@@ -1,5 +1,11 @@
 # Global settings applied to all applications
 global:
+  cluster:
+    serverip: 192.168.1.3
+    username: root
+    cluster-name: hess.pm
+    ip-range: 192.168.1.80-192.168.1.90
+
   # Common domain configuration
   domain: hess.pm
 
