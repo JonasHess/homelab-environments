@@ -203,7 +203,7 @@ apps:
           importJob:
             enabled: false
   argocd:
-    enabled: false
+    enabled: true
     argocd:
       targetRevision: feature/refactor-apps
       helm:
@@ -316,7 +316,7 @@ apps:
       helm:
         values: {}
   akeyless:
-    enabled: false
+    enabled: true
     argocd:
       targetRevision: feature/refactor-apps
       helm:
@@ -420,7 +420,7 @@ apps:
                 media:
                   hostPath: /mnt/tank0/encrypted/media
   traefik:
-    enabled: false
+    enabled: true
     argocd:
       targetRevision: feature/refactor-apps
       helm:
