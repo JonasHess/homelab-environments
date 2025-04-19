@@ -32,20 +32,6 @@ global:
   argocd:
     targetRevision: feature/refactor-apps
 
-    # Global ignore differences (applied to all apps unless overridden)
-    ignoreDifferences:
-      - group: ""
-        kind: "Secret"
-        jsonPointers:
-          - "/data"
-
-  # Notification settings
-  notifications:
-    # Default notification channels
-    slack:
-      channel: general
-      token: "${SECRET:slack-token}"
-
 # All applications to be deployed by Argo CD
 apps:
   mosquitto:
