@@ -172,7 +172,7 @@ apps:
               redis: /mnt/tank1/encrypted/apps/immich/redis
               cli: /mnt/tank1/encrypted/apps/immich-old/library/library/f7bf1225-04c1-421d-b639-295a991458a3
           importJob:
-            enabled: true
+            enabled: false
           smtp:
             enabled: true
             host: email-smtp.eu-central-1.amazonaws.com
