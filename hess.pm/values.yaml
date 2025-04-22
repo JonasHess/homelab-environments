@@ -38,6 +38,8 @@ apps:
     enabled: true
     argocd:
       targetRevision: feature/refactor-apps
+      helm:
+        values: { }
   mosquitto:
     enabled: true
     argocd:
