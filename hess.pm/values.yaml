@@ -34,6 +34,10 @@ global:
 
 # All applications to be deployed by Argo CD
 apps:
+  homer:
+    enabled: true
+    argocd:
+      targetRevision: feature/refactor-apps
   mosquitto:
     enabled: true
     argocd:
