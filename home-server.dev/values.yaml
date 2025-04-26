@@ -1,0 +1,65 @@
+global:
+  cluster:
+    serverip: 192.168.1.5
+    username: root
+    cluster-name: home-server.dev
+    ip-range: 192.168.1.91-192.168.1.100
+
+  domain: "home-server.dev"
+  akeyless:
+    path: "/home-server.dev"
+  email: "Jonas@Hess.pm"
+
+  cloudflare:
+    email: "Jonas@Hess.pm"
+
+  letsencrypt:
+    email: "Jonas@Hess.pm"
+
+  traefik_forward_auth:
+    oidc_issuer_url: "https://cognito-idp.eu-central-1.amazonaws.com/eu-central-1_t9DQfKlSX"
+    oidc_client_id: "6e1bl5i55ao7bhhcufk85ussm"
+
+  argocd:
+    targetRevision: feature/refactor-apps
+
+apps:
+  adguard:
+    enabled: true
+    argocd:
+      targetRevision: feature/refactor-apps
+      helm:
+        values:
+          generic:
+            deployment:
+              pvcMounts:
+                config:
+                  hostPath: /mnt/data/apps/adguard/config
+                data:
+                  hostPath: /mnt/data/apps/adguard/data
+  argocd:
+    enabled: true
+    argocd:
+      targetRevision: feature/refactor-apps
+      helm:
+        values: {}
+  akeyless:
+    enabled: true
+    argocd:
+      targetRevision: feature/refactor-apps
+      helm:
+        values: {}
+  traefik:
+    enabled: true
+    argocd:
+      targetRevision: feature/refactor-apps
+      helm:
+        values:
+          generic:
+            persistentVolumeClaims:
+              data: /mnt/data/apps/traefik
+          loadBalancerIP: 192.168.1.91
+          middlewares:
+            cloudflare:
+              allowedCIDRs:
+              - 192.168.1.0/24
