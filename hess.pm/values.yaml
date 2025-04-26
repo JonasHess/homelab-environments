@@ -284,12 +284,6 @@ apps:
       targetRevision: feature/refactor-apps
       helm:
         values: {}
-  zfs:
-    enabled: true
-    argocd:
-      targetRevision: feature/refactor-apps
-      helm:
-        values: {}
   postgres:
     enabled: true
     argocd:
