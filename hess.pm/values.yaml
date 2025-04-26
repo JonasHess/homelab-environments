@@ -30,26 +30,26 @@ global:
     oidc_issuer_url: "https://cognito-idp.eu-central-1.amazonaws.com/eu-central-1_t9DQfKlSX"
 
   argocd:
-    targetRevision: feature/refactor-apps
+    targetRevision: main
 
 # All applications to be deployed by Argo CD
 apps:
   homer:
     enabled: true
     argocd:
-      targetRevision: feature/refactor-apps
+      targetRevision: ~
       helm:
         values: { }
   mosquitto:
     enabled: true
     argocd:
-      targetRevision: feature/refactor-apps
+      targetRevision: ~
       helm:
         values: {}
   paperlessgpt:
     enabled: true
     argocd:
-      targetRevision: feature/refactor-apps
+      targetRevision: ~
       helm:
         values:
           generic:
@@ -72,7 +72,7 @@ apps:
   duplicati:
     enabled: true
     argocd:
-      targetRevision: feature/refactor-apps
+      targetRevision: ~
       helm:
         values:
           generic:
@@ -89,7 +89,7 @@ apps:
   prowlarr:
     enabled: true
     argocd:
-      targetRevision: feature/refactor-apps
+      targetRevision: ~
       helm:
         values:
           generic:
@@ -102,7 +102,7 @@ apps:
   homeassistant:
     enabled: true
     argocd:
-      targetRevision: feature/refactor-apps
+      targetRevision: ~
       helm:
         values:
           generic:
@@ -113,7 +113,7 @@ apps:
   adguard:
     enabled: true
     argocd:
-      targetRevision: feature/refactor-apps
+      targetRevision: ~
       helm:
         values:
           generic:
@@ -126,7 +126,7 @@ apps:
   qbittorrent:
     enabled: true
     argocd:
-      targetRevision: feature/refactor-apps
+      targetRevision: ~
       helm:
         values:
           generic:
@@ -143,7 +143,7 @@ apps:
   redis:
     enabled: true
     argocd:
-      targetRevision: feature/refactor-apps
+      targetRevision: ~
       helm:
         values:
           generic:
@@ -154,7 +154,7 @@ apps:
   immich:
     enabled: true
     argocd:
-      targetRevision: feature/refactor-apps
+      targetRevision: ~
       helm:
         values:
           generic:
@@ -173,7 +173,7 @@ apps:
   smarthome3:
     enabled: true
     argocd:
-      targetRevision: feature/refactor-apps
+      targetRevision: ~
       helm:
         values:
           hueIp: 192.168.1.194
@@ -183,7 +183,7 @@ apps:
   immichold:
     enabled: true
     argocd:
-      targetRevision: feature/refactor-apps
+      targetRevision: ~
       helm:
         values:
           generic:
@@ -197,19 +197,19 @@ apps:
   argocd:
     enabled: true
     argocd:
-      targetRevision: feature/refactor-apps
+      targetRevision: ~
       helm:
         values: {}
   gotenberg:
     enabled: true
     argocd:
-      targetRevision: feature/refactor-apps
+      targetRevision: ~
       helm:
         values: {}
   paperlessngx:
     enabled: true
     argocd:
-      targetRevision: feature/refactor-apps
+      targetRevision: ~
       helm:
         values:
           generic:
@@ -229,7 +229,7 @@ apps:
   sabnzbd:
     enabled: true
     argocd:
-      targetRevision: feature/refactor-apps
+      targetRevision: ~
       helm:
         values:
           generic:
@@ -246,7 +246,7 @@ apps:
   githubarc:
     enabled: true
     argocd:
-      targetRevision: feature/refactor-apps
+      targetRevision: ~
       helm:
         values:
           storageclasses:
@@ -255,7 +255,7 @@ apps:
   stirlingpdf:
     enabled: true
     argocd:
-      targetRevision: feature/refactor-apps
+      targetRevision: ~
       helm:
         values:
           generic:
@@ -268,7 +268,7 @@ apps:
   radarr:
     enabled: true
     argocd:
-      targetRevision: feature/refactor-apps
+      targetRevision: ~
       helm:
         values:
           generic:
@@ -281,13 +281,13 @@ apps:
   search:
     enabled: true
     argocd:
-      targetRevision: feature/refactor-apps
+      targetRevision: ~
       helm:
         values: {}
   postgres:
     enabled: true
     argocd:
-      targetRevision: feature/refactor-apps
+      targetRevision: ~
       helm:
         values:
           generic:
@@ -298,19 +298,19 @@ apps:
   tika:
     enabled: true
     argocd:
-      targetRevision: feature/refactor-apps
+      targetRevision: ~
       helm:
         values: {}
   akeyless:
     enabled: true
     argocd:
-      targetRevision: feature/refactor-apps
+      targetRevision: ~
       helm:
         values: {}
   zigbee2mqtt:
     enabled: true
     argocd:
-      targetRevision: feature/refactor-apps
+      targetRevision: ~
       helm:
         values:
           generic:
@@ -325,13 +325,13 @@ apps:
   asn:
     enabled: true
     argocd:
-      targetRevision: feature/refactor-apps
+      targetRevision: ~
       helm:
         values: {}
   plex:
     enabled: true
     argocd:
-      targetRevision: feature/refactor-apps
+      targetRevision: ~
       helm:
         values:
           generic:
@@ -344,7 +344,7 @@ apps:
   tautulli:
     enabled: true
     argocd:
-      targetRevision: feature/refactor-apps
+      targetRevision: ~
       helm:
         values:
           generic:
@@ -355,13 +355,13 @@ apps:
   aws:
     enabled: true
     argocd:
-      targetRevision: feature/refactor-apps
+      targetRevision: ~
       helm:
         values: {}
   prometheus:
     enabled: true
     argocd:
-      targetRevision: feature/refactor-apps
+      targetRevision: ~
       helm:
         values:
           generic:
@@ -373,7 +373,7 @@ apps:
   sftpgo:
     enabled: true
     argocd:
-      targetRevision: feature/refactor-apps
+      targetRevision: ~
       helm:
         values:
           generic:
@@ -395,7 +395,7 @@ apps:
   sonarr:
     enabled: true
     argocd:
-      targetRevision: feature/refactor-apps
+      targetRevision: ~
       helm:
         values:
           generic:
@@ -408,7 +408,7 @@ apps:
   traefik:
     enabled: true
     argocd:
-      targetRevision: feature/refactor-apps
+      targetRevision: ~
       helm:
         values:
           generic:
@@ -426,6 +426,6 @@ apps:
   duplicatiprometheusexporter:
     enabled: true
     argocd:
-      targetRevision: feature/refactor-apps
+      targetRevision: ~
       helm:
         values: {}

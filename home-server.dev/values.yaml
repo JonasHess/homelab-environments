@@ -21,13 +21,13 @@ global:
     oidc_client_id: "6e1bl5i55ao7bhhcufk85ussm"
 
   argocd:
-    targetRevision: feature/refactor-apps
+    targetRevision: main
 
 apps:
   adguard:
     enabled: true
     argocd:
-      targetRevision: feature/refactor-apps
+      targetRevision: ~
       helm:
         values:
           generic:
@@ -40,19 +40,19 @@ apps:
   argocd:
     enabled: true
     argocd:
-      targetRevision: feature/refactor-apps
+      targetRevision: ~
       helm:
         values: {}
   akeyless:
     enabled: true
     argocd:
-      targetRevision: feature/refactor-apps
+      targetRevision: ~
       helm:
         values: {}
   traefik:
     enabled: true
     argocd:
-      targetRevision: feature/refactor-apps
+      targetRevision: ~
       helm:
         values:
           generic:
