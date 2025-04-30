@@ -58,7 +58,7 @@ apps:
         group: "infrastructure"
         subtitle: "Router"
         logo: "https://raw.githubusercontent.com/walkxcode/dashboard-icons/main/svg/router.svg"
-        url: "http://192.169.0.1"
+        url: "http://192.168.0.1"
       firewall:
         name: "UniFi Firewall"
         group: "infrastructure"
