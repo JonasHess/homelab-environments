@@ -47,6 +47,24 @@ apps:
         subtitle: ""
         logo: "https://raw.githubusercontent.com/walkxcode/dashboard-icons/main/svg/github.svg"
         url: "https://github.com/JonasHess/homelab-environments"
+      adguardHomeserver:
+        name: "AdGuard Homeserver"
+        group: "infrastructure"
+        subtitle: "DNS Server"
+        logo: "https://raw.githubusercontent.com/walkxcode/dashboard-icons/main/svg/adguard-home.svg"
+        url: "https://adguard.home-server.dev"
+      ispRouter:
+        name: "ISP Router"
+        group: "infrastructure"
+        subtitle: "Router"
+        logo: "https://raw.githubusercontent.com/walkxcode/dashboard-icons/main/svg/router.svg"
+        url: "https://192.169.0.1"
+      firewall:
+        name: "UniFi Firewall"
+        group: "infrastructure"
+        subtitle: ""
+        logo: "https://raw.githubusercontent.com/walkxcode/dashboard-icons/main/svg/firewall.svg"
+        url: "https://192.168.1.1
   mosquitto:
     enabled: true
     argocd:
