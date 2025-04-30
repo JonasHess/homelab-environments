@@ -40,6 +40,13 @@ apps:
       targetRevision: ~
       helm:
         values: { }
+    additionalLinks:
+      githubEnvironments:
+        name: "GitHub Environments"
+        group: "infrastructure"
+        subtitle: ""
+        logo: "https://raw.githubusercontent.com/walkxcode/dashboard-icons/main/svg/github.svg"
+        url: "https://github.com/JonasHess/homelab-environments"
   mosquitto:
     enabled: true
     argocd:
