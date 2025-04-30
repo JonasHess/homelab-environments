@@ -65,6 +65,12 @@ apps:
         subtitle: ""
         logo: "https://raw.githubusercontent.com/walkxcode/dashboard-icons/main/svg/unifi.svg"
         url: "http://192.168.1.1"
+      proxmox:
+        name: "Proxmox"
+        group: "infrastructure"
+        subtitle: "Virtualization"
+        logo: "https://raw.githubusercontent.com/walkxcode/dashboard-icons/main/svg/proxmox.svg"
+        url: "https://192.168.1.2:8006/"
   mosquitto:
     enabled: true
     argocd:
