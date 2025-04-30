@@ -136,7 +136,7 @@ apps:
                 config:
                   hostPath: /mnt/tank1/unencrypted/apps/homeassistant/config
   adguard:
-    enabled: true
+    enabled: false
     argocd:
       targetRevision: ~
       helm:
