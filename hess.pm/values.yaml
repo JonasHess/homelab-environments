@@ -42,27 +42,27 @@ apps:
         values: { }
     additionalLinks:
       githubEnvironments:
-        name: "GitHub Environments"
+        name: "Environments"
         group: "infrastructure"
-        subtitle: ""
+        subtitle: "GitHub"
         logo: "https://raw.githubusercontent.com/walkxcode/dashboard-icons/main/svg/github.svg"
         url: "https://github.com/JonasHess/homelab-environments"
       adguardHomeserver:
-        name: "AdGuard Homeserver"
+        name: "AdGuard"
         group: "infrastructure"
-        subtitle: "DNS Server"
+        subtitle: "DNS Homeserver"
         logo: "https://raw.githubusercontent.com/walkxcode/dashboard-icons/main/svg/adguard-home.svg"
         url: "https://adguard.home-server.dev"
       ispRouter:
         name: "ISP Router"
         group: "infrastructure"
-        subtitle: "Router"
+        subtitle: "192.168.0.1"
         logo: "https://raw.githubusercontent.com/walkxcode/dashboard-icons/main/svg/router.svg"
         url: "http://192.168.0.1"
       firewall:
         name: "UniFi Firewall"
         group: "infrastructure"
-        subtitle: ""
+        subtitle: "192.168.1.1"
         logo: "https://raw.githubusercontent.com/walkxcode/dashboard-icons/main/svg/unifi.svg"
         url: "http://192.168.1.1"
       proxmox:
