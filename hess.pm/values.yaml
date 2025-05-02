@@ -195,7 +195,7 @@ apps:
               redis: /mnt/tank1/encrypted/apps/immich/redis
               cli: /mnt/truenas/bilder
           importJob:
-            enabled: true
+            enabled: false
           smtp:
             enabled: true
             host: email-smtp.eu-central-1.amazonaws.com
