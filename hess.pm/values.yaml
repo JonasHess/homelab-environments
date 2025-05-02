@@ -466,4 +466,6 @@ apps:
       deployment:
         pvcMounts:
           config:
-            hostPath: ~ /mnt/tank1/encrypted/apps/audiobookshelf/config
+            hostPath: /mnt/tank1/encrypted/apps/audiobookshelf/config
+          media:
+            hostPath: /mnt/tank0/encrypted/media
