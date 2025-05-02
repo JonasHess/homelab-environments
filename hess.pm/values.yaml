@@ -460,3 +460,10 @@ apps:
       targetRevision: ~
       helm:
         values: {}
+  audiobookshelf:
+    enabled: true
+    generic:
+      deployment:
+        pvcMounts:
+          config:
+            hostPath: ~ /mnt/tank1/encrypted/apps/audiobookshelf/config
