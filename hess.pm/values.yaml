@@ -462,10 +462,14 @@ apps:
         values: {}
   audiobookshelf:
     enabled: true
-    generic:
-      deployment:
-        pvcMounts:
-          config:
-            hostPath: /mnt/tank1/encrypted/apps/audiobookshelf/config
-          media:
-            hostPath: /mnt/tank0/encrypted/media
+    argocd:
+      targetRevision: ~
+      helm:
+        values:
+          generic:
+            deployment:
+              pvcMounts:
+                config:
+                  hostPath: /mnt/tank1/encrypted/apps/audiobookshelf/config
+                media:
+                  hostPath: /mnt/tank0/encrypted/media
