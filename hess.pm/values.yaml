@@ -478,12 +478,12 @@ apps:
 
   mealie:
     enabled: true
-    oidc:
-      configurationUrl: https://cognito-idp.eu-central-1.amazonaws.com/eu-central-1_t9DQfKlSX/.well-known/openid-configuration
     argocd:
       targetRevision: ~
       helm:
         values:
+          oidc:
+            configurationUrl: https://cognito-idp.eu-central-1.amazonaws.com/eu-central-1_t9DQfKlSX/.well-known/openid-configuration
           generic:
             deployment:
               pvcMounts:
