@@ -475,3 +475,15 @@ apps:
                   hostPath: /mnt/tank1/encrypted/apps/audiobookshelf/metadata
                 media:
                   hostPath: /mnt/tank0/encrypted/media
+
+  mealie:
+    enabled: true
+    argocd:
+      targetRevision: ~
+      helm:
+        values:
+          generic:
+            deployment:
+              pvcMounts:
+                data:
+                  hostPath: /mnt/tank1/encrypted/apps/mealie/data
