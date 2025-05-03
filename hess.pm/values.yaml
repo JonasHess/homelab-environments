@@ -489,3 +489,10 @@ apps:
               pvcMounts:
                 data:
                   hostPath: /mnt/tank1/encrypted/apps/mealie/data
+
+  whoami:
+    enabled: true
+    argocd:
+      targetRevision: ~
+      helm:
+        values: {}
