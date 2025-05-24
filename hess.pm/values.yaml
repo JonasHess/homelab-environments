@@ -503,3 +503,15 @@ apps:
       targetRevision: ~
       helm:
         values: {}
+
+  restic:
+    enabled: true
+    argocd:
+      targetRevision: ~
+      helm:
+        values:
+          cronjob:
+            pvcMounts: [ ]
+          #    tank0:
+          #      hostPath: /mnt/tank0
+          #      mountPath: /mnt/tank0
