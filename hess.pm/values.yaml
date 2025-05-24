@@ -507,7 +507,7 @@ apps:
   restic:
     enabled: true
     argocd:
-      targetRevision: ~
+      targetRevision: feature/restic_backup
       helm:
         values:
           cronjob:
