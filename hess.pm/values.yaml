@@ -489,6 +489,7 @@ apps:
               pvcMounts:
                 data:
                   backup: true
+                  restore: true
                   hostPath: /mnt/tank1/encrypted/apps/mealie/data
 
   whoami:
