@@ -511,8 +511,10 @@ apps:
       targetRevision: feature/restic_backup
       helm:
         values:
+          generic:
+            persistentVolumeClaims:
+              tank1: /mnt/tank1/encrypted/apps/mealie/data
           cronjob:
             pvcMounts:
               tank1:
-                hostPath: /mnt/tank1/encrypted/apps/mealie/data
                 mountPath: /mnt/tank1/encrypted/apps/mealie/data
