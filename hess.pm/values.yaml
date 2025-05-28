@@ -479,7 +479,7 @@ apps:
   mealie:
     enabled: true
     argocd:
-      targetRevision: ~
+      targetRevision: feature/restic_backup
       helm:
         values:
           oidc:
