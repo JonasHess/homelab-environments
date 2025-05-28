@@ -512,7 +512,7 @@ apps:
       helm:
         values:
           cronjob:
-            pvcMounts: [ ]
-          #    tank0:
-          #      hostPath: /mnt/tank0
-          #      mountPath: /mnt/tank0
+            pvcMounts:
+              tank1:
+                hostPath: /mnt/tank1/encrypted/apps/mealie/data
+                mountPath: /mnt/tank1/encrypted/apps/mealie/data
