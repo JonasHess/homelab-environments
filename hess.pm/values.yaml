@@ -523,3 +523,10 @@ apps:
                 mountPath: /mnt/tank1
               tank0:
                 mountPath: /mnt/tank0
+
+  crossplane:
+    enabled: true
+    argocd:
+      targetRevision: ~
+      helm:
+        values: { }
