@@ -514,9 +514,12 @@ apps:
         values:
           generic:
             persistentVolumeClaims:
-              tank1: /mnt/tank1/encrypted/apps/mealie/data
+              tank1: /mnt/tank1
+              tank0: /mnt/tank0
               restoreddata: /mnt/tank0/encrypted/apps/restic/restored-data
           cronjob:
             pvcMounts:
               tank1:
-                mountPath: /mnt/tank1/encrypted/apps/mealie/data
+                mountPath: /mnt/tank1
+              tank0:
+                mountPath: /mnt/tank0
