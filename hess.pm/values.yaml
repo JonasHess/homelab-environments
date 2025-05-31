@@ -543,3 +543,14 @@ apps:
                 config:
                   mountPath: /config
                   hostPath: /mnt/tank1/encrypted/apps/profilarr/config
+  overseerr:
+    enabled: true
+    argocd:
+      targetRevision: ~
+      helm:
+        values:
+          generic:
+            deployment:
+              pvcMounts:
+                config:
+                  hostPath: /mnt/tank1/encrypted/apps/overseerr/config
