@@ -541,7 +541,6 @@ apps:
             deployment:
               pvcMounts:
                 config:
-                  mountPath: /config
                   hostPath: /mnt/tank1/encrypted/apps/profilarr/config
   overseerr:
     enabled: true
