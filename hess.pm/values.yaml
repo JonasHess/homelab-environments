@@ -562,14 +562,8 @@ apps:
         values:
           generic:
             deployment:
-              pvcMounts:
-                data:
-                  hostPath: /mnt/tank1/encrypted/apps/backrest/data
-                config:
-                  hostPath: /mnt/tank1/encrypted/apps/backrest/config
-                cache:
-                  hostPath: /mnt/tank1/encrypted/apps/backrest/cache
-                tmp:
-                  hostPath: /mnt/tank1/encrypted/apps/backrest/tmp
-                restore:
-                  hostPath: /mnt/tank1/encrypted/apps/backrest/restore
+              persistentVolumeClaims:
+                data: /mnt/tank1/encrypted/apps/backrest/data
+                cache: /mnt/tank1/encrypted/apps/backrest/cache
+                tmp: /mnt/tank1/encrypted/apps/backrest/tmp
+                restore: /mnt/tank1/encrypted/apps/backrest/restore
