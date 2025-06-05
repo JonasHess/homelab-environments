@@ -561,9 +561,8 @@ apps:
       helm:
         values:
           generic:
-            deployment:
-              persistentVolumeClaims:
-                data: /mnt/tank1/encrypted/apps/backrest/data
-                cache: /mnt/tank1/encrypted/apps/backrest/cache
-                tmp: /mnt/tank1/encrypted/apps/backrest/tmp
-                restore: /mnt/tank1/encrypted/apps/backrest/restore
+            persistentVolumeClaims:
+              data: /mnt/tank1/encrypted/apps/backrest/data
+              cache: /mnt/tank1/encrypted/apps/backrest/cache
+              tmp: /mnt/tank1/encrypted/apps/backrest/tmp
+              restore: /mnt/tank1/encrypted/apps/backrest/restore
