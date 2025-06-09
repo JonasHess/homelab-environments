@@ -190,10 +190,14 @@ apps:
         values:
           generic:
             persistentVolumeClaims:
-              library: /mnt/tank0/encrypted/apps/immich/library
-              postgresql: /mnt/tank1/encrypted/apps/immich/postgresql
-              redis: /mnt/tank1/encrypted/apps/immich/redis
-              cli: /mnt/truenas/bilder
+              library:
+                hostPath: /mnt/tank0/encrypted/apps/immich/library
+              postgresql:
+                hostPath: /mnt/tank1/encrypted/apps/immich/postgresql
+              redis:
+                hostPath: /mnt/tank1/encrypted/apps/immich/redis
+              cli:
+                hostPath: /mnt/truenas/bilder
           importJob:
             enabled: false
           smtp:
@@ -219,10 +223,14 @@ apps:
         values:
           generic:
             persistentVolumeClaims:
-              library: /mnt/tank1/encrypted/apps/immich-old/library
-              postgresql: /mnt/tank1/encrypted/apps/immich-old/postgresql
-              redis: /mnt/tank1/encrypted/apps/immich-old/redis
-              cli: /mnt/tank1/encrypted/apps/immich-old/immich-old
+              library:
+                hostPath: /mnt/tank1/encrypted/apps/immich-old/library
+              postgresql:
+                hostPath: /mnt/tank1/encrypted/apps/immich-old/postgresql
+              redis:
+                hostPath: /mnt/tank1/encrypted/apps/immich-old/redis
+              cli:
+                hostPath: /mnt/tank1/encrypted/apps/immich-old/immich-old
           importJob:
             enabled: false
   argocd:
@@ -399,8 +407,10 @@ apps:
             persistentVolume:
               prometheus: /mnt/tank1/unencrypted/apps/prometheus/data
             persistentVolumeClaims:
-              grafana: /mnt/tank1/unencrypted/apps/prometheus/grafana/data
-              alertmanager: /mnt/tank1/unencrypted/apps/prometheus/alertmanager/data
+              grafana:
+                hostPath: /mnt/tank1/unencrypted/apps/prometheus/grafana/data
+              alertmanager:
+                hostPath: /mnt/tank1/unencrypted/apps/prometheus/alertmanager/data
   sftpgo:
     enabled: true
     argocd:
@@ -444,7 +454,8 @@ apps:
         values:
           generic:
             persistentVolumeClaims:
-              data: /mnt/tank1/unencrypted/apps/traefik
+              data:
+                hostPath: /mnt/tank1/unencrypted/apps/traefik
           additionalExposedPorts:
             plex:
               port: 32400
@@ -514,9 +525,12 @@ apps:
         values:
           generic:
             persistentVolumeClaims:
-              tank1: /mnt/tank1
-              tank0: /mnt/tank0
-              restoreddata: /mnt/tank0/encrypted/apps/restic/restored-data
+              tank1:
+                hostPath: /mnt/tank1
+              tank0:
+                hostPath: /mnt/tank0
+              restoreddata:
+                hostPath: /mnt/tank0/encrypted/apps/restic/restored-data
           cronjob:
             pvcMounts:
               tank1:
@@ -562,7 +576,11 @@ apps:
         values:
           generic:
             persistentVolumeClaims:
-              data: /mnt/tank1/encrypted/apps/backrest/data
-              cache: /mnt/tank1/encrypted/apps/backrest/cache
-              tmp: /mnt/tank1/encrypted/apps/backrest/tmp
-              restore: /mnt/tank1/encrypted/apps/backrest/restore
+              data:
+                hostPath: /mnt/tank1/encrypted/apps/backrest/data
+              cache:
+                hostPath: /mnt/tank1/encrypted/apps/backrest/cache
+              tmp:
+                hostPath: /mnt/tank1/encrypted/apps/backrest/tmp
+              restore:
+                hostPath: /mnt/tank1/encrypted/apps/backrest/restore
