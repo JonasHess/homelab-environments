@@ -30,7 +30,7 @@ global:
     oidc_issuer_url: "https://cognito-idp.eu-central-1.amazonaws.com/eu-central-1_t9DQfKlSX"
 
   argocd:
-    targetRevision: feature/restic_backup
+    targetRevision: main
 
 # All applications to be deployed by Argo CD
 apps:
