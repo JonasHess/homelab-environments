@@ -584,3 +584,14 @@ apps:
                 hostPath: /mnt/tank1/encrypted/apps/backrest/tmp
               restore:
                 hostPath: /mnt/tank1/encrypted/apps/backrest/restore
+  radicale:
+    enabled: true
+    argocd:
+      targetRevision: ~
+      helm:
+        values:
+          generic:
+            deployment:
+              pvcMounts:
+                data:
+                  hostPath: /mnt/tank1/encrypted/apps/radicale/data
