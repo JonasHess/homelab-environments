@@ -539,7 +539,7 @@ apps:
                 mountPath: /mnt/tank0
 
   crossplane:
-    enabled: true
+    enabled: false
     argocd:
       targetRevision: ~
       helm:
