@@ -557,7 +557,7 @@ apps:
                 config:
                   hostPath: /mnt/tank1/encrypted/apps/profilarr/config
   overseerr:
-    enabled: true
+    enabled: false
     argocd:
       targetRevision: ~
       helm:
