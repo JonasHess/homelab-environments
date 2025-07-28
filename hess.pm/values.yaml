@@ -215,6 +215,24 @@ apps:
           mqttUrl: tcp://mosquitto-service:1883
           homeAssistantIp: ws://homeassistant-service:8123
           profilesActive: jonas
+  immichold:
+    enabled: true
+    argocd:
+      targetRevision: ~
+      helm:
+        values:
+          generic:
+            persistentVolumeClaims:
+              library:
+                hostPath: /mnt/tank1/encrypted/apps/immich-old/library
+              postgresql:
+                hostPath: /mnt/tank1/encrypted/apps/immich-old/postgresql
+              redis:
+                hostPath: /mnt/tank1/encrypted/apps/immich-old/redis
+              cli:
+                hostPath: /mnt/tank1/encrypted/apps/immich-old/immich-old
+          importJob:
+            enabled: false
   argocd:
     enabled: true
     argocd:
