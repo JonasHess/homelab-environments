@@ -530,13 +530,19 @@ apps:
             persistentVolumeClaims:
               sabnzbd-download:
                 hostPath: /data/volumes/sabnzbd-downloads
+              sabnzbd-unknown:
+                hostPath: /mnt/tank0/encrypted/media/_unknown/sabnzbd
           filecleanup:
             dryRun: true  # Set to false after testing
             cleanupJobs:
               sabnzbd-download:
-                retentionDays: 7
+                retentionDays: 3
                 cleanupEmptyDirs: true
                 schedule: "0 2 * * *"  # 2 AM daily
+              sabnzbd-unknown:
+                retentionDays: 7  # Keep unknown media longer
+                cleanupEmptyDirs: true
+                schedule: "0 3 * * *"  # 3 AM daily
 
   crossplane:
     enabled: false
