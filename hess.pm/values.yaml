@@ -533,7 +533,7 @@ apps:
               sabnzbd-unknown:
                 hostPath: /mnt/tank0/encrypted/media/_unknown/sabnzbd
           filecleanup:
-            dryRun: true  # Set to false after testing
+            dryRun: false  # Set to false after testing
             cleanupJobs:
               sabnzbd-download:
                 retentionDays: 3
