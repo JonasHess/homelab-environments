@@ -520,6 +520,24 @@ apps:
               tank0:
                 mountPath: /mnt/tank0
 
+  filecleanup:
+    enabled: true
+    argocd:
+      targetRevision: ~
+      helm:
+        values:
+          generic:
+            persistentVolumeClaims:
+              sabnzbd-download:
+                hostPath: /data/volumes/sabnzbd-downloads
+          filecleanup:
+            dryRun: true  # Set to false after testing
+            cleanupJobs:
+              sabnzbd-download:
+                retentionDays: 7
+                cleanupEmptyDirs: true
+                schedule: "0 2 * * *"  # 2 AM daily
+
   crossplane:
     enabled: false
     argocd:
