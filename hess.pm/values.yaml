@@ -540,7 +540,7 @@ apps:
                 cleanupEmptyDirs: true
                 schedule: "0 2 * * *"  # 2 AM daily
               sabnzbd-unknown:
-                retentionDays: 7  # Keep unknown media longer
+                retentionDays: 3
                 cleanupEmptyDirs: true
                 schedule: "0 3 * * *"  # 3 AM daily
 
