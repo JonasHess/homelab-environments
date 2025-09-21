@@ -362,6 +362,19 @@ apps:
                   hostPath: /mnt/tank1/encrypted/apps/plex/config
                 media:
                   hostPath: /mnt/tank0/encrypted/media
+  jellyfin:
+    enabled: true
+    argocd:
+      targetRevision: ~
+      helm:
+        values:
+          generic:
+            deployment:
+              pvcMounts:
+                config:
+                  hostPath: /mnt/tank1/encrypted/apps/jellyfin/config
+                media:
+                  hostPath: /mnt/tank0/encrypted/media
   tautulli:
     enabled: true
     argocd:
