@@ -391,7 +391,17 @@ apps:
     argocd:
       targetRevision: ~
       helm:
-        values: {}
+        values:
+          ecrRegistries:
+            - name: primary
+              region: eu-central-1
+              namespace: argocd
+              schedule: "0 */10 * * *"
+#            # Add additional ECR accounts as needed
+#            - name: secondary
+#              region: eu-central-1
+#              namespace: argocd
+#              schedule: "0 */10 * * *"
   prometheus:
     enabled: true
     argocd:
