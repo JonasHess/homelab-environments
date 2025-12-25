@@ -555,6 +555,12 @@ apps:
                 hostPath: /data/volumes/sabnzbd-downloads
               sabnzbd-unknown:
                 hostPath: /mnt/tank0/encrypted/media/_unknown/sabnzbd
+              nzbget-download:
+                hostPath: /data/volumes/nzbget-downloads
+              nzbget-radarr:
+                hostPath: /mnt/tank0/encrypted/media/_unknown/nzbget/Radarr
+              nzbget-prowlarr:
+                hostPath: /mnt/tank0/encrypted/media/_unknown/nzbget/Prowlarr
           filecleanup:
             dryRun: false  # Set to false after testing
             cleanupJobs:
@@ -566,6 +572,18 @@ apps:
                 retentionDays: 3
                 cleanupEmptyDirs: true
                 schedule: "0 3 * * *"  # 3 AM daily
+              nzbget-download:
+                retentionDays: 3
+                cleanupEmptyDirs: true
+                schedule: "0 4 * * *"
+              nzbget-radarr:
+                retentionDays: 3
+                cleanupEmptyDirs: true
+                schedule: "0 5 * * *"
+              nzbget-prowlarr:
+                retentionDays: 3
+                cleanupEmptyDirs: true
+                schedule: "0 6 * * *"
 
   crossplane:
     enabled: false
