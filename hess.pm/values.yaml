@@ -624,3 +624,18 @@ apps:
               pvcMounts:
                 data:
                   hostPath: /mnt/tank1/encrypted/apps/radicale/data
+  nzbget:
+    enabled: true
+    argocd:
+      targetRevision: ~
+      helm:
+        values:
+          generic:
+            deployment:
+              pvcMounts:
+                config:
+                  hostPath: /mnt/tank1/unencrypted/apps/nzbget/config
+                  backup:
+                    enabled: true
+                downloads:
+                  hostPath: /data/volumes/nzbget-downloads
