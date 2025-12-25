@@ -639,3 +639,5 @@ apps:
                     enabled: true
                 downloads:
                   hostPath: /data/volumes/nzbget-downloads
+                media:
+                  hostPath: /mnt/tank0/encrypted/media
