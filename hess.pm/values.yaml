@@ -211,7 +211,7 @@ apps:
       targetRevision: ~
       helm:
         values:
-          hueIp: 192.168.1.194
+          hueIp: 192.168.1.251
           mqttUrl: tcp://mosquitto-service:1883
           homeAssistantIp: ws://homeassistant-service:8123
           profilesActive: jonas
