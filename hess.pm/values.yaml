@@ -286,6 +286,17 @@ apps:
                   hostPath: /mnt/tank1/encrypted/apps/stirlingpdf/pipeline/watchedFolders/scanner
                 paperlessconsume:
                   hostPath: /mnt/tank1/encrypted/apps/paperlessngx/consume
+  freshrss:
+    enabled: true
+    argocd:
+      targetRevision: ~
+      helm:
+        values:
+          generic:
+            deployment:
+              pvcMounts:
+                data:
+                  hostPath: /mnt/tank1/encrypted/apps/freshrss/data
   radarr:
     enabled: true
     argocd:
