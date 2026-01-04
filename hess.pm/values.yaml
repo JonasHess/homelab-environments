@@ -216,7 +216,7 @@ apps:
           homeAssistantIp: ws://homeassistant-service:8123
           profilesActive: jonas
   smarthome4:
-    enabled: false
+    enabled: true
     argocd:
       targetRevision: ~
       helm:
