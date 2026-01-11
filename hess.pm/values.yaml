@@ -25,7 +25,7 @@ global:
     email: Jonas@Hess.pm
 
   # Authentication provider
-  traefik_forward_auth:
+  oauth2_proxy:
     oidc_client_id: "6e1bl5i55ao7bhhcufk85ussm"
     oidc_issuer_url: "https://cognito-idp.eu-central-1.amazonaws.com/eu-central-1_t9DQfKlSX"
 
@@ -603,6 +603,12 @@ apps:
             cloudflare:
               allowedCIDRs:
                 - 192.168.1.0/24
+          oauth2-proxy:
+            extraArgs:
+              oidc-issuer-url: "https://cognito-idp.eu-central-1.amazonaws.com/eu-central-1_t9DQfKlSX"
+              cookie-domain: ".hess.pm"
+              whitelist-domain: ".hess.pm"
+              redirect-url: "https://auth.hess.pm/oauth2/callback"
   duplicatiprometheusexporter:
     enabled: false
     argocd:
