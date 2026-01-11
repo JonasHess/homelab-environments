@@ -89,7 +89,7 @@ apps:
                 prompts:
                   hostPath: /mnt/tank1/encrypted/apps/paperless-gpt/prompts
           LLM_PROVIDER: openai
-          LLM_MODEL: gpt-4o
+          LLM_MODEL: gpt-5.1
           CORRESPONDENT_BLACK_LIST: "Jonas He\xDF, Lena Raab, Lena He\xDF"
           AWS_OCR_BUCKET_NAME: paperless-ocr
           PROMPT_PREAMBLE: "Dein Name ist Jonas He\xDF. Du arbeitest als Softwareentwickler.\
