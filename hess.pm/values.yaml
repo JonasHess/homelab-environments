@@ -238,105 +238,131 @@ apps:
               initialDelayMs: "60000"
           appConfig: |
             version: "1.0"
-            
+
             smartHome:
+              # ============================================================================
+              # CONDITIONS
+              # ============================================================================
               conditions:
                 - type: "SpelExpression"
                   id: "day"
                   expression: "#timeOfDay() == 'DAY'"
-            
+
                 - type: "SpelExpression"
                   id: "night"
                   expression: "#timeOfDay() == 'NIGHT'"
-            
-                - type: "SpelExpression"
-                  id: "workday"
-                  expression: "#isWorkday()"
-            
-                - type: "SpelExpression"
-                  id: "evening"
-                  expression: "#isTimeInRange('18:00', '22:00')"
-            
+
+              # ============================================================================
+              # HOME ASSISTANT RESOURCES
+              # ============================================================================
               homeAssistantResources:
-                - type: "Scene"
-                  id: "buero_jonas_room_scenes_day"
-                  lookups:
-                    - type: "labelRegex"
-                      labelRegex: "Scenen_Buero_Jonas_Licht_Day"
-            
-                #    - type: "Script"
-                #      id: "buero_room_fans_speed_high"
-                #      lookups:
-                #        - type: "staticEntity"
-                #          entityRefs:
-                #            - "script.buero_room_fans_speed_high"
-                #
-                - type: "Group"
-                  id: "group_buero_jonas_light"
+
+                # --------------------------------------------------------------------------
+                # BUERO JONAS
+                # --------------------------------------------------------------------------
+                - type: "Light"
+                  id: "light_buero_jonas"
                   lookups:
                     - type: "staticEntity"
                       entityRefs:
-                        - "light.buero_jonas_licht_2"
-              #
-              #    - type: "Group"
-              #      id: "buero_room_fans"
-              #      lookups:
-              #        - type: "staticEntity"
-              #          entityRefs:
-              #            - "fan.buero_room"
-            
+                        - "light.buero_jonas"
+
+                # Day Scenes
+                - type: "Scene"
+                  id: "scenes_buero_jonas_dimmerswitch_01_day_1"
+                  lookups:
+                    - type: "labelRegex"
+                      labelRegex: "Scenen_Buero_Jonas_DimmerSwitch_01_Day_1"
+
+                - type: "Scene"
+                  id: "scenes_buero_jonas_dimmerswitch_01_day_2"
+                  lookups:
+                    - type: "labelRegex"
+                      labelRegex: "Scenen_Buero_Jonas_DimmerSwitch_01_Day_2"
+
+                - type: "Scene"
+                  id: "scenes_buero_jonas_dimmerswitch_01_day_3"
+                  lookups:
+                    - type: "labelRegex"
+                      labelRegex: "Scenen_Buero_Jonas_DimmerSwitch_01_Day_3"
+
+                - type: "Scene"
+                  id: "scenes_buero_jonas_dimmerswitch_01_day_n"
+                  lookups:
+                    - type: "labelRegex"
+                      labelRegex: "Scenen_Buero_Jonas_DimmerSwitch_01_Day_N"
+
+                # Night Scenes
+                - type: "Scene"
+                  id: "scenes_buero_jonas_dimmerswitch_01_night_1"
+                  lookups:
+                    - type: "labelRegex"
+                      labelRegex: "Scenen_Buero_Jonas_DimmerSwitch_01_Night_1"
+
+                - type: "Scene"
+                  id: "scenes_buero_jonas_dimmerswitch_01_night_2"
+                  lookups:
+                    - type: "labelRegex"
+                      labelRegex: "Scenen_Buero_Jonas_DimmerSwitch_01_Night_2"
+
+                - type: "Scene"
+                  id: "scenes_buero_jonas_dimmerswitch_01_night_3"
+                  lookups:
+                    - type: "labelRegex"
+                      labelRegex: "Scenen_Buero_Jonas_DimmerSwitch_01_Night_3"
+
+                - type: "Scene"
+                  id: "scenes_buero_jonas_dimmerswitch_01_night_n"
+                  lookups:
+                    - type: "labelRegex"
+                      labelRegex: "Scenen_Buero_Jonas_DimmerSwitch_01_Night_N"
+
+              # ============================================================================
+              # SENSORS
+              # ============================================================================
               sensors:
-                - name: "buero_Room_Default_Hue_Dimmer_Switch"
+
+                # ==========================================================================
+                # BUERO JONAS
+                # ==========================================================================
+                - name: "Buero_Jonas_Dimmer_Switch"
                   type: "HueDimmerSwitch"
                   devices:
-                    - S42
+                    - S39
                   groups:
+                    # Position 1 - Buero Jonas (Day)
                     - position: "1"
                       profile: "HUE_DIMMER_SWITCH_LIGHT_DEFAULT"
                       homeAssistantResources:
-                        - "group_buero_jonas_light"
+                        - "light_buero_jonas"
+                      condition: "day"
+                      triggers:
+                        - trigger: "BUTTON_1"
+                          sequences:
+                            - homeAssistantResources:
+                                - "scenes_buero_jonas_dimmerswitch_01_day_1"
+                                - "scenes_buero_jonas_dimmerswitch_01_day_2"
+                                - "scenes_buero_jonas_dimmerswitch_01_day_3"
+                                - "scenes_buero_jonas_dimmerswitch_01_day_n"
+                              cycleStart: "i:1"
+                              cycleEnd: "i:N"
+
+                    # Position 1 - Buero Jonas (Night)
+                    - position: "1"
+                      profile: "HUE_DIMMER_SWITCH_LIGHT_DEFAULT"
+                      homeAssistantResources:
+                        - "light_buero_jonas"
                       condition: "night"
                       triggers:
                         - trigger: "BUTTON_1"
                           sequences:
                             - homeAssistantResources:
-                                - "buero_jonas_room_scenes_day"
+                                - "scenes_buero_jonas_dimmerswitch_01_night_1"
+                                - "scenes_buero_jonas_dimmerswitch_01_night_2"
+                                - "scenes_buero_jonas_dimmerswitch_01_night_3"
+                                - "scenes_buero_jonas_dimmerswitch_01_night_n"
                               cycleStart: "i:1"
                               cycleEnd: "i:N"
-                              condition: "night"
-              
-              #        - position: "2"
-              #          profile: "FAN_DEFAULT"
-              #          homeAssistantResources:
-              #            - "buero_room_fans"
-              #          condition: ~
-              #          triggers:
-              #            - trigger: "BUTTON_1"
-              #              sequences:
-              #                - homeAssistantResources:
-              #                    - "buero_room_fans_speed_high"
-              #                  cycleStart: ~
-              #                  cycleEnd: ~
-              #                  condition: "day"
-              
-              #    - name: "Door_Sensor_Kitchen"
-              #      type: "HueDoorSensor"
-              #      devices:
-              #        - S66
-              #      groups:
-              #        - position: "1"
-              #          profile: "HUE_DIMMER_SWITCH_LIGHT_DEFAULT"
-              #          homeAssistantResources:
-              #            - "buero_room_light"
-              #          condition: "workday"
-              #          triggers:
-              #            - trigger: "OPEN"
-              #              sequences:
-              #                - homeAssistantResources:
-              #                    - "buero_room_scenes_day"
-              #                  cycleStart: ~
-              #                  cycleEnd: ~
-              #                  condition: "day"
   argocd:
     enabled: true
     argocd:
