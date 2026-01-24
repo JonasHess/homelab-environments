@@ -2120,7 +2120,9 @@ apps:
                 - name: "Schlafzimmer_Dimmer_Switch"
                   type: "HueDimmerSwitch"
                   devices:
-                    - S00
+                    - S81
+                    - S50
+                    - S44
                   groups:
                     # Position 1 - Schlafzimmer (Day)
                     - position: "1"
