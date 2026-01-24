@@ -1528,7 +1528,7 @@ apps:
                 - name: "Buero_Jonas_Dimmer_Switch"
                   type: "HueDimmerSwitch"
                   devices:
-                    - S39
+                    - S00
                   groups:
                     # Position 1 - Buero Jonas (Day)
                     - position: "1"
