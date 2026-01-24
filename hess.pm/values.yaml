@@ -2372,7 +2372,9 @@ apps:
                 - name: "Wohnzimmer_Dimmer_Switch"
                   type: "HueDimmerSwitch"
                   devices:
-                    - S00
+                    - S48
+                    - S36
+                    - S42
                   groups:
                     # Position 1 - Wohnzimmer (Day)
                     - position: "1"
