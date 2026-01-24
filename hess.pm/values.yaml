@@ -1157,6 +1157,106 @@ apps:
                     - type: "labelRegex"
                       labelRegex: "Scenen_Schlafzimmer_DimmerSwitch_01_Night_N"
 
+                # DimmerSwitch 02 - Day Scenes
+                - type: "Scene"
+                  id: "scenes_schlafzimmer_dimmerswitch_02_day_1"
+                  lookups:
+                    - type: "labelRegex"
+                      labelRegex: "Scenen_Schlafzimmer_DimmerSwitch_02_Day_1"
+
+                - type: "Scene"
+                  id: "scenes_schlafzimmer_dimmerswitch_02_day_2"
+                  lookups:
+                    - type: "labelRegex"
+                      labelRegex: "Scenen_Schlafzimmer_DimmerSwitch_02_Day_2"
+
+                - type: "Scene"
+                  id: "scenes_schlafzimmer_dimmerswitch_02_day_3"
+                  lookups:
+                    - type: "labelRegex"
+                      labelRegex: "Scenen_Schlafzimmer_DimmerSwitch_02_Day_3"
+
+                - type: "Scene"
+                  id: "scenes_schlafzimmer_dimmerswitch_02_day_n"
+                  lookups:
+                    - type: "labelRegex"
+                      labelRegex: "Scenen_Schlafzimmer_DimmerSwitch_02_Day_N"
+
+                # DimmerSwitch 02 - Night Scenes
+                - type: "Scene"
+                  id: "scenes_schlafzimmer_dimmerswitch_02_night_1"
+                  lookups:
+                    - type: "labelRegex"
+                      labelRegex: "Scenen_Schlafzimmer_DimmerSwitch_02_Night_1"
+
+                - type: "Scene"
+                  id: "scenes_schlafzimmer_dimmerswitch_02_night_2"
+                  lookups:
+                    - type: "labelRegex"
+                      labelRegex: "Scenen_Schlafzimmer_DimmerSwitch_02_Night_2"
+
+                - type: "Scene"
+                  id: "scenes_schlafzimmer_dimmerswitch_02_night_3"
+                  lookups:
+                    - type: "labelRegex"
+                      labelRegex: "Scenen_Schlafzimmer_DimmerSwitch_02_Night_3"
+
+                - type: "Scene"
+                  id: "scenes_schlafzimmer_dimmerswitch_02_night_n"
+                  lookups:
+                    - type: "labelRegex"
+                      labelRegex: "Scenen_Schlafzimmer_DimmerSwitch_02_Night_N"
+
+                # DimmerSwitch 03 - Day Scenes
+                - type: "Scene"
+                  id: "scenes_schlafzimmer_dimmerswitch_03_day_1"
+                  lookups:
+                    - type: "labelRegex"
+                      labelRegex: "Scenen_Schlafzimmer_DimmerSwitch_03_Day_1"
+
+                - type: "Scene"
+                  id: "scenes_schlafzimmer_dimmerswitch_03_day_2"
+                  lookups:
+                    - type: "labelRegex"
+                      labelRegex: "Scenen_Schlafzimmer_DimmerSwitch_03_Day_2"
+
+                - type: "Scene"
+                  id: "scenes_schlafzimmer_dimmerswitch_03_day_3"
+                  lookups:
+                    - type: "labelRegex"
+                      labelRegex: "Scenen_Schlafzimmer_DimmerSwitch_03_Day_3"
+
+                - type: "Scene"
+                  id: "scenes_schlafzimmer_dimmerswitch_03_day_n"
+                  lookups:
+                    - type: "labelRegex"
+                      labelRegex: "Scenen_Schlafzimmer_DimmerSwitch_03_Day_N"
+
+                # DimmerSwitch 03 - Night Scenes
+                - type: "Scene"
+                  id: "scenes_schlafzimmer_dimmerswitch_03_night_1"
+                  lookups:
+                    - type: "labelRegex"
+                      labelRegex: "Scenen_Schlafzimmer_DimmerSwitch_03_Night_1"
+
+                - type: "Scene"
+                  id: "scenes_schlafzimmer_dimmerswitch_03_night_2"
+                  lookups:
+                    - type: "labelRegex"
+                      labelRegex: "Scenen_Schlafzimmer_DimmerSwitch_03_Night_2"
+
+                - type: "Scene"
+                  id: "scenes_schlafzimmer_dimmerswitch_03_night_3"
+                  lookups:
+                    - type: "labelRegex"
+                      labelRegex: "Scenen_Schlafzimmer_DimmerSwitch_03_Night_3"
+
+                - type: "Scene"
+                  id: "scenes_schlafzimmer_dimmerswitch_03_night_n"
+                  lookups:
+                    - type: "labelRegex"
+                      labelRegex: "Scenen_Schlafzimmer_DimmerSwitch_03_Night_N"
+
                 # --------------------------------------------------------------------------
                 # STUDIO
                 # --------------------------------------------------------------------------
@@ -2117,12 +2217,10 @@ apps:
                 # ==========================================================================
                 # SCHLAFZIMMER
                 # ==========================================================================
-                - name: "Schlafzimmer_Dimmer_Switch"
+                - name: "Schlafzimmer_Dimmer_Switch_01"
                   type: "HueDimmerSwitch"
                   devices:
                     - S81
-                    - S50
-                    - S44
                   groups:
                     # Position 1 - Schlafzimmer (Day)
                     - position: "1"
@@ -2155,6 +2253,84 @@ apps:
                                 - "scenes_schlafzimmer_dimmerswitch_01_night_2"
                                 - "scenes_schlafzimmer_dimmerswitch_01_night_3"
                                 - "scenes_schlafzimmer_dimmerswitch_01_night_n"
+                              cycleStart: "i:1"
+                              cycleEnd: "i:N"
+
+                - name: "Schlafzimmer_Dimmer_Switch_02"
+                  type: "HueDimmerSwitch"
+                  devices:
+                    - S50
+                  groups:
+                    # Position 1 - Schlafzimmer (Day)
+                    - position: "1"
+                      profile: "HUE_DIMMER_SWITCH_LIGHT_DEFAULT"
+                      homeAssistantResources:
+                        - "light_schlafzimmer"
+                      condition: "day"
+                      triggers:
+                        - trigger: "BUTTON_1"
+                          sequences:
+                            - homeAssistantResources:
+                                - "scenes_schlafzimmer_dimmerswitch_02_day_1"
+                                - "scenes_schlafzimmer_dimmerswitch_02_day_2"
+                                - "scenes_schlafzimmer_dimmerswitch_02_day_3"
+                                - "scenes_schlafzimmer_dimmerswitch_02_day_n"
+                              cycleStart: "i:1"
+                              cycleEnd: "i:N"
+
+                    # Position 1 - Schlafzimmer (Night)
+                    - position: "1"
+                      profile: "HUE_DIMMER_SWITCH_LIGHT_DEFAULT"
+                      homeAssistantResources:
+                        - "light_schlafzimmer"
+                      condition: "night"
+                      triggers:
+                        - trigger: "BUTTON_1"
+                          sequences:
+                            - homeAssistantResources:
+                                - "scenes_schlafzimmer_dimmerswitch_02_night_1"
+                                - "scenes_schlafzimmer_dimmerswitch_02_night_2"
+                                - "scenes_schlafzimmer_dimmerswitch_02_night_3"
+                                - "scenes_schlafzimmer_dimmerswitch_02_night_n"
+                              cycleStart: "i:1"
+                              cycleEnd: "i:N"
+
+                - name: "Schlafzimmer_Dimmer_Switch_03"
+                  type: "HueDimmerSwitch"
+                  devices:
+                    - S44
+                  groups:
+                    # Position 1 - Schlafzimmer (Day)
+                    - position: "1"
+                      profile: "HUE_DIMMER_SWITCH_LIGHT_DEFAULT"
+                      homeAssistantResources:
+                        - "light_schlafzimmer"
+                      condition: "day"
+                      triggers:
+                        - trigger: "BUTTON_1"
+                          sequences:
+                            - homeAssistantResources:
+                                - "scenes_schlafzimmer_dimmerswitch_03_day_1"
+                                - "scenes_schlafzimmer_dimmerswitch_03_day_2"
+                                - "scenes_schlafzimmer_dimmerswitch_03_day_3"
+                                - "scenes_schlafzimmer_dimmerswitch_03_day_n"
+                              cycleStart: "i:1"
+                              cycleEnd: "i:N"
+
+                    # Position 1 - Schlafzimmer (Night)
+                    - position: "1"
+                      profile: "HUE_DIMMER_SWITCH_LIGHT_DEFAULT"
+                      homeAssistantResources:
+                        - "light_schlafzimmer"
+                      condition: "night"
+                      triggers:
+                        - trigger: "BUTTON_1"
+                          sequences:
+                            - homeAssistantResources:
+                                - "scenes_schlafzimmer_dimmerswitch_03_night_1"
+                                - "scenes_schlafzimmer_dimmerswitch_03_night_2"
+                                - "scenes_schlafzimmer_dimmerswitch_03_night_3"
+                                - "scenes_schlafzimmer_dimmerswitch_03_night_n"
                               cycleStart: "i:1"
                               cycleEnd: "i:N"
 
