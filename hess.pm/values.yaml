@@ -1866,7 +1866,9 @@ apps:
                 - name: "Gaestezimmer_Dimmer_Switch"
                   type: "HueDimmerSwitch"
                   devices:
-                    - S00
+                    - S47
+                    - S63
+                    - S56
                   groups:
                     # Position 1 - Gaestezimmer (Day)
                     - position: "1"
