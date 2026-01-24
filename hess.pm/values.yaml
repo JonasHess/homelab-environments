@@ -1654,7 +1654,9 @@ apps:
                 - name: "Buero_Lena_Dimmer_Switch"
                   type: "HueDimmerSwitch"
                   devices:
-                    - S00
+                    - S35
+                    - S39
+                    - S46
                   groups:
                     # Position 1 - Buero Lena (Day)
                     - position: "1"
