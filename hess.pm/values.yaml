@@ -2246,7 +2246,8 @@ apps:
                 - name: "Treppe_Dach_Dimmer_Switch"
                   type: "HueDimmerSwitch"
                   devices:
-                    - S00
+                    - S49
+                    - S43
                   groups:
                     # Position 1 - Treppe Dach (Day)
                     - position: "1"
@@ -2330,7 +2331,8 @@ apps:
                 - name: "Treppe_Oben_Dimmer_Switch"
                   type: "HueDimmerSwitch"
                   devices:
-                    - S00
+                    - S54
+                    - S40
                   groups:
                     # Position 1 - Treppe Oben (Day)
                     - position: "1"
