@@ -1765,7 +1765,7 @@ apps:
                   lookups:
                     - type: "staticEntity"
                       entityRefs:
-                        - "light.wohnzimmer"
+                        - "light.wonzimmer_z2m_group"
 
                 # Day Scenes
                 - type: "Scene"
