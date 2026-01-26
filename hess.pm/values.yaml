@@ -2907,6 +2907,7 @@ apps:
                     - S48
                     - S36
                     - S42
+                    - S62
                   groups:
                     # Position 1 - Wohnzimmer (Day)
                     - position: "1"
