@@ -3066,7 +3066,7 @@ apps:
       helm:
         values: {}
   zigbee2mqtt:
-    enabled: true
+    enabled: false
     argocd:
       targetRevision: ~
       helm:
