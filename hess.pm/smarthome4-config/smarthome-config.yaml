@@ -1,0 +1,2704 @@
+version: "1.0"
+
+smartHome:
+  # ============================================================================
+  # CONDITIONS
+  # ============================================================================
+  conditions:
+    - type: "SpelExpression"
+      id: "day"
+      expression: "#timeOfDay() == 'DAY'"
+
+    - type: "SpelExpression"
+      id: "night"
+      expression: "#timeOfDay() == 'NIGHT'"
+
+  # ============================================================================
+  # HOME ASSISTANT RESOURCES
+  # ============================================================================
+  homeAssistantResources:
+
+    # --------------------------------------------------------------------------
+    # BUERO JONAS
+    # --------------------------------------------------------------------------
+    - type: "Light"
+      id: "light_buero_jonas"
+      lookups:
+        - type: "staticEntity"
+          entityRefs:
+            - "light.buero_jonas"
+
+    # Day Scenes
+    - type: "Scene"
+      id: "scenes_buero_jonas_dimmerswitch_01_day_1"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Buero_Jonas_DimmerSwitch_01_Day_1"
+
+    - type: "Scene"
+      id: "scenes_buero_jonas_dimmerswitch_01_day_2"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Buero_Jonas_DimmerSwitch_01_Day_2"
+
+    - type: "Scene"
+      id: "scenes_buero_jonas_dimmerswitch_01_day_3"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Buero_Jonas_DimmerSwitch_01_Day_3"
+
+    - type: "Scene"
+      id: "scenes_buero_jonas_dimmerswitch_01_day_n"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Buero_Jonas_DimmerSwitch_01_Day_N"
+
+    # Night Scenes
+    - type: "Scene"
+      id: "scenes_buero_jonas_dimmerswitch_01_night_1"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Buero_Jonas_DimmerSwitch_01_Night_1"
+
+    - type: "Scene"
+      id: "scenes_buero_jonas_dimmerswitch_01_night_2"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Buero_Jonas_DimmerSwitch_01_Night_2"
+
+    - type: "Scene"
+      id: "scenes_buero_jonas_dimmerswitch_01_night_3"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Buero_Jonas_DimmerSwitch_01_Night_3"
+
+    - type: "Scene"
+      id: "scenes_buero_jonas_dimmerswitch_01_night_n"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Buero_Jonas_DimmerSwitch_01_Night_N"
+
+    # --------------------------------------------------------------------------
+    # BADEZIMMER DACH
+    # --------------------------------------------------------------------------
+    - type: "Light"
+      id: "light_badezimmer_dach"
+      lookups:
+        - type: "staticEntity"
+          entityRefs:
+            - "light.badezimmer_dach"
+
+    # Day Scenes
+    - type: "Scene"
+      id: "scenes_badezimmer_dach_dimmerswitch_01_day_1"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Badezimmer_Dach_DimmerSwitch_01_Day_1"
+
+    - type: "Scene"
+      id: "scenes_badezimmer_dach_dimmerswitch_01_day_2"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Badezimmer_Dach_DimmerSwitch_01_Day_2"
+
+    - type: "Scene"
+      id: "scenes_badezimmer_dach_dimmerswitch_01_day_3"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Badezimmer_Dach_DimmerSwitch_01_Day_3"
+
+    - type: "Scene"
+      id: "scenes_badezimmer_dach_dimmerswitch_01_day_n"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Badezimmer_Dach_DimmerSwitch_01_Day_N"
+
+    # Night Scenes
+    - type: "Scene"
+      id: "scenes_badezimmer_dach_dimmerswitch_01_night_1"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Badezimmer_Dach_DimmerSwitch_01_Night_1"
+
+    - type: "Scene"
+      id: "scenes_badezimmer_dach_dimmerswitch_01_night_2"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Badezimmer_Dach_DimmerSwitch_01_Night_2"
+
+    - type: "Scene"
+      id: "scenes_badezimmer_dach_dimmerswitch_01_night_3"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Badezimmer_Dach_DimmerSwitch_01_Night_3"
+
+    - type: "Scene"
+      id: "scenes_badezimmer_dach_dimmerswitch_01_night_n"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Badezimmer_Dach_DimmerSwitch_01_Night_N"
+
+    # --------------------------------------------------------------------------
+    # BADEZIMMER OBEN
+    # --------------------------------------------------------------------------
+    - type: "Light"
+      id: "light_badezimmer_oben"
+      lookups:
+        - type: "staticEntity"
+          entityRefs:
+            - "light.badezimmer_oben"
+
+    # Day Scenes
+    - type: "Scene"
+      id: "scenes_badezimmer_oben_dimmerswitch_01_day_1"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Badezimmer_Oben_DimmerSwitch_01_Day_1"
+
+    - type: "Scene"
+      id: "scenes_badezimmer_oben_dimmerswitch_01_day_2"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Badezimmer_Oben_DimmerSwitch_01_Day_2"
+
+    - type: "Scene"
+      id: "scenes_badezimmer_oben_dimmerswitch_01_day_3"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Badezimmer_Oben_DimmerSwitch_01_Day_3"
+
+    - type: "Scene"
+      id: "scenes_badezimmer_oben_dimmerswitch_01_day_n"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Badezimmer_Oben_DimmerSwitch_01_Day_N"
+
+    # Night Scenes
+    - type: "Scene"
+      id: "scenes_badezimmer_oben_dimmerswitch_01_night_1"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Badezimmer_Oben_DimmerSwitch_01_Night_1"
+
+    - type: "Scene"
+      id: "scenes_badezimmer_oben_dimmerswitch_01_night_2"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Badezimmer_Oben_DimmerSwitch_01_Night_2"
+
+    - type: "Scene"
+      id: "scenes_badezimmer_oben_dimmerswitch_01_night_3"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Badezimmer_Oben_DimmerSwitch_01_Night_3"
+
+    - type: "Scene"
+      id: "scenes_badezimmer_oben_dimmerswitch_01_night_n"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Badezimmer_Oben_DimmerSwitch_01_Night_N"
+
+    # --------------------------------------------------------------------------
+    # BUERO LENA
+    # --------------------------------------------------------------------------
+    - type: "Light"
+      id: "light_buero_lena"
+      lookups:
+        - type: "staticEntity"
+          entityRefs:
+            - "light.buero_lena"
+
+    # Day Scenes
+    - type: "Scene"
+      id: "scenes_buero_lena_dimmerswitch_01_day_1"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Buero_Lena_DimmerSwitch_01_Day_1"
+
+    - type: "Scene"
+      id: "scenes_buero_lena_dimmerswitch_01_day_2"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Buero_Lena_DimmerSwitch_01_Day_2"
+
+    - type: "Scene"
+      id: "scenes_buero_lena_dimmerswitch_01_day_3"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Buero_Lena_DimmerSwitch_01_Day_3"
+
+    - type: "Scene"
+      id: "scenes_buero_lena_dimmerswitch_01_day_n"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Buero_Lena_DimmerSwitch_01_Day_N"
+
+    # Night Scenes
+    - type: "Scene"
+      id: "scenes_buero_lena_dimmerswitch_01_night_1"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Buero_Lena_DimmerSwitch_01_Night_1"
+
+    - type: "Scene"
+      id: "scenes_buero_lena_dimmerswitch_01_night_2"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Buero_Lena_DimmerSwitch_01_Night_2"
+
+    - type: "Scene"
+      id: "scenes_buero_lena_dimmerswitch_01_night_3"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Buero_Lena_DimmerSwitch_01_Night_3"
+
+    - type: "Scene"
+      id: "scenes_buero_lena_dimmerswitch_01_night_n"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Buero_Lena_DimmerSwitch_01_Night_N"
+
+    # DimmerSwitch 02 - Day Scenes
+    - type: "Scene"
+      id: "scenes_buero_lena_dimmerswitch_02_day_1"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Buero_Lena_DimmerSwitch_02_Day_1"
+
+    - type: "Scene"
+      id: "scenes_buero_lena_dimmerswitch_02_day_2"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Buero_Lena_DimmerSwitch_02_Day_2"
+
+    - type: "Scene"
+      id: "scenes_buero_lena_dimmerswitch_02_day_3"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Buero_Lena_DimmerSwitch_02_Day_3"
+
+    - type: "Scene"
+      id: "scenes_buero_lena_dimmerswitch_02_day_n"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Buero_Lena_DimmerSwitch_02_Day_N"
+
+    # DimmerSwitch 02 - Night Scenes
+    - type: "Scene"
+      id: "scenes_buero_lena_dimmerswitch_02_night_1"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Buero_Lena_DimmerSwitch_02_Night_1"
+
+    - type: "Scene"
+      id: "scenes_buero_lena_dimmerswitch_02_night_2"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Buero_Lena_DimmerSwitch_02_Night_2"
+
+    - type: "Scene"
+      id: "scenes_buero_lena_dimmerswitch_02_night_3"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Buero_Lena_DimmerSwitch_02_Night_3"
+
+    - type: "Scene"
+      id: "scenes_buero_lena_dimmerswitch_02_night_n"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Buero_Lena_DimmerSwitch_02_Night_N"
+
+    # DimmerSwitch 03 - Day Scenes
+    - type: "Scene"
+      id: "scenes_buero_lena_dimmerswitch_03_day_1"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Buero_Lena_DimmerSwitch_03_Day_1"
+
+    - type: "Scene"
+      id: "scenes_buero_lena_dimmerswitch_03_day_2"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Buero_Lena_DimmerSwitch_03_Day_2"
+
+    - type: "Scene"
+      id: "scenes_buero_lena_dimmerswitch_03_day_3"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Buero_Lena_DimmerSwitch_03_Day_3"
+
+    - type: "Scene"
+      id: "scenes_buero_lena_dimmerswitch_03_day_n"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Buero_Lena_DimmerSwitch_03_Day_N"
+
+    # DimmerSwitch 03 - Night Scenes
+    - type: "Scene"
+      id: "scenes_buero_lena_dimmerswitch_03_night_1"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Buero_Lena_DimmerSwitch_03_Night_1"
+
+    - type: "Scene"
+      id: "scenes_buero_lena_dimmerswitch_03_night_2"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Buero_Lena_DimmerSwitch_03_Night_2"
+
+    - type: "Scene"
+      id: "scenes_buero_lena_dimmerswitch_03_night_3"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Buero_Lena_DimmerSwitch_03_Night_3"
+
+    - type: "Scene"
+      id: "scenes_buero_lena_dimmerswitch_03_night_n"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Buero_Lena_DimmerSwitch_03_Night_N"
+
+    # --------------------------------------------------------------------------
+    # DACH
+    # --------------------------------------------------------------------------
+    - type: "Light"
+      id: "light_dach"
+      lookups:
+        - type: "staticEntity"
+          entityRefs:
+            - "light.dach"
+
+    # Day Scenes
+    - type: "Scene"
+      id: "scenes_dach_dimmerswitch_01_day_1"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Dach_DimmerSwitch_01_Day_1"
+
+    - type: "Scene"
+      id: "scenes_dach_dimmerswitch_01_day_2"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Dach_DimmerSwitch_01_Day_2"
+
+    - type: "Scene"
+      id: "scenes_dach_dimmerswitch_01_day_3"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Dach_DimmerSwitch_01_Day_3"
+
+    - type: "Scene"
+      id: "scenes_dach_dimmerswitch_01_day_n"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Dach_DimmerSwitch_01_Day_N"
+
+    # Night Scenes
+    - type: "Scene"
+      id: "scenes_dach_dimmerswitch_01_night_1"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Dach_DimmerSwitch_01_Night_1"
+
+    - type: "Scene"
+      id: "scenes_dach_dimmerswitch_01_night_2"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Dach_DimmerSwitch_01_Night_2"
+
+    - type: "Scene"
+      id: "scenes_dach_dimmerswitch_01_night_3"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Dach_DimmerSwitch_01_Night_3"
+
+    - type: "Scene"
+      id: "scenes_dach_dimmerswitch_01_night_n"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Dach_DimmerSwitch_01_Night_N"
+
+    # --------------------------------------------------------------------------
+    # EINGANG
+    # --------------------------------------------------------------------------
+    - type: "Light"
+      id: "light_eingang"
+      lookups:
+        - type: "staticEntity"
+          entityRefs:
+            - "light.eingang"
+
+    # Day Scenes
+    - type: "Scene"
+      id: "scenes_eingang_dimmerswitch_01_day_1"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Eingang_DimmerSwitch_01_Day_1"
+
+    - type: "Scene"
+      id: "scenes_eingang_dimmerswitch_01_day_2"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Eingang_DimmerSwitch_01_Day_2"
+
+    - type: "Scene"
+      id: "scenes_eingang_dimmerswitch_01_day_3"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Eingang_DimmerSwitch_01_Day_3"
+
+    - type: "Scene"
+      id: "scenes_eingang_dimmerswitch_01_day_n"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Eingang_DimmerSwitch_01_Day_N"
+
+    # Night Scenes
+    - type: "Scene"
+      id: "scenes_eingang_dimmerswitch_01_night_1"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Eingang_DimmerSwitch_01_Night_1"
+
+    - type: "Scene"
+      id: "scenes_eingang_dimmerswitch_01_night_2"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Eingang_DimmerSwitch_01_Night_2"
+
+    - type: "Scene"
+      id: "scenes_eingang_dimmerswitch_01_night_3"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Eingang_DimmerSwitch_01_Night_3"
+
+    - type: "Scene"
+      id: "scenes_eingang_dimmerswitch_01_night_n"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Eingang_DimmerSwitch_01_Night_N"
+
+    # --------------------------------------------------------------------------
+    # ESSZIMMER
+    # --------------------------------------------------------------------------
+    - type: "Light"
+      id: "light_esszimmer"
+      lookups:
+        - type: "staticEntity"
+          entityRefs:
+            - "light.esszimmer"
+
+    # Day Scenes
+    - type: "Scene"
+      id: "scenes_esszimmer_dimmerswitch_01_day_1"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Esszimmer_DimmerSwitch_01_Day_1"
+
+    - type: "Scene"
+      id: "scenes_esszimmer_dimmerswitch_01_day_2"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Esszimmer_DimmerSwitch_01_Day_2"
+
+    - type: "Scene"
+      id: "scenes_esszimmer_dimmerswitch_01_day_3"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Esszimmer_DimmerSwitch_01_Day_3"
+
+    - type: "Scene"
+      id: "scenes_esszimmer_dimmerswitch_01_day_n"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Esszimmer_DimmerSwitch_01_Day_N"
+
+    # Night Scenes
+    - type: "Scene"
+      id: "scenes_esszimmer_dimmerswitch_01_night_1"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Esszimmer_DimmerSwitch_01_Night_1"
+
+    - type: "Scene"
+      id: "scenes_esszimmer_dimmerswitch_01_night_2"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Esszimmer_DimmerSwitch_01_Night_2"
+
+    - type: "Scene"
+      id: "scenes_esszimmer_dimmerswitch_01_night_3"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Esszimmer_DimmerSwitch_01_Night_3"
+
+    - type: "Scene"
+      id: "scenes_esszimmer_dimmerswitch_01_night_n"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Esszimmer_DimmerSwitch_01_Night_N"
+
+    # --------------------------------------------------------------------------
+    # GAESTE WC
+    # --------------------------------------------------------------------------
+    - type: "Light"
+      id: "light_gaeste_wc"
+      lookups:
+        - type: "staticEntity"
+          entityRefs:
+            - "light.gaeste_wc"
+
+    # Day Scenes
+    - type: "Scene"
+      id: "scenes_gaeste_wc_dimmerswitch_01_day_1"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Gaeste_WC_DimmerSwitch_01_Day_1"
+
+    - type: "Scene"
+      id: "scenes_gaeste_wc_dimmerswitch_01_day_2"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Gaeste_WC_DimmerSwitch_01_Day_2"
+
+    - type: "Scene"
+      id: "scenes_gaeste_wc_dimmerswitch_01_day_3"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Gaeste_WC_DimmerSwitch_01_Day_3"
+
+    - type: "Scene"
+      id: "scenes_gaeste_wc_dimmerswitch_01_day_n"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Gaeste_WC_DimmerSwitch_01_Day_N"
+
+    # Night Scenes
+    - type: "Scene"
+      id: "scenes_gaeste_wc_dimmerswitch_01_night_1"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Gaeste_WC_DimmerSwitch_01_Night_1"
+
+    - type: "Scene"
+      id: "scenes_gaeste_wc_dimmerswitch_01_night_2"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Gaeste_WC_DimmerSwitch_01_Night_2"
+
+    - type: "Scene"
+      id: "scenes_gaeste_wc_dimmerswitch_01_night_3"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Gaeste_WC_DimmerSwitch_01_Night_3"
+
+    - type: "Scene"
+      id: "scenes_gaeste_wc_dimmerswitch_01_night_n"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Gaeste_WC_DimmerSwitch_01_Night_N"
+
+    # --------------------------------------------------------------------------
+    # GAESTEZIMMER
+    # --------------------------------------------------------------------------
+    - type: "Light"
+      id: "light_gaestezimmer"
+      lookups:
+        - type: "staticEntity"
+          entityRefs:
+            - "light.gaestezimmer"
+
+    # Day Scenes
+    - type: "Scene"
+      id: "scenes_gaestezimmer_dimmerswitch_01_day_1"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Gaestezimmer_DimmerSwitch_01_Day_1"
+
+    - type: "Scene"
+      id: "scenes_gaestezimmer_dimmerswitch_01_day_2"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Gaestezimmer_DimmerSwitch_01_Day_2"
+
+    - type: "Scene"
+      id: "scenes_gaestezimmer_dimmerswitch_01_day_3"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Gaestezimmer_DimmerSwitch_01_Day_3"
+
+    - type: "Scene"
+      id: "scenes_gaestezimmer_dimmerswitch_01_day_n"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Gaestezimmer_DimmerSwitch_01_Day_N"
+
+    # Night Scenes
+    - type: "Scene"
+      id: "scenes_gaestezimmer_dimmerswitch_01_night_1"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Gaestezimmer_DimmerSwitch_01_Night_1"
+
+    - type: "Scene"
+      id: "scenes_gaestezimmer_dimmerswitch_01_night_2"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Gaestezimmer_DimmerSwitch_01_Night_2"
+
+    - type: "Scene"
+      id: "scenes_gaestezimmer_dimmerswitch_01_night_3"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Gaestezimmer_DimmerSwitch_01_Night_3"
+
+    - type: "Scene"
+      id: "scenes_gaestezimmer_dimmerswitch_01_night_n"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Gaestezimmer_DimmerSwitch_01_Night_N"
+
+    # DimmerSwitch 02 - Day Scenes
+    - type: "Scene"
+      id: "scenes_gaestezimmer_dimmerswitch_02_day_1"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Gaestezimmer_DimmerSwitch_02_Day_1"
+
+    - type: "Scene"
+      id: "scenes_gaestezimmer_dimmerswitch_02_day_2"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Gaestezimmer_DimmerSwitch_02_Day_2"
+
+    - type: "Scene"
+      id: "scenes_gaestezimmer_dimmerswitch_02_day_3"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Gaestezimmer_DimmerSwitch_02_Day_3"
+
+    - type: "Scene"
+      id: "scenes_gaestezimmer_dimmerswitch_02_day_n"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Gaestezimmer_DimmerSwitch_02_Day_N"
+
+    # DimmerSwitch 02 - Night Scenes
+    - type: "Scene"
+      id: "scenes_gaestezimmer_dimmerswitch_02_night_1"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Gaestezimmer_DimmerSwitch_02_Night_1"
+
+    - type: "Scene"
+      id: "scenes_gaestezimmer_dimmerswitch_02_night_2"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Gaestezimmer_DimmerSwitch_02_Night_2"
+
+    - type: "Scene"
+      id: "scenes_gaestezimmer_dimmerswitch_02_night_3"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Gaestezimmer_DimmerSwitch_02_Night_3"
+
+    - type: "Scene"
+      id: "scenes_gaestezimmer_dimmerswitch_02_night_n"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Gaestezimmer_DimmerSwitch_02_Night_N"
+
+    # DimmerSwitch 03 - Day Scenes
+    - type: "Scene"
+      id: "scenes_gaestezimmer_dimmerswitch_03_day_1"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Gaestezimmer_DimmerSwitch_03_Day_1"
+
+    - type: "Scene"
+      id: "scenes_gaestezimmer_dimmerswitch_03_day_2"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Gaestezimmer_DimmerSwitch_03_Day_2"
+
+    - type: "Scene"
+      id: "scenes_gaestezimmer_dimmerswitch_03_day_3"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Gaestezimmer_DimmerSwitch_03_Day_3"
+
+    - type: "Scene"
+      id: "scenes_gaestezimmer_dimmerswitch_03_day_n"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Gaestezimmer_DimmerSwitch_03_Day_N"
+
+    # DimmerSwitch 03 - Night Scenes
+    - type: "Scene"
+      id: "scenes_gaestezimmer_dimmerswitch_03_night_1"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Gaestezimmer_DimmerSwitch_03_Night_1"
+
+    - type: "Scene"
+      id: "scenes_gaestezimmer_dimmerswitch_03_night_2"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Gaestezimmer_DimmerSwitch_03_Night_2"
+
+    - type: "Scene"
+      id: "scenes_gaestezimmer_dimmerswitch_03_night_3"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Gaestezimmer_DimmerSwitch_03_Night_3"
+
+    - type: "Scene"
+      id: "scenes_gaestezimmer_dimmerswitch_03_night_n"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Gaestezimmer_DimmerSwitch_03_Night_N"
+
+    # --------------------------------------------------------------------------
+    # HAUSWIRTSCHAFTSRAUM
+    # --------------------------------------------------------------------------
+    - type: "Light"
+      id: "light_hauswirtschaftsraum"
+      lookups:
+        - type: "staticEntity"
+          entityRefs:
+            - "light.hauswirtschaftsraum"
+
+    # Day Scenes
+    - type: "Scene"
+      id: "scenes_hauswirtschaftsraum_dimmerswitch_01_day_1"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Hauswirtschaftsraum_DimmerSwitch_01_Day_1"
+
+    - type: "Scene"
+      id: "scenes_hauswirtschaftsraum_dimmerswitch_01_day_2"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Hauswirtschaftsraum_DimmerSwitch_01_Day_2"
+
+    - type: "Scene"
+      id: "scenes_hauswirtschaftsraum_dimmerswitch_01_day_3"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Hauswirtschaftsraum_DimmerSwitch_01_Day_3"
+
+    - type: "Scene"
+      id: "scenes_hauswirtschaftsraum_dimmerswitch_01_day_n"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Hauswirtschaftsraum_DimmerSwitch_01_Day_N"
+
+    # Night Scenes
+    - type: "Scene"
+      id: "scenes_hauswirtschaftsraum_dimmerswitch_01_night_1"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Hauswirtschaftsraum_DimmerSwitch_01_Night_1"
+
+    - type: "Scene"
+      id: "scenes_hauswirtschaftsraum_dimmerswitch_01_night_2"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Hauswirtschaftsraum_DimmerSwitch_01_Night_2"
+
+    - type: "Scene"
+      id: "scenes_hauswirtschaftsraum_dimmerswitch_01_night_3"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Hauswirtschaftsraum_DimmerSwitch_01_Night_3"
+
+    - type: "Scene"
+      id: "scenes_hauswirtschaftsraum_dimmerswitch_01_night_n"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Hauswirtschaftsraum_DimmerSwitch_01_Night_N"
+
+    # --------------------------------------------------------------------------
+    # HEIZUNGSKELLER
+    # --------------------------------------------------------------------------
+    - type: "Light"
+      id: "light_heizungskeller"
+      lookups:
+        - type: "staticEntity"
+          entityRefs:
+            - "light.heizungskeller"
+
+    # Day Scenes
+    - type: "Scene"
+      id: "scenes_heizungskeller_dimmerswitch_01_day_1"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Heizungskeller_DimmerSwitch_01_Day_1"
+
+    - type: "Scene"
+      id: "scenes_heizungskeller_dimmerswitch_01_day_2"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Heizungskeller_DimmerSwitch_01_Day_2"
+
+    - type: "Scene"
+      id: "scenes_heizungskeller_dimmerswitch_01_day_3"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Heizungskeller_DimmerSwitch_01_Day_3"
+
+    - type: "Scene"
+      id: "scenes_heizungskeller_dimmerswitch_01_day_n"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Heizungskeller_DimmerSwitch_01_Day_N"
+
+    # Night Scenes
+    - type: "Scene"
+      id: "scenes_heizungskeller_dimmerswitch_01_night_1"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Heizungskeller_DimmerSwitch_01_Night_1"
+
+    - type: "Scene"
+      id: "scenes_heizungskeller_dimmerswitch_01_night_2"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Heizungskeller_DimmerSwitch_01_Night_2"
+
+    - type: "Scene"
+      id: "scenes_heizungskeller_dimmerswitch_01_night_3"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Heizungskeller_DimmerSwitch_01_Night_3"
+
+    - type: "Scene"
+      id: "scenes_heizungskeller_dimmerswitch_01_night_n"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Heizungskeller_DimmerSwitch_01_Night_N"
+
+    # --------------------------------------------------------------------------
+    # KELLER
+    # --------------------------------------------------------------------------
+    - type: "Light"
+      id: "light_keller"
+      lookups:
+        - type: "staticEntity"
+          entityRefs:
+            - "light.keller"
+
+    # Day Scenes
+    - type: "Scene"
+      id: "scenes_keller_dimmerswitch_01_day_1"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Keller_DimmerSwitch_01_Day_1"
+
+    - type: "Scene"
+      id: "scenes_keller_dimmerswitch_01_day_2"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Keller_DimmerSwitch_01_Day_2"
+
+    - type: "Scene"
+      id: "scenes_keller_dimmerswitch_01_day_3"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Keller_DimmerSwitch_01_Day_3"
+
+    - type: "Scene"
+      id: "scenes_keller_dimmerswitch_01_day_n"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Keller_DimmerSwitch_01_Day_N"
+
+    # Night Scenes
+    - type: "Scene"
+      id: "scenes_keller_dimmerswitch_01_night_1"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Keller_DimmerSwitch_01_Night_1"
+
+    - type: "Scene"
+      id: "scenes_keller_dimmerswitch_01_night_2"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Keller_DimmerSwitch_01_Night_2"
+
+    - type: "Scene"
+      id: "scenes_keller_dimmerswitch_01_night_3"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Keller_DimmerSwitch_01_Night_3"
+
+    - type: "Scene"
+      id: "scenes_keller_dimmerswitch_01_night_n"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Keller_DimmerSwitch_01_Night_N"
+
+    # --------------------------------------------------------------------------
+    # KUECHE
+    # --------------------------------------------------------------------------
+    - type: "Light"
+      id: "light_kueche"
+      lookups:
+        - type: "staticEntity"
+          entityRefs:
+            - "light.kueche"
+
+    # Day Scenes
+    - type: "Scene"
+      id: "scenes_kueche_dimmerswitch_01_day_1"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Kueche_DimmerSwitch_01_Day_1"
+
+    - type: "Scene"
+      id: "scenes_kueche_dimmerswitch_01_day_2"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Kueche_DimmerSwitch_01_Day_2"
+
+    - type: "Scene"
+      id: "scenes_kueche_dimmerswitch_01_day_3"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Kueche_DimmerSwitch_01_Day_3"
+
+    - type: "Scene"
+      id: "scenes_kueche_dimmerswitch_01_day_n"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Kueche_DimmerSwitch_01_Day_N"
+
+    # Night Scenes
+    - type: "Scene"
+      id: "scenes_kueche_dimmerswitch_01_night_1"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Kueche_DimmerSwitch_01_Night_1"
+
+    - type: "Scene"
+      id: "scenes_kueche_dimmerswitch_01_night_2"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Kueche_DimmerSwitch_01_Night_2"
+
+    - type: "Scene"
+      id: "scenes_kueche_dimmerswitch_01_night_3"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Kueche_DimmerSwitch_01_Night_3"
+
+    - type: "Scene"
+      id: "scenes_kueche_dimmerswitch_01_night_n"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Kueche_DimmerSwitch_01_Night_N"
+
+    # --------------------------------------------------------------------------
+    # PERGOLA
+    # --------------------------------------------------------------------------
+    - type: "Light"
+      id: "light_pergola"
+      lookups:
+        - type: "staticEntity"
+          entityRefs:
+            - "light.pergola"
+
+    # Day Scenes
+    - type: "Scene"
+      id: "scenes_pergola_dimmerswitch_01_day_1"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Pergola_DimmerSwitch_01_Day_1"
+
+    - type: "Scene"
+      id: "scenes_pergola_dimmerswitch_01_day_2"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Pergola_DimmerSwitch_01_Day_2"
+
+    - type: "Scene"
+      id: "scenes_pergola_dimmerswitch_01_day_3"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Pergola_DimmerSwitch_01_Day_3"
+
+    - type: "Scene"
+      id: "scenes_pergola_dimmerswitch_01_day_n"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Pergola_DimmerSwitch_01_Day_N"
+
+    # Night Scenes
+    - type: "Scene"
+      id: "scenes_pergola_dimmerswitch_01_night_1"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Pergola_DimmerSwitch_01_Night_1"
+
+    - type: "Scene"
+      id: "scenes_pergola_dimmerswitch_01_night_2"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Pergola_DimmerSwitch_01_Night_2"
+
+    - type: "Scene"
+      id: "scenes_pergola_dimmerswitch_01_night_3"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Pergola_DimmerSwitch_01_Night_3"
+
+    - type: "Scene"
+      id: "scenes_pergola_dimmerswitch_01_night_n"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Pergola_DimmerSwitch_01_Night_N"
+
+    # --------------------------------------------------------------------------
+    # SCHLAFZIMMER
+    # --------------------------------------------------------------------------
+    - type: "Light"
+      id: "light_schlafzimmer"
+      lookups:
+        - type: "staticEntity"
+          entityRefs:
+            - "light.schlafzimmer"
+
+    # Day Scenes
+    - type: "Scene"
+      id: "scenes_schlafzimmer_dimmerswitch_01_day_1"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Schlafzimmer_DimmerSwitch_01_Day_1"
+
+    - type: "Scene"
+      id: "scenes_schlafzimmer_dimmerswitch_01_day_2"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Schlafzimmer_DimmerSwitch_01_Day_2"
+
+    - type: "Scene"
+      id: "scenes_schlafzimmer_dimmerswitch_01_day_3"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Schlafzimmer_DimmerSwitch_01_Day_3"
+
+    - type: "Scene"
+      id: "scenes_schlafzimmer_dimmerswitch_01_day_n"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Schlafzimmer_DimmerSwitch_01_Day_N"
+
+    # Night Scenes
+    - type: "Scene"
+      id: "scenes_schlafzimmer_dimmerswitch_01_night_1"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Schlafzimmer_DimmerSwitch_01_Night_1"
+
+    - type: "Scene"
+      id: "scenes_schlafzimmer_dimmerswitch_01_night_2"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Schlafzimmer_DimmerSwitch_01_Night_2"
+
+    - type: "Scene"
+      id: "scenes_schlafzimmer_dimmerswitch_01_night_3"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Schlafzimmer_DimmerSwitch_01_Night_3"
+
+    - type: "Scene"
+      id: "scenes_schlafzimmer_dimmerswitch_01_night_n"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Schlafzimmer_DimmerSwitch_01_Night_N"
+
+    # DimmerSwitch 02 - Day Scenes
+    - type: "Scene"
+      id: "scenes_schlafzimmer_dimmerswitch_02_day_1"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Schlafzimmer_DimmerSwitch_02_Day_1"
+
+    - type: "Scene"
+      id: "scenes_schlafzimmer_dimmerswitch_02_day_2"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Schlafzimmer_DimmerSwitch_02_Day_2"
+
+    - type: "Scene"
+      id: "scenes_schlafzimmer_dimmerswitch_02_day_3"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Schlafzimmer_DimmerSwitch_02_Day_3"
+
+    - type: "Scene"
+      id: "scenes_schlafzimmer_dimmerswitch_02_day_n"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Schlafzimmer_DimmerSwitch_02_Day_N"
+
+    # DimmerSwitch 02 - Night Scenes
+    - type: "Scene"
+      id: "scenes_schlafzimmer_dimmerswitch_02_night_1"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Schlafzimmer_DimmerSwitch_02_Night_1"
+
+    - type: "Scene"
+      id: "scenes_schlafzimmer_dimmerswitch_02_night_2"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Schlafzimmer_DimmerSwitch_02_Night_2"
+
+    - type: "Scene"
+      id: "scenes_schlafzimmer_dimmerswitch_02_night_3"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Schlafzimmer_DimmerSwitch_02_Night_3"
+
+    - type: "Scene"
+      id: "scenes_schlafzimmer_dimmerswitch_02_night_n"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Schlafzimmer_DimmerSwitch_02_Night_N"
+
+    # DimmerSwitch 03 - Day Scenes
+    - type: "Scene"
+      id: "scenes_schlafzimmer_dimmerswitch_03_day_1"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Schlafzimmer_DimmerSwitch_03_Day_1"
+
+    - type: "Scene"
+      id: "scenes_schlafzimmer_dimmerswitch_03_day_2"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Schlafzimmer_DimmerSwitch_03_Day_2"
+
+    - type: "Scene"
+      id: "scenes_schlafzimmer_dimmerswitch_03_day_3"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Schlafzimmer_DimmerSwitch_03_Day_3"
+
+    - type: "Scene"
+      id: "scenes_schlafzimmer_dimmerswitch_03_day_n"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Schlafzimmer_DimmerSwitch_03_Day_N"
+
+    # DimmerSwitch 03 - Night Scenes
+    - type: "Scene"
+      id: "scenes_schlafzimmer_dimmerswitch_03_night_1"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Schlafzimmer_DimmerSwitch_03_Night_1"
+
+    - type: "Scene"
+      id: "scenes_schlafzimmer_dimmerswitch_03_night_2"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Schlafzimmer_DimmerSwitch_03_Night_2"
+
+    - type: "Scene"
+      id: "scenes_schlafzimmer_dimmerswitch_03_night_3"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Schlafzimmer_DimmerSwitch_03_Night_3"
+
+    - type: "Scene"
+      id: "scenes_schlafzimmer_dimmerswitch_03_night_n"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Schlafzimmer_DimmerSwitch_03_Night_N"
+
+    # --------------------------------------------------------------------------
+    # STUDIO
+    # --------------------------------------------------------------------------
+    - type: "Light"
+      id: "light_studio"
+      lookups:
+        - type: "staticEntity"
+          entityRefs:
+            - "light.studio"
+
+    # Day Scenes
+    - type: "Scene"
+      id: "scenes_studio_dimmerswitch_01_day_1"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Studio_DimmerSwitch_01_Day_1"
+
+    - type: "Scene"
+      id: "scenes_studio_dimmerswitch_01_day_2"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Studio_DimmerSwitch_01_Day_2"
+
+    - type: "Scene"
+      id: "scenes_studio_dimmerswitch_01_day_3"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Studio_DimmerSwitch_01_Day_3"
+
+    - type: "Scene"
+      id: "scenes_studio_dimmerswitch_01_day_n"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Studio_DimmerSwitch_01_Day_N"
+
+    # Night Scenes
+    - type: "Scene"
+      id: "scenes_studio_dimmerswitch_01_night_1"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Studio_DimmerSwitch_01_Night_1"
+
+    - type: "Scene"
+      id: "scenes_studio_dimmerswitch_01_night_2"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Studio_DimmerSwitch_01_Night_2"
+
+    - type: "Scene"
+      id: "scenes_studio_dimmerswitch_01_night_3"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Studio_DimmerSwitch_01_Night_3"
+
+    - type: "Scene"
+      id: "scenes_studio_dimmerswitch_01_night_n"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Studio_DimmerSwitch_01_Night_N"
+
+    # --------------------------------------------------------------------------
+    # TERRASSE
+    # --------------------------------------------------------------------------
+    - type: "Light"
+      id: "light_terrasse"
+      lookups:
+        - type: "staticEntity"
+          entityRefs:
+            - "light.terrasse"
+
+    # Day Scenes
+    - type: "Scene"
+      id: "scenes_terrasse_dimmerswitch_01_day_1"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Terrasse_DimmerSwitch_01_Day_1"
+
+    - type: "Scene"
+      id: "scenes_terrasse_dimmerswitch_01_day_2"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Terrasse_DimmerSwitch_01_Day_2"
+
+    - type: "Scene"
+      id: "scenes_terrasse_dimmerswitch_01_day_3"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Terrasse_DimmerSwitch_01_Day_3"
+
+    - type: "Scene"
+      id: "scenes_terrasse_dimmerswitch_01_day_n"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Terrasse_DimmerSwitch_01_Day_N"
+
+    # Night Scenes
+    - type: "Scene"
+      id: "scenes_terrasse_dimmerswitch_01_night_1"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Terrasse_DimmerSwitch_01_Night_1"
+
+    - type: "Scene"
+      id: "scenes_terrasse_dimmerswitch_01_night_2"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Terrasse_DimmerSwitch_01_Night_2"
+
+    - type: "Scene"
+      id: "scenes_terrasse_dimmerswitch_01_night_3"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Terrasse_DimmerSwitch_01_Night_3"
+
+    - type: "Scene"
+      id: "scenes_terrasse_dimmerswitch_01_night_n"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Terrasse_DimmerSwitch_01_Night_N"
+
+    # --------------------------------------------------------------------------
+    # TREPPE DACH
+    # --------------------------------------------------------------------------
+    - type: "Light"
+      id: "light_treppe_dach"
+      lookups:
+        - type: "staticEntity"
+          entityRefs:
+            - "light.treppe_dach"
+
+    # Day Scenes
+    - type: "Scene"
+      id: "scenes_treppe_dach_dimmerswitch_01_day_1"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Treppe_Dach_DimmerSwitch_01_Day_1"
+
+    - type: "Scene"
+      id: "scenes_treppe_dach_dimmerswitch_01_day_2"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Treppe_Dach_DimmerSwitch_01_Day_2"
+
+    - type: "Scene"
+      id: "scenes_treppe_dach_dimmerswitch_01_day_3"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Treppe_Dach_DimmerSwitch_01_Day_3"
+
+    - type: "Scene"
+      id: "scenes_treppe_dach_dimmerswitch_01_day_n"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Treppe_Dach_DimmerSwitch_01_Day_N"
+
+    # Night Scenes
+    - type: "Scene"
+      id: "scenes_treppe_dach_dimmerswitch_01_night_1"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Treppe_Dach_DimmerSwitch_01_Night_1"
+
+    - type: "Scene"
+      id: "scenes_treppe_dach_dimmerswitch_01_night_2"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Treppe_Dach_DimmerSwitch_01_Night_2"
+
+    - type: "Scene"
+      id: "scenes_treppe_dach_dimmerswitch_01_night_3"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Treppe_Dach_DimmerSwitch_01_Night_3"
+
+    - type: "Scene"
+      id: "scenes_treppe_dach_dimmerswitch_01_night_n"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Treppe_Dach_DimmerSwitch_01_Night_N"
+
+    # --------------------------------------------------------------------------
+    # TREPPE KELLER
+    # --------------------------------------------------------------------------
+    - type: "Light"
+      id: "light_treppe_keller"
+      lookups:
+        - type: "staticEntity"
+          entityRefs:
+            - "light.treppe_keller"
+
+    # Day Scenes
+    - type: "Scene"
+      id: "scenes_treppe_keller_dimmerswitch_01_day_1"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Treppe_Keller_DimmerSwitch_01_Day_1"
+
+    - type: "Scene"
+      id: "scenes_treppe_keller_dimmerswitch_01_day_2"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Treppe_Keller_DimmerSwitch_01_Day_2"
+
+    - type: "Scene"
+      id: "scenes_treppe_keller_dimmerswitch_01_day_3"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Treppe_Keller_DimmerSwitch_01_Day_3"
+
+    - type: "Scene"
+      id: "scenes_treppe_keller_dimmerswitch_01_day_n"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Treppe_Keller_DimmerSwitch_01_Day_N"
+
+    # Night Scenes
+    - type: "Scene"
+      id: "scenes_treppe_keller_dimmerswitch_01_night_1"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Treppe_Keller_DimmerSwitch_01_Night_1"
+
+    - type: "Scene"
+      id: "scenes_treppe_keller_dimmerswitch_01_night_2"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Treppe_Keller_DimmerSwitch_01_Night_2"
+
+    - type: "Scene"
+      id: "scenes_treppe_keller_dimmerswitch_01_night_3"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Treppe_Keller_DimmerSwitch_01_Night_3"
+
+    - type: "Scene"
+      id: "scenes_treppe_keller_dimmerswitch_01_night_n"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Treppe_Keller_DimmerSwitch_01_Night_N"
+
+    # --------------------------------------------------------------------------
+    # TREPPE OBEN
+    # --------------------------------------------------------------------------
+    - type: "Light"
+      id: "light_treppe_oben"
+      lookups:
+        - type: "staticEntity"
+          entityRefs:
+            - "light.treppe_oben"
+
+    # Day Scenes
+    - type: "Scene"
+      id: "scenes_treppe_oben_dimmerswitch_01_day_1"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Treppe_Oben_DimmerSwitch_01_Day_1"
+
+    - type: "Scene"
+      id: "scenes_treppe_oben_dimmerswitch_01_day_2"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Treppe_Oben_DimmerSwitch_01_Day_2"
+
+    - type: "Scene"
+      id: "scenes_treppe_oben_dimmerswitch_01_day_3"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Treppe_Oben_DimmerSwitch_01_Day_3"
+
+    - type: "Scene"
+      id: "scenes_treppe_oben_dimmerswitch_01_day_n"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Treppe_Oben_DimmerSwitch_01_Day_N"
+
+    # Night Scenes
+    - type: "Scene"
+      id: "scenes_treppe_oben_dimmerswitch_01_night_1"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Treppe_Oben_DimmerSwitch_01_Night_1"
+
+    - type: "Scene"
+      id: "scenes_treppe_oben_dimmerswitch_01_night_2"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Treppe_Oben_DimmerSwitch_01_Night_2"
+
+    - type: "Scene"
+      id: "scenes_treppe_oben_dimmerswitch_01_night_3"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Treppe_Oben_DimmerSwitch_01_Night_3"
+
+    - type: "Scene"
+      id: "scenes_treppe_oben_dimmerswitch_01_night_n"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Treppe_Oben_DimmerSwitch_01_Night_N"
+
+    # --------------------------------------------------------------------------
+    # WOHNZIMMER
+    # --------------------------------------------------------------------------
+    - type: "Light"
+      id: "light_wohnzimmer"
+      lookups:
+        - type: "staticEntity"
+          entityRefs:
+            - "light.sonoff_dongle_m_light_wohnzimmer"
+
+    # Day Scenes
+    - type: "Scene"
+      id: "scenes_wohnzimmer_dimmerswitch_01_day_1"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Wohnzimmer_DimmerSwitch_01_Day_1"
+
+    - type: "Scene"
+      id: "scenes_wohnzimmer_dimmerswitch_01_day_2"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Wohnzimmer_DimmerSwitch_01_Day_2"
+
+    - type: "Scene"
+      id: "scenes_wohnzimmer_dimmerswitch_01_day_3"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Wohnzimmer_DimmerSwitch_01_Day_3"
+
+    - type: "Scene"
+      id: "scenes_wohnzimmer_dimmerswitch_01_day_n"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Wohnzimmer_DimmerSwitch_01_Day_N"
+
+    # Night Scenes
+    - type: "Scene"
+      id: "scenes_wohnzimmer_dimmerswitch_01_night_1"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Wohnzimmer_DimmerSwitch_01_Night_1"
+
+    - type: "Scene"
+      id: "scenes_wohnzimmer_dimmerswitch_01_night_2"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Wohnzimmer_DimmerSwitch_01_Night_2"
+
+    - type: "Scene"
+      id: "scenes_wohnzimmer_dimmerswitch_01_night_3"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Wohnzimmer_DimmerSwitch_01_Night_3"
+
+    - type: "Scene"
+      id: "scenes_wohnzimmer_dimmerswitch_01_night_n"
+      lookups:
+        - type: "labelRegex"
+          labelRegex: "Scenen_Wohnzimmer_DimmerSwitch_01_Night_N"
+
+  # ============================================================================
+  # SENSORS
+  # ============================================================================
+  sensors:
+
+    # ==========================================================================
+    # BUERO JONAS
+    # ==========================================================================
+    - name: "Buero_Jonas_Dimmer_Switch"
+      type: "HueDimmerSwitch"
+      devices:
+        - S00
+      groups:
+        # Position 1 - Buero Jonas (Day)
+        - position: "1"
+          profile: "HUE_DIMMER_SWITCH_LIGHT_DEFAULT"
+          homeAssistantResources:
+            - "light_buero_jonas"
+          condition: "day"
+          triggers:
+            - trigger: "BUTTON_1"
+              sequences:
+                - homeAssistantResources:
+                    - "scenes_buero_jonas_dimmerswitch_01_day_1"
+                    - "scenes_buero_jonas_dimmerswitch_01_day_2"
+                    - "scenes_buero_jonas_dimmerswitch_01_day_3"
+                    - "scenes_buero_jonas_dimmerswitch_01_day_n"
+                  cycleStart: "i:1"
+                  cycleEnd: "i:N"
+
+        # Position 1 - Buero Jonas (Night)
+        - position: "1"
+          profile: "HUE_DIMMER_SWITCH_LIGHT_DEFAULT"
+          homeAssistantResources:
+            - "light_buero_jonas"
+          condition: "night"
+          triggers:
+            - trigger: "BUTTON_1"
+              sequences:
+                - homeAssistantResources:
+                    - "scenes_buero_jonas_dimmerswitch_01_night_1"
+                    - "scenes_buero_jonas_dimmerswitch_01_night_2"
+                    - "scenes_buero_jonas_dimmerswitch_01_night_3"
+                    - "scenes_buero_jonas_dimmerswitch_01_night_n"
+                  cycleStart: "i:1"
+                  cycleEnd: "i:N"
+
+    # ==========================================================================
+    # BADEZIMMER DACH
+    # ==========================================================================
+    - name: "Badezimmer_Dach_Dimmer_Switch"
+      type: "HueDimmerSwitch"
+      devices:
+        - S00
+      groups:
+        # Position 1 - Badezimmer Dach (Day)
+        - position: "1"
+          profile: "HUE_DIMMER_SWITCH_LIGHT_DEFAULT"
+          homeAssistantResources:
+            - "light_badezimmer_dach"
+          condition: "day"
+          triggers:
+            - trigger: "BUTTON_1"
+              sequences:
+                - homeAssistantResources:
+                    - "scenes_badezimmer_dach_dimmerswitch_01_day_1"
+                    - "scenes_badezimmer_dach_dimmerswitch_01_day_2"
+                    - "scenes_badezimmer_dach_dimmerswitch_01_day_3"
+                    - "scenes_badezimmer_dach_dimmerswitch_01_day_n"
+                  cycleStart: "i:1"
+                  cycleEnd: "i:N"
+
+        # Position 1 - Badezimmer Dach (Night)
+        - position: "1"
+          profile: "HUE_DIMMER_SWITCH_LIGHT_DEFAULT"
+          homeAssistantResources:
+            - "light_badezimmer_dach"
+          condition: "night"
+          triggers:
+            - trigger: "BUTTON_1"
+              sequences:
+                - homeAssistantResources:
+                    - "scenes_badezimmer_dach_dimmerswitch_01_night_1"
+                    - "scenes_badezimmer_dach_dimmerswitch_01_night_2"
+                    - "scenes_badezimmer_dach_dimmerswitch_01_night_3"
+                    - "scenes_badezimmer_dach_dimmerswitch_01_night_n"
+                  cycleStart: "i:1"
+                  cycleEnd: "i:N"
+
+    # ==========================================================================
+    # BADEZIMMER OBEN
+    # ==========================================================================
+    - name: "Badezimmer_Oben_Dimmer_Switch"
+      type: "HueDimmerSwitch"
+      devices:
+        - S00
+      groups:
+        # Position 1 - Badezimmer Oben (Day)
+        - position: "1"
+          profile: "HUE_DIMMER_SWITCH_LIGHT_DEFAULT"
+          homeAssistantResources:
+            - "light_badezimmer_oben"
+          condition: "day"
+          triggers:
+            - trigger: "BUTTON_1"
+              sequences:
+                - homeAssistantResources:
+                    - "scenes_badezimmer_oben_dimmerswitch_01_day_1"
+                    - "scenes_badezimmer_oben_dimmerswitch_01_day_2"
+                    - "scenes_badezimmer_oben_dimmerswitch_01_day_3"
+                    - "scenes_badezimmer_oben_dimmerswitch_01_day_n"
+                  cycleStart: "i:1"
+                  cycleEnd: "i:N"
+
+        # Position 1 - Badezimmer Oben (Night)
+        - position: "1"
+          profile: "HUE_DIMMER_SWITCH_LIGHT_DEFAULT"
+          homeAssistantResources:
+            - "light_badezimmer_oben"
+          condition: "night"
+          triggers:
+            - trigger: "BUTTON_1"
+              sequences:
+                - homeAssistantResources:
+                    - "scenes_badezimmer_oben_dimmerswitch_01_night_1"
+                    - "scenes_badezimmer_oben_dimmerswitch_01_night_2"
+                    - "scenes_badezimmer_oben_dimmerswitch_01_night_3"
+                    - "scenes_badezimmer_oben_dimmerswitch_01_night_n"
+                  cycleStart: "i:1"
+                  cycleEnd: "i:N"
+
+    # ==========================================================================
+    # BUERO LENA
+    # ==========================================================================
+    - name: "Buero_Lena_Dimmer_Switch_01"
+      type: "HueDimmerSwitch"
+      devices:
+        - S35
+      groups:
+        # Position 1 - Buero Lena (Day)
+        - position: "1"
+          profile: "HUE_DIMMER_SWITCH_LIGHT_DEFAULT"
+          homeAssistantResources:
+            - "light_buero_lena"
+          condition: "day"
+          triggers:
+            - trigger: "BUTTON_1"
+              sequences:
+                - homeAssistantResources:
+                    - "scenes_buero_lena_dimmerswitch_01_day_1"
+                    - "scenes_buero_lena_dimmerswitch_01_day_2"
+                    - "scenes_buero_lena_dimmerswitch_01_day_3"
+                    - "scenes_buero_lena_dimmerswitch_01_day_n"
+                  cycleStart: "i:1"
+                  cycleEnd: "i:N"
+
+        # Position 1 - Buero Lena (Night)
+        - position: "1"
+          profile: "HUE_DIMMER_SWITCH_LIGHT_DEFAULT"
+          homeAssistantResources:
+            - "light_buero_lena"
+          condition: "night"
+          triggers:
+            - trigger: "BUTTON_1"
+              sequences:
+                - homeAssistantResources:
+                    - "scenes_buero_lena_dimmerswitch_01_night_1"
+                    - "scenes_buero_lena_dimmerswitch_01_night_2"
+                    - "scenes_buero_lena_dimmerswitch_01_night_3"
+                    - "scenes_buero_lena_dimmerswitch_01_night_n"
+                  cycleStart: "i:1"
+                  cycleEnd: "i:N"
+
+    - name: "Buero_Lena_Dimmer_Switch_02"
+      type: "HueDimmerSwitch"
+      devices:
+        - S39
+      groups:
+        # Position 1 - Buero Lena (Day)
+        - position: "1"
+          profile: "HUE_DIMMER_SWITCH_LIGHT_DEFAULT"
+          homeAssistantResources:
+            - "light_buero_lena"
+          condition: "day"
+          triggers:
+            - trigger: "BUTTON_1"
+              sequences:
+                - homeAssistantResources:
+                    - "scenes_buero_lena_dimmerswitch_02_day_1"
+                    - "scenes_buero_lena_dimmerswitch_02_day_2"
+                    - "scenes_buero_lena_dimmerswitch_02_day_3"
+                    - "scenes_buero_lena_dimmerswitch_02_day_n"
+                  cycleStart: "i:1"
+                  cycleEnd: "i:N"
+
+        # Position 1 - Buero Lena (Night)
+        - position: "1"
+          profile: "HUE_DIMMER_SWITCH_LIGHT_DEFAULT"
+          homeAssistantResources:
+            - "light_buero_lena"
+          condition: "night"
+          triggers:
+            - trigger: "BUTTON_1"
+              sequences:
+                - homeAssistantResources:
+                    - "scenes_buero_lena_dimmerswitch_02_night_1"
+                    - "scenes_buero_lena_dimmerswitch_02_night_2"
+                    - "scenes_buero_lena_dimmerswitch_02_night_3"
+                    - "scenes_buero_lena_dimmerswitch_02_night_n"
+                  cycleStart: "i:1"
+                  cycleEnd: "i:N"
+
+    - name: "Buero_Lena_Dimmer_Switch_03"
+      type: "HueDimmerSwitch"
+      devices:
+        - S46
+      groups:
+        # Position 1 - Buero Lena (Day)
+        - position: "1"
+          profile: "HUE_DIMMER_SWITCH_LIGHT_DEFAULT"
+          homeAssistantResources:
+            - "light_buero_lena"
+          condition: "day"
+          triggers:
+            - trigger: "BUTTON_1"
+              sequences:
+                - homeAssistantResources:
+                    - "scenes_buero_lena_dimmerswitch_03_day_1"
+                    - "scenes_buero_lena_dimmerswitch_03_day_2"
+                    - "scenes_buero_lena_dimmerswitch_03_day_3"
+                    - "scenes_buero_lena_dimmerswitch_03_day_n"
+                  cycleStart: "i:1"
+                  cycleEnd: "i:N"
+
+        # Position 1 - Buero Lena (Night)
+        - position: "1"
+          profile: "HUE_DIMMER_SWITCH_LIGHT_DEFAULT"
+          homeAssistantResources:
+            - "light_buero_lena"
+          condition: "night"
+          triggers:
+            - trigger: "BUTTON_1"
+              sequences:
+                - homeAssistantResources:
+                    - "scenes_buero_lena_dimmerswitch_03_night_1"
+                    - "scenes_buero_lena_dimmerswitch_03_night_2"
+                    - "scenes_buero_lena_dimmerswitch_03_night_3"
+                    - "scenes_buero_lena_dimmerswitch_03_night_n"
+                  cycleStart: "i:1"
+                  cycleEnd: "i:N"
+
+    # ==========================================================================
+    # DACH
+    # ==========================================================================
+    - name: "Dach_Dimmer_Switch"
+      type: "HueDimmerSwitch"
+      devices:
+        - S00
+      groups:
+        # Position 1 - Dach (Day)
+        - position: "1"
+          profile: "HUE_DIMMER_SWITCH_LIGHT_DEFAULT"
+          homeAssistantResources:
+            - "light_dach"
+          condition: "day"
+          triggers:
+            - trigger: "BUTTON_1"
+              sequences:
+                - homeAssistantResources:
+                    - "scenes_dach_dimmerswitch_01_day_1"
+                    - "scenes_dach_dimmerswitch_01_day_2"
+                    - "scenes_dach_dimmerswitch_01_day_3"
+                    - "scenes_dach_dimmerswitch_01_day_n"
+                  cycleStart: "i:1"
+                  cycleEnd: "i:N"
+
+        # Position 1 - Dach (Night)
+        - position: "1"
+          profile: "HUE_DIMMER_SWITCH_LIGHT_DEFAULT"
+          homeAssistantResources:
+            - "light_dach"
+          condition: "night"
+          triggers:
+            - trigger: "BUTTON_1"
+              sequences:
+                - homeAssistantResources:
+                    - "scenes_dach_dimmerswitch_01_night_1"
+                    - "scenes_dach_dimmerswitch_01_night_2"
+                    - "scenes_dach_dimmerswitch_01_night_3"
+                    - "scenes_dach_dimmerswitch_01_night_n"
+                  cycleStart: "i:1"
+                  cycleEnd: "i:N"
+
+    # ==========================================================================
+    # EINGANG
+    # ==========================================================================
+    - name: "Eingang_Dimmer_Switch"
+      type: "HueDimmerSwitch"
+      devices:
+        - S00
+      groups:
+        # Position 1 - Eingang (Day)
+        - position: "1"
+          profile: "HUE_DIMMER_SWITCH_LIGHT_DEFAULT"
+          homeAssistantResources:
+            - "light_eingang"
+          condition: "day"
+          triggers:
+            - trigger: "BUTTON_1"
+              sequences:
+                - homeAssistantResources:
+                    - "scenes_eingang_dimmerswitch_01_day_1"
+                    - "scenes_eingang_dimmerswitch_01_day_2"
+                    - "scenes_eingang_dimmerswitch_01_day_3"
+                    - "scenes_eingang_dimmerswitch_01_day_n"
+                  cycleStart: "i:1"
+                  cycleEnd: "i:N"
+
+        # Position 1 - Eingang (Night)
+        - position: "1"
+          profile: "HUE_DIMMER_SWITCH_LIGHT_DEFAULT"
+          homeAssistantResources:
+            - "light_eingang"
+          condition: "night"
+          triggers:
+            - trigger: "BUTTON_1"
+              sequences:
+                - homeAssistantResources:
+                    - "scenes_eingang_dimmerswitch_01_night_1"
+                    - "scenes_eingang_dimmerswitch_01_night_2"
+                    - "scenes_eingang_dimmerswitch_01_night_3"
+                    - "scenes_eingang_dimmerswitch_01_night_n"
+                  cycleStart: "i:1"
+                  cycleEnd: "i:N"
+
+    # ==========================================================================
+    # ESSZIMMER
+    # ==========================================================================
+    - name: "Esszimmer_Dimmer_Switch"
+      type: "HueDimmerSwitch"
+      devices:
+        - S00
+      groups:
+        # Position 1 - Esszimmer (Day)
+        - position: "1"
+          profile: "HUE_DIMMER_SWITCH_LIGHT_DEFAULT"
+          homeAssistantResources:
+            - "light_esszimmer"
+          condition: "day"
+          triggers:
+            - trigger: "BUTTON_1"
+              sequences:
+                - homeAssistantResources:
+                    - "scenes_esszimmer_dimmerswitch_01_day_1"
+                    - "scenes_esszimmer_dimmerswitch_01_day_2"
+                    - "scenes_esszimmer_dimmerswitch_01_day_3"
+                    - "scenes_esszimmer_dimmerswitch_01_day_n"
+                  cycleStart: "i:1"
+                  cycleEnd: "i:N"
+
+        # Position 1 - Esszimmer (Night)
+        - position: "1"
+          profile: "HUE_DIMMER_SWITCH_LIGHT_DEFAULT"
+          homeAssistantResources:
+            - "light_esszimmer"
+          condition: "night"
+          triggers:
+            - trigger: "BUTTON_1"
+              sequences:
+                - homeAssistantResources:
+                    - "scenes_esszimmer_dimmerswitch_01_night_1"
+                    - "scenes_esszimmer_dimmerswitch_01_night_2"
+                    - "scenes_esszimmer_dimmerswitch_01_night_3"
+                    - "scenes_esszimmer_dimmerswitch_01_night_n"
+                  cycleStart: "i:1"
+                  cycleEnd: "i:N"
+
+    # ==========================================================================
+    # GAESTE WC
+    # ==========================================================================
+    - name: "Gaeste_WC_Dimmer_Switch"
+      type: "HueDimmerSwitch"
+      devices:
+        - S00
+      groups:
+        # Position 1 - Gaeste WC (Day)
+        - position: "1"
+          profile: "HUE_DIMMER_SWITCH_LIGHT_DEFAULT"
+          homeAssistantResources:
+            - "light_gaeste_wc"
+          condition: "day"
+          triggers:
+            - trigger: "BUTTON_1"
+              sequences:
+                - homeAssistantResources:
+                    - "scenes_gaeste_wc_dimmerswitch_01_day_1"
+                    - "scenes_gaeste_wc_dimmerswitch_01_day_2"
+                    - "scenes_gaeste_wc_dimmerswitch_01_day_3"
+                    - "scenes_gaeste_wc_dimmerswitch_01_day_n"
+                  cycleStart: "i:1"
+                  cycleEnd: "i:N"
+
+        # Position 1 - Gaeste WC (Night)
+        - position: "1"
+          profile: "HUE_DIMMER_SWITCH_LIGHT_DEFAULT"
+          homeAssistantResources:
+            - "light_gaeste_wc"
+          condition: "night"
+          triggers:
+            - trigger: "BUTTON_1"
+              sequences:
+                - homeAssistantResources:
+                    - "scenes_gaeste_wc_dimmerswitch_01_night_1"
+                    - "scenes_gaeste_wc_dimmerswitch_01_night_2"
+                    - "scenes_gaeste_wc_dimmerswitch_01_night_3"
+                    - "scenes_gaeste_wc_dimmerswitch_01_night_n"
+                  cycleStart: "i:1"
+                  cycleEnd: "i:N"
+
+    # ==========================================================================
+    # GAESTEZIMMER
+    # ==========================================================================
+    - name: "Gaestezimmer_Dimmer_Switch_01"
+      type: "HueDimmerSwitch"
+      devices:
+        - S47
+      groups:
+        # Position 1 - Gaestezimmer (Day)
+        - position: "1"
+          profile: "HUE_DIMMER_SWITCH_LIGHT_DEFAULT"
+          homeAssistantResources:
+            - "light_gaestezimmer"
+          condition: "day"
+          triggers:
+            - trigger: "BUTTON_1"
+              sequences:
+                - homeAssistantResources:
+                    - "scenes_gaestezimmer_dimmerswitch_01_day_1"
+                    - "scenes_gaestezimmer_dimmerswitch_01_day_2"
+                    - "scenes_gaestezimmer_dimmerswitch_01_day_3"
+                    - "scenes_gaestezimmer_dimmerswitch_01_day_n"
+                  cycleStart: "i:1"
+                  cycleEnd: "i:N"
+
+        # Position 1 - Gaestezimmer (Night)
+        - position: "1"
+          profile: "HUE_DIMMER_SWITCH_LIGHT_DEFAULT"
+          homeAssistantResources:
+            - "light_gaestezimmer"
+          condition: "night"
+          triggers:
+            - trigger: "BUTTON_1"
+              sequences:
+                - homeAssistantResources:
+                    - "scenes_gaestezimmer_dimmerswitch_01_night_1"
+                    - "scenes_gaestezimmer_dimmerswitch_01_night_2"
+                    - "scenes_gaestezimmer_dimmerswitch_01_night_3"
+                    - "scenes_gaestezimmer_dimmerswitch_01_night_n"
+                  cycleStart: "i:1"
+                  cycleEnd: "i:N"
+
+    - name: "Gaestezimmer_Dimmer_Switch_02"
+      type: "HueDimmerSwitch"
+      devices:
+        - S63
+      groups:
+        # Position 1 - Gaestezimmer (Day)
+        - position: "1"
+          profile: "HUE_DIMMER_SWITCH_LIGHT_DEFAULT"
+          homeAssistantResources:
+            - "light_gaestezimmer"
+          condition: "day"
+          triggers:
+            - trigger: "BUTTON_1"
+              sequences:
+                - homeAssistantResources:
+                    - "scenes_gaestezimmer_dimmerswitch_02_day_1"
+                    - "scenes_gaestezimmer_dimmerswitch_02_day_2"
+                    - "scenes_gaestezimmer_dimmerswitch_02_day_3"
+                    - "scenes_gaestezimmer_dimmerswitch_02_day_n"
+                  cycleStart: "i:1"
+                  cycleEnd: "i:N"
+
+        # Position 1 - Gaestezimmer (Night)
+        - position: "1"
+          profile: "HUE_DIMMER_SWITCH_LIGHT_DEFAULT"
+          homeAssistantResources:
+            - "light_gaestezimmer"
+          condition: "night"
+          triggers:
+            - trigger: "BUTTON_1"
+              sequences:
+                - homeAssistantResources:
+                    - "scenes_gaestezimmer_dimmerswitch_02_night_1"
+                    - "scenes_gaestezimmer_dimmerswitch_02_night_2"
+                    - "scenes_gaestezimmer_dimmerswitch_02_night_3"
+                    - "scenes_gaestezimmer_dimmerswitch_02_night_n"
+                  cycleStart: "i:1"
+                  cycleEnd: "i:N"
+
+    - name: "Gaestezimmer_Dimmer_Switch_03"
+      type: "HueDimmerSwitch"
+      devices:
+        - S56
+      groups:
+        # Position 1 - Gaestezimmer (Day)
+        - position: "1"
+          profile: "HUE_DIMMER_SWITCH_LIGHT_DEFAULT"
+          homeAssistantResources:
+            - "light_gaestezimmer"
+          condition: "day"
+          triggers:
+            - trigger: "BUTTON_1"
+              sequences:
+                - homeAssistantResources:
+                    - "scenes_gaestezimmer_dimmerswitch_03_day_1"
+                    - "scenes_gaestezimmer_dimmerswitch_03_day_2"
+                    - "scenes_gaestezimmer_dimmerswitch_03_day_3"
+                    - "scenes_gaestezimmer_dimmerswitch_03_day_n"
+                  cycleStart: "i:1"
+                  cycleEnd: "i:N"
+
+        # Position 1 - Gaestezimmer (Night)
+        - position: "1"
+          profile: "HUE_DIMMER_SWITCH_LIGHT_DEFAULT"
+          homeAssistantResources:
+            - "light_gaestezimmer"
+          condition: "night"
+          triggers:
+            - trigger: "BUTTON_1"
+              sequences:
+                - homeAssistantResources:
+                    - "scenes_gaestezimmer_dimmerswitch_03_night_1"
+                    - "scenes_gaestezimmer_dimmerswitch_03_night_2"
+                    - "scenes_gaestezimmer_dimmerswitch_03_night_3"
+                    - "scenes_gaestezimmer_dimmerswitch_03_night_n"
+                  cycleStart: "i:1"
+                  cycleEnd: "i:N"
+
+    # ==========================================================================
+    # HAUSWIRTSCHAFTSRAUM
+    # ==========================================================================
+    - name: "Hauswirtschaftsraum_Dimmer_Switch"
+      type: "HueDimmerSwitch"
+      devices:
+        - S00
+      groups:
+        # Position 1 - Hauswirtschaftsraum (Day)
+        - position: "1"
+          profile: "HUE_DIMMER_SWITCH_LIGHT_DEFAULT"
+          homeAssistantResources:
+            - "light_hauswirtschaftsraum"
+          condition: "day"
+          triggers:
+            - trigger: "BUTTON_1"
+              sequences:
+                - homeAssistantResources:
+                    - "scenes_hauswirtschaftsraum_dimmerswitch_01_day_1"
+                    - "scenes_hauswirtschaftsraum_dimmerswitch_01_day_2"
+                    - "scenes_hauswirtschaftsraum_dimmerswitch_01_day_3"
+                    - "scenes_hauswirtschaftsraum_dimmerswitch_01_day_n"
+                  cycleStart: "i:1"
+                  cycleEnd: "i:N"
+
+        # Position 1 - Hauswirtschaftsraum (Night)
+        - position: "1"
+          profile: "HUE_DIMMER_SWITCH_LIGHT_DEFAULT"
+          homeAssistantResources:
+            - "light_hauswirtschaftsraum"
+          condition: "night"
+          triggers:
+            - trigger: "BUTTON_1"
+              sequences:
+                - homeAssistantResources:
+                    - "scenes_hauswirtschaftsraum_dimmerswitch_01_night_1"
+                    - "scenes_hauswirtschaftsraum_dimmerswitch_01_night_2"
+                    - "scenes_hauswirtschaftsraum_dimmerswitch_01_night_3"
+                    - "scenes_hauswirtschaftsraum_dimmerswitch_01_night_n"
+                  cycleStart: "i:1"
+                  cycleEnd: "i:N"
+
+    # ==========================================================================
+    # HEIZUNGSKELLER
+    # ==========================================================================
+    - name: "Heizungskeller_Dimmer_Switch"
+      type: "HueDimmerSwitch"
+      devices:
+        - S00
+      groups:
+        # Position 1 - Heizungskeller (Day)
+        - position: "1"
+          profile: "HUE_DIMMER_SWITCH_LIGHT_DEFAULT"
+          homeAssistantResources:
+            - "light_heizungskeller"
+          condition: "day"
+          triggers:
+            - trigger: "BUTTON_1"
+              sequences:
+                - homeAssistantResources:
+                    - "scenes_heizungskeller_dimmerswitch_01_day_1"
+                    - "scenes_heizungskeller_dimmerswitch_01_day_2"
+                    - "scenes_heizungskeller_dimmerswitch_01_day_3"
+                    - "scenes_heizungskeller_dimmerswitch_01_day_n"
+                  cycleStart: "i:1"
+                  cycleEnd: "i:N"
+
+        # Position 1 - Heizungskeller (Night)
+        - position: "1"
+          profile: "HUE_DIMMER_SWITCH_LIGHT_DEFAULT"
+          homeAssistantResources:
+            - "light_heizungskeller"
+          condition: "night"
+          triggers:
+            - trigger: "BUTTON_1"
+              sequences:
+                - homeAssistantResources:
+                    - "scenes_heizungskeller_dimmerswitch_01_night_1"
+                    - "scenes_heizungskeller_dimmerswitch_01_night_2"
+                    - "scenes_heizungskeller_dimmerswitch_01_night_3"
+                    - "scenes_heizungskeller_dimmerswitch_01_night_n"
+                  cycleStart: "i:1"
+                  cycleEnd: "i:N"
+
+    # ==========================================================================
+    # KELLER
+    # ==========================================================================
+    - name: "Keller_Dimmer_Switch"
+      type: "HueDimmerSwitch"
+      devices:
+        - S00
+      groups:
+        # Position 1 - Keller (Day)
+        - position: "1"
+          profile: "HUE_DIMMER_SWITCH_LIGHT_DEFAULT"
+          homeAssistantResources:
+            - "light_keller"
+          condition: "day"
+          triggers:
+            - trigger: "BUTTON_1"
+              sequences:
+                - homeAssistantResources:
+                    - "scenes_keller_dimmerswitch_01_day_1"
+                    - "scenes_keller_dimmerswitch_01_day_2"
+                    - "scenes_keller_dimmerswitch_01_day_3"
+                    - "scenes_keller_dimmerswitch_01_day_n"
+                  cycleStart: "i:1"
+                  cycleEnd: "i:N"
+
+        # Position 1 - Keller (Night)
+        - position: "1"
+          profile: "HUE_DIMMER_SWITCH_LIGHT_DEFAULT"
+          homeAssistantResources:
+            - "light_keller"
+          condition: "night"
+          triggers:
+            - trigger: "BUTTON_1"
+              sequences:
+                - homeAssistantResources:
+                    - "scenes_keller_dimmerswitch_01_night_1"
+                    - "scenes_keller_dimmerswitch_01_night_2"
+                    - "scenes_keller_dimmerswitch_01_night_3"
+                    - "scenes_keller_dimmerswitch_01_night_n"
+                  cycleStart: "i:1"
+                  cycleEnd: "i:N"
+
+    # ==========================================================================
+    # KUECHE
+    # ==========================================================================
+    - name: "Kueche_Dimmer_Switch"
+      type: "HueDimmerSwitch"
+      devices:
+        - S00
+      groups:
+        # Position 1 - Kueche (Day)
+        - position: "1"
+          profile: "HUE_DIMMER_SWITCH_LIGHT_DEFAULT"
+          homeAssistantResources:
+            - "light_kueche"
+          condition: "day"
+          triggers:
+            - trigger: "BUTTON_1"
+              sequences:
+                - homeAssistantResources:
+                    - "scenes_kueche_dimmerswitch_01_day_1"
+                    - "scenes_kueche_dimmerswitch_01_day_2"
+                    - "scenes_kueche_dimmerswitch_01_day_3"
+                    - "scenes_kueche_dimmerswitch_01_day_n"
+                  cycleStart: "i:1"
+                  cycleEnd: "i:N"
+
+        # Position 1 - Kueche (Night)
+        - position: "1"
+          profile: "HUE_DIMMER_SWITCH_LIGHT_DEFAULT"
+          homeAssistantResources:
+            - "light_kueche"
+          condition: "night"
+          triggers:
+            - trigger: "BUTTON_1"
+              sequences:
+                - homeAssistantResources:
+                    - "scenes_kueche_dimmerswitch_01_night_1"
+                    - "scenes_kueche_dimmerswitch_01_night_2"
+                    - "scenes_kueche_dimmerswitch_01_night_3"
+                    - "scenes_kueche_dimmerswitch_01_night_n"
+                  cycleStart: "i:1"
+                  cycleEnd: "i:N"
+
+    # ==========================================================================
+    # PERGOLA
+    # ==========================================================================
+    - name: "Pergola_Dimmer_Switch"
+      type: "HueDimmerSwitch"
+      devices:
+        - S00
+      groups:
+        # Position 1 - Pergola (Day)
+        - position: "1"
+          profile: "HUE_DIMMER_SWITCH_LIGHT_DEFAULT"
+          homeAssistantResources:
+            - "light_pergola"
+          condition: "day"
+          triggers:
+            - trigger: "BUTTON_1"
+              sequences:
+                - homeAssistantResources:
+                    - "scenes_pergola_dimmerswitch_01_day_1"
+                    - "scenes_pergola_dimmerswitch_01_day_2"
+                    - "scenes_pergola_dimmerswitch_01_day_3"
+                    - "scenes_pergola_dimmerswitch_01_day_n"
+                  cycleStart: "i:1"
+                  cycleEnd: "i:N"
+
+        # Position 1 - Pergola (Night)
+        - position: "1"
+          profile: "HUE_DIMMER_SWITCH_LIGHT_DEFAULT"
+          homeAssistantResources:
+            - "light_pergola"
+          condition: "night"
+          triggers:
+            - trigger: "BUTTON_1"
+              sequences:
+                - homeAssistantResources:
+                    - "scenes_pergola_dimmerswitch_01_night_1"
+                    - "scenes_pergola_dimmerswitch_01_night_2"
+                    - "scenes_pergola_dimmerswitch_01_night_3"
+                    - "scenes_pergola_dimmerswitch_01_night_n"
+                  cycleStart: "i:1"
+                  cycleEnd: "i:N"
+
+    # ==========================================================================
+    # SCHLAFZIMMER
+    # ==========================================================================
+    - name: "Schlafzimmer_Dimmer_Switch_01"
+      type: "HueDimmerSwitch"
+      devices:
+        - S81
+      groups:
+        # Position 1 - Schlafzimmer (Day)
+        - position: "1"
+          profile: "HUE_DIMMER_SWITCH_LIGHT_DEFAULT"
+          homeAssistantResources:
+            - "light_schlafzimmer"
+          condition: "day"
+          triggers:
+            - trigger: "BUTTON_1"
+              sequences:
+                - homeAssistantResources:
+                    - "scenes_schlafzimmer_dimmerswitch_01_day_1"
+                    - "scenes_schlafzimmer_dimmerswitch_01_day_2"
+                    - "scenes_schlafzimmer_dimmerswitch_01_day_3"
+                    - "scenes_schlafzimmer_dimmerswitch_01_day_n"
+                  cycleStart: "i:1"
+                  cycleEnd: "i:N"
+
+        # Position 1 - Schlafzimmer (Night)
+        - position: "1"
+          profile: "HUE_DIMMER_SWITCH_LIGHT_DEFAULT"
+          homeAssistantResources:
+            - "light_schlafzimmer"
+          condition: "night"
+          triggers:
+            - trigger: "BUTTON_1"
+              sequences:
+                - homeAssistantResources:
+                    - "scenes_schlafzimmer_dimmerswitch_01_night_1"
+                    - "scenes_schlafzimmer_dimmerswitch_01_night_2"
+                    - "scenes_schlafzimmer_dimmerswitch_01_night_3"
+                    - "scenes_schlafzimmer_dimmerswitch_01_night_n"
+                  cycleStart: "i:1"
+                  cycleEnd: "i:N"
+
+    - name: "Schlafzimmer_Dimmer_Switch_02"
+      type: "HueDimmerSwitch"
+      devices:
+        - S50
+      groups:
+        # Position 1 - Schlafzimmer (Day)
+        - position: "1"
+          profile: "HUE_DIMMER_SWITCH_LIGHT_DEFAULT"
+          homeAssistantResources:
+            - "light_schlafzimmer"
+          condition: "day"
+          triggers:
+            - trigger: "BUTTON_1"
+              sequences:
+                - homeAssistantResources:
+                    - "scenes_schlafzimmer_dimmerswitch_02_day_1"
+                    - "scenes_schlafzimmer_dimmerswitch_02_day_2"
+                    - "scenes_schlafzimmer_dimmerswitch_02_day_3"
+                    - "scenes_schlafzimmer_dimmerswitch_02_day_n"
+                  cycleStart: "i:1"
+                  cycleEnd: "i:N"
+
+        # Position 1 - Schlafzimmer (Night)
+        - position: "1"
+          profile: "HUE_DIMMER_SWITCH_LIGHT_DEFAULT"
+          homeAssistantResources:
+            - "light_schlafzimmer"
+          condition: "night"
+          triggers:
+            - trigger: "BUTTON_1"
+              sequences:
+                - homeAssistantResources:
+                    - "scenes_schlafzimmer_dimmerswitch_02_night_1"
+                    - "scenes_schlafzimmer_dimmerswitch_02_night_2"
+                    - "scenes_schlafzimmer_dimmerswitch_02_night_3"
+                    - "scenes_schlafzimmer_dimmerswitch_02_night_n"
+                  cycleStart: "i:1"
+                  cycleEnd: "i:N"
+
+    - name: "Schlafzimmer_Dimmer_Switch_03"
+      type: "HueDimmerSwitch"
+      devices:
+        - S44
+      groups:
+        # Position 1 - Schlafzimmer (Day)
+        - position: "1"
+          profile: "HUE_DIMMER_SWITCH_LIGHT_DEFAULT"
+          homeAssistantResources:
+            - "light_schlafzimmer"
+          condition: "day"
+          triggers:
+            - trigger: "BUTTON_1"
+              sequences:
+                - homeAssistantResources:
+                    - "scenes_schlafzimmer_dimmerswitch_03_day_1"
+                    - "scenes_schlafzimmer_dimmerswitch_03_day_2"
+                    - "scenes_schlafzimmer_dimmerswitch_03_day_3"
+                    - "scenes_schlafzimmer_dimmerswitch_03_day_n"
+                  cycleStart: "i:1"
+                  cycleEnd: "i:N"
+
+        # Position 1 - Schlafzimmer (Night)
+        - position: "1"
+          profile: "HUE_DIMMER_SWITCH_LIGHT_DEFAULT"
+          homeAssistantResources:
+            - "light_schlafzimmer"
+          condition: "night"
+          triggers:
+            - trigger: "BUTTON_1"
+              sequences:
+                - homeAssistantResources:
+                    - "scenes_schlafzimmer_dimmerswitch_03_night_1"
+                    - "scenes_schlafzimmer_dimmerswitch_03_night_2"
+                    - "scenes_schlafzimmer_dimmerswitch_03_night_3"
+                    - "scenes_schlafzimmer_dimmerswitch_03_night_n"
+                  cycleStart: "i:1"
+                  cycleEnd: "i:N"
+
+    # ==========================================================================
+    # STUDIO
+    # ==========================================================================
+    - name: "Studio_Dimmer_Switch"
+      type: "HueDimmerSwitch"
+      devices:
+        - S00
+      groups:
+        # Position 1 - Studio (Day)
+        - position: "1"
+          profile: "HUE_DIMMER_SWITCH_LIGHT_DEFAULT"
+          homeAssistantResources:
+            - "light_studio"
+          condition: "day"
+          triggers:
+            - trigger: "BUTTON_1"
+              sequences:
+                - homeAssistantResources:
+                    - "scenes_studio_dimmerswitch_01_day_1"
+                    - "scenes_studio_dimmerswitch_01_day_2"
+                    - "scenes_studio_dimmerswitch_01_day_3"
+                    - "scenes_studio_dimmerswitch_01_day_n"
+                  cycleStart: "i:1"
+                  cycleEnd: "i:N"
+
+        # Position 1 - Studio (Night)
+        - position: "1"
+          profile: "HUE_DIMMER_SWITCH_LIGHT_DEFAULT"
+          homeAssistantResources:
+            - "light_studio"
+          condition: "night"
+          triggers:
+            - trigger: "BUTTON_1"
+              sequences:
+                - homeAssistantResources:
+                    - "scenes_studio_dimmerswitch_01_night_1"
+                    - "scenes_studio_dimmerswitch_01_night_2"
+                    - "scenes_studio_dimmerswitch_01_night_3"
+                    - "scenes_studio_dimmerswitch_01_night_n"
+                  cycleStart: "i:1"
+                  cycleEnd: "i:N"
+
+    # ==========================================================================
+    # TERRASSE
+    # ==========================================================================
+    - name: "Terrasse_Dimmer_Switch"
+      type: "HueDimmerSwitch"
+      devices:
+        - S00
+      groups:
+        # Position 1 - Terrasse (Day)
+        - position: "1"
+          profile: "HUE_DIMMER_SWITCH_LIGHT_DEFAULT"
+          homeAssistantResources:
+            - "light_terrasse"
+          condition: "day"
+          triggers:
+            - trigger: "BUTTON_1"
+              sequences:
+                - homeAssistantResources:
+                    - "scenes_terrasse_dimmerswitch_01_day_1"
+                    - "scenes_terrasse_dimmerswitch_01_day_2"
+                    - "scenes_terrasse_dimmerswitch_01_day_3"
+                    - "scenes_terrasse_dimmerswitch_01_day_n"
+                  cycleStart: "i:1"
+                  cycleEnd: "i:N"
+
+        # Position 1 - Terrasse (Night)
+        - position: "1"
+          profile: "HUE_DIMMER_SWITCH_LIGHT_DEFAULT"
+          homeAssistantResources:
+            - "light_terrasse"
+          condition: "night"
+          triggers:
+            - trigger: "BUTTON_1"
+              sequences:
+                - homeAssistantResources:
+                    - "scenes_terrasse_dimmerswitch_01_night_1"
+                    - "scenes_terrasse_dimmerswitch_01_night_2"
+                    - "scenes_terrasse_dimmerswitch_01_night_3"
+                    - "scenes_terrasse_dimmerswitch_01_night_n"
+                  cycleStart: "i:1"
+                  cycleEnd: "i:N"
+
+    # ==========================================================================
+    # TREPPE DACH
+    # ==========================================================================
+    - name: "Treppe_Dach_Dimmer_Switch"
+      type: "HueDimmerSwitch"
+      devices:
+        - S49
+        - S43
+      groups:
+        # Position 1 - Treppe Dach (Day)
+        - position: "1"
+          profile: "HUE_DIMMER_SWITCH_LIGHT_DEFAULT"
+          homeAssistantResources:
+            - "light_treppe_dach"
+          condition: "day"
+          triggers:
+            - trigger: "BUTTON_1"
+              sequences:
+                - homeAssistantResources:
+                    - "scenes_treppe_dach_dimmerswitch_01_day_1"
+                    - "scenes_treppe_dach_dimmerswitch_01_day_2"
+                    - "scenes_treppe_dach_dimmerswitch_01_day_3"
+                    - "scenes_treppe_dach_dimmerswitch_01_day_n"
+                  cycleStart: "i:1"
+                  cycleEnd: "i:N"
+
+        # Position 1 - Treppe Dach (Night)
+        - position: "1"
+          profile: "HUE_DIMMER_SWITCH_LIGHT_DEFAULT"
+          homeAssistantResources:
+            - "light_treppe_dach"
+          condition: "night"
+          triggers:
+            - trigger: "BUTTON_1"
+              sequences:
+                - homeAssistantResources:
+                    - "scenes_treppe_dach_dimmerswitch_01_night_1"
+                    - "scenes_treppe_dach_dimmerswitch_01_night_2"
+                    - "scenes_treppe_dach_dimmerswitch_01_night_3"
+                    - "scenes_treppe_dach_dimmerswitch_01_night_n"
+                  cycleStart: "i:1"
+                  cycleEnd: "i:N"
+
+    # ==========================================================================
+    # TREPPE KELLER
+    # ==========================================================================
+    - name: "Treppe_Keller_Dimmer_Switch"
+      type: "HueDimmerSwitch"
+      devices:
+        - S62
+      groups:
+        # Position 1 - Treppe Keller (Day)
+        - position: "1"
+          profile: "HUE_DIMMER_SWITCH_LIGHT_DEFAULT"
+          homeAssistantResources:
+            - "light_treppe_keller"
+          condition: "day"
+          triggers:
+            - trigger: "BUTTON_1"
+              sequences:
+                - homeAssistantResources:
+                    - "scenes_treppe_keller_dimmerswitch_01_day_1"
+                    - "scenes_treppe_keller_dimmerswitch_01_day_2"
+                    - "scenes_treppe_keller_dimmerswitch_01_day_3"
+                    - "scenes_treppe_keller_dimmerswitch_01_day_n"
+                  cycleStart: "i:1"
+                  cycleEnd: "i:N"
+
+        # Position 1 - Treppe Keller (Night)
+        - position: "1"
+          profile: "HUE_DIMMER_SWITCH_LIGHT_DEFAULT"
+          homeAssistantResources:
+            - "light_treppe_keller"
+          condition: "night"
+          triggers:
+            - trigger: "BUTTON_1"
+              sequences:
+                - homeAssistantResources:
+                    - "scenes_treppe_keller_dimmerswitch_01_night_1"
+                    - "scenes_treppe_keller_dimmerswitch_01_night_2"
+                    - "scenes_treppe_keller_dimmerswitch_01_night_3"
+                    - "scenes_treppe_keller_dimmerswitch_01_night_n"
+                  cycleStart: "i:1"
+                  cycleEnd: "i:N"
+
+    # ==========================================================================
+    # TREPPE OBEN
+    # ==========================================================================
+    - name: "Treppe_Oben_Dimmer_Switch"
+      type: "HueDimmerSwitch"
+      devices:
+        - S54
+        - S40
+      groups:
+        # Position 1 - Treppe Oben (Day)
+        - position: "1"
+          profile: "HUE_DIMMER_SWITCH_LIGHT_DEFAULT"
+          homeAssistantResources:
+            - "light_treppe_oben"
+          condition: "day"
+          triggers:
+            - trigger: "BUTTON_1"
+              sequences:
+                - homeAssistantResources:
+                    - "scenes_treppe_oben_dimmerswitch_01_day_1"
+                    - "scenes_treppe_oben_dimmerswitch_01_day_2"
+                    - "scenes_treppe_oben_dimmerswitch_01_day_3"
+                    - "scenes_treppe_oben_dimmerswitch_01_day_n"
+                  cycleStart: "i:1"
+                  cycleEnd: "i:N"
+
+        # Position 1 - Treppe Oben (Night)
+        - position: "1"
+          profile: "HUE_DIMMER_SWITCH_LIGHT_DEFAULT"
+          homeAssistantResources:
+            - "light_treppe_oben"
+          condition: "night"
+          triggers:
+            - trigger: "BUTTON_1"
+              sequences:
+                - homeAssistantResources:
+                    - "scenes_treppe_oben_dimmerswitch_01_night_1"
+                    - "scenes_treppe_oben_dimmerswitch_01_night_2"
+                    - "scenes_treppe_oben_dimmerswitch_01_night_3"
+                    - "scenes_treppe_oben_dimmerswitch_01_night_n"
+                  cycleStart: "i:1"
+                  cycleEnd: "i:N"
+
+    # ==========================================================================
+    # WOHNZIMMER
+    # ==========================================================================
+    - name: "Wohnzimmer_Dimmer_Switch"
+      type: "HueDimmerSwitch"
+      devices:
+        - S48
+        - S36
+        - S42
+      groups:
+        # Position 1 - Wohnzimmer (Day)
+        - position: "1"
+          profile: "HUE_DIMMER_SWITCH_LIGHT_DEFAULT"
+          homeAssistantResources:
+            - "light_wohnzimmer"
+          condition: "day"
+          triggers:
+            - trigger: "BUTTON_1"
+              sequences:
+                - homeAssistantResources:
+                    - "scenes_wohnzimmer_dimmerswitch_01_day_1"
+                    - "scenes_wohnzimmer_dimmerswitch_01_day_2"
+                    - "scenes_wohnzimmer_dimmerswitch_01_day_3"
+                    - "scenes_wohnzimmer_dimmerswitch_01_day_n"
+                  cycleStart: "i:1"
+                  cycleEnd: "i:N"
+
+        # Position 1 - Wohnzimmer (Night)
+        - position: "1"
+          profile: "HUE_DIMMER_SWITCH_LIGHT_DEFAULT"
+          homeAssistantResources:
+            - "light_wohnzimmer"
+          condition: "night"
+          triggers:
+            - trigger: "BUTTON_1"
+              sequences:
+                - homeAssistantResources:
+                    - "scenes_wohnzimmer_dimmerswitch_01_night_1"
+                    - "scenes_wohnzimmer_dimmerswitch_01_night_2"
+                    - "scenes_wohnzimmer_dimmerswitch_01_night_3"
+                    - "scenes_wohnzimmer_dimmerswitch_01_night_n"
+                  cycleStart: "i:1"
+                  cycleEnd: "i:N"
