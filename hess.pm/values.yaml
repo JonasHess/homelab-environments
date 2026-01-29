@@ -3066,7 +3066,7 @@ apps:
       helm:
         values: {}
   zigbee2mqtt:
-    enabled: true
+    enabled: false
     argocd:
       targetRevision: ~
       helm:
@@ -3075,8 +3075,6 @@ apps:
           serialAdapter: ember
           generic:
             deployment:
-              securityContext: null
-              deviceMounts: null
               pvcMounts:
                 data:
                   hostPath: /mnt/tank1/unencrypted/apps/zigbee2mqtt/data
