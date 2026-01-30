@@ -241,6 +241,19 @@ apps:
             targetRevision: "main"
             path: "hess.pm/smarthome4-config"
             configMapName: "smarthome4-app-config"
+  smarthome4-ui:
+    enabled: true
+    argocd:
+      targetRevision: ~
+      helm:
+        values:
+          mqtt:
+            host: mosquitto-service
+            port: "1883"
+          z2mTopic: zigbee2mqtt
+          homeAssistant:
+            baseUrl: http://homeassistant-service:8123
+          corsOrigins: "https://lights.hess.pm"
   argocd:
     enabled: true
     argocd:
