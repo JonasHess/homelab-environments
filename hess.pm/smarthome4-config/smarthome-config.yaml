@@ -1250,41 +1250,6 @@ smartHome:
           - scenes_buero_jonas_dimmerswitch_01_night_n
           cycleStart: i:1
           cycleEnd: i:N
-  - name: Badezimmer_Oben_Dimmer_Switch
-    type: HueDimmerSwitch
-    devices:
-    - S00
-    groups:
-    - position: '1'
-      profile: HUE_DIMMER_SWITCH_LIGHT_DEFAULT
-      homeAssistantResources:
-      - light_badezimmer_oben
-      condition: day
-      triggers:
-      - trigger: BUTTON_1
-        sequences:
-        - homeAssistantResources:
-          - scenes_badezimmer_oben_dimmerswitch_01_day_1
-          - scenes_badezimmer_oben_dimmerswitch_01_day_2
-          - scenes_badezimmer_oben_dimmerswitch_01_day_3
-          - scenes_badezimmer_oben_dimmerswitch_01_day_n
-          cycleStart: i:1
-          cycleEnd: i:N
-    - position: '1'
-      profile: HUE_DIMMER_SWITCH_LIGHT_DEFAULT
-      homeAssistantResources:
-      - light_badezimmer_oben
-      condition: night
-      triggers:
-      - trigger: BUTTON_1
-        sequences:
-        - homeAssistantResources:
-          - scenes_badezimmer_oben_dimmerswitch_01_night_1
-          - scenes_badezimmer_oben_dimmerswitch_01_night_2
-          - scenes_badezimmer_oben_dimmerswitch_01_night_3
-          - scenes_badezimmer_oben_dimmerswitch_01_night_n
-          cycleStart: i:1
-          cycleEnd: i:N
   - name: Buero_Lena_Dimmer_Switch_01
     type: HueDimmerSwitch
     devices:
