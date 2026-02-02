@@ -147,3 +147,16 @@ smartHome:
           condition: night
       homeAssistantResources:
       - Light Wohnzimmer
+    - position: '2'
+      profile: HUE_DIMMER_SWITCH_LIGHT_DEFAULT
+      triggers:
+      - trigger: BUTTON_1
+        sequences:
+        - homeAssistantResources:
+          - Esszimmer DimmerSwitch 01 Day
+          condition: day
+        - homeAssistantResources:
+          - Esszimmer DimmerSwitch 01 Night
+          condition: night
+      homeAssistantResources:
+      - light_esszimmer
