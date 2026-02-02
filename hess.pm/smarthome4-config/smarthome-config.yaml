@@ -66,6 +66,16 @@ smartHome:
     lookups:
     - type: labelRegex
       labelRegex: Schlafzimmer__DimmerSwitch__01__night__.*
+  - type: Scene
+    id: Esszimmer DimmerSwitch 01 Day
+    lookups:
+    - type: labelRegex
+      labelRegex: Esszimmer__DimmerSwitch__01__day__.*
+  - type: Scene
+    id: Esszimmer DimmerSwitch 01 Night
+    lookups:
+    - type: labelRegex
+      labelRegex: Esszimmer__DimmerSwitch__01__night__.*
   sensors:
   - name: Schlafzimmer
     type: HueDimmerSwitch
@@ -85,3 +95,21 @@ smartHome:
           condition: night
       homeAssistantResources:
       - light_schlafzimmer
+  - name: Eszimmer Hie Dimmer
+    type: HueDimmerSwitch
+    devices:
+    - S52
+    groups:
+    - position: '1'
+      profile: HUE_DIMMER_SWITCH_LIGHT_DEFAULT
+      triggers:
+      - trigger: BUTTON_1
+        sequences:
+        - homeAssistantResources:
+          - Esszimmer DimmerSwitch 01 Day
+          condition: day
+        - homeAssistantResources:
+          - Esszimmer DimmerSwitch 01 Night
+          condition: night
+      homeAssistantResources:
+      - light_esszimmer
