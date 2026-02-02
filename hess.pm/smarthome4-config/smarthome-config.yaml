@@ -133,7 +133,7 @@ smartHome:
     type: HueDimmerSwitch
     devices:
     - S80
-    - '42'
+    - S42
     groups:
     - position: '1'
       profile: HUE_DIMMER_SWITCH_LIGHT_DEFAULT
