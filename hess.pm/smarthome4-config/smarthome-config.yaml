@@ -60,12 +60,12 @@ smartHome:
     id: Schlafzimmer__DimmerSwitch__01__day
     lookups:
     - type: labelRegex
-      labelRegex: Schlafzimmer__DimmerSwitch__01__day__*
+      labelRegex: Schlafzimmer__DimmerSwitch__01__day__.*
   - type: Scene
     id: Schlafzimmer__DimmerSwitch__01__nigt
     lookups:
     - type: labelRegex
-      labelRegex: Schlafzimmer__DimmerSwitch__01__night__*
+      labelRegex: Schlafzimmer__DimmerSwitch__01__night__.*
   sensors:
   - name: Schlafzimmer
     type: HueDimmerSwitch
