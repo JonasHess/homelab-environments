@@ -102,6 +102,16 @@ smartHome:
     lookups:
     - type: labelRegex
       labelRegex: Buero Jonas__DimmerSwitch__01__night__.*
+  - type: Scene
+    id: Buero Lena DimmerSwitch 01 Day
+    lookups:
+    - type: labelRegex
+      labelRegex: Buero Lena__DimmerSwitch__01__day__.*
+  - type: Scene
+    id: Buero Lena DimmerSwitch 01 Night
+    lookups:
+    - type: labelRegex
+      labelRegex: Buero Lena__DimmerSwitch__01__night__.*
   sensors:
   - name: Schlafzimmer
     type: HueDimmerSwitch
@@ -189,3 +199,23 @@ smartHome:
           condition: night
       homeAssistantResources:
       - light_buero_jonas
+  - name: Buero Lena 01
+    type: HueDimmerSwitch
+    devices:
+    - S39
+    - S35
+    - S46
+    groups:
+    - position: '1'
+      profile: HUE_DIMMER_SWITCH_LIGHT_DEFAULT
+      triggers:
+      - trigger: BUTTON_1
+        sequences:
+        - homeAssistantResources:
+          - Buero Lena DimmerSwitch 01 Day
+          condition: day
+        - homeAssistantResources:
+          - Buero Lena DimmerSwitch 01 Night
+          condition: night
+      homeAssistantResources:
+      - light_buero_lena
