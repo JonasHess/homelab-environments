@@ -92,6 +92,16 @@ smartHome:
     lookups:
     - type: labelRegex
       labelRegex: Wohnzimmer__DimmerSwitch__01__night__.*
+  - type: Scene
+    id: Buero Jonas DimmerSwitch 01 Day
+    lookups:
+    - type: labelRegex
+      labelRegex: Buero Jonas__DimmerSwitch__01__day__.*
+  - type: Scene
+    id: Buero Jonas DimmerSwitch 01 Night
+    lookups:
+    - type: labelRegex
+      labelRegex: Buero Jonas__DimmerSwitch__01__night__.*
   sensors:
   - name: Schlafzimmer
     type: HueDimmerSwitch
@@ -161,3 +171,21 @@ smartHome:
           condition: night
       homeAssistantResources:
       - light_esszimmer
+  - name: Buero Jonas
+    type: HueDimmerSwitch
+    devices:
+    - S43
+    groups:
+    - position: '1'
+      profile: HUE_DIMMER_SWITCH_LIGHT_DEFAULT
+      triggers:
+      - trigger: BUTTON_1
+        sequences:
+        - homeAssistantResources:
+          - Buero Jonas DimmerSwitch 01 Day
+          condition: day
+        - homeAssistantResources:
+          - Buero Jonas DimmerSwitch 01 Night
+          condition: night
+      homeAssistantResources:
+      - light_buero_jonas
