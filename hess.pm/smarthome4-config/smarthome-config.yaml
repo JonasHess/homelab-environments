@@ -122,6 +122,12 @@ smartHome:
     lookups:
     - type: labelRegex
       labelRegex: Dach__DimmerSwitch__01__night__.*
+  - type: Light
+    id: Light Dach
+    lookups:
+    - type: staticEntity
+      entityRefs:
+      - light.dach
   sensors:
   - name: Schlafzimmer
     type: HueDimmerSwitch
@@ -221,6 +227,8 @@ smartHome:
         - homeAssistantResources:
           - Dach DimmerSwitch 01 Night
           condition: night
+      homeAssistantResources:
+      - Light Dach
   - name: Buero Lena 01
     type: HueDimmerSwitch
     devices:
