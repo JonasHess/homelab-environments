@@ -171,6 +171,7 @@ smartHome:
     devices:
     - S80
     - S42
+    - S36
     groups:
     - position: '1'
       profile: HUE_DIMMER_SWITCH_LIGHT_DEFAULT
