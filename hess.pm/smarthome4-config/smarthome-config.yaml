@@ -128,6 +128,16 @@ smartHome:
     - type: staticEntity
       entityRefs:
       - light.dach
+  - type: Scene
+    id: Gaestezimmer DimmerSwitch 01 Day
+    lookups:
+    - type: labelRegex
+      labelRegex: Gaestezimmer__DimmerSwitch__01__day__.*
+  - type: Scene
+    id: Gaestezimmer DimmerSwitch 01 Night
+    lookups:
+    - type: labelRegex
+      labelRegex: Gaestezimmer__DimmerSwitch__01__night__.*
   sensors:
   - name: Schlafzimmer
     type: HueDimmerSwitch
@@ -250,3 +260,21 @@ smartHome:
           condition: night
       homeAssistantResources:
       - light_buero_lena
+  - name: Gästezimmer
+    type: HueDimmerSwitch
+    devices:
+    - S
+    groups:
+    - position: '1'
+      profile: HUE_DIMMER_SWITCH_LIGHT_DEFAULT
+      triggers:
+      - trigger: BUTTON_1
+        sequences:
+        - homeAssistantResources:
+          - Gaestezimmer DimmerSwitch 01 Day
+          condition: day
+        - homeAssistantResources:
+          - Gaestezimmer DimmerSwitch 01 Night
+          condition: night
+      homeAssistantResources:
+      - light_gaestezimmer
