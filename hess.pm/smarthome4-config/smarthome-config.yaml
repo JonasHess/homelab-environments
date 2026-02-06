@@ -263,7 +263,9 @@ smartHome:
   - name: Gästezimmer
     type: HueDimmerSwitch
     devices:
-    - S
+    - S47
+    - S56
+    - S63
     groups:
     - position: '1'
       profile: HUE_DIMMER_SWITCH_LIGHT_DEFAULT
