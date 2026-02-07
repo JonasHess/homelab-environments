@@ -1,9 +1,9 @@
 global:
   cluster:
-    serverip: 192.168.1.5
+    serverip: 192.168.0.5
     username: root
     cluster-name: home-server.dev
-    ip-range: 192.168.1.91-192.168.1.100
+    ip-range: 192.168.0.91-192.168.0.100
 
   domain: "home-server.dev"
   akeyless:
@@ -59,8 +59,8 @@ apps:
             persistentVolumeClaims:
               data:
                 hostPath: /mnt/data/apps/traefik
-          loadBalancerIP: 192.168.1.91
+          loadBalancerIP: 192.168.0.91
           middlewares:
             cloudflare:
               allowedCIDRs:
-              - 192.168.1.0/24
+              - 192.168.0.0/24
