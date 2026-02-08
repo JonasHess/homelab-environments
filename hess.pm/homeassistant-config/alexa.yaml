@@ -1,4 +1,8 @@
 smart_home:
   filter:
     include_entities:
-      - light.buero_jonas
+    - light.buero_jonas
+  entity_config:
+    light.buero_jonas:
+      name: Büro Jonas Licht
+      description: ''
