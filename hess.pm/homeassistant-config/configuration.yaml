@@ -5,6 +5,16 @@ default_config:
 frontend:
   themes: !include_dir_merge_named themes
 
+lovelace:
+  mode: yaml
+  dashboards:
+    lovelace-wohnzimmer:
+      mode: yaml
+      filename: dashboards/wohnzimmer.yaml
+      title: Wohnzimmer
+      icon: mdi:sofa
+      show_in_sidebar: true
+
 automation: !include automations.yaml
 script: !include scripts.yaml
 scene: !include scenes.yaml
