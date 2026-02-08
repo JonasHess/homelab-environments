@@ -13,8 +13,8 @@ smart_home:
       name: Wohnzimmer Licht
       description: Licht Wohnzimmer Lampen
     light.esszimmer:
-      name: Esszimmer
-      description: ''
+      name: Esszimmer Licht
+      description: Esszimmer Lampen Esstisch
     light.schlafzimmer:
-      name: Schlafzimmer
-      description: ''
+      name: Schlafzimmer Licht
+      description: Schlafzimmer Lampen
