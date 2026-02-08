@@ -2,7 +2,11 @@ smart_home:
   filter:
     include_entities:
     - light.buero_jonas
+    - light.wohnzimmer
   entity_config:
     light.buero_jonas:
       name: Büro Jonas Licht
       description: ''
+    light.wohnzimmer:
+      name: Wohnzimmer Licht
+      description: Licht Wohnzimmer Lampen
