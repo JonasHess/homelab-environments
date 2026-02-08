@@ -8,6 +8,12 @@ frontend:
 lovelace:
   mode: yaml
   dashboards:
+    lovelace-home:
+      mode: yaml
+      filename: home-dashboard.yaml
+      title: Home
+      icon: mdi:home
+      show_in_sidebar: true
     lovelace-wohnzimmer:
       mode: yaml
       filename: wohnzimmer-dashboard.yaml

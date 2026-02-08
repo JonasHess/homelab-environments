@@ -1,0 +1,185 @@
+title: Home
+views:
+- title: Home
+  path: home
+  icon: mdi:home
+  type: sections
+  sections:
+
+  - type: grid
+    title: Wetter & Status
+    cards:
+    - type: weather-forecast
+      entity: weather.forecast_home
+      forecast_type: daily
+      show_forecast: true
+    - type: tile
+      entity: sun.sun
+      name: Sonne
+
+  - type: grid
+    title: Schnellaktionen
+    cards:
+    - type: tile
+      entity: script.turn_on_all_lights
+      name: Alle Lichter an
+      icon: mdi:lightbulb-group
+      color: amber
+      tap_action:
+        action: call-service
+        service: script.turn_on
+        target:
+          entity_id: script.turn_on_all_lights
+    - type: tile
+      entity: script.turn_off_all_lights
+      name: Alle Lichter aus
+      icon: mdi:lightbulb-group-off
+      color: grey
+      tap_action:
+        action: call-service
+        service: script.turn_on
+        target:
+          entity_id: script.turn_off_all_lights
+
+  - type: grid
+    title: Räume
+    cards:
+    - type: tile
+      entity: light.wohnzimmer
+      name: Wohnzimmer
+      icon: mdi:sofa
+      features:
+      - type: light-brightness
+    - type: tile
+      entity: light.esszimmer
+      name: Esszimmer
+      icon: mdi:silverware-fork-knife
+      features:
+      - type: light-brightness
+    - type: tile
+      entity: light.buero_jonas
+      name: Büro Jonas
+      icon: mdi:desk
+      features:
+      - type: light-brightness
+    - type: tile
+      entity: light.buero_lena
+      name: Büro Lena
+      icon: mdi:desk-lamp
+      features:
+      - type: light-brightness
+    - type: tile
+      entity: light.schlafzimmer
+      name: Schlafzimmer
+      icon: mdi:bed
+      features:
+      - type: light-brightness
+    - type: tile
+      entity: light.gaestezimmer
+      name: Gästezimmer
+      icon: mdi:bed-outline
+      features:
+      - type: light-brightness
+    - type: tile
+      entity: light.dach
+      name: Dach
+      icon: mdi:home-roof
+      features:
+      - type: light-brightness
+
+  - type: grid
+    title: Flure & Treppen
+    cards:
+    - type: tile
+      entity: light.eingang_flur_deckenlampe_tur
+      name: Eingang Tür
+      icon: mdi:door
+    - type: tile
+      entity: light.eingang_flur_deckenlampe_wz
+      name: Eingang WZ
+      icon: mdi:door-open
+    - type: tile
+      entity: light.flur_oben_1
+      name: Flur Oben 1
+      icon: mdi:ceiling-light
+    - type: tile
+      entity: light.flur_oben_2
+      name: Flur Oben 2
+      icon: mdi:ceiling-light
+    - type: tile
+      entity: light.flur_oben_3
+      name: Flur Oben 3
+      icon: mdi:ceiling-light
+    - type: tile
+      entity: light.treppe_oben
+      name: Treppe Oben
+      icon: mdi:stairs
+    - type: tile
+      entity: light.treppe_dach
+      name: Treppe Dach
+      icon: mdi:stairs
+    - type: tile
+      entity: light.treppe_keller
+      name: Treppe Keller
+      icon: mdi:stairs
+
+  - type: grid
+    title: Rollos
+    cards:
+    - type: tile
+      entity: cover.rolladen
+      name: Alle Rollos
+      icon: mdi:blinds
+      features:
+      - type: cover-position
+    - type: tile
+      entity: cover.wohnzimmer_rollo_links
+      name: WZ Rollo Links
+      features:
+      - type: cover-position
+    - type: tile
+      entity: cover.wohnzimmer_rollo_rechts
+      name: WZ Rollo Rechts
+      features:
+      - type: cover-position
+
+  - type: grid
+    title: Medien
+    cards:
+    - type: tile
+      entity: media_player.spotify_hess_jonas
+      name: Spotify
+      icon: mdi:spotify
+      color: green
+    - type: tile
+      entity: media_player.wohnzimmer_shield
+      name: Shield TV
+      icon: mdi:television
+    - type: tile
+      entity: media_player.kueche
+      name: Küche
+      icon: mdi:speaker
+    - type: tile
+      entity: media_player.schlafzimmer
+      name: Schlafzimmer
+      icon: mdi:speaker
+    - type: tile
+      entity: media_player.badezimmer
+      name: Badezimmer
+      icon: mdi:speaker
+
+  - type: grid
+    title: Staubsauger
+    cards:
+    - type: tile
+      entity: vacuum.erdgeschoss
+      name: Erdgeschoss
+      icon: mdi:robot-vacuum
+    - type: tile
+      entity: vacuum.1_stock
+      name: 1. Stock
+      icon: mdi:robot-vacuum
+    - type: tile
+      entity: vacuum.2_stock
+      name: 2. Stock
+      icon: mdi:robot-vacuum

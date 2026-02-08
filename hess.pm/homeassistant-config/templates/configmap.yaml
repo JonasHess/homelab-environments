@@ -14,5 +14,7 @@ data:
 {{ .Files.Get "scenes.yaml" | indent 4 }}
   scripts.yaml: |
 {{ .Files.Get "scripts.yaml" | indent 4 }}
+  home-dashboard.yaml: |
+{{ .Files.Get "home-dashboard.yaml" | indent 4 }}
   wohnzimmer-dashboard.yaml: |
 {{ .Files.Get "wohnzimmer-dashboard.yaml" | indent 4 }}
