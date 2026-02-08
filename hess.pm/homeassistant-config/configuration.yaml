@@ -10,7 +10,7 @@ lovelace:
   dashboards:
     lovelace-wohnzimmer:
       mode: yaml
-      filename: dashboards/wohnzimmer.yaml
+      filename: wohnzimmer-dashboard.yaml
       title: Wohnzimmer
       icon: mdi:sofa
       show_in_sidebar: true
