@@ -1,6 +1,6 @@
 - id: '1769268645698'
   alias: Philips Hue Tap Dial Switch (Z2M / ZHA)
-  description: ''
+  description: Controls Esszimmer and Wohnzimmer lights via Hue Tap Dial
   use_blueprint:
     path: danielpetrovic/philips-hue-tap-dial-switch.yaml
     input:
@@ -8,20 +8,16 @@
       - z2m
       z2m_base_topic: zigbee2mqtt
       z2m_device_name: Esszimmer Dimmer Tab
-      button_1_press: []
       last_pressed: input_text.esszimmer_hue_tab_dial_last_pressed_state
       button_1_light:
         entity_id: light.esszimmer
       button_1_short_release_light_mode:
       - turn_on
+      button_1_dimming_speed: 7
       button_2_press:
       - action: light.toggle
-        metadata: {}
         target:
           entity_id: light.esszimmer
-        data: {}
-      button_3_short_release: []
-      button_1_dimming_speed: 7
       button_2_light:
         entity_id: light.esszimmer
       button_3_light:
@@ -31,8 +27,9 @@
       button_4_dimming_speed: 10
       button_4_short_release_light_mode:
       - turn_on
+
 - id: '1769443006186'
-  alias: Forward Hue Dimmer ZHA events to MQTT (smarthome-core compatible)
+  alias: Forward Hue Dimmer ZHA events to MQTT
   description: Forwards RWL022 dimmer events to zigbee2mqtt-compatible topic format
   triggers:
   - trigger: event
@@ -69,3 +66,13 @@
       qos: 1
   mode: parallel
   max: 10
+
+- id: '1739055600000'
+  alias: Turn off all lights at 03:00
+  description: Turns off all lights every night at 03:00
+  triggers:
+  - trigger: time
+    at: '03:00:00'
+  actions:
+  - action: script.turn_off_all_lights
+  mode: single

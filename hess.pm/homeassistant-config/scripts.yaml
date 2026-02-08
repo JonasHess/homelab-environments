@@ -1,40 +1,15 @@
-'1709741825259':
-  alias: Play_Spotify
-  sequence:
-  - service: media_player.play_media
-    target:
-      entity_id: 013f6e0b3803a737d658b253e32bd000
-    data:
-      media_content_id: Release Radar
-      media_content_type: SPOTIFY
-'1709741997595':
-  alias: New Script
-  sequence:
-  - service: media_player.play_media
-    target:
-      entity_id: 3b2ba682d2204d719c103f76da3e29e9
-    data:
-      media_content_type: sound
-      media_content_id: amzn_sfx_doorbell_chime_01
-test_script_alexa:
-  sequence:
-  - action: media_player.turn_off
-    target:
-      device_id: 5c9c70ef02a7d5e9e0ecb41469a99b5d
-    data: {}
-  alias: TEST_Script_alexa
-  description: ''
 turn_on_all_lights:
+  alias: Turn on all lights
+  description: Turns on every light entity in the house
   sequence:
-  - target:
+  - action: light.turn_on
+    target:
       entity_id: all
-    action: light.turn_on
-  alias: Turn On all Lights
-  description: ''
+
 turn_off_all_lights:
+  alias: Turn off all lights
+  description: Turns off every light entity in the house
   sequence:
-  - target:
+  - action: light.turn_off
+    target:
       entity_id: all
-    action: light.turn_off
-  alias: Turn OFF all Lights
-  description: ''
