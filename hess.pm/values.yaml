@@ -251,6 +251,40 @@ apps:
             repo: JonasHess/homelab-environments
             configPath: hess.pm/smarthome4-config/smarthome-config.yaml
             branch: main
+  alexa-smarthome-skill:
+    enabled: true
+    argocd:
+      namespace: "homeassistant"
+      targetRevision: ~
+      helm:
+        values:
+          skillId: "amzn1.ask.skill.fa708930-0ce8-422c-a5a2-aaca11b649f8"
+          lambdaArn: "arn:aws:lambda:eu-west-1:629099703604:function:HomeAssistant"
+          lambdaRegion: "eu-west-1"
+          homeAssistantUrl: "https://homeassistant.hess.pm"
+          files:
+            skillJson: |
+              {
+                "manifest": {
+                  "apis": {
+                    "smartHome": {
+                      "endpoint": {
+                        "uri": "{{ .Values.lambdaArn }}"
+                      },
+                      "protocolVersion": "3"
+                    }
+                  },
+                  "manifestVersion": "1.0",
+                  "publishingInformation": {
+                    "locales": {
+                      "de-DE": {
+                        "name": "HomeAssistant"
+                      }
+                    }
+                  }
+                }
+              }
+
   argocd:
     enabled: true
     argocd:
