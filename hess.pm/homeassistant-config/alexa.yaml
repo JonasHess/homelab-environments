@@ -4,6 +4,7 @@ smart_home:
     - light.buero_jonas
     - light.wohnzimmer
     - light.esszimmer
+    - light.schlafzimmer
   entity_config:
     light.buero_jonas:
       name: Büro Jonas Licht
@@ -13,4 +14,7 @@ smart_home:
       description: Licht Wohnzimmer Lampen
     light.esszimmer:
       name: Esszimmer
+      description: ''
+    light.schlafzimmer:
+      name: Schlafzimmer
       description: ''
