@@ -1,0 +1,179 @@
+title: Sicherheit
+views:
+- title: Sicherheit
+  path: sicherheit
+  icon: mdi:shield-home
+  type: sections
+  sections:
+
+  - type: grid
+    title: "Türen & Fenster"
+    cards:
+    - type: tile
+      entity: binary_sensor.balkontur_kuche
+      name: Balkontür Küche
+      icon: mdi:door
+    - type: tile
+      entity: binary_sensor.balkontur_links
+      name: Balkontür Links
+      icon: mdi:door
+    - type: tile
+      entity: binary_sensor.balkontur_rechts
+      name: Balkontür Rechts
+      icon: mdi:door
+    - type: tile
+      entity: binary_sensor.balkontur_sz
+      name: Balkontür SZ
+      icon: mdi:door
+    - type: tile
+      entity: binary_sensor.balkontur_zi_strasse
+      name: Balkontür ZI Strasse
+      icon: mdi:door
+    - type: tile
+      entity: binary_sensor.fenster_garten
+      name: Fenster Garten
+      icon: mdi:window-closed-variant
+    - type: tile
+      entity: binary_sensor.fenster_wz
+      name: Fenster WZ
+      icon: mdi:window-closed-variant
+    - type: tile
+      entity: binary_sensor.dachfensdoor_window_contact_ii
+      name: Dachfenster
+      icon: mdi:window-closed-variant
+    - type: tile
+      entity: binary_sensor.0x00158d00033ab58e_contact
+      name: Kontakt
+      icon: mdi:door
+
+  - type: grid
+    title: Zigbee Kontaktsensoren
+    cards:
+    - type: tile
+      entity: binary_sensor.s67_contact
+      name: S67
+      icon: mdi:door-closed
+    - type: tile
+      entity: binary_sensor.s68_contact
+      name: S68
+      icon: mdi:door-closed
+    - type: tile
+      entity: binary_sensor.s69_contact
+      name: S69
+      icon: mdi:door-closed
+    - type: tile
+      entity: binary_sensor.s70_contact
+      name: S70
+      icon: mdi:door-closed
+    - type: tile
+      entity: binary_sensor.s71_contact
+      name: S71
+      icon: mdi:door-closed
+    - type: tile
+      entity: binary_sensor.s72_contact
+      name: S72
+      icon: mdi:door-closed
+    - type: tile
+      entity: binary_sensor.s73_contact
+      name: S73
+      icon: mdi:door-closed
+    - type: tile
+      entity: binary_sensor.s74_contact
+      name: S74
+      icon: mdi:door-closed
+    - type: tile
+      entity: binary_sensor.s75_contact
+      name: S75
+      icon: mdi:door-closed
+    - type: tile
+      entity: binary_sensor.s79_contact
+      name: S79
+      icon: mdi:door-closed
+
+  - type: grid
+    title: Bewegungsmelder
+    cards:
+    - type: tile
+      entity: binary_sensor.s19_occupancy
+      name: S19
+      icon: mdi:motion-sensor
+    - type: tile
+      entity: binary_sensor.s20_occupancy
+      name: S20
+      icon: mdi:motion-sensor
+    - type: tile
+      entity: binary_sensor.s21_occupancy
+      name: S21
+      icon: mdi:motion-sensor
+    - type: tile
+      entity: binary_sensor.s22_occupancy
+      name: S22
+      icon: mdi:motion-sensor
+    - type: tile
+      entity: binary_sensor.s23_occupancy
+      name: S23
+      icon: mdi:motion-sensor
+    - type: tile
+      entity: binary_sensor.s24_occupancy
+      name: S24
+      icon: mdi:motion-sensor
+    - type: tile
+      entity: binary_sensor.s25_occupancy
+      name: S25
+      icon: mdi:motion-sensor
+
+  - type: grid
+    title: Helligkeit
+    cards:
+    - type: sensor
+      entity: sensor.s22_illuminance
+      name: S22
+      graph: line
+    - type: sensor
+      entity: sensor.s23_illuminance
+      name: S23
+      graph: line
+    - type: sensor
+      entity: sensor.s24_illuminance
+      name: S24
+      graph: line
+    - type: sensor
+      entity: sensor.s25_illuminance
+      name: S25
+      graph: line
+
+  - type: grid
+    title: Rauchmelder
+    cards:
+    - type: tile
+      entity: binary_sensor.rauchmelder_flur_keller_battery
+      name: Flur Keller
+      icon: mdi:smoke-detector-variant
+    - type: tile
+      entity: binary_sensor.rauchmelder_sz2_garten_battery
+      name: Wohnzimmer
+      icon: mdi:smoke-detector-variant
+    - type: tile
+      entity: binary_sensor.rauchmelder_dg_battery
+      name: Dachgeschoss
+      icon: mdi:smoke-detector-variant
+    - type: tile
+      entity: binary_sensor.rauchmelder_eg_wz_battery
+      name: EG WZ
+      icon: mdi:smoke-detector-variant
+    - type: tile
+      entity: binary_sensor.rauchmelder_flur_battery
+      name: Flur
+      icon: mdi:smoke-detector-variant
+    - type: tile
+      entity: binary_sensor.rauchmelder_zi1_strasse_battery
+      name: ZI Strasse
+      icon: mdi:smoke-detector-variant
+
+  - type: grid
+    title: Wasseralarm
+    cards:
+    - type: tile
+      entity: binary_sensor.water_alarm_battery
+      name: Wasseralarm
+      icon: mdi:water-alert

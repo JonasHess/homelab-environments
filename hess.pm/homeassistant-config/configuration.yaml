@@ -20,6 +20,36 @@ lovelace:
       title: Wohnzimmer
       icon: mdi:sofa
       show_in_sidebar: true
+    lovelace-szenen:
+      mode: yaml
+      filename: szenen-dashboard.yaml
+      title: Szenen
+      icon: mdi:palette
+      show_in_sidebar: true
+    lovelace-klima:
+      mode: yaml
+      filename: klima-dashboard.yaml
+      title: Klima
+      icon: mdi:thermometer
+      show_in_sidebar: true
+    lovelace-sicherheit:
+      mode: yaml
+      filename: sicherheit-dashboard.yaml
+      title: Sicherheit
+      icon: mdi:shield-home
+      show_in_sidebar: true
+    lovelace-medien:
+      mode: yaml
+      filename: medien-dashboard.yaml
+      title: Medien
+      icon: mdi:multimedia
+      show_in_sidebar: true
+    lovelace-system:
+      mode: yaml
+      filename: system-dashboard.yaml
+      title: System
+      icon: mdi:cog
+      show_in_sidebar: true
 
 automation: !include automations.yaml
 script: !include scripts.yaml

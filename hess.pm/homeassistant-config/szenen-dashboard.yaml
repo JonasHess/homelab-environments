@@ -1,0 +1,200 @@
+title: Szenen
+views:
+- title: Szenen
+  path: szenen
+  icon: mdi:palette
+  type: sections
+  sections:
+
+  - type: grid
+    title: Wohnzimmer
+    cards:
+    - type: tile
+      entity: scene.wohnzimmer_1_bright
+      name: Bright
+      icon: mdi:brightness-7
+      color: amber
+    - type: tile
+      entity: scene.wohnzimmer_2_dimmed
+      name: Dimmed
+      icon: mdi:brightness-5
+      color: orange
+    - type: tile
+      entity: scene.wohnzimmer_3_rest
+      name: Rest
+      icon: mdi:brightness-3
+      color: deep-orange
+    - type: tile
+      entity: scene.wohnzimmer_4_ocean
+      name: Ocean
+      icon: mdi:waves
+      color: cyan
+    - type: tile
+      entity: scene.wohnzimmer_5_golden_hour
+      name: Golden Hour
+      icon: mdi:weather-sunset
+      color: amber
+    - type: tile
+      entity: scene.wohnzimmer_6_neon
+      name: Neon
+      icon: mdi:led-strip-variant
+      color: pink
+    - type: tile
+      entity: scene.wohnzimmer_7_nordlicht
+      name: Nordlicht
+      icon: mdi:aurora
+      color: green
+    - type: tile
+      entity: scene.wohnzimmer_8_sunset
+      name: Sunset
+      icon: mdi:weather-sunset-down
+      color: deep-orange
+
+  - type: grid
+    title: Esszimmer
+    cards:
+    - type: tile
+      entity: scene.esszimmer_3_bright
+      name: Bright
+      icon: mdi:brightness-7
+      color: amber
+    - type: tile
+      entity: scene.esszimmer_4_dimmed
+      name: Dimmed
+      icon: mdi:brightness-5
+      color: orange
+    - type: tile
+      entity: scene.esszimmer_2_nightlight
+      name: Nightlight
+      icon: mdi:weather-night
+      color: indigo
+
+  - type: grid
+    title: Büro Jonas
+    cards:
+    - type: tile
+      entity: scene.buero_jonas_1_dimmed
+      name: Dimmed
+      icon: mdi:brightness-5
+      color: orange
+    - type: tile
+      entity: scene.buero_jonas_2_ocean
+      name: Ocean
+      icon: mdi:waves
+      color: cyan
+    - type: tile
+      entity: scene.buero_jonas_3_christmas
+      name: Christmas
+      icon: mdi:pine-tree
+      color: green
+
+  - type: grid
+    title: Büro Lena
+    cards:
+    - type: tile
+      entity: scene.buero_lena_1_bright
+      name: Bright
+      icon: mdi:brightness-7
+      color: amber
+    - type: tile
+      entity: scene.buero_lena_2_dimmed
+      name: Dimmed
+      icon: mdi:brightness-5
+      color: orange
+    - type: tile
+      entity: scene.buero_lena_3_nightlight
+      name: Nightlight
+      icon: mdi:weather-night
+      color: indigo
+    - type: tile
+      entity: scene.buero_lena_4_fireplace
+      name: Fireplace
+      icon: mdi:fireplace
+      color: deep-orange
+    - type: tile
+      entity: scene.buero_lena_5_nordlicht
+      name: Nordlicht
+      icon: mdi:aurora
+      color: green
+    - type: tile
+      entity: scene.buero_lena_6_lava
+      name: Lava
+      icon: mdi:lava-lamp
+      color: red
+    - type: tile
+      entity: scene.buero_lena_7_valentine
+      name: Valentine
+      icon: mdi:heart
+      color: pink
+    - type: tile
+      entity: scene.buero_lena_8_forest
+      name: Forest
+      icon: mdi:forest
+      color: green
+
+  - type: grid
+    title: Schlafzimmer
+    cards:
+    - type: tile
+      entity: scene.schlafzimmer_4_bright
+      name: Bright
+      icon: mdi:brightness-7
+      color: amber
+    - type: tile
+      entity: scene.schlafzimmer_1_nightlight
+      name: Nightlight
+      icon: mdi:weather-night
+      color: indigo
+    - type: tile
+      entity: scene.schlafzimmer_2_nachtlicht_jonas
+      name: Nachtlicht Jonas
+      icon: mdi:lamp
+      color: orange
+    - type: tile
+      entity: scene.schlafzimmer_3_nachtlicht_lena
+      name: Nachtlicht Lena
+      icon: mdi:lamp
+      color: pink
+
+  - type: grid
+    title: Gästezimmer
+    cards:
+    - type: tile
+      entity: scene.gaestezimmer_2_bright
+      name: Bright
+      icon: mdi:brightness-7
+      color: amber
+    - type: tile
+      entity: scene.gaestezimmer_1_candlelight
+      name: Candlelight
+      icon: mdi:candle
+      color: orange
+    - type: tile
+      entity: scene.gaestezimmer_3_ocean
+      name: Ocean
+      icon: mdi:waves
+      color: cyan
+    - type: tile
+      entity: scene.gaestezimmer_4_nightlight
+      name: Nightlight
+      icon: mdi:weather-night
+      color: indigo
+
+  - type: grid
+    title: Dach
+    cards:
+    - type: tile
+      entity: scene.dach_1_dimmed
+      name: Dimmed
+      icon: mdi:brightness-5
+      color: orange
+    - type: tile
+      entity: scene.dach_2_miami_vice
+      name: Miami Vice
+      icon: mdi:palm-tree
+      color: pink
+    - type: tile
+      entity: scene.dach_3_matrix
+      name: Matrix
+      icon: mdi:matrix
+      color: green

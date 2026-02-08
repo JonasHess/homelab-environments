@@ -1,0 +1,101 @@
+title: Medien
+views:
+- title: Medien
+  path: medien
+  icon: mdi:multimedia
+  type: sections
+  sections:
+
+  - type: grid
+    title: Spotify
+    cards:
+    - type: media-control
+      entity: media_player.spotify_hess_jonas
+
+  - type: grid
+    title: TV & Streaming
+    cards:
+    - type: tile
+      entity: media_player.wohnzimmer_shield
+      name: Shield TV
+      icon: mdi:television
+    - type: tile
+      entity: media_player.jonas_s_fire_tv_stick
+      name: Fire TV Stick
+      icon: mdi:television
+    - type: tile
+      entity: remote.harmony_wohnzimmer
+      name: Harmony Hub
+      icon: mdi:remote-tv
+
+  - type: grid
+    title: Plex
+    cards:
+    - type: tile
+      entity: media_player.plex_plex_for_android_tv_shield_android_tv
+      name: Plex Shield
+      icon: mdi:plex
+    - type: tile
+      entity: media_player.plex_jana_wei_plex_for_lg_lg_oled65c27la
+      name: Plex LG TV
+      icon: mdi:plex
+    - type: tile
+      entity: media_player.plex_plex_for_android_mobile_galaxy_s20_fe
+      name: Plex Galaxy S20
+      icon: mdi:plex
+    - type: tile
+      entity: sensor.plex_nudelkiste
+      name: Plex Server
+      icon: mdi:plex
+
+  - type: grid
+    title: Alexa Lautsprecher
+    cards:
+    - type: tile
+      entity: media_player.kueche
+      name: Küche
+      icon: mdi:speaker
+    - type: tile
+      entity: media_player.wohnzimmer_tv
+      name: Büro Jonas
+      icon: mdi:speaker
+    - type: tile
+      entity: media_player.schlafzimmer
+      name: Schlafzimmer
+      icon: mdi:speaker
+    - type: tile
+      entity: media_player.badezimmer
+      name: Badezimmer
+      icon: mdi:speaker
+    - type: tile
+      entity: media_player.buero
+      name: Alexa Küche
+      icon: mdi:speaker
+    - type: tile
+      entity: media_player.alexa_studio
+      name: Studio
+      icon: mdi:speaker
+    - type: tile
+      entity: media_player.ueberall
+      name: Überall
+      icon: mdi:speaker-multiple
+
+  - type: grid
+    title: SABnzbd
+    cards:
+    - type: sensor
+      entity: sensor.sabnzbd_speed
+      name: Download Speed
+      graph: line
+    - type: tile
+      entity: sensor.sabnzbd_status
+      name: Status
+      icon: mdi:download
+    - type: tile
+      entity: sensor.sabnzbd_queue_count
+      name: Queue
+      icon: mdi:tray-full
+    - type: tile
+      entity: sensor.sabnzbd_free_disk_space
+      name: Freier Speicher
+      icon: mdi:harddisk

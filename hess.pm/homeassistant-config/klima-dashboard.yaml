@@ -1,0 +1,160 @@
+title: Klima
+views:
+- title: Klima
+  path: klima
+  icon: mdi:thermometer
+  type: sections
+  sections:
+
+  - type: grid
+    title: Temperaturen
+    cards:
+    - type: sensor
+      entity: sensor.heizung_wz_temperature
+      name: Wohnzimmer
+      graph: line
+      detail: 2
+    - type: sensor
+      entity: sensor.heizung_kuche_temperature
+      name: Küche
+      graph: line
+      detail: 2
+    - type: sensor
+      entity: sensor.heizung_1_st_sz_temperature
+      name: Schlafzimmer
+      graph: line
+      detail: 2
+    - type: sensor
+      entity: sensor.heizung_1_stock_bad_temperature
+      name: Bad 1. OG
+      graph: line
+      detail: 2
+    - type: sensor
+      entity: sensor.heizung_1_st_strasse_temperature
+      name: 1. OG Strasse
+      graph: line
+      detail: 2
+    - type: sensor
+      entity: sensor.heizung_2_st_dg_buro_temperature
+      name: Büro DG
+      graph: line
+      detail: 2
+    - type: sensor
+      entity: sensor.heizung_2_st_dg_bad_temperature
+      name: Bad DG
+      graph: line
+      detail: 2
+    - type: sensor
+      entity: sensor.heizung_2_st_dg_strasse_temperature
+      name: DG Strasse
+      graph: line
+      detail: 2
+    - type: sensor
+      entity: sensor.heizung_keller_strasse_temperature
+      name: Keller
+      graph: line
+      detail: 2
+
+  - type: grid
+    title: Ventilstellung
+    cards:
+    - type: tile
+      entity: sensor.heizung_wz_valve_tappet
+      name: Wohnzimmer
+      icon: mdi:valve
+    - type: tile
+      entity: sensor.heizung_kuche_valve_tappet
+      name: Küche
+      icon: mdi:valve
+    - type: tile
+      entity: sensor.heizung_1_st_sz_valve_tappet
+      name: Schlafzimmer
+      icon: mdi:valve
+    - type: tile
+      entity: sensor.heizung_1_stock_bad_valve_tappet
+      name: Bad 1. OG
+      icon: mdi:valve
+    - type: tile
+      entity: sensor.heizung_1_st_strasse_valve_tappet
+      name: 1. OG Strasse
+      icon: mdi:valve
+    - type: tile
+      entity: sensor.heizung_2_st_dg_buro_valve_tappet
+      name: Büro DG
+      icon: mdi:valve
+    - type: tile
+      entity: sensor.heizung_2_st_dg_bad_valve_tappet
+      name: Bad DG
+      icon: mdi:valve
+    - type: tile
+      entity: sensor.heizung_2_st_dg_strasse_valve_tappet
+      name: DG Strasse
+      icon: mdi:valve
+    - type: tile
+      entity: sensor.heizung_keller_strasse_valve_tappet
+      name: Keller
+      icon: mdi:valve
+
+  - type: grid
+    title: Luftfeuchtigkeit & Raumklima
+    cards:
+    - type: sensor
+      entity: sensor.s77_humidity
+      name: Sensor 77 Feuchte
+      graph: line
+      detail: 2
+    - type: sensor
+      entity: sensor.s77_temperature
+      name: Sensor 77 Temp
+      graph: line
+      detail: 2
+    - type: sensor
+      entity: sensor.s78_humidity
+      name: Sensor 78 Feuchte
+      graph: line
+      detail: 2
+    - type: sensor
+      entity: sensor.s78_temperature
+      name: Sensor 78 Temp
+      graph: line
+      detail: 2
+
+  - type: grid
+    title: Heizung Batterien
+    cards:
+    - type: tile
+      entity: binary_sensor.heizung_wz_battery
+      name: Wohnzimmer
+      icon: mdi:battery
+    - type: tile
+      entity: binary_sensor.heizung_kuche_battery
+      name: Küche
+      icon: mdi:battery
+    - type: tile
+      entity: binary_sensor.heizung_1_st_sz_battery
+      name: Schlafzimmer
+      icon: mdi:battery
+    - type: tile
+      entity: binary_sensor.heizung_1_stock_bad_battery
+      name: Bad 1. OG
+      icon: mdi:battery
+    - type: tile
+      entity: binary_sensor.heizung_1_st_strasse_battery
+      name: 1. OG Strasse
+      icon: mdi:battery
+    - type: tile
+      entity: binary_sensor.heizung_2_st_dg_buro_battery
+      name: Büro DG
+      icon: mdi:battery
+    - type: tile
+      entity: binary_sensor.heizung_2_st_dg_bad_battery
+      name: Bad DG
+      icon: mdi:battery
+    - type: tile
+      entity: binary_sensor.heizung_2_st_dg_strasse_battery
+      name: DG Strasse
+      icon: mdi:battery
+    - type: tile
+      entity: binary_sensor.heizung_keller_strasse_battery
+      name: Keller
+      icon: mdi:battery

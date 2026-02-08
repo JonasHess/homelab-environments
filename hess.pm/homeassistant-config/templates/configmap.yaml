@@ -18,3 +18,13 @@ data:
 {{ .Files.Get "home-dashboard.yaml" | indent 4 }}
   wohnzimmer-dashboard.yaml: |
 {{ .Files.Get "wohnzimmer-dashboard.yaml" | indent 4 }}
+  szenen-dashboard.yaml: |
+{{ .Files.Get "szenen-dashboard.yaml" | indent 4 }}
+  klima-dashboard.yaml: |
+{{ .Files.Get "klima-dashboard.yaml" | indent 4 }}
+  sicherheit-dashboard.yaml: |
+{{ .Files.Get "sicherheit-dashboard.yaml" | indent 4 }}
+  medien-dashboard.yaml: |
+{{ .Files.Get "medien-dashboard.yaml" | indent 4 }}
+  system-dashboard.yaml: |
+{{ .Files.Get "system-dashboard.yaml" | indent 4 }}

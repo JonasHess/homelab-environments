@@ -1,0 +1,187 @@
+title: System
+views:
+- title: System
+  path: system
+  icon: mdi:cog
+  type: sections
+  sections:
+
+  - type: grid
+    title: Zigbee Netzwerk
+    cards:
+    - type: tile
+      entity: binary_sensor.zigbee2mqtt_bridge_connection_state
+      name: Zigbee2MQTT
+      icon: mdi:zigbee
+    - type: tile
+      entity: sensor.zigbee2mqtt_bridge_version
+      name: Z2M Version
+      icon: mdi:tag
+    - type: tile
+      entity: switch.zigbee2mqtt_bridge_permit_join
+      name: Permit Join
+      icon: mdi:plus-network
+
+  - type: grid
+    title: AdGuard Home
+    cards:
+    - type: tile
+      entity: switch.adguard_home_protection
+      name: Schutz
+      icon: mdi:shield-check
+    - type: tile
+      entity: switch.adguard_home_filtering
+      name: Filterung
+      icon: mdi:filter
+    - type: sensor
+      entity: sensor.adguard_home_dns_queries
+      name: DNS Anfragen
+      graph: line
+    - type: sensor
+      entity: sensor.adguard_home_dns_queries_blocked_ratio
+      name: Blockiert
+      graph: line
+    - type: tile
+      entity: sensor.adguard_home_average_processing_speed
+      name: Verarbeitung
+      icon: mdi:speedometer
+
+  - type: grid
+    title: Geräte Batterien (kritisch)
+    cards:
+    - type: tile
+      entity: sensor.0x0017880102d49154_battery
+      name: Hue Dimmer 1
+      icon: mdi:battery-alert
+    - type: tile
+      entity: sensor.0x00178801063474be_battery
+      name: Hue Dimmer 2
+      icon: mdi:battery-alert
+    - type: tile
+      entity: sensor.0x0017880103ca7b81_battery
+      name: Hue Dimmer 3
+      icon: mdi:battery-alert
+    - type: tile
+      entity: sensor.s10_battery
+      name: S10
+      icon: mdi:battery-low
+    - type: tile
+      entity: sensor.s19_battery
+      name: S19
+      icon: mdi:battery-low
+    - type: tile
+      entity: sensor.s40_battery
+      name: S40
+      icon: mdi:battery-low
+    - type: tile
+      entity: sensor.s41_battery
+      name: S41
+      icon: mdi:battery-low
+    - type: tile
+      entity: sensor.s42_battery
+      name: S42
+      icon: mdi:battery-low
+    - type: tile
+      entity: sensor.s46_battery
+      name: S46
+      icon: mdi:battery-low
+    - type: tile
+      entity: sensor.s47_battery
+      name: S47
+      icon: mdi:battery-low
+    - type: tile
+      entity: sensor.s51_battery
+      name: S51
+      icon: mdi:battery-low
+
+  - type: grid
+    title: Mobilgeräte
+    cards:
+    - type: tile
+      entity: sensor.sm_f946b_battery_level
+      name: Samsung Fold
+      icon: mdi:cellphone
+    - type: tile
+      entity: sensor.sm_f946b_battery_state
+      name: Fold Status
+      icon: mdi:battery-charging
+    - type: tile
+      entity: sensor.sm_g780g_l_battery_level
+      name: Galaxy S20
+      icon: mdi:cellphone
+    - type: tile
+      entity: sensor.sm_g780g_l_battery_state
+      name: S20 Status
+      icon: mdi:battery-charging
+    - type: tile
+      entity: sensor.galaxy_watch6_classic_xema_battery_level
+      name: Galaxy Watch
+      icon: mdi:watch
+    - type: tile
+      entity: sensor.galaxy_watch6_classic_xema_battery_state
+      name: Watch Status
+      icon: mdi:battery-charging
+
+  - type: grid
+    title: Staubsauger
+    cards:
+    - type: tile
+      entity: vacuum.erdgeschoss
+      name: Erdgeschoss
+      icon: mdi:robot-vacuum
+    - type: tile
+      entity: sensor.erdgeschoss_battery
+      name: EG Batterie
+      icon: mdi:battery
+    - type: tile
+      entity: sensor.erdgeschoss_status
+      name: EG Status
+      icon: mdi:information
+    - type: tile
+      entity: vacuum.1_stock
+      name: 1. Stock
+      icon: mdi:robot-vacuum
+    - type: tile
+      entity: sensor.1_stock_battery
+      name: 1. OG Batterie
+      icon: mdi:battery
+    - type: tile
+      entity: sensor.1_stock_status
+      name: 1. OG Status
+      icon: mdi:information
+    - type: tile
+      entity: vacuum.2_stock
+      name: 2. Stock
+      icon: mdi:robot-vacuum
+    - type: tile
+      entity: sensor.2_stock_battery
+      name: 2. OG Batterie
+      icon: mdi:battery
+    - type: tile
+      entity: sensor.2_stock_status
+      name: 2. OG Status
+      icon: mdi:information
+
+  - type: grid
+    title: Vacuum Karten
+    cards:
+    - type: picture-entity
+      entity: camera.erdgeschoss_map
+      name: Erdgeschoss
+      show_state: false
+    - type: picture-entity
+      entity: camera.1_stock_map
+      name: 1. Stock
+      show_state: false
+    - type: picture-entity
+      entity: camera.2_stock_map
+      name: 2. Stock
+      show_state: false
+
+  - type: grid
+    title: Backup
+    cards:
+    - type: tile
+      entity: sensor.backup_backup_manager_state
+      name: Backup Status
+      icon: mdi:backup-restore
