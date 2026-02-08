@@ -1,0 +1,71 @@
+- id: '1769268645698'
+  alias: Philips Hue Tap Dial Switch (Z2M / ZHA)
+  description: ''
+  use_blueprint:
+    path: danielpetrovic/philips-hue-tap-dial-switch.yaml
+    input:
+      integration_type:
+      - z2m
+      z2m_base_topic: zigbee2mqtt
+      z2m_device_name: Esszimmer Dimmer Tab
+      button_1_press: []
+      last_pressed: input_text.esszimmer_hue_tab_dial_last_pressed_state
+      button_1_light:
+        entity_id: light.esszimmer
+      button_1_short_release_light_mode:
+      - turn_on
+      button_2_press:
+      - action: light.toggle
+        metadata: {}
+        target:
+          entity_id: light.esszimmer
+        data: {}
+      button_3_short_release: []
+      button_1_dimming_speed: 7
+      button_2_light:
+        entity_id: light.esszimmer
+      button_3_light:
+        entity_id: light.esszimmer
+      button_4_light:
+        entity_id: light.wohnzimmer
+      button_4_dimming_speed: 10
+      button_4_short_release_light_mode:
+      - turn_on
+- id: '1769443006186'
+  alias: Forward Hue Dimmer ZHA events to MQTT (smarthome-core compatible)
+  description: Forwards RWL022 dimmer events to zigbee2mqtt-compatible topic format
+  triggers:
+  - trigger: event
+    event_type: zha_event
+  conditions:
+  - condition: template
+    value_template: >
+      {{ trigger.event is defined
+         and trigger.event.data is defined
+         and trigger.event.data.device_id is defined
+         and device_attr(trigger.event.data.device_id, 'model') == 'RWL022'
+         and trigger.event.data.command in ['on_press', 'on_hold', 'on_short_release', 'on_long_release',
+                                            'off_press', 'off_hold', 'off_short_release', 'off_long_release',
+                                            'up_press', 'up_hold', 'up_short_release', 'up_long_release',
+                                            'down_press', 'down_hold', 'down_short_release', 'down_long_release'] }}
+  actions:
+  - variables:
+      device_name: >
+        {{ device_attr(trigger.event.data.device_id, 'name_by_user')
+           or device_attr(trigger.event.data.device_id, 'name') }}
+      translated_action: >
+        {% set cmd = trigger.event.data.command %}
+        {% if cmd.endswith('_short_release') %}
+          {{ cmd.replace('_short_release', '_press_release') }}
+        {% elif cmd.endswith('_long_release') %}
+          {{ cmd.replace('_long_release', '_hold_release') }}
+        {% else %}
+          {{ cmd }}
+        {% endif %}
+  - action: mqtt.publish
+    data:
+      topic: zigbee2mqtt/{{ device_name }}/action
+      payload: '{{ {"action": translated_action} | to_json }}'
+      qos: 1
+  mode: parallel
+  max: 10

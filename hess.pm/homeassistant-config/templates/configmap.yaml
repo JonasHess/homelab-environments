@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.configMapName }}
+  namespace: {{ .Release.Namespace }}
+data:
+  configuration.yaml: |
+{{ .Files.Get "configuration.yaml" | indent 4 }}
+  automations.yaml: |
+{{ .Files.Get "automations.yaml" | indent 4 }}
+  alexa.yaml: |
+{{ .Files.Get "alexa.yaml" | indent 4 }}
+  scenes.yaml: |
+{{ .Files.Get "scenes.yaml" | indent 4 }}
+  scripts.yaml: |
+{{ .Files.Get "scripts.yaml" | indent 4 }}

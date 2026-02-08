@@ -136,11 +136,35 @@ apps:
       targetRevision: ~
       helm:
         values:
+          externalConfig:
+            repoURL: "https://github.com/JonasHess/homelab-environments.git"
+            targetRevision: "main"
+            path: "hess.pm/homeassistant-config"
+            configMapName: "homeassistant-app-config"
           generic:
             deployment:
               pvcMounts:
                 config:
                   hostPath: /mnt/tank1/unencrypted/apps/homeassistant/config
+              initContainers:
+                - name: copy-config
+                  image: busybox:1.36
+                  command:
+                    - sh
+                    - -c
+                    - |
+                      echo "Copying config files from ConfigMap to /config..."
+                      cp /configmap/*.yaml /config/
+                      echo "Config files copied successfully"
+                  volumeMounts:
+                    - name: homeassistant-config-volume
+                      mountPath: /config
+                    - name: homeassistant-configmap-volume
+                      mountPath: /configmap
+              configMapMounts:
+                configmap:
+                  mountPath: /configmap
+                  configMapName: homeassistant-app-config
   adguard:
     enabled: false
     argocd:

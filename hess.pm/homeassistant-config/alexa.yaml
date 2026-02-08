@@ -1,0 +1,4 @@
+smart_home:
+  filter:
+    include_entities:
+      - light.buero_jonas
