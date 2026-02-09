@@ -47,6 +47,7 @@ required_vars=(
   OAUTH2_PROXY_CLIENT_ID
   OAUTH2_PROXY_CLIENT_SECRET
   OAUTH2_PROXY_COOKIE_SECRET
+  ARGOCD_GITHUB_WEBHOOK_SECRET
   AKEYLESS_ACCESS_ID
   AKEYLESS_ACCESS_KEY
 )
@@ -126,6 +127,9 @@ create_secret "${AKEYLESS_PATH}/acme/cloudflare-api-credentials_apiKey" "$CLOUDF
 create_secret "${AKEYLESS_PATH}/oidc/oauth2-proxy/client_id" "$OAUTH2_PROXY_CLIENT_ID"
 create_secret "${AKEYLESS_PATH}/oidc/oauth2-proxy/client_secret" "$OAUTH2_PROXY_CLIENT_SECRET"
 create_secret "${AKEYLESS_PATH}/oidc/oauth2-proxy/cookie_secret" "$OAUTH2_PROXY_COOKIE_SECRET"
+
+# ArgoCD - GitHub webhook
+create_secret "${AKEYLESS_PATH}/argocd/webhook/github/secret" "$ARGOCD_GITHUB_WEBHOOK_SECRET"
 
 echo ""
 echo "=== Done ==="

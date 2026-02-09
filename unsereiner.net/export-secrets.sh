@@ -81,10 +81,11 @@ HEADER
   cat <<HEADER
 
 # -----------------------------------------------------------------------------
-# ArgoCD - Initial admin password
+# ArgoCD
 # -----------------------------------------------------------------------------
 HEADER
   printf 'ARGOCD_ADMIN_PASSWORD="%s"\n' "$(escape_value "$(get_secret_value argocd-initial-admin-secret password)")"
+  printf 'ARGOCD_GITHUB_WEBHOOK_SECRET="%s"\n' "$(escape_value "$(kubectl get secret argocd-secret -n "$NAMESPACE" -o json 2>/dev/null | jq -r '.data["webhook.github.secret"] // empty' | base64 -d 2>/dev/null || echo "")")"
 } > "$OUTPUT"
 
 echo "Secrets written to $OUTPUT"

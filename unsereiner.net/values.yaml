@@ -62,6 +62,7 @@ apps:
           middlewares:
             cloudflare:
               allowedCIDRs:
+                - 192.168.1.0/24
                 - 192.168.178.0/24
           oauth2-proxy:
             extraArgs:
