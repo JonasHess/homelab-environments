@@ -6,6 +6,7 @@ smart_home:
     - light.esszimmer
     - light.schlafzimmer
     - light.gaestezimmer
+    - light.buero_lena
   entity_config:
     light.buero_jonas:
       name: Büro Jonas Licht
@@ -22,3 +23,6 @@ smart_home:
     light.gaestezimmer:
       name: Gaestezimmer Licht
       description: Gaestezimmer Lampen
+    light.buero_lena:
+      name: Buero Lena
+      description: ''
