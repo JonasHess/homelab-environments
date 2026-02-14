@@ -132,7 +132,7 @@ iface vmbr2 inet manual
 |--------------|------------------------------------|
 | VMID         | 100                                |
 | Name         | netbox                             |
-| Memory       | 6048 MB                            |
+| Memory       | 8048 MB                            |
 | Boot Disk    | 128 GB (scsi0)                     |
 | Network      | virtio on **vmbr1** (192.168.0.x)  |
 | IP Address   | 192.168.0.5 (static)               |
@@ -173,7 +173,7 @@ The VM is **not reachable** from the management network (192.168.1.x) — only f
 |--------------|---------------------------------------------|
 | VMID         | 101                                         |
 | Name         | nutellajunkies                              |
-| Memory       | 6048 MB                                     |
+| Memory       | 4096 MB                                     |
 | Boot Disk    | 64 GB (scsi0 on tank3, cloud image)         |
 | Network      | virtio on **vmbr2** (192.168.178.x)         |
 | IP Address   | 192.168.178.101 (static, via cloud-init)    |
