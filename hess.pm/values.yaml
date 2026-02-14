@@ -756,6 +756,12 @@ apps:
               pvcMounts:
                 data:
                   hostPath: /mnt/tank1/encrypted/apps/radicale/data
+  prompt-util:
+    enabled: true
+    argocd:
+      targetRevision: ~
+      helm:
+        values: {}
   nzbget:
     enabled: true
     argocd:
