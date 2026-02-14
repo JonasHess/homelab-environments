@@ -50,6 +50,12 @@ required_vars=(
   ARGOCD_GITHUB_WEBHOOK_SECRET
   AKEYLESS_ACCESS_ID
   AKEYLESS_ACCESS_KEY
+  RESTIC_S3_ACCESS_KEY_ID
+  RESTIC_S3_SECRET_ACCESS_KEY
+  RESTIC_S3_BUCKET
+  RESTIC_S3_ENDPOINT
+  RESTIC_S3_REGION
+  RESTIC_PASSWORD
 )
 
 missing=()
@@ -130,6 +136,14 @@ create_secret "${AKEYLESS_PATH}/oidc/oauth2-proxy/cookie_secret" "$OAUTH2_PROXY_
 
 # ArgoCD - GitHub webhook
 create_secret "${AKEYLESS_PATH}/argocd/webhook/github/secret" "$ARGOCD_GITHUB_WEBHOOK_SECRET"
+
+# Restic - S3 backup credentials
+create_secret "/restic/S3_ACCESS_KEY_ID" "$RESTIC_S3_ACCESS_KEY_ID"
+create_secret "/restic/S3_SECRET_ACCESS_KEY" "$RESTIC_S3_SECRET_ACCESS_KEY"
+create_secret "/restic/S3_BUCKET" "$RESTIC_S3_BUCKET"
+create_secret "/restic/S3_ENDPOINT" "$RESTIC_S3_ENDPOINT"
+create_secret "/restic/S3_REGION" "$RESTIC_S3_REGION"
+create_secret "/restic/RESTIC_PASSWORD" "$RESTIC_PASSWORD"
 
 echo ""
 echo "=== Done ==="

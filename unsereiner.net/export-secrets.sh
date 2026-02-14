@@ -86,6 +86,19 @@ HEADER
 HEADER
   printf 'ARGOCD_ADMIN_PASSWORD="%s"\n' "$(escape_value "$(get_secret_value argocd-initial-admin-secret password)")"
   printf 'ARGOCD_GITHUB_WEBHOOK_SECRET="%s"\n' "$(escape_value "$(kubectl get secret argocd-secret -n "$NAMESPACE" -o json 2>/dev/null | jq -r '.data["webhook.github.secret"] // empty' | base64 -d 2>/dev/null || echo "")")"
+
+  cat <<HEADER
+
+# -----------------------------------------------------------------------------
+# Restic - S3 backup credentials
+# -----------------------------------------------------------------------------
+HEADER
+  printf 'RESTIC_S3_ACCESS_KEY_ID="%s"\n' "$(escape_value "$(get_secret_value restic-secret ACCESS_KEY_ID restic)")"
+  printf 'RESTIC_S3_SECRET_ACCESS_KEY="%s"\n' "$(escape_value "$(get_secret_value restic-secret SECRET_ACCESS_KEY restic)")"
+  printf 'RESTIC_S3_BUCKET="%s"\n' "$(escape_value "$(get_secret_value restic-secret BUCKET restic)")"
+  printf 'RESTIC_S3_ENDPOINT="%s"\n' "$(escape_value "$(get_secret_value restic-secret ENDPOINT restic)")"
+  printf 'RESTIC_S3_REGION="%s"\n' "$(escape_value "$(get_secret_value restic-secret REGION restic)")"
+  printf 'RESTIC_PASSWORD="%s"\n' "$(escape_value "$(get_secret_value restic-secret RESTIC_PASSWORD restic)")"
 } > "$OUTPUT"
 
 echo "Secrets written to $OUTPUT"
