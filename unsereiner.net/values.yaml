@@ -84,6 +84,8 @@ apps:
             configMapName: "homeassistant-app-config"
           generic:
             deployment:
+              hostNetwork: true
+              dnsPolicy: ClusterFirstWithHostNet
               pvcMounts:
                 config:
                   hostPath: /mnt/nutellajunkies/apps/homeassistant/config
