@@ -384,7 +384,7 @@ apps:
                 paperlessconsume:
                   hostPath: /mnt/tank1/encrypted/apps/paperlessngx/consume
   freshrss:
-    enabled: true
+    enabled: false
     argocd:
       targetRevision: ~
       helm:
@@ -408,7 +408,7 @@ apps:
                 media:
                   hostPath: /mnt/tank0/encrypted/media
   search:
-    enabled: true
+    enabled: false
     argocd:
       targetRevision: ~
       helm:
@@ -471,7 +471,7 @@ apps:
                 media:
                   hostPath: /mnt/tank0/encrypted/media
   jellyfin:
-    enabled: true
+    enabled: false
     argocd:
       targetRevision: ~
       helm:
@@ -484,7 +484,7 @@ apps:
                 media:
                   hostPath: /mnt/tank0/encrypted/media
   tautulli:
-    enabled: true
+    enabled: false
     argocd:
       targetRevision: ~
       helm:
@@ -607,7 +607,7 @@ apps:
                   hostPath: /mnt/tank0/encrypted/media
 
   mealie:
-    enabled: true
+    enabled: false
     argocd:
       targetRevision: ~
       helm:
@@ -623,7 +623,7 @@ apps:
                     restore: true
 
   whoami:
-    enabled: true
+    enabled: false
     argocd:
       targetRevision: ~
       helm:
