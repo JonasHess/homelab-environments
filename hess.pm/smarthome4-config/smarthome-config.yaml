@@ -138,6 +138,12 @@ smartHome:
     lookups:
     - type: labelRegex
       labelRegex: Gaestezimmer__DimmerSwitch__01__night__.*
+  - type: Switch
+    id: Switch Schlafzimmer Touchscreen
+    lookups:
+    - type: staticEntity
+      entityRefs:
+      - switch.schlafzimmer_touchscreen
   sensors:
   - name: Schlafzimmer
     type: HueDimmerSwitch
