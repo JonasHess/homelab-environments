@@ -7,6 +7,7 @@ smart_home:
     - light.schlafzimmer
     - light.gaestezimmer
     - light.buero_lena
+    - switch.schlafzimmer_touchscreen
   entity_config:
     light.buero_jonas:
       name: Büro Jonas Licht
@@ -25,4 +26,7 @@ smart_home:
       description: Gaestezimmer Lampen
     light.buero_lena:
       name: Buero Lena
+      description: ''
+    switch.schlafzimmer_touchscreen:
+      name: Touchscreen
       description: ''
