@@ -546,6 +546,25 @@ apps:
                 stirlingpdf:
                   mountPath: /mnt/stirlingpdf/pipeline/
                   hostPath: /mnt/tank1/encrypted/apps/stirlingpdf/pipeline/
+  samba:
+    enabled: true
+    argocd:
+      targetRevision: ~
+      helm:
+        values:
+          generic:
+            deployment:
+              pvcMounts:
+                media:
+                  mountPath: /shares/media
+                  hostPath: /mnt/tank0/encrypted/media
+          samba:
+            shares:
+              - name: media
+                path: /shares/media
+                guest: true
+                readOnly: true
+                browseable: true
   sonarr:
     enabled: true
     argocd:
