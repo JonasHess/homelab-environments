@@ -565,6 +565,9 @@ apps:
                 guest: true
                 readOnly: true
                 browseable: true
+            avahi:
+              enabled: true
+              publishIP: "192.168.1.80"
   sonarr:
     enabled: true
     argocd:
