@@ -802,3 +802,14 @@ apps:
                   hostPath: /data/volumes/nzbget-downloads
                 media:
                   hostPath: /mnt/tank0/encrypted/media
+  n8n:
+    enabled: true
+    argocd:
+      targetRevision: ~
+      helm:
+        values:
+          generic:
+            deployment:
+              pvcMounts:
+                data:
+                  hostPath: /mnt/tank1/encrypted/apps/n8n/data
