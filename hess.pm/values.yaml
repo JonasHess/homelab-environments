@@ -100,6 +100,7 @@ apps:
           PROMPT_DOCUMENT_TYPE_EXPLANATION: ''
           PROMPT_CORRESPONDENT_EXPLANATION: ''
           PROMPT_POSTAMBLE: ''
+          N8N_WEBHOOK_URL: https://n8n.hess.pm/webhook/paperless-gpt
   duplicati:
     enabled: false
     argocd:
