@@ -598,6 +598,7 @@ apps:
             plex:
               port: 32400
               protocol: TCP
+            dns: null  # AdGuard not deployed here; remove the chart default to avoid an unprogrammable UDP listener
           loadBalancerIP: 192.168.1.80
           middlewares:
             cloudflare:
