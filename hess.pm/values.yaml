@@ -583,16 +583,16 @@ apps:
                   hostPath: /mnt/tank1/unencrypted/apps/sonarr/config
                 media:
                   hostPath: /mnt/tank0/encrypted/media
+  cert-manager:
+    enabled: true
+    argocd:
+      targetRevision: ~
   traefik:
     enabled: true
     argocd:
       targetRevision: ~
       helm:
         values:
-          generic:
-            persistentVolumeClaims:
-              data:
-                hostPath: /mnt/tank1/unencrypted/apps/traefik
           additionalExposedPorts:
             plex:
               port: 32400
