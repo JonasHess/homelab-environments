@@ -28,7 +28,7 @@ global:
   oidc:
     issuerUrl: "https://cognito-idp.eu-central-1.amazonaws.com/eu-central-1_t9DQfKlSX"
     clientId: "6e1bl5i55ao7bhhcufk85ussm"
-    cookieDomain: ".hess.pm"
+    cookieDomain: "hess.pm"
 
   # CIDR allowlists for SecurityPolicy.authorization
   security:
