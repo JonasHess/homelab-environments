@@ -24,10 +24,17 @@ global:
   letsencrypt:
     email: Jonas@Hess.pm
 
-  # Authentication provider
-  oauth2_proxy:
-    oidc_client_id: "6e1bl5i55ao7bhhcufk85ussm"
-    oidc_issuer_url: "https://cognito-idp.eu-central-1.amazonaws.com/eu-central-1_t9DQfKlSX"
+  # OIDC provider for Envoy SecurityPolicy.oidc (per-route OAuth)
+  oidc:
+    issuerUrl: "https://cognito-idp.eu-central-1.amazonaws.com/eu-central-1_t9DQfKlSX"
+    clientId: "6e1bl5i55ao7bhhcufk85ussm"
+    cookieDomain: ".hess.pm"
+
+  # CIDR allowlists for SecurityPolicy.authorization
+  security:
+    cloudflareCIDRs:
+      - 192.168.1.0/24
+    lanCIDRs: []
 
   argocd:
     targetRevision: feature/gateway_api
@@ -588,7 +595,7 @@ apps:
     argocd:
       targetRevision: ~
       helm: {}
-  traefik:
+  envoy-gateway:
     enabled: true
     argocd:
       targetRevision: ~
@@ -600,16 +607,6 @@ apps:
               protocol: TCP
             dns: null  # AdGuard not deployed here; remove the chart default to avoid an unprogrammable UDP listener
           loadBalancerIP: 192.168.1.80
-          middlewares:
-            cloudflare:
-              allowedCIDRs:
-                - 192.168.1.0/24
-          oauth2-proxy:
-            extraArgs:
-              oidc-issuer-url: "https://cognito-idp.eu-central-1.amazonaws.com/eu-central-1_t9DQfKlSX"
-              cookie-domain: ".hess.pm"
-              whitelist-domain: ".hess.pm"
-              redirect-url: "https://auth.hess.pm/oauth2/callback"
   duplicatiprometheusexporter:
     enabled: false
     argocd:
