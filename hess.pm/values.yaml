@@ -24,9 +24,14 @@ global:
   letsencrypt:
     email: Jonas@Hess.pm
 
+  # OIDC provider for the Gateway-level SecurityPolicy.oidc. The Envoy OAuth2
+  # filter signs cookies with one HMAC and shares them across *.hess.pm via
+  # cookieDomain, so a single Cognito callback URL covers every protected
+  # subdomain.
   oidc:
     issuerUrl: "https://cognito-idp.eu-central-1.amazonaws.com/eu-central-1_t9DQfKlSX"
     clientId: "6e1bl5i55ao7bhhcufk85ussm"
+    cookieDomain: "hess.pm"
 
   # CIDR allowlists for SecurityPolicy.authorization
   security:
@@ -605,18 +610,6 @@ apps:
               protocol: TCP
             dns: null  # AdGuard not deployed here; remove the chart default to avoid an unprogrammable UDP listener
           loadBalancerIP: 192.168.1.80
-  oauth2-proxy:
-    enabled: true
-    argocd:
-      targetRevision: ~
-      helm:
-        values:
-          oauth2-proxy:
-            extraArgs:
-              oidc-issuer-url: "https://cognito-idp.eu-central-1.amazonaws.com/eu-central-1_t9DQfKlSX"
-              cookie-domain: ".hess.pm"
-              whitelist-domain: ".hess.pm"
-              redirect-url: "https://auth.hess.pm/oauth2/callback"
   duplicatiprometheusexporter:
     enabled: false
     argocd:
