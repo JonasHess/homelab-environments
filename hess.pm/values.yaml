@@ -44,7 +44,37 @@ global:
     # PEM of the CA cert (public info). The matching leaf cert + key are
     # uploaded to Cloudflare's zone-level AOP. Replace with the generated
     # CA PEM after running the openssl walkthrough.
-    cloudflareOriginCA: ~
+    cloudflareOriginCA: |
+      -----BEGIN CERTIFICATE-----
+      MIIFLDCCAxSgAwIBAgIUNBI8DueOIJLNe+IIBnmmAdBbdJswDQYJKoZIhvcNAQEL
+      BQAwHDEaMBgGA1UEAwwRaGVzcy5wbSBPcmlnaW4gQ0EwHhcNMjYwNTExMTkxNDM5
+      WhcNMzYwNTA4MTkxNDM5WjAcMRowGAYDVQQDDBFoZXNzLnBtIE9yaWdpbiBDQTCC
+      AiIwDQYJKoZIhvcNAQEBBQADggIPADCCAgoCggIBANpkelfRS0aGDecbw9a4vdMQ
+      oW80GYcS4sxhXDfYoevK1IS6aDbqo559Lx465hdEuxAi3/nipQh8X3Gw4IAXeqtj
+      gfuulYZ9Jvj6hAl6ewsprtyVcGM9Ku93StZFEfH45JSTvqUlOPNesOvT/X6Wo8DK
+      f+irZ78IrmF9WpHew/zVH18QtycGh9oo5WfEw6/roSPLeSuzRjmJovLbkS4vxF20
+      dN/PfszAfrq/1bctToJRfpn5y78JqqK+TJ5p4JLJ5A2cwnx8a0WO8XECqG7rArDo
+      G8I5pkgptxJHFrcJcwy/ilTceYpUaesctiCG41mwrPguoSThOU4W2Jdx4Ttd8m6N
+      v/dcXWRqi/ioeXPVteg2m4x5znixAjFr2SsxSD8vxGCU8Od6Nowbw4hHmhcZccSr
+      xYqL2FbWUSZCapCD4M/KrqfDXphm6tuJ6HRtjuLmAiA3I78amQtOeNfrz5B7vvVw
+      ij5rLQXtI7gOxegE3B72CFkVHGhKKiMhRUKFELob9TEWA3yIhnZ3dONYNg1IQlDk
+      QRiroOcPXFcjTgOHoMxCjMHJA+cmVHwAskT+//JXKZt/m5hij+oF4h95NHfC3NYK
+      aFRxERTupFCExCXIrd5pYdWyVx5k+wqpxgJCs5BS8DqhRzArtziEChd3wD4h3rfU
+      3bnZSUexQmxGVFYX08TBAgMBAAGjZjBkMB0GA1UdDgQWBBSsfnK2nHecQMrnsaVB
+      yidiryt71TAfBgNVHSMEGDAWgBSsfnK2nHecQMrnsaVByidiryt71TASBgNVHRMB
+      Af8ECDAGAQH/AgEAMA4GA1UdDwEB/wQEAwIBBjANBgkqhkiG9w0BAQsFAAOCAgEA
+      qTZ1S6BC4uVBGxjThFIQ3FGJXFm5i0qqYrVTsWIpjyei+G8KcLugS+jcm5P1fXAD
+      bPv1t0uqVRZUDXYO5niNIig55JgjO5f67nY2yX3wrp+JOMse/bYvlgjUPGKskaLn
+      fQxDuLj6aJc3hrkQdBxdiUxxji4DShhyYrjbD8U5TlJ9dfHT76r0ZHoHcj7fmntb
+      UTB4BfM2CefdxQ3ssfBPbpXfzF/XXzbhU0Cb0bvbENfhxLCu3YC/ZfZkYYNxORqj
+      Ch1Gu3PCg/EyCwjNBHWKmXvJW/SsWDNPnC/CkV2CQ6d2chhPnkLoFT5Kx28CRPlt
+      bAtFsOItpLPoUYXGbqUbiYId4yFFQXMbv5wdi9htZgU/gvtuVsdUuGdJ59bsZLJj
+      zudgTPUf9rT9sDTj/nOb7+TJxcEnnZLOEP225ExVP3UB1Efj8m81FBj3Dv7ezo+T
+      nmfgYLUjh5J5YHZCx8bp/8T0/B+4Ob4AuLLI7pYWcri8h0520vZMm+A7wPwpSQwu
+      /V5YDZ19h2eFe2zYNybE8nPxuLfyRm3/wN0HALWAT9lGi+b1HJXRRSidOYDXaiRp
+      EO3n6DwsY6bB0RCwLwlGRMHJuHX8aJZ6PHBSd8IrOxYzOZYE2FM7dxRiyHhedEwC
+      P84RJdt/Nz4l+W3DWkVg5ttEyHhFhpIv5I8JmDWE3NY=
+      -----END CERTIFICATE-----
 
   argocd:
     targetRevision: feature/gateway_api
