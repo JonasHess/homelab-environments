@@ -33,11 +33,18 @@ global:
     clientId: "6e1bl5i55ao7bhhcufk85ussm"
     cookieDomain: "hess.pm"
 
-  # CIDR allowlists for SecurityPolicy.authorization
+  # Two ways into the Gateway:
+  #   1. Source IP in lanCIDRs → LAN listener (port 443, no mTLS).
+  #   2. Cloudflare-proxied requests → mTLS listener (port 4443). Cloudflare
+  #      presents a leaf cert via zone-level Authenticated Origin Pulls.
+  #      Envoy validates it against the CA below.
   security:
-    cloudflareCIDRs:
+    lanCIDRs:
       - 192.168.1.0/24
-    lanCIDRs: []
+    # PEM of the CA cert (public info). The matching leaf cert + key are
+    # uploaded to Cloudflare's zone-level AOP. Replace with the generated
+    # CA PEM after running the openssl walkthrough.
+    cloudflareOriginCA: ~
 
   argocd:
     targetRevision: feature/gateway_api
