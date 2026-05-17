@@ -77,7 +77,7 @@ global:
       -----END CERTIFICATE-----
 
   argocd:
-    targetRevision: feature/gateway_api
+    targetRevision: main
 
 # All applications to be deployed by Argo CD
 apps:
