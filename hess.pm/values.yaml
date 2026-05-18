@@ -625,12 +625,17 @@ apps:
             shares:
               - name: media
                 path: /shares/media
-                guest: false
-                readOnly: true
+                guest: true              # anonymous read access
+                readOnly: true           # default deny-write for everyone…
                 browseable: true
-                validUsers: ["@family"]
-                writeList: ["@admin"]
+                writeList: ["@admin"]    # …except admin group (jonas), who can write
+                # No validUsers: leaving it unset means anyone (incl. guest) can
+                # connect. Combined with guest: true, anonymous clients land as
+                # the Samba guest user and inherit read-only access.
             avahi:
+              enabled: true
+              publishIP: "192.168.1.80"
+            wsdd:
               enabled: true
               publishIP: "192.168.1.80"
   sonarr:
