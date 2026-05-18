@@ -680,9 +680,6 @@ apps:
             avahi:
               enabled: true
               publishIP: "192.168.1.80"
-            wsdd:
-              enabled: true
-              publishIP: "192.168.1.80"
   sonarr:
     enabled: true
     argocd:
