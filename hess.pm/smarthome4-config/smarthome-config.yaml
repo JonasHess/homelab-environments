@@ -293,6 +293,15 @@ smartHome:
     groups:
     - position: '1'
       profile: SonoffZbminir2LightDefault
-      triggers: []
-      homeAssistantResources:
-      - light_schlafzimmer
+      triggers:
+      - trigger: SONOFF_ZBMINIR2_TOGGLE
+        sequences:
+        - homeAssistantResources:
+          - Schlafzimmer__DimmerSwitch__01__day
+          condition: day
+        - homeAssistantResources:
+          - Schlafzimmer__DimmerSwitch__01__nigt
+          condition: night
+    homeAssistantResources:
+      - light.schlafzimmer
+      - light.schlafzimmer
