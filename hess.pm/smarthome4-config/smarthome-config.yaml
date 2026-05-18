@@ -286,3 +286,13 @@ smartHome:
           condition: night
       homeAssistantResources:
       - light_gaestezimmer
+  - name: Schlafzimmer Sonoff
+    type: SonoffZbminir2
+    devices:
+    - U01
+    groups:
+    - position: '1'
+      profile: SonoffZbminir2LightDefault
+      triggers: []
+      homeAssistantResources:
+      - light_schlafzimmer
