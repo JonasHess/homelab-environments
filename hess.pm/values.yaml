@@ -608,12 +608,28 @@ apps:
                   hostPath: /mnt/tank0/encrypted/media
           samba:
             serverString: "NudelKiste"
+            groups:
+              - name: family
+                gid: 1500
+              - name: admin
+                gid: 1501
+            users:
+              - name: jonas
+                akeylessPath: "/samba/password-jonas"
+                uid: 1000
+                groups: [family, admin]
+              - name: lena
+                akeylessPath: "/samba/password-lena"
+                uid: 1001
+                groups: [family]
             shares:
               - name: media
                 path: /shares/media
-                guest: true
+                guest: false
                 readOnly: true
                 browseable: true
+                validUsers: ["@family"]
+                writeList: ["@admin"]
             avahi:
               enabled: true
               publishIP: "192.168.1.80"
