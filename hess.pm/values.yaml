@@ -606,6 +606,18 @@ apps:
                 media:
                   mountPath: /shares/media
                   hostPath: /mnt/tank0/encrypted/media
+                tank0:
+                  mountPath: /shares/tank0
+                  hostPath: /mnt/tank0
+                tank1:
+                  mountPath: /shares/tank1
+                  hostPath: /mnt/tank1
+                paperless-documents:
+                  mountPath: /shares/paperless-documents
+                  hostPath: /mnt/tank1/encrypted/apps/paperlessngx/media/documents
+                paperless-consume:
+                  mountPath: /shares/paperless-consume
+                  hostPath: /mnt/tank1/encrypted/apps/paperlessngx/consume
           samba:
             serverString: "NudelKiste"
             groups:
@@ -632,6 +644,39 @@ apps:
                 # No validUsers: leaving it unset means anyone (incl. guest) can
                 # connect. Combined with guest: true, anonymous clients land as
                 # the Samba guest user and inherit read-only access.
+
+              # Admin-only browse of the full tank0/tank1 drives. Read-only by
+              # default for safety; writeList lets jonas modify if needed.
+              - name: tank0
+                path: /shares/tank0
+                guest: false
+                readOnly: true
+                browseable: true
+                validUsers: ["@admin"]
+                writeList: ["@admin"]
+              - name: tank1
+                path: /shares/tank1
+                guest: false
+                readOnly: true
+                browseable: true
+                validUsers: ["@admin"]
+                writeList: ["@admin"]
+
+              # Direct access to the paperlessngx data. Documents stay read-only
+              # (paperless manages them — writing directly would desync the
+              # index). Consume is read+write — it's the drop-zone for new docs.
+              - name: paperless-documents
+                path: /shares/paperless-documents
+                guest: false
+                readOnly: true
+                browseable: true
+                validUsers: ["@admin"]
+              - name: paperless-consume
+                path: /shares/paperless-consume
+                guest: false
+                readOnly: false
+                browseable: true
+                validUsers: ["@admin"]
             avahi:
               enabled: true
               publishIP: "192.168.1.80"
