@@ -24,10 +24,61 @@ global:
   letsencrypt:
     email: Jonas@Hess.pm
 
-  # Authentication provider
-  oauth2_proxy:
-    oidc_client_id: "6e1bl5i55ao7bhhcufk85ussm"
-    oidc_issuer_url: "https://cognito-idp.eu-central-1.amazonaws.com/eu-central-1_t9DQfKlSX"
+  # OIDC provider for the Gateway-level SecurityPolicy.oidc. The Envoy OAuth2
+  # filter signs cookies with one HMAC and shares them across *.unsereiner.net
+  # via cookieDomain, so a single Cognito callback URL covers every protected
+  # subdomain.
+  oidc:
+    issuerUrl: "https://cognito-idp.eu-central-1.amazonaws.com/eu-central-1_t9DQfKlSX"
+    clientId: "6e1bl5i55ao7bhhcufk85ussm"
+    cookieDomain: "unsereiner.net"
+
+  # Two ways into the Gateway:
+  #   1. Source IP in lanCIDRs → LAN listener (port 443, no mTLS).
+  #   2. Cloudflare-proxied requests → mTLS listener (port 4443). Cloudflare
+  #      presents a leaf cert via zone-level Authenticated Origin Pulls.
+  #      Envoy validates it against the CA below.
+  #
+  # NOTE: unsereiner.net is currently LAN-only — the public mTLS listener
+  # will be programmed on the Gateway, but no router NAT forwards WAN:443
+  # to :4443 yet, so it sits idle until the public path is wired up.
+  security:
+    lanCIDRs:
+      - 192.168.178.0/24
+    # Same CA cert as hess.pm — the matching leaf+key are already uploaded
+    # to Cloudflare. Public exposure is gated by the router NAT (not in
+    # place for this env yet), not by whether the listener exists.
+    cloudflareOriginCA: |
+      -----BEGIN CERTIFICATE-----
+      MIIFLDCCAxSgAwIBAgIUNBI8DueOIJLNe+IIBnmmAdBbdJswDQYJKoZIhvcNAQEL
+      BQAwHDEaMBgGA1UEAwwRaGVzcy5wbSBPcmlnaW4gQ0EwHhcNMjYwNTExMTkxNDM5
+      WhcNMzYwNTA4MTkxNDM5WjAcMRowGAYDVQQDDBFoZXNzLnBtIE9yaWdpbiBDQTCC
+      AiIwDQYJKoZIhvcNAQEBBQADggIPADCCAgoCggIBANpkelfRS0aGDecbw9a4vdMQ
+      oW80GYcS4sxhXDfYoevK1IS6aDbqo559Lx465hdEuxAi3/nipQh8X3Gw4IAXeqtj
+      gfuulYZ9Jvj6hAl6ewsprtyVcGM9Ku93StZFEfH45JSTvqUlOPNesOvT/X6Wo8DK
+      f+irZ78IrmF9WpHew/zVH18QtycGh9oo5WfEw6/roSPLeSuzRjmJovLbkS4vxF20
+      dN/PfszAfrq/1bctToJRfpn5y78JqqK+TJ5p4JLJ5A2cwnx8a0WO8XECqG7rArDo
+      G8I5pkgptxJHFrcJcwy/ilTceYpUaesctiCG41mwrPguoSThOU4W2Jdx4Ttd8m6N
+      v/dcXWRqi/ioeXPVteg2m4x5znixAjFr2SsxSD8vxGCU8Od6Nowbw4hHmhcZccSr
+      xYqL2FbWUSZCapCD4M/KrqfDXphm6tuJ6HRtjuLmAiA3I78amQtOeNfrz5B7vvVw
+      ij5rLQXtI7gOxegE3B72CFkVHGhKKiMhRUKFELob9TEWA3yIhnZ3dONYNg1IQlDk
+      QRiroOcPXFcjTgOHoMxCjMHJA+cmVHwAskT+//JXKZt/m5hij+oF4h95NHfC3NYK
+      aFRxERTupFCExCXIrd5pYdWyVx5k+wqpxgJCs5BS8DqhRzArtziEChd3wD4h3rfU
+      3bnZSUexQmxGVFYX08TBAgMBAAGjZjBkMB0GA1UdDgQWBBSsfnK2nHecQMrnsaVB
+      yidiryt71TAfBgNVHSMEGDAWgBSsfnK2nHecQMrnsaVByidiryt71TASBgNVHRMB
+      Af8ECDAGAQH/AgEAMA4GA1UdDwEB/wQEAwIBBjANBgkqhkiG9w0BAQsFAAOCAgEA
+      qTZ1S6BC4uVBGxjThFIQ3FGJXFm5i0qqYrVTsWIpjyei+G8KcLugS+jcm5P1fXAD
+      bPv1t0uqVRZUDXYO5niNIig55JgjO5f67nY2yX3wrp+JOMse/bYvlgjUPGKskaLn
+      fQxDuLj6aJc3hrkQdBxdiUxxji4DShhyYrjbD8U5TlJ9dfHT76r0ZHoHcj7fmntb
+      UTB4BfM2CefdxQ3ssfBPbpXfzF/XXzbhU0Cb0bvbENfhxLCu3YC/ZfZkYYNxORqj
+      Ch1Gu3PCg/EyCwjNBHWKmXvJW/SsWDNPnC/CkV2CQ6d2chhPnkLoFT5Kx28CRPlt
+      bAtFsOItpLPoUYXGbqUbiYId4yFFQXMbv5wdi9htZgU/gvtuVsdUuGdJ59bsZLJj
+      zudgTPUf9rT9sDTj/nOb7+TJxcEnnZLOEP225ExVP3UB1Efj8m81FBj3Dv7ezo+T
+      nmfgYLUjh5J5YHZCx8bp/8T0/B+4Ob4AuLLI7pYWcri8h0520vZMm+A7wPwpSQwu
+      /V5YDZ19h2eFe2zYNybE8nPxuLfyRm3/wN0HALWAT9lGi+b1HJXRRSidOYDXaiRp
+      EO3n6DwsY6bB0RCwLwlGRMHJuHX8aJZ6PHBSd8IrOxYzOZYE2FM7dxRiyHhedEwC
+      P84RJdt/Nz4l+W3DWkVg5ttEyHhFhpIv5I8JmDWE3NY=
+      -----END CERTIFICATE-----
 
   argocd:
     targetRevision: main
@@ -49,28 +100,26 @@ apps:
         values: {}
 
   traefik:
+    enabled: false
+  envoy-gateway:
     enabled: true
     argocd:
       targetRevision: ~
       helm:
         values:
-          generic:
-            persistentVolumeClaims:
-              data:
-                hostPath: /mnt/nutellajunkies/apps/traefik
           loadBalancerIP: 192.168.178.191
-          middlewares:
-            cloudflare:
-              allowedCIDRs:
-                - 192.168.0.0/24
-                - 192.168.1.0/24
-                - 192.168.178.0/24
-          oauth2-proxy:
-            extraArgs:
-              oidc-issuer-url: "https://cognito-idp.eu-central-1.amazonaws.com/eu-central-1_t9DQfKlSX"
-              cookie-domain: ".unsereiner.net"
-              whitelist-domain: ".unsereiner.net"
-              redirect-url: "https://auth.unsereiner.net/oauth2/callback"
+          additionalExposedPorts:
+            # None of sftpgo/ftp/dns/samba are deployed in this env; null
+            # the chart defaults so the Gateway doesn't carry idle listeners.
+            sftpgo: null
+            ftp: null
+            dns: null
+            samba: null
+  cert-manager:
+    enabled: true
+    argocd:
+      targetRevision: ~
+      helm: {}
 
   homeassistant:
     enabled: true
