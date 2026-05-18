@@ -111,11 +111,11 @@ apps:
         values:
           loadBalancerIP: 192.168.0.91
           additionalExposedPorts:
-            # Keep `dns` (chart default 53/UDP) — AdGuard listens on it here.
-            # Null out the listeners whose apps aren't deployed in this env.
-            sftpgo: null
-            ftp: null
-            samba: null
+            # AdGuard listens on 53/UDP (and 53/TCP for fallback). The DNS
+            # UDPRoute targets this listener.
+            dns:
+              port: 53
+              protocol: UDP
   cert-manager:
     enabled: true
     argocd:

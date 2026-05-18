@@ -642,10 +642,15 @@ apps:
       helm:
         values:
           additionalExposedPorts:
+            sftpgo:
+              port: 2222
+              protocol: TCP
+            samba:
+              port: 445
+              protocol: TCP
             plex:
               port: 32400
               protocol: TCP
-            dns: null  # AdGuard not deployed here; remove the chart default to avoid an unprogrammable UDP listener
           loadBalancerIP: 192.168.1.80
   duplicatiprometheusexporter:
     enabled: false

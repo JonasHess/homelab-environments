@@ -108,13 +108,7 @@ apps:
       helm:
         values:
           loadBalancerIP: 192.168.178.191
-          additionalExposedPorts:
-            # None of sftpgo/ftp/dns/samba are deployed in this env; null
-            # the chart defaults so the Gateway doesn't carry idle listeners.
-            sftpgo: null
-            ftp: null
-            dns: null
-            samba: null
+          # No non-HTTPS listeners needed here.
   cert-manager:
     enabled: true
     argocd:
