@@ -56,13 +56,31 @@ smartHome:
     - type: staticEntity
       entityRefs:
       - light.treppe_oben
+  - type: Light
+    id: light_wohnzimmer
+    lookups:
+    - type: staticEntity
+      entityRefs:
+      - light.wohnzimmer
+  - type: Light
+    id: light_dach
+    lookups:
+    - type: staticEntity
+      entityRefs:
+      - light.dach
+  - type: Switch
+    id: Switch Schlafzimmer Touchscreen
+    lookups:
+    - type: staticEntity
+      entityRefs:
+      - switch.schlafzimmer_touchscreen
   - type: Scene
-    id: Schlafzimmer__DimmerSwitch__01__day
+    id: Schlafzimmer DimmerSwitch 01 Day
     lookups:
     - type: labelRegex
       labelRegex: Schlafzimmer__DimmerSwitch__01__day__.*
   - type: Scene
-    id: Schlafzimmer__DimmerSwitch__01__nigt
+    id: Schlafzimmer DimmerSwitch 01 Night
     lookups:
     - type: labelRegex
       labelRegex: Schlafzimmer__DimmerSwitch__01__night__.*
@@ -76,12 +94,6 @@ smartHome:
     lookups:
     - type: labelRegex
       labelRegex: Esszimmer__DimmerSwitch__01__night__.*
-  - type: Light
-    id: Light Wohnzimmer
-    lookups:
-    - type: staticEntity
-      entityRefs:
-      - light.wohnzimmer
   - type: Scene
     id: Wohnzimmer DimmerSwitch 01 Day
     lookups:
@@ -122,12 +134,6 @@ smartHome:
     lookups:
     - type: labelRegex
       labelRegex: Dach__DimmerSwitch__01__night__.*
-  - type: Light
-    id: Light Dach
-    lookups:
-    - type: staticEntity
-      entityRefs:
-      - light.dach
   - type: Scene
     id: Gaestezimmer DimmerSwitch 01 Day
     lookups:
@@ -138,17 +144,16 @@ smartHome:
     lookups:
     - type: labelRegex
       labelRegex: Gaestezimmer__DimmerSwitch__01__night__.*
-  - type: Switch
-    id: Switch Schlafzimmer Touchscreen
-    lookups:
-    - type: staticEntity
-      entityRefs:
-      - switch.schlafzimmer_touchscreen
   - type: Scene
-    id: Dach DimmerSwitch 01 Day Scenes
+    id: Treppe Dach DimmerSwitch 01 Day
     lookups:
     - type: labelRegex
-      labelRegex: Dach__DimmerSwitch__01__day__.*
+      labelRegex: Treppe Dach__DimmerSwitch__01__day__.*
+  - type: Scene
+    id: Treppe Dach DimmerSwitch 01 Night
+    lookups:
+    - type: labelRegex
+      labelRegex: Treppe Dach__DimmerSwitch__01__night__.*
   sensors:
   - name: Schlafzimmer
     type: HueDimmerSwitch
@@ -162,10 +167,10 @@ smartHome:
       - trigger: BUTTON_1
         sequences:
         - homeAssistantResources:
-          - Schlafzimmer__DimmerSwitch__01__day
+          - Schlafzimmer DimmerSwitch 01 Day
           condition: day
         - homeAssistantResources:
-          - Schlafzimmer__DimmerSwitch__01__nigt
+          - Schlafzimmer DimmerSwitch 01 Night
           condition: night
       homeAssistantResources:
       - light_schlafzimmer
@@ -206,7 +211,7 @@ smartHome:
           - Wohnzimmer DimmerSwitch 01 Night
           condition: night
       homeAssistantResources:
-      - Light Wohnzimmer
+      - light_wohnzimmer
     - position: '2'
       profile: HUE_DIMMER_SWITCH_LIGHT_DEFAULT
       triggers:
@@ -250,7 +255,7 @@ smartHome:
           - Dach DimmerSwitch 01 Night
           condition: night
       homeAssistantResources:
-      - Light Dach
+      - light_dach
   - name: Buero Lena 01
     type: HueDimmerSwitch
     devices:
@@ -291,7 +296,25 @@ smartHome:
           condition: night
       homeAssistantResources:
       - light_gaestezimmer
-  - name: Dach_Switch_1
+  - name: Dach Switch 1
+    type: AqaraLightSwitchH2_1Ch
+    devices:
+    - DACH1
+    groups:
+    - position: '1'
+      profile: AqaraLightSwitchH2_1ChLightDefault
+      triggers:
+      - trigger: AQARA_LIGHT_SWITCH_H2_1CH_SINGLE_UP
+        sequences:
+        - homeAssistantResources:
+          - Dach DimmerSwitch 01 Day
+          condition: day
+        - homeAssistantResources:
+          - Dach DimmerSwitch 01 Night
+          condition: night
+      homeAssistantResources:
+      - light_dach
+  - name: Dach Switch 2
     type: AqaraLightSwitchH2_1Ch
     devices:
     - DACH2
@@ -302,14 +325,14 @@ smartHome:
       - trigger: AQARA_LIGHT_SWITCH_H2_1CH_SINGLE_UP
         sequences:
         - homeAssistantResources:
-          - Dach DimmerSwitch 01 Day Scenes
+          - Schlafzimmer DimmerSwitch 01 Day
           condition: day
         - homeAssistantResources:
-          - Dach DimmerSwitch 01 Night
+          - Schlafzimmer DimmerSwitch 01 Night
           condition: night
       homeAssistantResources:
-      - Light Dach
-  - name: Dach_Switch_3
+      - light_schlafzimmer
+  - name: Dach Switch 3
     type: AqaraLightSwitchH2_1Ch
     devices:
     - DACH3
@@ -320,10 +343,10 @@ smartHome:
       - trigger: AQARA_LIGHT_SWITCH_H2_1CH_SINGLE_UP
         sequences:
         - homeAssistantResources:
-          - Schlafzimmer__DimmerSwitch__01__day
+          - Treppe Dach DimmerSwitch 01 Day
           condition: day
         - homeAssistantResources:
-          - Schlafzimmer__DimmerSwitch__01__nigt
+          - Treppe Dach DimmerSwitch 01 Night
           condition: night
       homeAssistantResources:
-      - light_schlafzimmer
+      - light_treppe_dach
