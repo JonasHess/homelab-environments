@@ -309,3 +309,21 @@ smartHome:
           condition: night
       homeAssistantResources:
       - Light Dach
+  - name: Dach_Switch_3
+    type: AqaraLightSwitchH2_1Ch
+    devices:
+    - DACH3
+    groups:
+    - position: '1'
+      profile: AqaraLightSwitchH2_1ChLightDefault
+      triggers:
+      - trigger: AQARA_LIGHT_SWITCH_H2_1CH_SINGLE_UP
+        sequences:
+        - homeAssistantResources:
+          - Schlafzimmer__DimmerSwitch__01__day
+          condition: day
+        - homeAssistantResources:
+          - Schlafzimmer__DimmerSwitch__01__nigt
+          condition: night
+      homeAssistantResources:
+      - light_schlafzimmer
