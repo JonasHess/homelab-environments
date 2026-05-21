@@ -294,7 +294,7 @@ smartHome:
   - name: Dach_Switch_1
     type: AqaraLightSwitchH2_1Ch
     devices:
-    - DACH1
+    - DACH2
     groups:
     - position: '1'
       profile: AqaraLightSwitchH2_1ChLightDefault
