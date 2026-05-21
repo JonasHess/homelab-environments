@@ -144,6 +144,11 @@ smartHome:
     - type: staticEntity
       entityRefs:
       - switch.schlafzimmer_touchscreen
+  - type: Scene
+    id: Dach DimmerSwitch 01 Day Scenes
+    lookups:
+    - type: labelRegex
+      labelRegex: Dach__DimmerSwitch__01__day__.*
   sensors:
   - name: Schlafzimmer
     type: HueDimmerSwitch
@@ -286,3 +291,21 @@ smartHome:
           condition: night
       homeAssistantResources:
       - light_gaestezimmer
+  - name: Dach_Switch_1
+    type: AqaraLightSwitchH2_1Ch
+    devices:
+    - DACH1
+    groups:
+    - position: '1'
+      profile: AqaraLightSwitchH2_1ChLightDefault
+      triggers:
+      - trigger: AQARA_LIGHT_SWITCH_H2_1CH_SINGLE_UP
+        sequences:
+        - homeAssistantResources:
+          - Dach DimmerSwitch 01 Day Scenes
+          condition: day
+        - homeAssistantResources:
+          - Dach DimmerSwitch 01 Night
+          condition: night
+      homeAssistantResources:
+      - Light Dach
