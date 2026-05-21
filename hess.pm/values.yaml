@@ -291,7 +291,7 @@ apps:
                 HOME_ASSISTANT_IP: "ws://homeassistant-service:8123"
                 spring.profiles.active: "jonas"
   smarthome4:
-    enabled: false
+    enabled: true
     argocd:
       targetRevision: ~
       helm:
