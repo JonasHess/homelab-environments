@@ -112,6 +112,7 @@ apps:
     enabled: true
     argocd:
       targetRevision: ~
+      namespace: &envoyNamespace "envoy-gateway"
       helm:
         values:
           additionalExposedPorts:
@@ -120,6 +121,8 @@ apps:
             sftpgo: null
             ftp: null
             samba: null
+          envoyGateway:
+            namespace: *envoyNamespace
   cert-manager:
     enabled: true
     argocd:
