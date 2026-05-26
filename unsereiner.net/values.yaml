@@ -32,9 +32,16 @@ global:
     issuerUrl: "https://cognito-idp.eu-central-1.amazonaws.com/eu-central-1_t9DQfKlSX"
     clientId: "6e1bl5i55ao7bhhcufk85ussm"
     cookieDomain: "unsereiner.net"
+    # Keeping the old oauth2-proxy path until it is explicitly renamed in Akeyless.
+    clientSecretAkeylessPath: /oidc/oauth2-proxy/client_secret
+
+  # Gateway LoadBalancer IP (MetalLB assigns this to the Envoy proxy Service).
+  # Single source of truth.
+  gateway:
+    loadBalancerIP: 192.168.178.191
 
   # Two ways into the Gateway:
-  #   1. Source IP in lanCIDRs → LAN listener (port 443, no mTLS).
+  #   1. LAN clients hit the :443 listener directly (internal DNS resolves *.unsereiner.net → loadBalancerIP).
   #   2. Cloudflare-proxied requests → mTLS listener (port 4443). Cloudflare
   #      presents a leaf cert via zone-level Authenticated Origin Pulls.
   #      Envoy validates it against the CA below.
@@ -43,8 +50,6 @@ global:
   # will be programmed on the Gateway, but no router NAT forwards WAN:443
   # to :4443 yet, so it sits idle until the public path is wired up.
   security:
-    lanCIDRs:
-      - 192.168.178.0/24
     # Same CA cert as hess.pm — the matching leaf+key are already uploaded
     # to Cloudflare. Public exposure is gated by the router NAT (not in
     # place for this env yet), not by whether the listener exists.
@@ -107,7 +112,6 @@ apps:
       targetRevision: ~
       helm:
         values:
-          loadBalancerIP: 192.168.178.191
           additionalExposedPorts:
             # None of sftpgo/ftp/dns/samba are deployed in this env; null
             # the chart defaults so the Gateway doesn't carry idle listeners.
