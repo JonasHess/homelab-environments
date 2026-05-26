@@ -32,15 +32,21 @@ global:
     issuerUrl: "https://cognito-idp.eu-central-1.amazonaws.com/eu-central-1_t9DQfKlSX"
     clientId: "6e1bl5i55ao7bhhcufk85ussm"
     cookieDomain: "hess.pm"
+    # Akeyless path (relative to global.akeyless.path) for the Cognito client secret.
+    # Keeping the old oauth2-proxy path until it is explicitly renamed in Akeyless.
+    clientSecretAkeylessPath: /oidc/oauth2-proxy/client_secret
+
+  # Gateway LoadBalancer IP (MetalLB assigns this to the Envoy proxy Service).
+  # Single source of truth — also used by lanDnsCheck and samba avahi.
+  gateway:
+    loadBalancerIP: 192.168.1.80
 
   # Two ways into the Gateway:
-  #   1. Source IP in lanCIDRs → LAN listener (port 443, no mTLS).
+  #   1. LAN clients hit the :443 listener directly (internal DNS resolves *.hess.pm → loadBalancerIP).
   #   2. Cloudflare-proxied requests → mTLS listener (port 4443). Cloudflare
   #      presents a leaf cert via zone-level Authenticated Origin Pulls.
   #      Envoy validates it against the CA below.
   security:
-    lanCIDRs:
-      - 192.168.1.0/24
     # PEM of the CA cert (public info). The matching leaf cert + key are
     # uploaded to Cloudflare's zone-level AOP. Replace with the generated
     # CA PEM after running the openssl walkthrough.
@@ -75,6 +81,12 @@ global:
       EO3n6DwsY6bB0RCwLwlGRMHJuHX8aJZ6PHBSd8IrOxYzOZYE2FM7dxRiyHhedEwC
       P84RJdt/Nz4l+W3DWkVg5ttEyHhFhpIv5I8JmDWE3NY=
       -----END CERTIFICATE-----
+
+  # Monitors that internal DNS resolves *.hess.pm → 192.168.1.80 (the gateway LB IP).
+  # LanInternalDnsBroken fires after 5min if the answer is wrong.
+  lanDnsCheck:
+    dnsServer: "192.168.1.1"
+    queryName: "argocd.hess.pm"
 
   argocd:
     targetRevision: main
@@ -709,7 +721,6 @@ apps:
               port: 32400
               protocol: TCP
             dns: null  # AdGuard not deployed here; remove the chart default to avoid an unprogrammable UDP listener
-          loadBalancerIP: 192.168.1.80
   duplicatiprometheusexporter:
     enabled: false
     argocd:
