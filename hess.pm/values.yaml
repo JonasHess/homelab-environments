@@ -901,6 +901,28 @@ apps:
               pvcMounts:
                 data:
                   hostPath: /mnt/tank1/encrypted/apps/radicale/data
+            configMaps:
+              radicale-config-files:
+                rights: |
+                  [root]
+                  user = .+
+                  collection =
+                  permissions = R
+
+                  [owner-full-access]
+                  user = .+
+                  collection = {user}(/.*)?
+                  permissions = RrWw
+
+                  [lena-access-shared]
+                  user = lena
+                  collection = jonas/shared-(contacts|calendar)
+                  permissions = RrWw
+
+                  [jonas-access-shared]
+                  user = jonas
+                  collection = lena/shared-(contacts|calendar)
+                  permissions = RrWw
   prompt-util:
     enabled: true
     argocd:
