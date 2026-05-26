@@ -77,6 +77,11 @@ global:
       P84RJdt/Nz4l+W3DWkVg5ttEyHhFhpIv5I8JmDWE3NY=
       -----END CERTIFICATE-----
 
+  # No kube-prometheus-stack in this environment — suppress all
+  # monitoring.coreos.com resources to avoid CRD-not-found sync errors.
+  monitoring:
+    enabled: false
+
   argocd:
     targetRevision: main
 
