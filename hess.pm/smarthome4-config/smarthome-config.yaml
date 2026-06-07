@@ -180,15 +180,15 @@ smartHome:
     - type: labelRegex
       labelRegex: EG-Flur__DimmerSwitch__01__night__.*
   - type: Scene
-    id: 1OG-Treppe DimmerSwitch 01 Day
+    id: Treppe Oben DimmerSwitch 01 Day
     lookups:
     - type: labelRegex
-      labelRegex: 1OG-Treppe__DimmerSwitch__01__day__.*
+      labelRegex: Treppe Oben__DimmerSwitch__01__day__.*
   - type: Scene
-    id: 1OG-Treppe DimmerSwitch 01 Night
+    id: Treppe Oben DimmerSwitch 01 Night
     lookups:
     - type: labelRegex
-      labelRegex: 1OG-Treppe__DimmerSwitch__01__night__.*
+      labelRegex: Treppe Oben__DimmerSwitch__01__night__.*
   - type: Scene
     id: 1OG-Flur DimmerSwitch 01 Day
     lookups:
@@ -461,10 +461,10 @@ smartHome:
       - trigger: AQARA_LIGHT_SWITCH_H2_1CH_SINGLE_UP
         sequences:
         - homeAssistantResources:
-          - 1OG-Treppe DimmerSwitch 01 Day
+          - Treppe Oben DimmerSwitch 01 Day
           condition: day
         - homeAssistantResources:
-          - 1OG-Treppe DimmerSwitch 01 Night
+          - Treppe Oben DimmerSwitch 01 Night
           condition: night
       homeAssistantResources:
       - light_treppe_oben
@@ -569,10 +569,10 @@ smartHome:
       - trigger: AQARA_LIGHT_SWITCH_H2_1CH_SINGLE_UP
         sequences:
         - homeAssistantResources:
-          - 1OG-Treppe DimmerSwitch 01 Day
+          - Treppe Oben DimmerSwitch 01 Day
           condition: day
         - homeAssistantResources:
-          - 1OG-Treppe DimmerSwitch 01 Night
+          - Treppe Oben DimmerSwitch 01 Night
           condition: night
       homeAssistantResources:
       - light_treppe_oben
