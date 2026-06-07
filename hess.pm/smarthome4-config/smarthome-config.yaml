@@ -442,13 +442,14 @@ smartHome:
       - trigger: AQARA_LIGHT_SWITCH_H2_1CH_SINGLE_UP
         sequences:
         - homeAssistantResources:
-          - 1OG-Treppe DimmerSwitch 01 Day
+          - Wohnzimmer DimmerSwitch 01 Day
           condition: day
         - homeAssistantResources:
-          - 1OG-Treppe DimmerSwitch 01 Night
+          - Wohnzimmer DimmerSwitch 01 Night
           condition: night
       homeAssistantResources:
-      - light_treppe_oben
+      - light_wohnzimmer
+      - light_eingang_flur
   - name: EG Treppe Hoch
     type: AqaraLightSwitchH2_1Ch
     devices:
