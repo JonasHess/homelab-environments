@@ -68,6 +68,21 @@ smartHome:
     - type: staticEntity
       entityRefs:
       - light.dach
+  - type: Light
+    id: light_eingang_flur
+    lookups:
+    - type: staticEntity
+      entityRefs:
+      - light.eingang_flur_deckenlampe_tur
+      - light.eingang_flur_deckenlampe_wz
+  - type: Light
+    id: light_flur_oben
+    lookups:
+    - type: staticEntity
+      entityRefs:
+      - light.flur_oben_1
+      - light.flur_oben_2
+      - light.flur_oben_3
   - type: Switch
     id: Switch Schlafzimmer Touchscreen
     lookups:
@@ -154,6 +169,36 @@ smartHome:
     lookups:
     - type: labelRegex
       labelRegex: Treppe Dach__DimmerSwitch__01__night__.*
+  - type: Scene
+    id: EG-Flur DimmerSwitch 01 Day
+    lookups:
+    - type: labelRegex
+      labelRegex: EG-Flur__DimmerSwitch__01__day__.*
+  - type: Scene
+    id: EG-Flur DimmerSwitch 01 Night
+    lookups:
+    - type: labelRegex
+      labelRegex: EG-Flur__DimmerSwitch__01__night__.*
+  - type: Scene
+    id: 1OG-Treppe DimmerSwitch 01 Day
+    lookups:
+    - type: labelRegex
+      labelRegex: 1OG-Treppe__DimmerSwitch__01__day__.*
+  - type: Scene
+    id: 1OG-Treppe DimmerSwitch 01 Night
+    lookups:
+    - type: labelRegex
+      labelRegex: 1OG-Treppe__DimmerSwitch__01__night__.*
+  - type: Scene
+    id: 1OG-Flur DimmerSwitch 01 Day
+    lookups:
+    - type: labelRegex
+      labelRegex: 1OG-Flur__DimmerSwitch__01__day__.*
+  - type: Scene
+    id: 1OG-Flur DimmerSwitch 01 Night
+    lookups:
+    - type: labelRegex
+      labelRegex: 1OG-Flur__DimmerSwitch__01__night__.*
   sensors:
   - name: Schlafzimmer
     type: HueDimmerSwitch
@@ -350,3 +395,219 @@ smartHome:
           condition: night
       homeAssistantResources:
       - light_treppe_dach
+  - name: EG Flur Haustuer
+    type: AqaraLightSwitchH2_1Ch
+    devices:
+    - SW-EG-FLUR-HAUSTUER
+    groups:
+    - position: '1'
+      profile: AqaraLightSwitchH2_1ChLightDefault
+      triggers:
+      - trigger: AQARA_LIGHT_SWITCH_H2_1CH_SINGLE_UP
+        sequences:
+        - homeAssistantResources:
+          - EG-Flur DimmerSwitch 01 Day
+          condition: day
+        - homeAssistantResources:
+          - EG-Flur DimmerSwitch 01 Night
+          condition: night
+      homeAssistantResources:
+      - light_eingang_flur
+  - name: EG Flur Spiegel
+    type: AqaraLightSwitchH2_1Ch
+    devices:
+    - SW-EG-FLUR-SPIEGEL
+    groups:
+    - position: '1'
+      profile: AqaraLightSwitchH2_1ChLightDefault
+      triggers:
+      - trigger: AQARA_LIGHT_SWITCH_H2_1CH_SINGLE_UP
+        sequences:
+        - homeAssistantResources:
+          - EG-Flur DimmerSwitch 01 Day
+          condition: day
+        - homeAssistantResources:
+          - EG-Flur DimmerSwitch 01 Night
+          condition: night
+      homeAssistantResources:
+      - light_eingang_flur
+  - name: EG Flur Treppe Hoch
+    type: AqaraLightSwitchH2_1Ch
+    devices:
+    - SW-EG-FLUR-TREPPE-HOCH
+    groups:
+    - position: '1'
+      profile: AqaraLightSwitchH2_1ChLightDefault
+      triggers:
+      - trigger: AQARA_LIGHT_SWITCH_H2_1CH_SINGLE_UP
+        sequences:
+        - homeAssistantResources:
+          - 1OG-Treppe DimmerSwitch 01 Day
+          condition: day
+        - homeAssistantResources:
+          - 1OG-Treppe DimmerSwitch 01 Night
+          condition: night
+      homeAssistantResources:
+      - light_treppe_oben
+  - name: EG Treppe Hoch
+    type: AqaraLightSwitchH2_1Ch
+    devices:
+    - SW-EG-TREPPE-HOCH
+    groups:
+    - position: '1'
+      profile: AqaraLightSwitchH2_1ChLightDefault
+      triggers:
+      - trigger: AQARA_LIGHT_SWITCH_H2_1CH_SINGLE_UP
+        sequences:
+        - homeAssistantResources:
+          - 1OG-Treppe DimmerSwitch 01 Day
+          condition: day
+        - homeAssistantResources:
+          - 1OG-Treppe DimmerSwitch 01 Night
+          condition: night
+      homeAssistantResources:
+      - light_treppe_oben
+  - name: EG Esszimmer 1 Wohnzimmer
+    type: AqaraLightSwitchH2_1Ch
+    devices:
+    - SW-EG-ESSZ-1
+    groups:
+    - position: '1'
+      profile: AqaraLightSwitchH2_1ChLightDefault
+      triggers:
+      - trigger: AQARA_LIGHT_SWITCH_H2_1CH_SINGLE_UP
+        sequences:
+        - homeAssistantResources:
+          - Wohnzimmer DimmerSwitch 01 Day
+          condition: day
+        - homeAssistantResources:
+          - Wohnzimmer DimmerSwitch 01 Night
+          condition: night
+      homeAssistantResources:
+      - light_wohnzimmer
+  - name: EG Esszimmer 2
+    type: AqaraLightSwitchH2_1Ch
+    devices:
+    - SW-EG-ESSZ-2
+    groups:
+    - position: '1'
+      profile: AqaraLightSwitchH2_1ChLightDefault
+      triggers:
+      - trigger: AQARA_LIGHT_SWITCH_H2_1CH_SINGLE_UP
+        sequences:
+        - homeAssistantResources:
+          - Esszimmer DimmerSwitch 01 Day
+          condition: day
+        - homeAssistantResources:
+          - Esszimmer DimmerSwitch 01 Night
+          condition: night
+      homeAssistantResources:
+      - light_esszimmer
+  - name: 1OG Flur Buero
+    type: AqaraLightSwitchH2_1Ch
+    devices:
+    - SW-1OG-FLUR-BUERO
+    groups:
+    - position: '1'
+      profile: AqaraLightSwitchH2_1ChLightDefault
+      triggers:
+      - trigger: AQARA_LIGHT_SWITCH_H2_1CH_SINGLE_UP
+        sequences:
+        - homeAssistantResources:
+          - 1OG-Flur DimmerSwitch 01 Day
+          condition: day
+        - homeAssistantResources:
+          - 1OG-Flur DimmerSwitch 01 Night
+          condition: night
+      homeAssistantResources:
+      - light_flur_oben
+  - name: 1OG Flur Bad
+    type: AqaraLightSwitchH2_1Ch
+    devices:
+    - SW-1OG-FLUR-BAD
+    groups:
+    - position: '1'
+      profile: AqaraLightSwitchH2_1ChLightDefault
+      triggers:
+      - trigger: AQARA_LIGHT_SWITCH_H2_1CH_SINGLE_UP
+        sequences:
+        - homeAssistantResources:
+          - 1OG-Flur DimmerSwitch 01 Day
+          condition: day
+        - homeAssistantResources:
+          - 1OG-Flur DimmerSwitch 01 Night
+          condition: night
+      homeAssistantResources:
+      - light_flur_oben
+  - name: 1OG Flur Gast
+    type: AqaraLightSwitchH2_1Ch
+    devices:
+    - SW-1OG-FLUR-GAST
+    groups:
+    - position: '1'
+      profile: AqaraLightSwitchH2_1ChLightDefault
+      triggers:
+      - trigger: AQARA_LIGHT_SWITCH_H2_1CH_SINGLE_UP
+        sequences:
+        - homeAssistantResources:
+          - 1OG-Flur DimmerSwitch 01 Day
+          condition: day
+        - homeAssistantResources:
+          - 1OG-Flur DimmerSwitch 01 Night
+          condition: night
+      homeAssistantResources:
+      - light_flur_oben
+  - name: 1OG Treppe Runter
+    type: AqaraLightSwitchH2_1Ch
+    devices:
+    - SW-1OG-TREPPE-RUNTER
+    groups:
+    - position: '1'
+      profile: AqaraLightSwitchH2_1ChLightDefault
+      triggers:
+      - trigger: AQARA_LIGHT_SWITCH_H2_1CH_SINGLE_UP
+        sequences:
+        - homeAssistantResources:
+          - 1OG-Treppe DimmerSwitch 01 Day
+          condition: day
+        - homeAssistantResources:
+          - 1OG-Treppe DimmerSwitch 01 Night
+          condition: night
+      homeAssistantResources:
+      - light_treppe_oben
+  - name: 1OG Treppe Hoch
+    type: AqaraLightSwitchH2_1Ch
+    devices:
+    - SW-1OG-TREPPE-HOCH
+    groups:
+    - position: '1'
+      profile: AqaraLightSwitchH2_1ChLightDefault
+      triggers:
+      - trigger: AQARA_LIGHT_SWITCH_H2_1CH_SINGLE_UP
+        sequences:
+        - homeAssistantResources:
+          - Treppe Dach DimmerSwitch 01 Day
+          condition: day
+        - homeAssistantResources:
+          - Treppe Dach DimmerSwitch 01 Night
+          condition: night
+      homeAssistantResources:
+      - light_treppe_dach
+  - name: 1OG Lena Buero
+    type: AqaraLightSwitchH2_1Ch
+    devices:
+    - SW-1OG-LENA-BUERO
+    groups:
+    - position: '1'
+      profile: AqaraLightSwitchH2_1ChLightDefault
+      triggers:
+      - trigger: AQARA_LIGHT_SWITCH_H2_1CH_SINGLE_UP
+        sequences:
+        - homeAssistantResources:
+          - Buero Lena DimmerSwitch 01 Day
+          condition: day
+        - homeAssistantResources:
+          - Buero Lena DimmerSwitch 01 Night
+          condition: night
+      homeAssistantResources:
+      - light_buero_lena
