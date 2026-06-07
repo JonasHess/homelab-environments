@@ -299,7 +299,7 @@ smartHome:
   - name: Dach Switch 1
     type: AqaraLightSwitchH2_1Ch
     devices:
-    - DACH1
+    - SW-DACH-1
     groups:
     - position: '1'
       profile: AqaraLightSwitchH2_1ChLightDefault
@@ -317,7 +317,7 @@ smartHome:
   - name: Dach Switch 2
     type: AqaraLightSwitchH2_1Ch
     devices:
-    - DACH2
+    - SW-DACH-2
     groups:
     - position: '1'
       profile: AqaraLightSwitchH2_1ChLightDefault
@@ -335,7 +335,7 @@ smartHome:
   - name: Dach Switch 3
     type: AqaraLightSwitchH2_1Ch
     devices:
-    - DACH3
+    - SW-DACH-3
     groups:
     - position: '1'
       profile: AqaraLightSwitchH2_1ChLightDefault
