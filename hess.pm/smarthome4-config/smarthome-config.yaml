@@ -612,3 +612,21 @@ smartHome:
           condition: night
       homeAssistantResources:
       - light_buero_lena
+  - name: Treppe EG-1OG Motion
+    type: AqaraFP300
+    devices:
+    - M01
+    groups:
+    - position: '1'
+      profile: AqaraFP300LightDefault
+      triggers:
+      - trigger: AQARA_FP300_PRESENCE_DETECTED
+        sequences:
+        - homeAssistantResources:
+          - Treppe Oben DimmerSwitch 01 Day
+          condition: day
+        - homeAssistantResources:
+          - Treppe Oben DimmerSwitch 01 Night
+          condition: night
+      homeAssistantResources:
+      - light_treppe_oben
