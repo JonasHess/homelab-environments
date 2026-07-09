@@ -612,10 +612,11 @@ smartHome:
           condition: night
       homeAssistantResources:
       - light_buero_lena
-  - name: Treppe EG-1OG Motion
+  - name: 1OG Flur + Treppe EG-1OG Motion
     type: AqaraFP300
     devices:
     - M01
+    - M05
     groups:
     - position: '1'
       profile: AqaraFP300LightDefault
@@ -628,5 +629,60 @@ smartHome:
         - homeAssistantResources:
           - Treppe Oben DimmerSwitch 01 Night
           condition: night
+      - trigger: AQARA_FP300_PRESENCE_DETECTED
+        sequences:
+        - homeAssistantResources:
+          - 1OG-Flur DimmerSwitch 01 Day
+          condition: day
+        - homeAssistantResources:
+          - 1OG-Flur DimmerSwitch 01 Night
+          condition: night
       homeAssistantResources:
       - light_treppe_oben
+      - light_flur_oben
+  - name: Treppe 1OG-2OG Motion
+    type: AqaraFP300
+    devices:
+    - M02
+    - M07
+    groups:
+    - position: '1'
+      profile: AqaraFP300LightDefault
+      triggers:
+      - trigger: AQARA_FP300_PRESENCE_DETECTED
+        sequences:
+        - homeAssistantResources:
+          - Treppe Dach DimmerSwitch 01 Day
+          condition: day
+        - homeAssistantResources:
+          - Treppe Dach DimmerSwitch 01 Night
+          condition: night
+      homeAssistantResources:
+      - light_treppe_dach
+      # TODO Ankleidezimmer: add its light resource here (and its scenes above) once the room has lights
+  - name: Kueche Motion
+    type: AqaraFP300
+    devices:
+    - M03
+    groups:
+    - position: '1'
+      profile: AqaraFP300LightDefault
+      # TODO Kueche has no lights yet: add homeAssistantResources and PRESENCE_DETECTED scene sequences once installed
+  - name: EG Flur Motion
+    type: AqaraFP300
+    devices:
+    - M04
+    groups:
+    - position: '1'
+      profile: AqaraFP300LightDefault
+      triggers:
+      - trigger: AQARA_FP300_PRESENCE_DETECTED
+        sequences:
+        - homeAssistantResources:
+          - EG-Flur DimmerSwitch 01 Day
+          condition: day
+        - homeAssistantResources:
+          - EG-Flur DimmerSwitch 01 Night
+          condition: night
+      homeAssistantResources:
+      - light_eingang_flur
