@@ -686,3 +686,39 @@ smartHome:
           condition: night
       homeAssistantResources:
       - light_eingang_flur
+  - name: Dach Motion
+    type: AqaraFP1E
+    devices:
+    - M08
+    groups:
+    - position: '1'
+      profile: AqaraFP1ELightDefault
+      profileOptions:
+        offDelaySeconds: 0
+      triggers:
+      - trigger: AQARA_FP1E_PRESENCE_DETECTED
+        sequences:
+        - homeAssistantResources:
+          - Dach DimmerSwitch 01 Day
+          condition: day
+        - homeAssistantResources:
+          - Dach DimmerSwitch 01 Night
+          condition: night
+      homeAssistantResources:
+      - light_dach
+  - name: Treppe Keller Motion
+    type: HueSML001
+    devices:
+    - S23
+    groups:
+    - position: '1'
+      profile: HueSML001LightDefault
+      # Treppe Keller has no scenes yet: presence turns the light on at full brightness.
+      # Swap the sequence to Treppe Keller scene resources once they exist.
+      triggers:
+      - trigger: HUE_SML001_OCCUPANCY_DETECTED
+        sequences:
+        - homeAssistantResources:
+          - light_treppe_keller
+      homeAssistantResources:
+      - light_treppe_keller
