@@ -34,6 +34,8 @@ smartHome:
       - light.gaestezimmer
   - type: Light
     id: light_schlafzimmer
+    offLockSeconds: 43200      # single Off press locks the bedroom against motion for 12 h
+    disableLockSeconds: 43200  # double Off press also locks for 12 h
     lookups:
     - type: staticEntity
       entityRefs:
@@ -761,3 +763,57 @@ smartHome:
           - light_treppe_keller
       homeAssistantResources:
       - light_treppe_keller
+  - name: Schlafzimmer Motion
+    type: AqaraFP300
+    devices:
+    - M09
+    groups:
+    - position: '1'
+      profile: AqaraFP300LightDefault
+      triggers:
+      - trigger: AQARA_FP300_PRESENCE_DETECTED
+        sequences:
+        - homeAssistantResources:
+          - Schlafzimmer DimmerSwitch 01 Day
+          condition: day
+        - homeAssistantResources:
+          - Schlafzimmer DimmerSwitch 01 Night
+          condition: night
+      homeAssistantResources:
+      - light_schlafzimmer
+  - name: Esszimmer Motion
+    type: AqaraFP300
+    devices:
+    - M06
+    groups:
+    - position: '1'
+      profile: AqaraFP300LightDefault
+      triggers:
+      - trigger: AQARA_FP300_PRESENCE_DETECTED
+        sequences:
+        - homeAssistantResources:
+          - Esszimmer DimmerSwitch 01 Day
+          condition: day
+        - homeAssistantResources:
+          - Esszimmer DimmerSwitch 01 Night
+          condition: night
+      homeAssistantResources:
+      - light_esszimmer
+  - name: Wohnzimmer Motion
+    type: AqaraFP1E
+    devices:
+    - M10
+    groups:
+    - position: '1'
+      profile: AqaraFP1ELightDefault
+      triggers:
+      - trigger: AQARA_FP1E_PRESENCE_DETECTED
+        sequences:
+        - homeAssistantResources:
+          - Wohnzimmer DimmerSwitch 01 Day
+          condition: day
+        - homeAssistantResources:
+          - Wohnzimmer DimmerSwitch 01 Night
+          condition: night
+      homeAssistantResources:
+      - light_wohnzimmer
