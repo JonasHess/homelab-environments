@@ -27,6 +27,12 @@ smartHome:
       entityRefs:
       - light.esszimmer
   - type: Light
+    id: light_kueche
+    lookups:
+    - type: staticEntity
+      entityRefs:
+      - light.kueche
+  - type: Light
     id: light_gaestezimmer
     lookups:
     - type: staticEntity
@@ -111,6 +117,16 @@ smartHome:
     lookups:
     - type: labelRegex
       labelRegex: Esszimmer__DimmerSwitch__01__night__.*
+  - type: Scene
+    id: Kueche DimmerSwitch 01 Day
+    lookups:
+    - type: labelRegex
+      labelRegex: Kueche__DimmerSwitch__01__day__.*
+  - type: Scene
+    id: Kueche DimmerSwitch 01 Night
+    lookups:
+    - type: labelRegex
+      labelRegex: Kueche__DimmerSwitch__01__night__.*
   - type: Scene
     id: Wohnzimmer DimmerSwitch 01 Day
     lookups:
@@ -545,6 +561,24 @@ smartHome:
           condition: night
       homeAssistantResources:
       - light_esszimmer
+  - name: EG Kueche 1
+    type: AqaraLightSwitchH2_1Ch
+    devices:
+    - SW-EG-KUECHE-1
+    groups:
+    - position: '1'
+      profile: AqaraLightSwitchH2_1ChLightDefault
+      triggers:
+      - trigger: AQARA_LIGHT_SWITCH_H2_1CH_SINGLE_UP
+        sequences:
+        - homeAssistantResources:
+          - Kueche DimmerSwitch 01 Day
+          condition: day
+        - homeAssistantResources:
+          - Kueche DimmerSwitch 01 Night
+          condition: night
+      homeAssistantResources:
+      - light_kueche
   - name: 1OG Flur Buero
     type: AqaraLightSwitchH2_1Ch
     devices:
@@ -708,7 +742,17 @@ smartHome:
     groups:
     - position: '1'
       profile: AqaraFP300LightDefault
-      # TODO Kueche has no lights yet: add homeAssistantResources and PRESENCE_DETECTED scene sequences once installed
+      triggers:
+      - trigger: AQARA_FP300_PRESENCE_DETECTED
+        sequences:
+        - homeAssistantResources:
+          - Kueche DimmerSwitch 01 Day
+          condition: day
+        - homeAssistantResources:
+          - Kueche DimmerSwitch 01 Night
+          condition: night
+      homeAssistantResources:
+      - light_kueche
   - name: EG Flur Motion
     type: AqaraFP300
     devices:
