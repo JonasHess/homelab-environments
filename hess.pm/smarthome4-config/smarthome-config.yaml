@@ -70,6 +70,18 @@ smartHome:
     - type: staticEntity
       entityRefs:
       - light.wohnzimmer
+  - type: Cover
+    id: cover_wohnzimmer_rollo_links
+    lookups:
+    - type: staticEntity
+      entityRefs:
+      - cover.wohnzimmer_rollo_links
+  - type: Cover
+    id: cover_wohnzimmer_rollo_rechts
+    lookups:
+    - type: staticEntity
+      entityRefs:
+      - cover.wohnzimmer_rollo_rechts
   - type: Light
     id: light_dach
     lookups:
@@ -561,6 +573,21 @@ smartHome:
           condition: night
       homeAssistantResources:
       - light_esszimmer
+  # 2-gang shutter switch for the Wohnzimmer rollos. Gangs are crossed on purpose:
+  # left gang controls the RIGHT rollo, right gang controls the LEFT rollo.
+  - name: EG Esszimmer 3
+    type: AqaraLightSwitchH2_2Ch
+    devices:
+    - SW-EG-ESSZ-3
+    groups:
+    - position: '1'
+      profile: AqaraLightSwitchH2_2ChLeftShutterDefault
+      homeAssistantResources:
+      - cover_wohnzimmer_rollo_rechts
+    - position: '1'
+      profile: AqaraLightSwitchH2_2ChRightShutterDefault
+      homeAssistantResources:
+      - cover_wohnzimmer_rollo_links
   - name: EG Kueche 1
     type: AqaraLightSwitchH2_2Ch
     devices:
