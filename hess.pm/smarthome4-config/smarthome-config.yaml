@@ -562,14 +562,15 @@ smartHome:
       homeAssistantResources:
       - light_esszimmer
   - name: EG Kueche 1
-    type: AqaraLightSwitchH2_1Ch
+    type: AqaraLightSwitchH2_2Ch
     devices:
     - SW-EG-KUECHE-1
     groups:
+    # Only the right gang is configured; the left gang is intentionally unwired for now.
     - position: '1'
-      profile: AqaraLightSwitchH2_1ChLightDefault
+      profile: AqaraLightSwitchH2_2ChRightLightDefault
       triggers:
-      - trigger: AQARA_LIGHT_SWITCH_H2_1CH_SINGLE_UP
+      - trigger: AQARA_LIGHT_SWITCH_H2_2CH_RIGHT_UP
         sequences:
         - homeAssistantResources:
           - Kueche DimmerSwitch 01 Day
@@ -735,10 +736,13 @@ smartHome:
       homeAssistantResources:
       - light_treppe_dach
       # TODO Ankleidezimmer: add its light resource here (and its scenes above) once the room has lights
-  - name: Kueche Motion
+  # Kueche and EG Flur form one occupancy zone: motion on either device (M03/M04) turns
+  # on both lights; the zone only clears (both lights off) once both devices are clear.
+  - name: Kueche + EG Flur Motion
     type: AqaraFP300
     devices:
     - M03
+    - M04
     groups:
     - position: '1'
       profile: AqaraFP300LightDefault
@@ -751,16 +755,6 @@ smartHome:
         - homeAssistantResources:
           - Kueche DimmerSwitch 01 Night
           condition: night
-      homeAssistantResources:
-      - light_kueche
-  - name: EG Flur Motion
-    type: AqaraFP300
-    devices:
-    - M04
-    groups:
-    - position: '1'
-      profile: AqaraFP300LightDefault
-      triggers:
       - trigger: AQARA_FP300_PRESENCE_DETECTED
         sequences:
         - homeAssistantResources:
@@ -770,6 +764,7 @@ smartHome:
           - EG-Flur DimmerSwitch 01 Night
           condition: night
       homeAssistantResources:
+      - light_kueche
       - light_eingang_flur
   - name: Dach Motion
     type: AqaraFP1E
