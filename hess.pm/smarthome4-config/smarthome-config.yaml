@@ -103,6 +103,18 @@ smartHome:
       - light.flur_oben_1
       - light.flur_oben_2
       - light.flur_oben_3
+  - type: Light
+    id: light_badezimmer_dach
+    lookups:
+    - type: staticEntity
+      entityRefs:
+      - light.badezimmer_dach
+  - type: Light
+    id: light_garderobe_dach
+    lookups:
+    - type: staticEntity
+      entityRefs:
+      - light.garderobe_dach
   - type: Switch
     id: Switch Schlafzimmer Touchscreen
     lookups:
@@ -229,6 +241,26 @@ smartHome:
     lookups:
     - type: labelRegex
       labelRegex: 1OG-Flur__DimmerSwitch__01__night__.*
+  - type: Scene
+    id: Garderobe Dach DimmerSwitch 01 Day
+    lookups:
+    - type: labelRegex
+      labelRegex: Garderobe Dach__DimmerSwitch__01__day__.*
+  - type: Scene
+    id: Garderobe Dach DimmerSwitch 01 Night
+    lookups:
+    - type: labelRegex
+      labelRegex: Garderobe Dach__DimmerSwitch__01__night__.*
+  - type: Scene
+    id: Badezimmer Dach DimmerSwitch 01 Day
+    lookups:
+    - type: labelRegex
+      labelRegex: Badezimmer Dach__DimmerSwitch__01__day__.*
+  - type: Scene
+    id: Badezimmer Dach DimmerSwitch 01 Night
+    lookups:
+    - type: labelRegex
+      labelRegex: Badezimmer Dach__DimmerSwitch__01__night__.*
   sensors:
   - name: Schlafzimmer
     type: HueDimmerSwitch
@@ -446,6 +478,8 @@ smartHome:
           condition: night
       homeAssistantResources:
       - light_schlafzimmer
+  # Controls Treppe Dach and, coupled to it, Garderobe Dach (which has no switch of its own):
+  # UP runs both rooms' scenes, DOWN turns both lights off.
   - name: Dach Switch 3
     type: AqaraLightSwitchH2_1Ch
     devices:
@@ -462,8 +496,17 @@ smartHome:
         - homeAssistantResources:
           - Treppe Dach DimmerSwitch 01 Night
           condition: night
+      - trigger: AQARA_LIGHT_SWITCH_H2_1CH_SINGLE_UP
+        sequences:
+        - homeAssistantResources:
+          - Garderobe Dach DimmerSwitch 01 Day
+          condition: day
+        - homeAssistantResources:
+          - Garderobe Dach DimmerSwitch 01 Night
+          condition: night
       homeAssistantResources:
       - light_treppe_dach
+      - light_garderobe_dach
   - name: EG Flur Haustuer
     type: AqaraLightSwitchH2_1Ch
     devices:
@@ -679,6 +722,8 @@ smartHome:
           condition: night
       homeAssistantResources:
       - light_treppe_oben
+  # Controls Treppe Dach and, coupled to it, Garderobe Dach (which has no switch of its own):
+  # UP runs both rooms' scenes, DOWN turns both lights off.
   - name: 1OG Treppe Hoch
     type: AqaraLightSwitchH2_1Ch
     devices:
@@ -695,8 +740,17 @@ smartHome:
         - homeAssistantResources:
           - Treppe Dach DimmerSwitch 01 Night
           condition: night
+      - trigger: AQARA_LIGHT_SWITCH_H2_1CH_SINGLE_UP
+        sequences:
+        - homeAssistantResources:
+          - Garderobe Dach DimmerSwitch 01 Day
+          condition: day
+        - homeAssistantResources:
+          - Garderobe Dach DimmerSwitch 01 Night
+          condition: night
       homeAssistantResources:
       - light_treppe_dach
+      - light_garderobe_dach
   - name: 1OG Lena Buero
     type: AqaraLightSwitchH2_1Ch
     devices:
@@ -715,6 +769,24 @@ smartHome:
           condition: night
       homeAssistantResources:
       - light_buero_lena
+  - name: Dach Bad Unten
+    type: AqaraLightSwitchH2_1Ch
+    devices:
+    - SW-DACH-BAD-UNTEN
+    groups:
+    - position: '1'
+      profile: AqaraLightSwitchH2_1ChLightDefault
+      triggers:
+      - trigger: AQARA_LIGHT_SWITCH_H2_1CH_SINGLE_UP
+        sequences:
+        - homeAssistantResources:
+          - Badezimmer Dach DimmerSwitch 01 Day
+          condition: day
+        - homeAssistantResources:
+          - Badezimmer Dach DimmerSwitch 01 Night
+          condition: night
+      homeAssistantResources:
+      - light_badezimmer_dach
   - name: 1OG Flur + Treppe EG-1OG Motion
     type: AqaraFP300
     devices:
@@ -743,6 +815,8 @@ smartHome:
       homeAssistantResources:
       - light_treppe_oben
       - light_flur_oben
+  # Presence on the 1OG-2OG staircase drives Treppe Dach and, coupled to it, Garderobe Dach
+  # (which has no switch/sensor of its own): motion runs both rooms' scenes, clearing turns both off.
   - name: Treppe 1OG-2OG Motion
     type: AqaraFP300
     devices:
@@ -760,8 +834,17 @@ smartHome:
         - homeAssistantResources:
           - Treppe Dach DimmerSwitch 01 Night
           condition: night
+      - trigger: AQARA_FP300_PRESENCE_DETECTED
+        sequences:
+        - homeAssistantResources:
+          - Garderobe Dach DimmerSwitch 01 Day
+          condition: day
+        - homeAssistantResources:
+          - Garderobe Dach DimmerSwitch 01 Night
+          condition: night
       homeAssistantResources:
       - light_treppe_dach
+      - light_garderobe_dach
       # TODO Ankleidezimmer: add its light resource here (and its scenes above) once the room has lights
   # Kueche and EG Flur form one occupancy zone: motion on either device (M03/M04) turns
   # on both lights; the zone only clears (both lights off) once both devices are clear.
@@ -847,6 +930,24 @@ smartHome:
           condition: night
       homeAssistantResources:
       - light_schlafzimmer
+  - name: Badezimmer Dach Motion
+    type: AqaraFP300
+    devices:
+    - M12
+    groups:
+    - position: '1'
+      profile: AqaraFP300LightDefault
+      triggers:
+      - trigger: AQARA_FP300_PRESENCE_DETECTED
+        sequences:
+        - homeAssistantResources:
+          - Badezimmer Dach DimmerSwitch 01 Day
+          condition: day
+        - homeAssistantResources:
+          - Badezimmer Dach DimmerSwitch 01 Night
+          condition: night
+      homeAssistantResources:
+      - light_badezimmer_dach
   - name: Esszimmer Motion
     type: AqaraFP300
     devices:
