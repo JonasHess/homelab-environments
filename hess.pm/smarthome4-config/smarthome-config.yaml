@@ -584,7 +584,6 @@ smartHome:
       profile: AqaraLightSwitchH2_1ChLightDefault
       profileOptions:
         handledButtons: DOWN
-        pressOffLockSeconds: 1800
         pressDisableLockSeconds: 14400
       homeAssistantResources:
       - light_eingang_flur
@@ -666,7 +665,6 @@ smartHome:
       profile: AqaraLightSwitchH2_1ChLightDefault
       profileOptions:
         handledButtons: DOWN
-        pressOffLockSeconds: 1800
         pressDisableLockSeconds: 14400
       homeAssistantResources:
       - light_wohnzimmer
