@@ -174,9 +174,12 @@ apps:
                 tank1:
                   mountPath: /mnt/tank1
                   hostPath: /mnt/tank1
-                tank0:
-                  mountPath: /mnt/tank0
-                  hostPath: /mnt/tank0
+                hdd-z1:
+                  mountPath: /mnt/hdd-z1
+                  hostPath: /mnt/hdd-z1
+                hdd-z2:
+                  mountPath: /mnt/hdd-z2
+                  hostPath: /mnt/hdd-z2
   prowlarr:
     enabled: true
     argocd:
@@ -189,7 +192,7 @@ apps:
                 config:
                   hostPath: /mnt/tank1/unencrypted/apps/prowlarr/config
                 media:
-                  hostPath: /mnt/tank0/encrypted/media
+                  hostPath: /mnt/hdd-z1/encrypted/media
   homeassistant:
     enabled: true
     argocd:
@@ -250,7 +253,7 @@ apps:
                 config:
                   hostPath: /mnt/tank1/unencrypted/apps/qbittorrent/config
                 media:
-                  hostPath: /mnt/tank0/encrypted/media
+                  hostPath: /mnt/hdd-z1/encrypted/media
                 downloads:
                   hostPath: /data/volumes/qbittorrent-downloads
                 watchdir:
@@ -275,7 +278,7 @@ apps:
           generic:
             persistentVolumeClaims:
               library:
-                hostPath: /mnt/tank0/encrypted/apps/immich/library
+                hostPath: /mnt/hdd-z2/encrypted/apps/immich/library
               postgresql:
                 hostPath: /mnt/tank1/encrypted/apps/immich/postgresql
               redis:
@@ -416,7 +419,7 @@ apps:
                 config:
                   hostPath: /mnt/tank1/unencrypted/apps/sabnzbd/config
                 media:
-                  hostPath: /mnt/tank0/encrypted/media
+                  hostPath: /mnt/hdd-z1/encrypted/media
                 downloads:
                   hostPath: /data/volumes/sabnzbd-downloads
                 watchdir:
@@ -466,7 +469,7 @@ apps:
                 config:
                   hostPath: /mnt/tank1/unencrypted/apps/radarr/config
                 media:
-                  hostPath: /mnt/tank0/encrypted/media
+                  hostPath: /mnt/hdd-z1/encrypted/media
   search:
     enabled: false
     argocd:
@@ -529,7 +532,7 @@ apps:
                 config:
                   hostPath: /mnt/tank1/encrypted/apps/plex/config
                 media:
-                  hostPath: /mnt/tank0/encrypted/media
+                  hostPath: /mnt/hdd-z1/encrypted/media
   jellyfin:
     enabled: false
     argocd:
@@ -542,7 +545,7 @@ apps:
                 config:
                   hostPath: /mnt/tank1/encrypted/apps/jellyfin/config
                 media:
-                  hostPath: /mnt/tank0/encrypted/media
+                  hostPath: /mnt/hdd-z1/encrypted/media
   tautulli:
     enabled: false
     argocd:
@@ -597,9 +600,12 @@ apps:
                   hostPath: /mnt/tank1/encrypted/apps/sftpgo/data
                 config:
                   hostPath: /mnt/tank1/unencrypted/apps/sftpgo/config
-                tank0:
-                  mountPath: /mnt/tank0
-                  hostPath: /mnt/tank0
+                hdd-z1:
+                  mountPath: /mnt/hdd-z1
+                  hostPath: /mnt/hdd-z1
+                hdd-z2:
+                  mountPath: /mnt/hdd-z2
+                  hostPath: /mnt/hdd-z2
                 tank1:
                   mountPath: /mnt/tank1
                   hostPath: /mnt/tank1
@@ -617,10 +623,13 @@ apps:
               pvcMounts:
                 media:
                   mountPath: /shares/media
-                  hostPath: /mnt/tank0/encrypted/media
-                tank0:
-                  mountPath: /shares/tank0
-                  hostPath: /mnt/tank0
+                  hostPath: /mnt/hdd-z1/encrypted/media
+                hdd-z1:
+                  mountPath: /shares/hdd-z1
+                  hostPath: /mnt/hdd-z1
+                hdd-z2:
+                  mountPath: /shares/hdd-z2
+                  hostPath: /mnt/hdd-z2
                 tank1:
                   mountPath: /shares/tank1
                   hostPath: /mnt/tank1
@@ -657,10 +666,17 @@ apps:
                 # connect. Combined with guest: true, anonymous clients land as
                 # the Samba guest user and inherit read-only access.
 
-              # Admin-only browse of the full tank0/tank1 drives. Read-only by
-              # default for safety; writeList lets jonas modify if needed.
-              - name: tank0
-                path: /shares/tank0
+              # Admin-only browse of the full hdd-z1/hdd-z2/tank1 drives. Read-only
+              # by default for safety; writeList lets jonas modify if needed.
+              - name: hdd-z1
+                path: /shares/hdd-z1
+                guest: false
+                readOnly: true
+                browseable: true
+                validUsers: ["@admin"]
+                writeList: ["@admin"]
+              - name: hdd-z2
+                path: /shares/hdd-z2
                 guest: false
                 readOnly: true
                 browseable: true
@@ -704,7 +720,7 @@ apps:
                 config:
                   hostPath: /mnt/tank1/unencrypted/apps/sonarr/config
                 media:
-                  hostPath: /mnt/tank0/encrypted/media
+                  hostPath: /mnt/hdd-z1/encrypted/media
   cert-manager:
     enabled: true
     argocd:
@@ -749,7 +765,7 @@ apps:
                 metadata:
                   hostPath: /mnt/tank1/encrypted/apps/audiobookshelf/metadata
                 media:
-                  hostPath: /mnt/tank0/encrypted/media
+                  hostPath: /mnt/hdd-z1/encrypted/media
 
   mealie:
     enabled: false
@@ -791,16 +807,20 @@ apps:
             persistentVolumeClaims:
               tank1:
                 hostPath: /mnt/tank1
-              tank0:
-                hostPath: /mnt/tank0
+              hdd-z1:
+                hostPath: /mnt/hdd-z1
+              hdd-z2:
+                hostPath: /mnt/hdd-z2
               restoreddata:
-                hostPath: /mnt/tank0/encrypted/apps/restic/restored-data
+                hostPath: /mnt/hdd-z1/encrypted/apps/restic/restored-data
           cronjob:
             pvcMounts:
               tank1:
                 mountPath: /mnt/tank1
-              tank0:
-                mountPath: /mnt/tank0
+              hdd-z1:
+                mountPath: /mnt/hdd-z1
+              hdd-z2:
+                mountPath: /mnt/hdd-z2
 
   filecleanup:
     enabled: true
@@ -813,13 +833,13 @@ apps:
               sabnzbd-download:
                 hostPath: /data/volumes/sabnzbd-downloads
               sabnzbd-unknown:
-                hostPath: /mnt/tank0/encrypted/media/_unknown/sabnzbd
+                hostPath: /mnt/hdd-z1/encrypted/media/_unknown/sabnzbd
               nzbget-download:
                 hostPath: /data/volumes/nzbget-downloads
               nzbget-radarr:
-                hostPath: /mnt/tank0/encrypted/media/_unknown/nzbget/Radarr
+                hostPath: /mnt/hdd-z1/encrypted/media/_unknown/nzbget/Radarr
               nzbget-prowlarr:
-                hostPath: /mnt/tank0/encrypted/media/_unknown/nzbget/Prowlarr
+                hostPath: /mnt/hdd-z1/encrypted/media/_unknown/nzbget/Prowlarr
           filecleanup:
             dryRun: false  # Set to false after testing
             cleanupJobs:
@@ -945,7 +965,7 @@ apps:
                 downloads:
                   hostPath: /data/volumes/nzbget-downloads
                 media:
-                  hostPath: /mnt/tank0/encrypted/media
+                  hostPath: /mnt/hdd-z1/encrypted/media
   n8n:
     enabled: true
     argocd:
