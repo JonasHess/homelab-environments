@@ -5,8 +5,14 @@ smartHome:
     id: day
     expression: '#timeOfDay() == ''DAY'''
   - type: SpelExpression
+    id: evening
+    expression: '#timeOfDay() == ''NIGHT'' && !#isTimeInRange(''23:00'', ''12:00'')'
+  - type: SpelExpression
+    id: day_or_evening
+    expression: '#timeOfDay() == ''DAY'' || (#timeOfDay() == ''NIGHT'' && !#isTimeInRange(''23:00'', ''12:00''))'
+  - type: SpelExpression
     id: night
-    expression: '#timeOfDay() == ''NIGHT'''
+    expression: '#timeOfDay() == ''NIGHT'' && #isTimeInRange(''23:00'', ''12:00'')'
   homeAssistantResources:
   - type: Light
     id: light_buero_jonas
@@ -275,7 +281,7 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - Schlafzimmer DimmerSwitch 01 Day
-          condition: day
+          condition: day_or_evening
         - homeAssistantResources:
           - Schlafzimmer DimmerSwitch 01 Night
           condition: night
@@ -288,7 +294,7 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - Dach DimmerSwitch 01 Day
-          condition: day
+          condition: day_or_evening
         - homeAssistantResources:
           - Dach DimmerSwitch 01 Night
           condition: night
@@ -301,7 +307,7 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - Buero Jonas DimmerSwitch 01 Day
-          condition: day
+          condition: day_or_evening
         - homeAssistantResources:
           - Buero Jonas DimmerSwitch 01 Night
           condition: night
@@ -319,7 +325,7 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - Esszimmer DimmerSwitch 01 Day
-          condition: day
+          condition: day_or_evening
         - homeAssistantResources:
           - Esszimmer DimmerSwitch 01 Night
           condition: night
@@ -339,7 +345,7 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - Wohnzimmer DimmerSwitch 01 Day
-          condition: day
+          condition: day_or_evening
         - homeAssistantResources:
           - Wohnzimmer DimmerSwitch 01 Night
           condition: night
@@ -352,7 +358,7 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - Esszimmer DimmerSwitch 01 Day
-          condition: day
+          condition: day_or_evening
         - homeAssistantResources:
           - Esszimmer DimmerSwitch 01 Night
           condition: night
@@ -370,7 +376,7 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - Buero Jonas DimmerSwitch 01 Day
-          condition: day
+          condition: day_or_evening
         - homeAssistantResources:
           - Buero Jonas DimmerSwitch 01 Night
           condition: night
@@ -383,7 +389,7 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - Dach DimmerSwitch 01 Day
-          condition: day
+          condition: day_or_evening
         - homeAssistantResources:
           - Dach DimmerSwitch 01 Night
           condition: night
@@ -396,7 +402,7 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - Schlafzimmer DimmerSwitch 01 Day
-          condition: day
+          condition: day_or_evening
         - homeAssistantResources:
           - Schlafzimmer DimmerSwitch 01 Night
           condition: night
@@ -416,7 +422,7 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - Buero Lena DimmerSwitch 01 Day
-          condition: day
+          condition: day_or_evening
         - homeAssistantResources:
           - Buero Lena DimmerSwitch 01 Night
           condition: night
@@ -436,7 +442,7 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - Gaestezimmer DimmerSwitch 01 Day
-          condition: day
+          condition: day_or_evening
         - homeAssistantResources:
           - Gaestezimmer DimmerSwitch 01 Night
           condition: night
@@ -454,7 +460,7 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - Dach DimmerSwitch 01 Day
-          condition: day
+          condition: day_or_evening
         - homeAssistantResources:
           - Dach DimmerSwitch 01 Night
           condition: night
@@ -472,7 +478,7 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - Schlafzimmer DimmerSwitch 01 Day
-          condition: day
+          condition: day_or_evening
         - homeAssistantResources:
           - Schlafzimmer DimmerSwitch 01 Night
           condition: night
@@ -492,7 +498,7 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - Treppe Dach DimmerSwitch 01 Day
-          condition: day
+          condition: day_or_evening
         - homeAssistantResources:
           - Treppe Dach DimmerSwitch 01 Night
           condition: night
@@ -500,7 +506,7 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - Garderobe Dach DimmerSwitch 01 Day
-          condition: day
+          condition: day_or_evening
         - homeAssistantResources:
           - Garderobe Dach DimmerSwitch 01 Night
           condition: night
@@ -519,7 +525,7 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - EG-Flur DimmerSwitch 01 Day
-          condition: day
+          condition: day_or_evening
         - homeAssistantResources:
           - EG-Flur DimmerSwitch 01 Night
           condition: night
@@ -537,7 +543,7 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - EG-Flur DimmerSwitch 01 Day
-          condition: day
+          condition: day_or_evening
         - homeAssistantResources:
           - EG-Flur DimmerSwitch 01 Night
           condition: night
@@ -555,7 +561,7 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - Wohnzimmer DimmerSwitch 01 Day
-          condition: day
+          condition: day_or_evening
         - homeAssistantResources:
           - Wohnzimmer DimmerSwitch 01 Night
           condition: night
@@ -574,7 +580,7 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - Treppe Oben DimmerSwitch 01 Day
-          condition: day
+          condition: day_or_evening
         - homeAssistantResources:
           - Treppe Oben DimmerSwitch 01 Night
           condition: night
@@ -592,7 +598,7 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - Wohnzimmer DimmerSwitch 01 Day
-          condition: day
+          condition: day_or_evening
         - homeAssistantResources:
           - Wohnzimmer DimmerSwitch 01 Night
           condition: night
@@ -610,7 +616,7 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - Esszimmer DimmerSwitch 01 Day
-          condition: day
+          condition: day_or_evening
         - homeAssistantResources:
           - Esszimmer DimmerSwitch 01 Night
           condition: night
@@ -644,7 +650,7 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - Kueche DimmerSwitch 01 Day
-          condition: day
+          condition: day_or_evening
         - homeAssistantResources:
           - Kueche DimmerSwitch 01 Night
           condition: night
@@ -662,7 +668,7 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - 1OG-Flur DimmerSwitch 01 Day
-          condition: day
+          condition: day_or_evening
         - homeAssistantResources:
           - 1OG-Flur DimmerSwitch 01 Night
           condition: night
@@ -680,7 +686,7 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - 1OG-Flur DimmerSwitch 01 Day
-          condition: day
+          condition: day_or_evening
         - homeAssistantResources:
           - 1OG-Flur DimmerSwitch 01 Night
           condition: night
@@ -698,7 +704,7 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - 1OG-Flur DimmerSwitch 01 Day
-          condition: day
+          condition: day_or_evening
         - homeAssistantResources:
           - 1OG-Flur DimmerSwitch 01 Night
           condition: night
@@ -716,7 +722,7 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - Treppe Oben DimmerSwitch 01 Day
-          condition: day
+          condition: day_or_evening
         - homeAssistantResources:
           - Treppe Oben DimmerSwitch 01 Night
           condition: night
@@ -736,7 +742,7 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - Treppe Dach DimmerSwitch 01 Day
-          condition: day
+          condition: day_or_evening
         - homeAssistantResources:
           - Treppe Dach DimmerSwitch 01 Night
           condition: night
@@ -744,7 +750,7 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - Garderobe Dach DimmerSwitch 01 Day
-          condition: day
+          condition: day_or_evening
         - homeAssistantResources:
           - Garderobe Dach DimmerSwitch 01 Night
           condition: night
@@ -763,7 +769,7 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - Buero Lena DimmerSwitch 01 Day
-          condition: day
+          condition: day_or_evening
         - homeAssistantResources:
           - Buero Lena DimmerSwitch 01 Night
           condition: night
@@ -781,7 +787,7 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - Badezimmer Dach DimmerSwitch 01 Day
-          condition: day
+          condition: day_or_evening
         - homeAssistantResources:
           - Badezimmer Dach DimmerSwitch 01 Night
           condition: night
@@ -800,7 +806,7 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - Treppe Oben DimmerSwitch 01 Day
-          condition: day
+          condition: day_or_evening
         - homeAssistantResources:
           - Treppe Oben DimmerSwitch 01 Night
           condition: night
@@ -808,7 +814,7 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - 1OG-Flur DimmerSwitch 01 Day
-          condition: day
+          condition: day_or_evening
         - homeAssistantResources:
           - 1OG-Flur DimmerSwitch 01 Night
           condition: night
@@ -830,7 +836,7 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - Treppe Dach DimmerSwitch 01 Day
-          condition: day
+          condition: day_or_evening
         - homeAssistantResources:
           - Treppe Dach DimmerSwitch 01 Night
           condition: night
@@ -838,7 +844,7 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - Garderobe Dach DimmerSwitch 01 Day
-          condition: day
+          condition: day_or_evening
         - homeAssistantResources:
           - Garderobe Dach DimmerSwitch 01 Night
           condition: night
@@ -861,7 +867,7 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - Kueche DimmerSwitch 01 Day
-          condition: day
+          condition: evening
         - homeAssistantResources:
           - Kueche DimmerSwitch 01 Night
           condition: night
@@ -869,7 +875,7 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - EG-Flur DimmerSwitch 01 Day
-          condition: day
+          condition: evening
         - homeAssistantResources:
           - EG-Flur DimmerSwitch 01 Night
           condition: night
@@ -890,7 +896,7 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - Dach DimmerSwitch 01 Day
-          condition: day
+          condition: day_or_evening
         - homeAssistantResources:
           - Dach DimmerSwitch 01 Night
           condition: night
@@ -924,7 +930,7 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - Schlafzimmer DimmerSwitch 01 Day
-          condition: day
+          condition: day_or_evening
         - homeAssistantResources:
           - Schlafzimmer DimmerSwitch 01 Night
           condition: night
@@ -942,7 +948,7 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - Badezimmer Dach DimmerSwitch 01 Day
-          condition: day
+          condition: day_or_evening
         - homeAssistantResources:
           - Badezimmer Dach DimmerSwitch 01 Night
           condition: night
@@ -960,7 +966,7 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - Esszimmer DimmerSwitch 01 Day
-          condition: day
+          condition: evening
         - homeAssistantResources:
           - Esszimmer DimmerSwitch 01 Night
           condition: night
@@ -978,7 +984,7 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - Wohnzimmer DimmerSwitch 01 Day
-          condition: day
+          condition: evening
         - homeAssistantResources:
           - Wohnzimmer DimmerSwitch 01 Night
           condition: night
