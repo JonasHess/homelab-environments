@@ -875,7 +875,7 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - EG-Flur DimmerSwitch 01 Day
-          condition: evening
+          condition: day_or_evening
         - homeAssistantResources:
           - EG-Flur DimmerSwitch 01 Night
           condition: night
@@ -896,7 +896,7 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - Dach DimmerSwitch 01 Day
-          condition: day_or_evening
+          condition: evening
         - homeAssistantResources:
           - Dach DimmerSwitch 01 Night
           condition: night
@@ -930,7 +930,7 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - Schlafzimmer DimmerSwitch 01 Day
-          condition: day_or_evening
+          condition: evening
         - homeAssistantResources:
           - Schlafzimmer DimmerSwitch 01 Night
           condition: night
@@ -948,7 +948,7 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - Badezimmer Dach DimmerSwitch 01 Day
-          condition: day_or_evening
+          condition: evening
         - homeAssistantResources:
           - Badezimmer Dach DimmerSwitch 01 Night
           condition: night
