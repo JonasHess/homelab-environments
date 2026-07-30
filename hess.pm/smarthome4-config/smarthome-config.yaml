@@ -873,7 +873,7 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - Kueche DimmerSwitch 01 Day
-          condition: evening
+          condition: day_or_evening
         - homeAssistantResources:
           - Kueche DimmerSwitch 01 Night
           condition: night
