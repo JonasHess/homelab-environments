@@ -76,3 +76,36 @@
   actions:
   - action: script.turn_off_all_lights
   mode: single
+
+- id: '1764593100000'
+  alias: Schlafzimmer wake-up time announcement
+  description: Announces the current time every ten minutes while bedroom presence remains active.
+  triggers:
+  - trigger: time_pattern
+    minutes: '5,15,25,35,45,55'
+  conditions:
+  - condition: time
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+  - condition: time
+    after: '08:44:00'
+    before: '10:46:00'
+  - condition: state
+    entity_id: binary_sensor.m09_presence
+    state: 'on'
+  actions:
+  - action: media_player.volume_set
+    target:
+      entity_id: media_player.schlafzimmer
+    data:
+      volume_level: "{{ 1.0 if now().strftime('%H:%M') >= '10:00' else 0.5 }}"
+  - action: notify.alexa_media_schlafzimmer
+    data:
+      message: "Es ist {{ now().strftime('%H:%M') }} Uhr."
+      data:
+        type: announce
+  mode: single
