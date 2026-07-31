@@ -117,3 +117,41 @@
     data:
       volume_level: '{{ previous_volume }}'
   mode: single
+
+- id: '1764594000000'
+  alias: Schlafzimmer weekend wake-up time announcement
+  description: Announces the current time every 15 minutes while bedroom presence remains active on weekends.
+  triggers:
+  - trigger: time_pattern
+    minutes: '/15'
+  conditions:
+  - condition: time
+    weekday:
+    - sat
+    - sun
+  - condition: time
+    after: '09:59:00'
+    before: '13:01:00'
+  - condition: state
+    entity_id: binary_sensor.m09_presence
+    state: 'on'
+  actions:
+  - variables:
+      previous_volume: "{{ state_attr('media_player.schlafzimmer', 'volume_level') | float(0.5) }}"
+  - action: media_player.volume_set
+    target:
+      entity_id: media_player.schlafzimmer
+    data:
+      volume_level: 0.5
+  - action: notify.alexa_media_schlafzimmer
+    data:
+      message: "Es ist {{ now().strftime('%H:%M') }} Uhr."
+      data:
+        type: announce
+  - delay: '00:00:10'
+  - action: media_player.volume_set
+    target:
+      entity_id: media_player.schlafzimmer
+    data:
+      volume_level: '{{ previous_volume }}'
+  mode: single
