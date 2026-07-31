@@ -81,8 +81,32 @@
   alias: Schlafzimmer wake-up time announcement
   description: Announces the current time every ten minutes while bedroom presence remains active.
   triggers:
-  - trigger: time_pattern
-    minutes: '5,15,25,35,45,55'
+  - trigger: time
+    at: '08:45:00'
+  - trigger: time
+    at: '08:55:00'
+  - trigger: time
+    at: '09:05:00'
+  - trigger: time
+    at: '09:15:00'
+  - trigger: time
+    at: '09:25:00'
+  - trigger: time
+    at: '09:35:00'
+  - trigger: time
+    at: '09:45:00'
+  - trigger: time
+    at: '09:55:00'
+  - trigger: time
+    at: '10:05:00'
+  - trigger: time
+    at: '10:15:00'
+  - trigger: time
+    at: '10:25:00'
+  - trigger: time
+    at: '10:35:00'
+  - trigger: time
+    at: '10:45:00'
   conditions:
   - condition: time
     weekday:
