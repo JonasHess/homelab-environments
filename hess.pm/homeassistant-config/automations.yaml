@@ -122,6 +122,8 @@
     entity_id: binary_sensor.m09_presence
     state: 'on'
   actions:
+  - variables:
+      previous_volume: "{{ state_attr('media_player.schlafzimmer', 'volume_level') | float(0.5) }}"
   - action: media_player.volume_set
     target:
       entity_id: media_player.schlafzimmer
@@ -132,4 +134,10 @@
       message: "Es ist {{ now().strftime('%H:%M') }} Uhr."
       data:
         type: announce
+  - delay: '00:00:10'
+  - action: media_player.volume_set
+    target:
+      entity_id: media_player.schlafzimmer
+    data:
+      volume_level: '{{ previous_volume }}'
   mode: single
