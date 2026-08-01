@@ -121,6 +121,14 @@ smartHome:
     - type: staticEntity
       entityRefs:
       - light.garderobe_dach
+  # 1OG bathroom. It has no switch or motion sensor of its own, but it must be reachable by the
+  # front-door master switch's whole-house off, which acts on Light resources.
+  - type: Light
+    id: light_badezimmer_oben
+    lookups:
+    - type: staticEntity
+      entityRefs:
+      - light.badezimmer_oben
   - type: Switch
     id: Switch Schlafzimmer Touchscreen
     lookups:
@@ -513,13 +521,22 @@ smartHome:
       homeAssistantResources:
       - light_treppe_dach
       - light_garderobe_dach
-  - name: EG Flur Haustuer
+  # Front-door MASTER switch. Two groups share position '1'; each claims exactly ONE button of the
+  # rocker via handledButtons, so UP and DOWN act on completely different resource sets while the
+  # device's scene cycle counter still advances exactly once per physical press.
+  # (Same two-groups-at-one-position shape as "EG Esszimmer 3" above.)
+  - name: EG Flur Haustuer Master
     type: AqaraLightSwitchH2_1Ch
     devices:
     - SW-EG-FLUR-HAUSTUER
     groups:
+    # UP = coming home: light up the whole Erdgeschoss. Each room keeps its own day/night scene
+    # family, so the master press cycles scenes exactly like that room's own switch does.
     - position: '1'
       profile: AqaraLightSwitchH2_1ChLightDefault
+      profileOptions:
+        handledButtons: UP
+        pressOnLockSeconds: 900
       triggers:
       - trigger: AQARA_LIGHT_SWITCH_H2_1CH_SINGLE_UP
         sequences:
@@ -529,8 +546,62 @@ smartHome:
         - homeAssistantResources:
           - EG-Flur DimmerSwitch 01 Night
           condition: night
+      - trigger: AQARA_LIGHT_SWITCH_H2_1CH_SINGLE_UP
+        sequences:
+        - homeAssistantResources:
+          - Wohnzimmer DimmerSwitch 01 Day
+          condition: day
+        - homeAssistantResources:
+          - Wohnzimmer DimmerSwitch 01 Night
+          condition: night
+      - trigger: AQARA_LIGHT_SWITCH_H2_1CH_SINGLE_UP
+        sequences:
+        - homeAssistantResources:
+          - Esszimmer DimmerSwitch 01 Day
+          condition: day
+        - homeAssistantResources:
+          - Esszimmer DimmerSwitch 01 Night
+          condition: night
+      - trigger: AQARA_LIGHT_SWITCH_H2_1CH_SINGLE_UP
+        sequences:
+        - homeAssistantResources:
+          - Kueche DimmerSwitch 01 Day
+          condition: day
+        - homeAssistantResources:
+          - Kueche DimmerSwitch 01 Night
+          condition: night
       homeAssistantResources:
       - light_eingang_flur
+      - light_wohnzimmer
+      - light_esszimmer
+      - light_kueche
+    # DOWN = leaving the house: every light in the house off. No triggers needed - the profile's
+    # built-in turn-off acts on every light resource listed here, and off-locks each one so no
+    # motion sensor can re-light a room behind you. Single press 30 min, double press within 4 s
+    # 4 h. light_schlafzimmer keeps its own 12 h floor: the longer duration always wins.
+    # This list IS the motion-lock scope, so every Light resource in the config belongs here.
+    - position: '1'
+      profile: AqaraLightSwitchH2_1ChLightDefault
+      profileOptions:
+        handledButtons: DOWN
+        pressDisableLockSeconds: 14400
+      homeAssistantResources:
+      - light_eingang_flur
+      - light_wohnzimmer
+      - light_esszimmer
+      - light_kueche
+      - light_treppe_oben
+      - light_flur_oben
+      - light_buero_jonas
+      - light_buero_lena
+      - light_gaestezimmer
+      - light_schlafzimmer
+      - light_badezimmer_oben
+      - light_treppe_dach
+      - light_garderobe_dach
+      - light_badezimmer_dach
+      - light_dach
+      - light_treppe_keller
   - name: EG Flur Spiegel
     type: AqaraLightSwitchH2_1Ch
     devices:
@@ -573,8 +644,11 @@ smartHome:
     devices:
     - SW-EG-TREPPE-HOCH
     groups:
+    # UP controls the staircase light and its scenes.
     - position: '1'
       profile: AqaraLightSwitchH2_1ChLightDefault
+      profileOptions:
+        handledButtons: UP
       triggers:
       - trigger: AQARA_LIGHT_SWITCH_H2_1CH_SINGLE_UP
         sequences:
@@ -586,6 +660,17 @@ smartHome:
           condition: night
       homeAssistantResources:
       - light_treppe_oben
+    # DOWN turns off the ground-floor living-area lights and locks them against motion re-triggering.
+    - position: '1'
+      profile: AqaraLightSwitchH2_1ChLightDefault
+      profileOptions:
+        handledButtons: DOWN
+        pressDisableLockSeconds: 14400
+      homeAssistantResources:
+      - light_wohnzimmer
+      - light_esszimmer
+      - light_kueche
+      - light_eingang_flur
   - name: EG Esszimmer 1 Wohnzimmer
     type: AqaraLightSwitchH2_1Ch
     devices:
