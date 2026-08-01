@@ -1,5 +1,12 @@
 version: '1.0'
 smartHome:
+  # Named household state. In-memory only: every variable starts each run at its initial value.
+  # Nothing here says when it changes - that is decided by whichever triggers assign it.
+  variables:
+  - id: bedtime
+    type: boolean
+    initial: false
+    description: Someone has gone to bed tonight. Set once, sticky until sunrise.
   conditions:
   - type: SpelExpression
     id: day
@@ -13,6 +20,23 @@ smartHome:
   - type: SpelExpression
     id: night
     expression: '#timeOfDay() == ''NIGHT'' && #isTimeInRange(''22:30'', ''12:00'')'
+  # Bedroom-area scene selection, used ONLY by the four bedroom-area motion sensors. The global
+  # day/evening/night/day_or_evening conditions above are shared with every other room and every
+  # manual switch, and are deliberately left untouched.
+  # These only ever move the dim point EARLIER than the existing 22:30 cutoff, never later.
+  - type: SpelExpression
+    id: bedtime_arm_window
+    expression: '#isTimeInRange(''21:00'', ''04:00'')'
+  - type: SpelExpression
+    id: bedroom_area_bright
+    expression: '#timeOfDay() == ''NIGHT'' && !#isTimeInRange(''22:30'', ''12:00'') && !#var(''bedtime'')'
+  - type: SpelExpression
+    id: bedroom_area_dim
+    expression: '#timeOfDay() == ''NIGHT'' && (#isTimeInRange(''22:30'', ''12:00'') || #var(''bedtime''))'
+  # Treppe lights in daylight today; that is kept, and only its evening half is gated on bedtime.
+  - type: SpelExpression
+    id: treppe_area_bright
+    expression: '(#timeOfDay() == ''DAY'' || (#timeOfDay() == ''NIGHT'' && !#isTimeInRange(''22:30'', ''12:00''))) && !#var(''bedtime'')'
   homeAssistantResources:
   - type: Light
     id: light_buero_jonas
@@ -483,6 +507,11 @@ smartHome:
       profile: AqaraLightSwitchH2_1ChLightDefault
       triggers:
       - trigger: AQARA_LIGHT_SWITCH_H2_1CH_SINGLE_UP
+        setVariables:
+        - id: bedtime
+          value: true
+          condition: bedtime_arm_window
+      - trigger: AQARA_LIGHT_SWITCH_H2_1CH_SINGLE_UP
         sequences:
         - homeAssistantResources:
           - Schlafzimmer DimmerSwitch 01 Day
@@ -925,18 +954,18 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - Treppe Dach DimmerSwitch 01 Day
-          condition: day_or_evening
+          condition: treppe_area_bright
         - homeAssistantResources:
           - Treppe Dach DimmerSwitch 01 Night
-          condition: night
+          condition: bedroom_area_dim
       - trigger: AQARA_FP300_PRESENCE_DETECTED
         sequences:
         - homeAssistantResources:
           - Garderobe Dach DimmerSwitch 01 Day
-          condition: day_or_evening
+          condition: treppe_area_bright
         - homeAssistantResources:
           - Garderobe Dach DimmerSwitch 01 Night
-          condition: night
+          condition: bedroom_area_dim
       homeAssistantResources:
       - light_treppe_dach
       - light_garderobe_dach
@@ -987,10 +1016,10 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - Dach DimmerSwitch 01 Day
-          condition: evening
+          condition: bedroom_area_bright
         - homeAssistantResources:
           - Dach DimmerSwitch 01 Night
-          condition: night
+          condition: bedroom_area_dim
       homeAssistantResources:
       - light_dach
   - name: Treppe Keller Motion
@@ -1011,6 +1040,9 @@ smartHome:
           - light_treppe_keller
       homeAssistantResources:
       - light_treppe_keller
+  # Bedtime is armed here AND from the bedroom switches. Presence alone is not enough: a manual
+  # lock on light_schlafzimmer suppresses presence events entirely for up to 4 h, so switching the
+  # light on by hand at 21:30 would otherwise mean bedtime never arms at all.
   - name: Schlafzimmer Motion
     type: AqaraFP300
     devices:
@@ -1020,13 +1052,18 @@ smartHome:
       profile: AqaraFP300LightDefault
       triggers:
       - trigger: AQARA_FP300_PRESENCE_DETECTED
+        setVariables:
+        - id: bedtime
+          value: true
+          condition: bedtime_arm_window
+      - trigger: AQARA_FP300_PRESENCE_DETECTED
         sequences:
         - homeAssistantResources:
           - Schlafzimmer DimmerSwitch 01 Day
-          condition: evening
+          condition: bedroom_area_bright
         - homeAssistantResources:
           - Schlafzimmer DimmerSwitch 01 Night
-          condition: night
+          condition: bedroom_area_dim
       homeAssistantResources:
       - light_schlafzimmer
   - name: Badezimmer Dach Motion
@@ -1041,10 +1078,10 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - Badezimmer Dach DimmerSwitch 01 Day
-          condition: evening
+          condition: bedroom_area_bright
         - homeAssistantResources:
           - Badezimmer Dach DimmerSwitch 01 Night
-          condition: night
+          condition: bedroom_area_dim
       homeAssistantResources:
       - light_badezimmer_dach
   - name: Esszimmer Motion
@@ -1087,3 +1124,17 @@ smartHome:
           condition: night
       homeAssistantResources:
       - light_wohnzimmer
+  # Clears the night's state. Without it bedtime would still be set at the next nightfall and the
+  # bedroom area would jump straight to its dim scenes in the early evening.
+  - name: Sunrise Reset
+    type: Solar
+    devices:
+    - SUN-RISE
+    groups:
+    - position: '1'
+      profile: TriggersOnly
+      triggers:
+      - trigger: SOLAR_SUNRISE
+        setVariables:
+        - id: bedtime
+          value: false
