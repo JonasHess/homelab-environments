@@ -6,13 +6,13 @@ smartHome:
     expression: '#timeOfDay() == ''DAY'''
   - type: SpelExpression
     id: evening
-    expression: '#timeOfDay() == ''NIGHT'' && !#isTimeInRange(''23:00'', ''12:00'')'
+    expression: '#timeOfDay() == ''NIGHT'' && !#isTimeInRange(''22:30'', ''12:00'')'
   - type: SpelExpression
     id: day_or_evening
-    expression: '#timeOfDay() == ''DAY'' || (#timeOfDay() == ''NIGHT'' && !#isTimeInRange(''23:00'', ''12:00''))'
+    expression: '#timeOfDay() == ''DAY'' || (#timeOfDay() == ''NIGHT'' && !#isTimeInRange(''22:30'', ''12:00''))'
   - type: SpelExpression
     id: night
-    expression: '#timeOfDay() == ''NIGHT'' && #isTimeInRange(''23:00'', ''12:00'')'
+    expression: '#timeOfDay() == ''NIGHT'' && #isTimeInRange(''22:30'', ''12:00'')'
   homeAssistantResources:
   - type: Light
     id: light_buero_jonas
