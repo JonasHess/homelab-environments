@@ -649,13 +649,18 @@ smartHome:
           condition: night
       homeAssistantResources:
       - light_eingang_flur
+  # Living-area switch at the foot of the stairs. Two groups share position '1'; each claims one
+  # button via handledButtons, so UP and DOWN act on deliberately different sets.
   - name: EG Flur Treppe Hoch
     type: AqaraLightSwitchH2_1Ch
     devices:
     - SW-EG-FLUR-TREPPE-HOCH
     groups:
+    # UP = arriving in the living area: Wohnzimmer plus the hallway you walked through.
     - position: '1'
       profile: AqaraLightSwitchH2_1ChLightDefault
+      profileOptions:
+        handledButtons: UP
       triggers:
       - trigger: AQARA_LIGHT_SWITCH_H2_1CH_SINGLE_UP
         sequences:
@@ -665,19 +670,38 @@ smartHome:
         - homeAssistantResources:
           - Wohnzimmer DimmerSwitch 01 Night
           condition: night
+      - trigger: AQARA_LIGHT_SWITCH_H2_1CH_SINGLE_UP
+        sequences:
+        - homeAssistantResources:
+          - EG-Flur DimmerSwitch 01 Day
+          condition: day_or_evening
+        - homeAssistantResources:
+          - EG-Flur DimmerSwitch 01 Night
+          condition: night
       homeAssistantResources:
       - light_wohnzimmer
       - light_eingang_flur
+    # DOWN = leaving the living area: all four ground-floor rooms off. No triggers needed - the
+    # profile turns off every light listed here and motion-locks it. Double press within 4 s
+    # suppresses motion for 4 h. The staircase is deliberately NOT included, so you can still see.
+    - position: '1'
+      profile: AqaraLightSwitchH2_1ChLightDefault
+      profileOptions:
+        handledButtons: DOWN
+        pressDisableLockSeconds: 14400
+      homeAssistantResources:
+      - light_wohnzimmer
+      - light_esszimmer
+      - light_kueche
+      - light_eingang_flur
+  # Staircase switch: UP runs the Treppe Oben scenes, DOWN turns the staircase off.
   - name: EG Treppe Hoch
     type: AqaraLightSwitchH2_1Ch
     devices:
     - SW-EG-TREPPE-HOCH
     groups:
-    # UP controls the staircase light and its scenes.
     - position: '1'
       profile: AqaraLightSwitchH2_1ChLightDefault
-      profileOptions:
-        handledButtons: UP
       triggers:
       - trigger: AQARA_LIGHT_SWITCH_H2_1CH_SINGLE_UP
         sequences:
@@ -689,17 +713,6 @@ smartHome:
           condition: night
       homeAssistantResources:
       - light_treppe_oben
-    # DOWN turns off the ground-floor living-area lights and locks them against motion re-triggering.
-    - position: '1'
-      profile: AqaraLightSwitchH2_1ChLightDefault
-      profileOptions:
-        handledButtons: DOWN
-        pressDisableLockSeconds: 14400
-      homeAssistantResources:
-      - light_wohnzimmer
-      - light_esszimmer
-      - light_kueche
-      - light_eingang_flur
   - name: EG Esszimmer 1 Wohnzimmer
     type: AqaraLightSwitchH2_1Ch
     devices:
