@@ -23,21 +23,29 @@ smartHome:
   # Bedroom-area scene selection, used ONLY by the four bedroom-area motion sensors. The global
   # day/evening/night/day_or_evening conditions above are shared with every other room and every
   # manual switch, and are deliberately left untouched.
-  # These only ever move the dim point EARLIER than the existing 22:30 cutoff, never later.
+  # Arming needs something to HAPPEN inside this window - a dimmer press, or presence crossing from
+  # absent to present. Presence repeats are suppressed as non-transitions, so going to bed before
+  # 21:00 and staying put never arms bedtime. Accepted: the 02:00 backstop below bounds that to
+  # "bright until 02:00" rather than all night.
   - type: SpelExpression
     id: bedtime_arm_window
     expression: '#isTimeInRange(''21:00'', ''04:00'')'
+  # Motion: dark, and nobody has gone to bed yet. 02:00 is the backstop - past it, assume bed.
   - type: SpelExpression
     id: bedroom_area_bright
-    expression: '#timeOfDay() == ''NIGHT'' && !#isTimeInRange(''22:30'', ''12:00'') && !#var(''bedtime'')'
+    expression: '#timeOfDay() == ''NIGHT'' && !#var(''bedtime'') && !#isTimeInRange(''02:00'', ''12:00'')'
+  # Dark, and either someone went to bed or it is past the 02:00 backstop. Shared by motion and
+  # switches, so the two never disagree about what "bedtime" means.
   - type: SpelExpression
     id: bedroom_area_dim
-    expression: '#timeOfDay() == ''NIGHT'' && (#isTimeInRange(''22:30'', ''12:00'') || #var(''bedtime''))'
+    expression: '#timeOfDay() == ''NIGHT'' && (#var(''bedtime'') || #isTimeInRange(''02:00'', ''12:00''))'
   # For controls that must still work in daylight (every wall switch, and the Treppe motion
   # sensor which lights in daylight today). Only the evening half is gated on bedtime.
+  # Switches: exactly the complement of bedroom_area_dim, so a press ALWAYS matches one branch.
+  # Daylight wins outright - otherwise a bedtime still set at sunrise would leave switches dead.
   - type: SpelExpression
     id: bedroom_area_bright_or_day
-    expression: '(#timeOfDay() == ''DAY'' || (#timeOfDay() == ''NIGHT'' && !#isTimeInRange(''22:30'', ''12:00''))) && !#var(''bedtime'')'
+    expression: '#timeOfDay() == ''DAY'' || (#timeOfDay() == ''NIGHT'' && !#var(''bedtime'') && !#isTimeInRange(''02:00'', ''12:00''))'
   homeAssistantResources:
   - type: Light
     id: light_buero_jonas
