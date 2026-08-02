@@ -306,7 +306,9 @@ apps:
                 HOME_ASSISTANT_IP: "ws://homeassistant-service:8123"
                 spring.profiles.active: "jonas"
   smarthome4:
-    enabled: true
+    # Temporarily disabled: running the core locally to debug. Re-enable to restore automation -
+    # while this is false nothing reacts to motion or wall switches.
+    enabled: false
     argocd:
       targetRevision: ~
       helm:
