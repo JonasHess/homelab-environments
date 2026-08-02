@@ -33,9 +33,10 @@ smartHome:
   - type: SpelExpression
     id: bedroom_area_dim
     expression: '#timeOfDay() == ''NIGHT'' && (#isTimeInRange(''22:30'', ''12:00'') || #var(''bedtime''))'
-  # Treppe lights in daylight today; that is kept, and only its evening half is gated on bedtime.
+  # For controls that must still work in daylight (every wall switch, and the Treppe motion
+  # sensor which lights in daylight today). Only the evening half is gated on bedtime.
   - type: SpelExpression
-    id: treppe_area_bright
+    id: bedroom_area_bright_or_day
     expression: '(#timeOfDay() == ''DAY'' || (#timeOfDay() == ''NIGHT'' && !#isTimeInRange(''22:30'', ''12:00''))) && !#var(''bedtime'')'
   homeAssistantResources:
   - type: Light
@@ -300,6 +301,9 @@ smartHome:
     - type: labelRegex
       labelRegex: Badezimmer Dach__DimmerSwitch__01__night__.*
   sensors:
+  # Touching either bedroom control after 21:00 arms bedtime. Presence alone is not enough:
+  # AbstractPresenceSensorService only emits on a room TRANSITION, so someone already lying in
+  # bed when 21:00 passes never produces a detection event.
   - name: Schlafzimmer
     type: HueDimmerSwitch
     devices:
@@ -310,13 +314,23 @@ smartHome:
       profile: HUE_DIMMER_SWITCH_LIGHT_DEFAULT
       triggers:
       - trigger: BUTTON_1
+        setVariables:
+        - id: bedtime
+          value: true
+          condition: bedtime_arm_window
+      - trigger: BUTTON_4
+        setVariables:
+        - id: bedtime
+          value: true
+          condition: bedtime_arm_window
+      - trigger: BUTTON_1
         sequences:
         - homeAssistantResources:
           - Schlafzimmer DimmerSwitch 01 Day
-          condition: day_or_evening
+          condition: bedroom_area_bright_or_day
         - homeAssistantResources:
           - Schlafzimmer DimmerSwitch 01 Night
-          condition: night
+          condition: bedroom_area_dim
       homeAssistantResources:
       - light_schlafzimmer
     - position: '2'
@@ -326,10 +340,10 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - Dach DimmerSwitch 01 Day
-          condition: day_or_evening
+          condition: bedroom_area_bright_or_day
         - homeAssistantResources:
           - Dach DimmerSwitch 01 Night
-          condition: night
+          condition: bedroom_area_dim
       homeAssistantResources:
       - light_dach
     - position: '3'
@@ -421,10 +435,10 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - Dach DimmerSwitch 01 Day
-          condition: day_or_evening
+          condition: bedroom_area_bright_or_day
         - homeAssistantResources:
           - Dach DimmerSwitch 01 Night
-          condition: night
+          condition: bedroom_area_dim
       homeAssistantResources:
       - light_dach
     - position: '3'
@@ -434,10 +448,10 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - Schlafzimmer DimmerSwitch 01 Day
-          condition: day_or_evening
+          condition: bedroom_area_bright_or_day
         - homeAssistantResources:
           - Schlafzimmer DimmerSwitch 01 Night
-          condition: night
+          condition: bedroom_area_dim
       homeAssistantResources:
       - light_schlafzimmer
   - name: Buero Lena 01
@@ -492,10 +506,10 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - Dach DimmerSwitch 01 Day
-          condition: day_or_evening
+          condition: bedroom_area_bright_or_day
         - homeAssistantResources:
           - Dach DimmerSwitch 01 Night
-          condition: night
+          condition: bedroom_area_dim
       homeAssistantResources:
       - light_dach
   - name: Dach Switch 2
@@ -507,18 +521,13 @@ smartHome:
       profile: AqaraLightSwitchH2_1ChLightDefault
       triggers:
       - trigger: AQARA_LIGHT_SWITCH_H2_1CH_SINGLE_UP
-        setVariables:
-        - id: bedtime
-          value: true
-          condition: bedtime_arm_window
-      - trigger: AQARA_LIGHT_SWITCH_H2_1CH_SINGLE_UP
         sequences:
         - homeAssistantResources:
           - Schlafzimmer DimmerSwitch 01 Day
-          condition: day_or_evening
+          condition: bedroom_area_bright_or_day
         - homeAssistantResources:
           - Schlafzimmer DimmerSwitch 01 Night
-          condition: night
+          condition: bedroom_area_dim
       homeAssistantResources:
       - light_schlafzimmer
   # Controls Treppe Dach and, coupled to it, Garderobe Dach (which has no switch of its own):
@@ -535,18 +544,18 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - Treppe Dach DimmerSwitch 01 Day
-          condition: day_or_evening
+          condition: bedroom_area_bright_or_day
         - homeAssistantResources:
           - Treppe Dach DimmerSwitch 01 Night
-          condition: night
+          condition: bedroom_area_dim
       - trigger: AQARA_LIGHT_SWITCH_H2_1CH_SINGLE_UP
         sequences:
         - homeAssistantResources:
           - Garderobe Dach DimmerSwitch 01 Day
-          condition: day_or_evening
+          condition: bedroom_area_bright_or_day
         - homeAssistantResources:
           - Garderobe Dach DimmerSwitch 01 Night
-          condition: night
+          condition: bedroom_area_dim
       homeAssistantResources:
       - light_treppe_dach
       - light_garderobe_dach
@@ -869,18 +878,18 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - Treppe Dach DimmerSwitch 01 Day
-          condition: day_or_evening
+          condition: bedroom_area_bright_or_day
         - homeAssistantResources:
           - Treppe Dach DimmerSwitch 01 Night
-          condition: night
+          condition: bedroom_area_dim
       - trigger: AQARA_LIGHT_SWITCH_H2_1CH_SINGLE_UP
         sequences:
         - homeAssistantResources:
           - Garderobe Dach DimmerSwitch 01 Day
-          condition: day_or_evening
+          condition: bedroom_area_bright_or_day
         - homeAssistantResources:
           - Garderobe Dach DimmerSwitch 01 Night
-          condition: night
+          condition: bedroom_area_dim
       homeAssistantResources:
       - light_treppe_dach
       - light_garderobe_dach
@@ -914,10 +923,10 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - Badezimmer Dach DimmerSwitch 01 Day
-          condition: day_or_evening
+          condition: bedroom_area_bright_or_day
         - homeAssistantResources:
           - Badezimmer Dach DimmerSwitch 01 Night
-          condition: night
+          condition: bedroom_area_dim
       homeAssistantResources:
       - light_badezimmer_dach
   - name: 1OG Flur + Treppe EG-1OG Motion
@@ -967,7 +976,7 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - Treppe Dach DimmerSwitch 01 Day
-          condition: treppe_area_bright
+          condition: bedroom_area_bright_or_day
         - homeAssistantResources:
           - Treppe Dach DimmerSwitch 01 Night
           condition: bedroom_area_dim
@@ -975,7 +984,7 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - Garderobe Dach DimmerSwitch 01 Day
-          condition: treppe_area_bright
+          condition: bedroom_area_bright_or_day
         - homeAssistantResources:
           - Garderobe Dach DimmerSwitch 01 Night
           condition: bedroom_area_dim
