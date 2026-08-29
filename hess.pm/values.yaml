@@ -93,6 +93,34 @@ global:
 
 # All applications to be deployed by Argo CD
 apps:
+  teddycloud:
+    enabled: true
+    argocd:
+      targetRevision: ~
+      helm:
+        values:
+          generic:
+            deployment:
+              pvcMounts:
+                certs:
+                  hostPath: /mnt/tank1/encrypted/apps/teddycloud/certs
+                config:
+                  hostPath: /mnt/tank1/encrypted/apps/teddycloud/config
+                content:
+                  hostPath: /mnt/tank1/encrypted/apps/teddycloud/content
+                library:
+                  hostPath: /mnt/tank1/encrypted/apps/teddycloud/library
+                firmware:
+                  hostPath: /mnt/tank1/encrypted/apps/teddycloud/firmware
+                custom-img:
+                  hostPath: /mnt/tank1/encrypted/apps/teddycloud/custom_img
+                plugins:
+                  hostPath: /mnt/tank1/encrypted/apps/teddycloud/plugins
+                cache:
+                  hostPath: /mnt/tank1/unencrypted/apps/teddycloud/cache
+          teddycloud:
+            box:
+              loadBalancerIP: 192.168.1.81
   homer:
     enabled: true
     argocd:
