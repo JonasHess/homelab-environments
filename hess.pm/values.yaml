@@ -94,7 +94,7 @@ global:
 # All applications to be deployed by Argo CD
 apps:
   teddycloud:
-    enabled: true
+    enabled: false
     argocd:
       targetRevision: ~
       helm:
