@@ -47,6 +47,22 @@ smartHome:
   - type: SpelExpression
     id: bedtime_bright_or_day
     expression: '#timeOfDay() == ''DAY'' || (#timeOfDay() == ''NIGHT'' && !#var(''bedtime'') && !#isTimeInRange(''02:00'', ''12:00''))'
+  # Erdgeschoss only: from 06:00 the dark hours count as bright, so getting up before sunrise runs
+  # the Day scenes. Both reasons for dim still hold at that hour - bedtime stays set until the
+  # SOLAR_SUNRISE reset, and the 02:00 backstop runs to 12:00 - so this window has to override both.
+  # The upper floors deliberately keep the bedtime conditions: full brightness at 06:00 would wake
+  # whoever is still asleep.
+  # Switches: exactly the complement of morning_dim, so a press ALWAYS matches one branch.
+  - type: SpelExpression
+    id: morning_bright_or_day
+    expression: '#timeOfDay() == ''DAY'' || (#timeOfDay() == ''NIGHT'' && (#isTimeInRange(''06:00'', ''12:00'') || (!#var(''bedtime'') && !#isTimeInRange(''02:00'', ''12:00''))))'
+  # Same window, for motion sensors that must stay dark in daylight.
+  - type: SpelExpression
+    id: morning_bright
+    expression: '#timeOfDay() == ''NIGHT'' && (#isTimeInRange(''06:00'', ''12:00'') || (!#var(''bedtime'') && !#isTimeInRange(''02:00'', ''12:00'')))'
+  - type: SpelExpression
+    id: morning_dim
+    expression: '#timeOfDay() == ''NIGHT'' && !#isTimeInRange(''06:00'', ''12:00'') && (#var(''bedtime'') || #isTimeInRange(''02:00'', ''12:00''))'
   homeAssistantResources:
   - type: Light
     id: light_buero_jonas
@@ -380,10 +396,10 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - Esszimmer DimmerSwitch 01 Day
-          condition: bedtime_bright_or_day
+          condition: morning_bright_or_day
         - homeAssistantResources:
           - Esszimmer DimmerSwitch 01 Night
-          condition: bedtime_dim
+          condition: morning_dim
       homeAssistantResources:
       - light_esszimmer
   - name: Wohnzimmer HueDimmer
@@ -400,10 +416,10 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - Wohnzimmer DimmerSwitch 01 Day
-          condition: bedtime_bright_or_day
+          condition: morning_bright_or_day
         - homeAssistantResources:
           - Wohnzimmer DimmerSwitch 01 Night
-          condition: bedtime_dim
+          condition: morning_dim
       homeAssistantResources:
       - light_wohnzimmer
     - position: '2'
@@ -413,10 +429,10 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - Esszimmer DimmerSwitch 01 Day
-          condition: bedtime_bright_or_day
+          condition: morning_bright_or_day
         - homeAssistantResources:
           - Esszimmer DimmerSwitch 01 Night
-          condition: bedtime_dim
+          condition: morning_dim
       homeAssistantResources:
       - light_esszimmer
   - name: Buero Jonas
@@ -589,34 +605,34 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - EG-Flur DimmerSwitch 01 Day
-          condition: bedtime_bright_or_day
+          condition: morning_bright_or_day
         - homeAssistantResources:
           - EG-Flur DimmerSwitch 01 Night
-          condition: bedtime_dim
+          condition: morning_dim
       - trigger: AQARA_LIGHT_SWITCH_H2_1CH_SINGLE_UP
         sequences:
         - homeAssistantResources:
           - Wohnzimmer DimmerSwitch 01 Day
-          condition: bedtime_bright_or_day
+          condition: morning_bright_or_day
         - homeAssistantResources:
           - Wohnzimmer DimmerSwitch 01 Night
-          condition: bedtime_dim
+          condition: morning_dim
       - trigger: AQARA_LIGHT_SWITCH_H2_1CH_SINGLE_UP
         sequences:
         - homeAssistantResources:
           - Esszimmer DimmerSwitch 01 Day
-          condition: bedtime_bright_or_day
+          condition: morning_bright_or_day
         - homeAssistantResources:
           - Esszimmer DimmerSwitch 01 Night
-          condition: bedtime_dim
+          condition: morning_dim
       - trigger: AQARA_LIGHT_SWITCH_H2_1CH_SINGLE_UP
         sequences:
         - homeAssistantResources:
           - Kueche DimmerSwitch 01 Day
-          condition: bedtime_bright_or_day
+          condition: morning_bright_or_day
         - homeAssistantResources:
           - Kueche DimmerSwitch 01 Night
-          condition: bedtime_dim
+          condition: morning_dim
       homeAssistantResources:
       - light_eingang_flur
       - light_wohnzimmer
@@ -661,10 +677,10 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - EG-Flur DimmerSwitch 01 Day
-          condition: bedtime_bright_or_day
+          condition: morning_bright_or_day
         - homeAssistantResources:
           - EG-Flur DimmerSwitch 01 Night
-          condition: bedtime_dim
+          condition: morning_dim
       homeAssistantResources:
       - light_eingang_flur
   - name: EG Flur Keller Treppe Oben
@@ -679,10 +695,10 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - EG-Flur DimmerSwitch 01 Day
-          condition: bedtime_bright_or_day
+          condition: morning_bright_or_day
         - homeAssistantResources:
           - EG-Flur DimmerSwitch 01 Night
-          condition: bedtime_dim
+          condition: morning_dim
       homeAssistantResources:
       - light_eingang_flur
   # Living-area switch at the foot of the stairs. Two groups share position '1'; each claims one
@@ -702,18 +718,18 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - Wohnzimmer DimmerSwitch 01 Day
-          condition: bedtime_bright_or_day
+          condition: morning_bright_or_day
         - homeAssistantResources:
           - Wohnzimmer DimmerSwitch 01 Night
-          condition: bedtime_dim
+          condition: morning_dim
       - trigger: AQARA_LIGHT_SWITCH_H2_1CH_SINGLE_UP
         sequences:
         - homeAssistantResources:
           - EG-Flur DimmerSwitch 01 Day
-          condition: bedtime_bright_or_day
+          condition: morning_bright_or_day
         - homeAssistantResources:
           - EG-Flur DimmerSwitch 01 Night
-          condition: bedtime_dim
+          condition: morning_dim
       homeAssistantResources:
       - light_wohnzimmer
       - light_eingang_flur
@@ -798,10 +814,10 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - Wohnzimmer DimmerSwitch 01 Day
-          condition: bedtime_bright_or_day
+          condition: morning_bright_or_day
         - homeAssistantResources:
           - Wohnzimmer DimmerSwitch 01 Night
-          condition: bedtime_dim
+          condition: morning_dim
       homeAssistantResources:
       - light_wohnzimmer
   - name: EG Esszimmer 2
@@ -816,10 +832,10 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - Esszimmer DimmerSwitch 01 Day
-          condition: bedtime_bright_or_day
+          condition: morning_bright_or_day
         - homeAssistantResources:
           - Esszimmer DimmerSwitch 01 Night
-          condition: bedtime_dim
+          condition: morning_dim
       homeAssistantResources:
       - light_esszimmer
   # 2-gang shutter switch for the Wohnzimmer rollos. Gangs are crossed on purpose:
@@ -850,10 +866,10 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - Kueche DimmerSwitch 01 Day
-          condition: bedtime_bright_or_day
+          condition: morning_bright_or_day
         - homeAssistantResources:
           - Kueche DimmerSwitch 01 Night
-          condition: bedtime_dim
+          condition: morning_dim
       homeAssistantResources:
       - light_kueche
   - name: 1OG Flur Buero
@@ -1073,18 +1089,18 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - Kueche DimmerSwitch 01 Day
-          condition: bedtime_bright_or_day
+          condition: morning_bright_or_day
         - homeAssistantResources:
           - Kueche DimmerSwitch 01 Night
-          condition: bedtime_dim
+          condition: morning_dim
       - trigger: AQARA_FP300_PRESENCE_DETECTED
         sequences:
         - homeAssistantResources:
           - EG-Flur DimmerSwitch 01 Day
-          condition: bedtime_bright_or_day
+          condition: morning_bright_or_day
         - homeAssistantResources:
           - EG-Flur DimmerSwitch 01 Night
-          condition: bedtime_dim
+          condition: morning_dim
       homeAssistantResources:
       - light_kueche
       - light_eingang_flur
@@ -1184,10 +1200,10 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - Esszimmer DimmerSwitch 01 Day
-          condition: bedtime_bright
+          condition: morning_bright
         - homeAssistantResources:
           - Esszimmer DimmerSwitch 01 Night
-          condition: bedtime_dim
+          condition: morning_dim
       homeAssistantResources:
       - light_esszimmer
   - name: Wohnzimmer Motion
@@ -1204,10 +1220,10 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - Wohnzimmer DimmerSwitch 01 Day
-          condition: bedtime_bright
+          condition: morning_bright
         - homeAssistantResources:
           - Wohnzimmer DimmerSwitch 01 Night
-          condition: bedtime_dim
+          condition: morning_dim
       homeAssistantResources:
       - light_wohnzimmer
   # Clears the night's state. Without it bedtime would still be set at the next nightfall and the
