@@ -56,6 +56,26 @@ script: !include scripts.yaml
 scene: !include scenes.yaml
 alexa: !include alexa.yaml
 
+input_number:
+  # Timings for the cat escape alarm. Both omit initial: so a value set in the UI survives a
+  # restart; on a fresh install they start at their minimum and have to be set once.
+  katzenalarm_verzoegerung:
+    name: Katzenalarm Verzögerung
+    icon: mdi:cat
+    min: 5
+    max: 600
+    step: 5
+    unit_of_measurement: s
+    mode: box
+  katzenalarm_wiederholung:
+    name: Katzenalarm Wiederholung
+    icon: mdi:cat
+    min: 15
+    max: 900
+    step: 15
+    unit_of_measurement: s
+    mode: box
+
 http:
   use_x_forwarded_for: true
   trusted_proxies:

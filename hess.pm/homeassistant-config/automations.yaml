@@ -155,3 +155,61 @@
     data:
       volume_level: '{{ previous_volume }}'
   mode: single
+
+- id: '1791568080000'
+  alias: Katzenalarm Wohnungstuer 2
+  description: Warns while Wohnungstuer 2 stands open together with the Haustuer or the
+    neighbour's flat door. Either combination gives the cats an unbroken route out of the
+    building or into the other flat; one open door alone only reaches the stairwell.
+  triggers:
+  - trigger: state
+    entity_id:
+    - binary_sensor.wohnungstuer2_contact
+    - binary_sensor.haustuer_contact
+    - binary_sensor.wohnungstuer_contact
+    to:
+    - 'on'
+    - 'off'
+    note: Only on and off count, so a sensor reporting unknown or unavailable stays silent
+      instead of raising a false alarm.
+  - trigger: homeassistant
+    event: start
+    note: A restart re-evaluates, otherwise doors left open across a restart would never alert.
+  conditions:
+  - condition: state
+    entity_id: binary_sensor.wohnungstuer2_contact
+    state: 'on'
+  - condition: or
+    conditions:
+    - condition: state
+      entity_id: binary_sensor.haustuer_contact
+      state: 'on'
+    - condition: state
+      entity_id: binary_sensor.wohnungstuer_contact
+      state: 'on'
+  actions:
+  - delay: "{{ states('input_number.katzenalarm_verzoegerung') | int(30) }}"
+    note: Seconds. Any door change restarts the run, so a door closing here cancels the alert.
+  - repeat:
+      while:
+      - condition: state
+        entity_id: binary_sensor.wohnungstuer2_contact
+        state: 'on'
+      - condition: or
+        conditions:
+        - condition: state
+          entity_id: binary_sensor.haustuer_contact
+          state: 'on'
+        - condition: state
+          entity_id: binary_sensor.wohnungstuer_contact
+          state: 'on'
+      sequence:
+      - variables:
+          fluchtweg: >-
+            {% if is_state('binary_sensor.haustuer_contact', 'on') and is_state('binary_sensor.wohnungstuer_contact', 'on') %}die Haustür und die Nachbarwohnung{% elif is_state('binary_sensor.haustuer_contact', 'on') %}die Haustür{% else %}die Nachbarwohnung{% endif %}
+      - action: script.katzenalarm_benachrichtigung
+        data:
+          nachricht: "Achtung: Wohnungstür 2 ist offen, dazu {{ fluchtweg }}. Die Katzen können
+            entkommen."
+      - delay: "{{ states('input_number.katzenalarm_wiederholung') | int(60) }}"
+  mode: restart

@@ -13,3 +13,23 @@ turn_off_all_lights:
   - action: light.turn_off
     target:
       entity_id: all
+
+katzenalarm_benachrichtigung:
+  alias: Katzenalarm Benachrichtigung
+  description: Delivers a cat escape warning. Holds the notification channel in one place so it
+    can be swapped without touching the automation.
+  fields:
+    nachricht:
+      name: Nachricht
+      description: Spoken text of the warning
+      required: true
+      selector:
+        text:
+  sequence:
+  - action: notify.alexa_media_schlafzimmer
+    data:
+      message: '{{ nachricht }}'
+      data:
+        type: announce
+  mode: queued
+  max: 5
