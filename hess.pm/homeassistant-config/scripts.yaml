@@ -26,10 +26,48 @@ katzenalarm_benachrichtigung:
       selector:
         text:
   sequence:
-  - action: notify.alexa_media_schlafzimmer
+  - variables:
+      echos:
+      - media_player.schlafzimmer
+      - media_player.buero
+      - media_player.badezimmer
+      - media_player.kueche
+      - media_player.alexa_studio
+      - media_player.wohnzimmer_tv
+      vorherige_lautstaerken: >-
+        {% set ns = namespace(items=[]) %}
+        {%- for e in echos %}
+          {%- set v = state_attr(e, 'volume_level') %}
+          {%- if v is not none %}
+            {%- set ns.items = ns.items + [{'entity_id': e, 'volume_level': v}] %}
+          {%- endif %}
+        {%- endfor %}
+        {{ ns.items }}
+    note: A speaker reports no volume_level unless Home Assistant set or polled one recently,
+      and it forgets again when idle, so this list is usually empty and the speakers simply
+      stay at the alarm volume. Being heard matters more than the volume being put back.
+  - action: media_player.volume_set
+    target:
+      entity_id: '{{ echos }}'
+    data:
+      volume_level: 0.8
+    note: A warning nobody can hear is worthless, so the volume is forced before speaking.
+  - action: notify.alexa_media_ueberall
     data:
       message: '{{ nachricht }}'
-    note: Plain TTS, not type announce. Announcements are accepted by the integration with no
-      error and never play on this account, while TTS is audible.
+      data:
+        type: announce
+    note: The group target speaks only via announce, while a single device speaks only via
+      plain TTS. Both combinations were verified on this account.
+  - delay: '00:00:10'
+    note: Announcement runs asynchronously on the devices; restoring at once would cut it off.
+  - repeat:
+      for_each: '{{ vorherige_lautstaerken }}'
+      sequence:
+      - action: media_player.volume_set
+        target:
+          entity_id: '{{ repeat.item.entity_id }}'
+        data:
+          volume_level: '{{ repeat.item.volume_level }}'
   mode: queued
   max: 5
