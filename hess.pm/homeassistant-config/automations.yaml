@@ -157,16 +157,16 @@
   mode: single
 
 - id: '1791568080000'
-  alias: Katzenalarm Wohnungstuer 2
-  description: Warns while Wohnungstuer 2 stands open together with the Haustuer or the
+  alias: Katzenalarm Wohnungstuer
+  description: Warns while the own flat door stands open together with the Haustuer or the
     neighbour's flat door. Either combination gives the cats an unbroken route out of the
     building or into the other flat; one open door alone only reaches the stairwell.
   triggers:
   - trigger: state
     entity_id:
-    - binary_sensor.wohnungstuer2_contact
-    - binary_sensor.haustuer_contact
     - binary_sensor.wohnungstuer_contact
+    - binary_sensor.haustuer_contact
+    - binary_sensor.wohnungstuer_nachbar_contact
     to:
     - 'on'
     - 'off'
@@ -187,7 +187,7 @@
     entity_id: input_boolean.katzenalarm_aktiv
     state: 'on'
   - condition: state
-    entity_id: binary_sensor.wohnungstuer2_contact
+    entity_id: binary_sensor.wohnungstuer_contact
     state: 'on'
   - condition: or
     conditions:
@@ -195,7 +195,7 @@
       entity_id: binary_sensor.haustuer_contact
       state: 'on'
     - condition: state
-      entity_id: binary_sensor.wohnungstuer_contact
+      entity_id: binary_sensor.wohnungstuer_nachbar_contact
       state: 'on'
   actions:
   - delay: "{{ states('input_number.katzenalarm_verzoegerung') | int(30) }}"
@@ -206,7 +206,7 @@
         entity_id: input_boolean.katzenalarm_aktiv
         state: 'on'
       - condition: state
-        entity_id: binary_sensor.wohnungstuer2_contact
+        entity_id: binary_sensor.wohnungstuer_contact
         state: 'on'
       - condition: or
         conditions:
@@ -214,7 +214,7 @@
           entity_id: binary_sensor.haustuer_contact
           state: 'on'
         - condition: state
-          entity_id: binary_sensor.wohnungstuer_contact
+          entity_id: binary_sensor.wohnungstuer_nachbar_contact
           state: 'on'
       sequence:
       - action: script.katzenalarm_benachrichtigung

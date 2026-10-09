@@ -13,8 +13,8 @@ views:
     title: "Wohnungstüren"
     cards:
     - type: tile
-      entity: binary_sensor.wohnungstuer2_contact
-      name: Wohnungstür 2 (unsere)
+      entity: binary_sensor.wohnungstuer_contact
+      name: Wohnungstür (unsere)
       icon: mdi:door
       grid_options:
         columns: 12
@@ -25,14 +25,14 @@ views:
       grid_options:
         columns: 6
     - type: tile
-      entity: binary_sensor.wohnungstuer_contact
+      entity: binary_sensor.wohnungstuer_nachbar_contact
       name: Nachbarwohnung
       icon: mdi:door
       grid_options:
         columns: 6
     - type: tile
-      entity: sensor.wohnungstuer2_battery
-      name: Wohnungstür 2
+      entity: sensor.wohnungstuer_battery
+      name: Wohnungstür
       icon: mdi:battery
       grid_options:
         columns: 4
@@ -43,14 +43,14 @@ views:
       grid_options:
         columns: 4
     - type: tile
-      entity: sensor.wohnungstuer_battery
+      entity: sensor.wohnungstuer_nachbar_battery
       name: Nachbarwohnung
       icon: mdi:battery
       grid_options:
         columns: 4
     - type: tile
-      entity: binary_sensor.wohnungstuer2_tamper
-      name: Sabotage WT2
+      entity: binary_sensor.wohnungstuer_tamper
+      name: Sabotage Wohnungstür
       icon: mdi:shield-alert
       grid_options:
         columns: 4
@@ -61,7 +61,7 @@ views:
       grid_options:
         columns: 4
     - type: tile
-      entity: binary_sensor.wohnungstuer_tamper
+      entity: binary_sensor.wohnungstuer_nachbar_tamper
       name: Sabotage Nachbar
       icon: mdi:shield-alert
       grid_options:
@@ -74,12 +74,12 @@ views:
       content: >-
         {% if not is_state('input_boolean.katzenalarm_aktiv', 'on') %}
         **Alarm ist aus.**
-        {% elif is_state('binary_sensor.wohnungstuer2_contact', 'on')
+        {% elif is_state('binary_sensor.wohnungstuer_contact', 'on')
               and (is_state('binary_sensor.haustuer_contact', 'on')
-                   or is_state('binary_sensor.wohnungstuer_contact', 'on')) %}
-        **Fluchtweg offen** - Wohnungstür 2 und eine weitere Tür stehen offen.
-        {% elif is_state('binary_sensor.wohnungstuer2_contact', 'on') %}
-        Wohnungstür 2 offen, aber kein Fluchtweg nach draußen.
+                   or is_state('binary_sensor.wohnungstuer_nachbar_contact', 'on')) %}
+        **Fluchtweg offen** - Wohnungstür und eine weitere Tür stehen offen.
+        {% elif is_state('binary_sensor.wohnungstuer_contact', 'on') %}
+        Wohnungstür offen, aber kein Fluchtweg nach draußen.
         {% else %}
         Kein Fluchtweg offen.
         {% endif %}
