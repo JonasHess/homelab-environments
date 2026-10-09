@@ -667,6 +667,24 @@ smartHome:
           condition: bedtime_dim
       homeAssistantResources:
       - light_eingang_flur
+  - name: EG Flur Keller Treppe Oben
+    type: AqaraLightSwitchH2_1Ch
+    devices:
+    - SW-EG-FLUR-BEI-KELLER-TREPPE-OBEN
+    groups:
+    - position: '1'
+      profile: AqaraLightSwitchH2_1ChLightDefault
+      triggers:
+      - trigger: AQARA_LIGHT_SWITCH_H2_1CH_SINGLE_UP
+        sequences:
+        - homeAssistantResources:
+          - EG-Flur DimmerSwitch 01 Day
+          condition: bedtime_bright_or_day
+        - homeAssistantResources:
+          - EG-Flur DimmerSwitch 01 Night
+          condition: bedtime_dim
+      homeAssistantResources:
+      - light_eingang_flur
   # Living-area switch at the foot of the stairs. Two groups share position '1'; each claims one
   # button via handledButtons, so UP and DOWN act on deliberately different sets.
   - name: EG Flur Treppe Hoch
@@ -731,6 +749,43 @@ smartHome:
           condition: bedtime_dim
       homeAssistantResources:
       - light_treppe_oben
+  # Both ends of the cellar staircase run the same light, so either switch works on the way down
+  # and on the way up. Treppe Keller has no scenes yet: a press turns the light on at full
+  # brightness. Swap the sequences to Treppe Keller scene resources once they exist.
+  # pressOnLockSeconds shortens the manual lock from 4 h to 5 min, because presence sensor S23
+  # drives this same light: with the default the light would stay on for hours after a press.
+  - name: EG Keller Treppe Runter
+    type: AqaraLightSwitchH2_1Ch
+    devices:
+    - SW-EG-KELLER-TREPPE-RUNTER
+    groups:
+    - position: '1'
+      profile: AqaraLightSwitchH2_1ChLightDefault
+      profileOptions:
+        pressOnLockSeconds: 300
+      triggers:
+      - trigger: AQARA_LIGHT_SWITCH_H2_1CH_SINGLE_UP
+        sequences:
+        - homeAssistantResources:
+          - light_treppe_keller
+      homeAssistantResources:
+      - light_treppe_keller
+  - name: Keller Treppe Hoch
+    type: AqaraLightSwitchH2_1Ch
+    devices:
+    - SW-KELLER-TREPPE-HOCH
+    groups:
+    - position: '1'
+      profile: AqaraLightSwitchH2_1ChLightDefault
+      profileOptions:
+        pressOnLockSeconds: 300
+      triggers:
+      - trigger: AQARA_LIGHT_SWITCH_H2_1CH_SINGLE_UP
+        sequences:
+        - homeAssistantResources:
+          - light_treppe_keller
+      homeAssistantResources:
+      - light_treppe_keller
   - name: EG Esszimmer 1 Wohnzimmer
     type: AqaraLightSwitchH2_1Ch
     devices:
