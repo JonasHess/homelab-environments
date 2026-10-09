@@ -47,11 +47,12 @@ smartHome:
   - type: SpelExpression
     id: bedtime_bright_or_day
     expression: '#timeOfDay() == ''DAY'' || (#timeOfDay() == ''NIGHT'' && !#var(''bedtime'') && !#isTimeInRange(''02:00'', ''12:00''))'
-  # Erdgeschoss only: from 06:00 the dark hours count as bright, so getting up before sunrise runs
-  # the Day scenes. Both reasons for dim still hold at that hour - bedtime stays set until the
-  # SOLAR_SUNRISE reset, and the 02:00 backstop runs to 12:00 - so this window has to override both.
-  # The upper floors deliberately keep the bedtime conditions: full brightness at 06:00 would wake
-  # whoever is still asleep.
+  # Morning route out of the house - Erdgeschoss, the EG-1OG staircase and the 1OG hallway: from
+  # 06:00 the dark hours count as bright, so getting up before sunrise runs the Day scenes. Both
+  # reasons for dim still hold at that hour - bedtime stays set until the SOLAR_SUNRISE reset, and
+  # the 02:00 backstop runs to 12:00 - so this window has to override both.
+  # Rooms that adjoin a bed keep the bedtime conditions, including the 1OG-Dach staircase and
+  # Garderobe Dach: full brightness at 06:00 would wake whoever is still asleep.
   # Switches: exactly the complement of morning_dim, so a press ALWAYS matches one branch.
   - type: SpelExpression
     id: morning_bright_or_day
@@ -759,10 +760,10 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - Treppe Oben DimmerSwitch 01 Day
-          condition: bedtime_bright_or_day
+          condition: morning_bright_or_day
         - homeAssistantResources:
           - Treppe Oben DimmerSwitch 01 Night
-          condition: bedtime_dim
+          condition: morning_dim
       homeAssistantResources:
       - light_treppe_oben
   # Both ends of the cellar staircase run the same light, so either switch works on the way down
@@ -884,10 +885,10 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - 1OG-Flur DimmerSwitch 01 Day
-          condition: bedtime_bright_or_day
+          condition: morning_bright_or_day
         - homeAssistantResources:
           - 1OG-Flur DimmerSwitch 01 Night
-          condition: bedtime_dim
+          condition: morning_dim
       homeAssistantResources:
       - light_flur_oben
   - name: 1OG Flur Bad
@@ -902,10 +903,10 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - 1OG-Flur DimmerSwitch 01 Day
-          condition: bedtime_bright_or_day
+          condition: morning_bright_or_day
         - homeAssistantResources:
           - 1OG-Flur DimmerSwitch 01 Night
-          condition: bedtime_dim
+          condition: morning_dim
       homeAssistantResources:
       - light_flur_oben
   - name: 1OG Flur Gast
@@ -920,10 +921,10 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - 1OG-Flur DimmerSwitch 01 Day
-          condition: bedtime_bright_or_day
+          condition: morning_bright_or_day
         - homeAssistantResources:
           - 1OG-Flur DimmerSwitch 01 Night
-          condition: bedtime_dim
+          condition: morning_dim
       homeAssistantResources:
       - light_flur_oben
   - name: 1OG Treppe Runter
@@ -938,10 +939,10 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - Treppe Oben DimmerSwitch 01 Day
-          condition: bedtime_bright_or_day
+          condition: morning_bright_or_day
         - homeAssistantResources:
           - Treppe Oben DimmerSwitch 01 Night
-          condition: bedtime_dim
+          condition: morning_dim
       homeAssistantResources:
       - light_treppe_oben
   # Controls Treppe Dach and, coupled to it, Garderobe Dach (which has no switch of its own):
@@ -1024,18 +1025,18 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - Treppe Oben DimmerSwitch 01 Day
-          condition: bedtime_bright_or_day
+          condition: morning_bright_or_day
         - homeAssistantResources:
           - Treppe Oben DimmerSwitch 01 Night
-          condition: bedtime_dim
+          condition: morning_dim
       - trigger: AQARA_FP300_PRESENCE_DETECTED
         sequences:
         - homeAssistantResources:
           - 1OG-Flur DimmerSwitch 01 Day
-          condition: bedtime_bright_or_day
+          condition: morning_bright_or_day
         - homeAssistantResources:
           - 1OG-Flur DimmerSwitch 01 Night
-          condition: bedtime_dim
+          condition: morning_dim
       homeAssistantResources:
       - light_treppe_oben
       - light_flur_oben
