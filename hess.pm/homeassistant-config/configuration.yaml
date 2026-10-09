@@ -66,7 +66,7 @@ input_number:
     max: 600
     step: 5
     unit_of_measurement: s
-    mode: box
+    mode: slider
   katzenalarm_wiederholung:
     name: Katzenalarm Wiederholung
     icon: mdi:cat
@@ -74,7 +74,7 @@ input_number:
     max: 900
     step: 15
     unit_of_measurement: s
-    mode: box
+    mode: slider
 
 input_boolean:
   # Master switch for the cat escape alarm, flipped from the dashboard and later from a Zigbee

@@ -109,7 +109,7 @@ views:
       icon: mdi:timer-outline
       features:
       - type: numeric-input
-        style: box
+        style: slider
       grid_options:
         columns: 6
     - type: tile
@@ -118,7 +118,7 @@ views:
       icon: mdi:repeat
       features:
       - type: numeric-input
-        style: box
+        style: slider
       grid_options:
         columns: 6
 

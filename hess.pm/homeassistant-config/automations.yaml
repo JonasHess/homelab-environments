@@ -217,12 +217,10 @@
           entity_id: binary_sensor.wohnungstuer_contact
           state: 'on'
       sequence:
-      - variables:
-          fluchtweg: >-
-            {% if is_state('binary_sensor.haustuer_contact', 'on') and is_state('binary_sensor.wohnungstuer_contact', 'on') %}die Haustür und die Nachbarwohnung{% elif is_state('binary_sensor.haustuer_contact', 'on') %}die Haustür{% else %}die Nachbarwohnung{% endif %}
       - action: script.katzenalarm_benachrichtigung
         data:
-          nachricht: "Achtung: Wohnungstür 2 ist offen, dazu {{ fluchtweg }}. Die Katzen können
-            entkommen."
+          nachricht: Wohnungstür steht offen. Bitte schließen.
+        note: Spoken on every Echo in the flat, so it names neither the door nor why it
+          matters.
       - delay: "{{ states('input_number.katzenalarm_wiederholung') | int(60) }}"
   mode: restart
