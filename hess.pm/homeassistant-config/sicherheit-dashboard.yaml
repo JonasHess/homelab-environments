@@ -6,6 +6,110 @@ views:
   type: sections
   sections:
 
+  # Own flat door, building door and the neighbour's door: the three that decide whether the
+  # cats have a way out. Battery and tamper sit next to each contact because a sensor that
+  # stops reporting makes the Katzenalarm silently blind.
+  - type: grid
+    title: "Wohnungstüren"
+    cards:
+    - type: tile
+      entity: binary_sensor.wohnungstuer2_contact
+      name: Wohnungstür 2 (unsere)
+      icon: mdi:door
+      grid_options:
+        columns: 12
+    - type: tile
+      entity: binary_sensor.haustuer_contact
+      name: Haustür
+      icon: mdi:door-closed-lock
+      grid_options:
+        columns: 6
+    - type: tile
+      entity: binary_sensor.wohnungstuer_contact
+      name: Nachbarwohnung
+      icon: mdi:door
+      grid_options:
+        columns: 6
+    - type: tile
+      entity: sensor.wohnungstuer2_battery
+      name: Wohnungstür 2
+      icon: mdi:battery
+      grid_options:
+        columns: 4
+    - type: tile
+      entity: sensor.haustuer_battery
+      name: Haustür
+      icon: mdi:battery
+      grid_options:
+        columns: 4
+    - type: tile
+      entity: sensor.wohnungstuer_battery
+      name: Nachbarwohnung
+      icon: mdi:battery
+      grid_options:
+        columns: 4
+    - type: tile
+      entity: binary_sensor.wohnungstuer2_tamper
+      name: Sabotage WT2
+      icon: mdi:shield-alert
+      grid_options:
+        columns: 4
+    - type: tile
+      entity: binary_sensor.haustuer_tamper
+      name: Sabotage Haustür
+      icon: mdi:shield-alert
+      grid_options:
+        columns: 4
+    - type: tile
+      entity: binary_sensor.wohnungstuer_tamper
+      name: Sabotage Nachbar
+      icon: mdi:shield-alert
+      grid_options:
+        columns: 4
+
+  - type: grid
+    title: "Katzenalarm"
+    cards:
+    - type: markdown
+      content: >-
+        {% if is_state('binary_sensor.wohnungstuer2_contact', 'on')
+              and (is_state('binary_sensor.haustuer_contact', 'on')
+                   or is_state('binary_sensor.wohnungstuer_contact', 'on')) %}
+        **Fluchtweg offen** - Wohnungstür 2 und eine weitere Tür stehen offen.
+        {% elif is_state('binary_sensor.wohnungstuer2_contact', 'on') %}
+        Wohnungstür 2 offen, aber kein Fluchtweg nach draußen.
+        {% else %}
+        Kein Fluchtweg offen.
+        {% endif %}
+      grid_options:
+        columns: full
+    - type: tile
+      entity: automation.katzenalarm_wohnungstuer_2
+      name: Alarm aktiv
+      icon: mdi:cat
+      features:
+      - type: toggle
+      grid_options:
+        columns: 12
+    - type: tile
+      entity: input_number.katzenalarm_verzoegerung
+      name: Verzögerung
+      icon: mdi:timer-outline
+      features:
+      - type: numeric-input
+        style: box
+      grid_options:
+        columns: 6
+    - type: tile
+      entity: input_number.katzenalarm_wiederholung
+      name: Wiederholung
+      icon: mdi:repeat
+      features:
+      - type: numeric-input
+        style: box
+      grid_options:
+        columns: 6
+
   - type: grid
     title: "Türen & Fenster"
     cards:
