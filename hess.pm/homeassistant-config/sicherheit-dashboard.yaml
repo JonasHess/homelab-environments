@@ -72,7 +72,9 @@ views:
     cards:
     - type: markdown
       content: >-
-        {% if is_state('binary_sensor.wohnungstuer2_contact', 'on')
+        {% if not is_state('input_boolean.katzenalarm_aktiv', 'on') %}
+        **Alarm ist aus.**
+        {% elif is_state('binary_sensor.wohnungstuer2_contact', 'on')
               and (is_state('binary_sensor.haustuer_contact', 'on')
                    or is_state('binary_sensor.wohnungstuer_contact', 'on')) %}
         **Fluchtweg offen** - Wohnungstür 2 und eine weitere Tür stehen offen.
@@ -84,13 +86,23 @@ views:
       grid_options:
         columns: full
     - type: tile
-      entity: automation.katzenalarm_wohnungstuer_2
+      entity: input_boolean.katzenalarm_aktiv
       name: Alarm aktiv
       icon: mdi:cat
       features:
       - type: toggle
       grid_options:
         columns: 12
+    - type: tile
+      entity: automation.katzenalarm_wohnungstuer_2
+      name: Automation
+      icon: mdi:robot
+      grid_options:
+        columns: 12
+      visibility:
+      - condition: state
+        entity: automation.katzenalarm_wohnungstuer_2
+        state: 'off'
     - type: tile
       entity: input_number.katzenalarm_verzoegerung
       name: Verzögerung

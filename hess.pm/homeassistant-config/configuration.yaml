@@ -76,6 +76,19 @@ input_number:
     unit_of_measurement: s
     mode: box
 
+input_boolean:
+  # Master switch for the cat escape alarm, flipped from the dashboard and later from a Zigbee
+  # remote. A helper rather than automation.turn_off: the automation entity stays enabled, so
+  # it keeps producing traces, and one flag means both controls cannot disagree.
+  # initial: true deliberately overrides the restored state on every restart. A helper without
+  # it comes up off the very first time, and an alarm that is silently off protects nothing;
+  # re-arming on restart errs towards a false alarm instead of a lost cat. The cost is that a
+  # deliberate "off" does not survive a restart.
+  katzenalarm_aktiv:
+    name: Katzenalarm aktiv
+    icon: mdi:cat
+    initial: true
+
 http:
   use_x_forwarded_for: true
   trusted_proxies:

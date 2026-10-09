@@ -175,7 +175,17 @@
   - trigger: homeassistant
     event: start
     note: A restart re-evaluates, otherwise doors left open across a restart would never alert.
+  - trigger: state
+    entity_id: input_boolean.katzenalarm_aktiv
+    to:
+    - 'on'
+    - 'off'
+    note: Switching the flag off restarts the run, whose conditions then fail, which ends a
+      repeat loop already in progress. Switching it on re-checks doors that are already open.
   conditions:
+  - condition: state
+    entity_id: input_boolean.katzenalarm_aktiv
+    state: 'on'
   - condition: state
     entity_id: binary_sensor.wohnungstuer2_contact
     state: 'on'
@@ -192,6 +202,9 @@
     note: Seconds. Any door change restarts the run, so a door closing here cancels the alert.
   - repeat:
       while:
+      - condition: state
+        entity_id: input_boolean.katzenalarm_aktiv
+        state: 'on'
       - condition: state
         entity_id: binary_sensor.wohnungstuer2_contact
         state: 'on'
