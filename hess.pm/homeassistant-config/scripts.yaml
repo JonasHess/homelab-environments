@@ -29,7 +29,7 @@ katzenalarm_benachrichtigung:
   - action: notify.alexa_media_schlafzimmer
     data:
       message: '{{ nachricht }}'
-      data:
-        type: announce
+    note: Plain TTS, not type announce. Announcements are accepted by the integration with no
+      error and never play on this account, while TTS is audible.
   mode: queued
   max: 5
