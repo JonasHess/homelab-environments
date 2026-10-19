@@ -116,6 +116,12 @@ smartHome:
       entityRefs:
       - light.treppe_keller
   - type: Light
+    id: light_terrasse
+    lookups:
+    - type: staticEntity
+      entityRefs:
+      - light.terrasse
+  - type: Light
     id: light_treppe_oben
     lookups:
     - type: staticEntity
@@ -206,6 +212,16 @@ smartHome:
     lookups:
     - type: labelRegex
       labelRegex: Esszimmer__DimmerSwitch__01__night__.*
+  - type: Scene
+    id: Terrasse DimmerSwitch 01 Day
+    lookups:
+    - type: labelRegex
+      labelRegex: Terrasse__DimmerSwitch__01__day__.*
+  - type: Scene
+    id: Terrasse DimmerSwitch 01 Night
+    lookups:
+    - type: labelRegex
+      labelRegex: Terrasse__DimmerSwitch__01__night__.*
   - type: Scene
     id: Kueche DimmerSwitch 01 Day
     lookups:
@@ -666,6 +682,7 @@ smartHome:
       - light_badezimmer_dach
       - light_dach
       - light_treppe_keller
+      - light_terrasse
   - name: EG Flur Spiegel
     type: AqaraLightSwitchH2_1Ch
     devices:
@@ -1227,6 +1244,28 @@ smartHome:
           condition: morning_dim
       homeAssistantResources:
       - light_wohnzimmer
+  # Terrasse (outdoors, ground floor): the sensor only lights at night, so both scene conditions
+  # require NIGHT and together cover the whole night, like Esszimmer Motion.
+  - name: Terrasse Motion
+    type: HueSML004
+    devices:
+    - M16
+    groups:
+    - position: '1'
+      profile: HueSML004LightDefault
+      profileOptions:
+        offDelaySeconds: 300
+      triggers:
+      - trigger: HUE_SML004_OCCUPANCY_DETECTED
+        sequences:
+        - homeAssistantResources:
+          - Terrasse DimmerSwitch 01 Day
+          condition: morning_bright
+        - homeAssistantResources:
+          - Terrasse DimmerSwitch 01 Night
+          condition: morning_dim
+      homeAssistantResources:
+      - light_terrasse
   # Clears the night's state. Without it bedtime would still be set at the next nightfall and the
   # bedroom area would jump straight to its dim scenes in the early evening.
   - name: Sunrise Reset
