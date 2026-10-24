@@ -224,3 +224,62 @@
           matters.
       - delay: "{{ states('input_number.katzenalarm_wiederholung') | int(60) }}"
   mode: restart
+
+- id: '1792875427795'
+  alias: 1OG bathroom fan follows the lights
+  description: >-
+    The fan is powered by the right relay of SW-1OG-Badezimmer-Flur, which is decoupled from the
+    rockers, so nothing else switches it. The bathroom has no window, so a bathroom light (mirror or
+    ceiling) being on counts as the room being in use. A short visit never starts the fan. Once a
+    light has been on for the delay in a row (input_number.badezimmer_luefter_verzoegerung, 3 minutes
+    if unset) the fan starts and keeps running until both lights have been off for the run-on time
+    (input_number.badezimmer_luefter_nachlauf, 10 minutes if unset). Switching a light on again
+    within the run-on time restarts the countdown.
+  triggers:
+  - trigger: template
+    value_template: >-
+      {{ is_state('light.badezimmer_spiegel', 'on') or is_state('light.badezimmer_oben', 'on') }}
+    for:
+      minutes: "{{ states('input_number.badezimmer_luefter_verzoegerung') | int(3) }}"
+    id: long_use
+  - trigger: template
+    value_template: >-
+      {{ not is_state('light.badezimmer_spiegel', 'on') and not is_state('light.badezimmer_oben', 'on') }}
+    for:
+      minutes: "{{ states('input_number.badezimmer_luefter_nachlauf') | int(10) }}"
+    id: free
+  - trigger: homeassistant
+    event: start
+    id: startup
+  conditions: []
+  actions:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: long_use
+      sequence:
+      - action: switch.turn_on
+        target:
+          entity_id: switch.sw_1og_badezimmer_flur_right
+    - conditions:
+      - condition: or
+        conditions:
+        - condition: trigger
+          id: free
+        - condition: trigger
+          id: startup
+      - condition: not
+        conditions:
+        - condition: state
+          entity_id: light.badezimmer_spiegel
+          state: 'on'
+      - condition: not
+        conditions:
+        - condition: state
+          entity_id: light.badezimmer_oben
+          state: 'on'
+      sequence:
+      - action: switch.turn_off
+        target:
+          entity_id: switch.sw_1og_badezimmer_flur_right
+  mode: restart

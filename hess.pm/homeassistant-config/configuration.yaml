@@ -75,6 +75,25 @@ input_number:
     step: 15
     unit_of_measurement: s
     mode: slider
+  # Timings for the 1OG bathroom fan. Both omit initial: so a value set in the UI survives a
+  # restart; on a fresh install they start at their minimum and have to be set once. The
+  # automation falls back to 3 and 10 minutes while a slider has no usable value.
+  badezimmer_luefter_verzoegerung:
+    name: Badezimmer Lüfter Verzögerung
+    icon: mdi:fan-clock
+    min: 1
+    max: 15
+    step: 1
+    unit_of_measurement: min
+    mode: slider
+  badezimmer_luefter_nachlauf:
+    name: Badezimmer Lüfter Nachlauf
+    icon: mdi:fan-clock
+    min: 1
+    max: 60
+    step: 1
+    unit_of_measurement: min
+    mode: slider
 
 input_boolean:
   # Master switch for the cat escape alarm, flipped from the dashboard and later from a Zigbee
