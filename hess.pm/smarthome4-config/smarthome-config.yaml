@@ -96,6 +96,19 @@ smartHome:
       entityRefs:
       - light.gaestezimmer
   - type: Light
+    id: light_gaestezimmer_decke
+    lookups:
+    - type: staticEntity
+      entityRefs:
+      - light.gaestezimmer_decke
+  - type: Light
+    id: light_gaestezimmer_nachttisch
+    lookups:
+    - type: staticEntity
+      entityRefs:
+      - light.gaestezimmer_nachttischlampe_fenster
+      - light.gaestezimmer_nachttischlampe_schrank
+  - type: Light
     id: light_schlafzimmer
     offLockSeconds: 43200      # single Off press locks the bedroom against motion for 12 h
     disableLockSeconds: 43200  # double Off press also locks for 12 h
@@ -282,6 +295,26 @@ smartHome:
     lookups:
     - type: labelRegex
       labelRegex: Gaestezimmer__DimmerSwitch__01__night__.*
+  - type: Scene
+    id: Gaestezimmer Deckenlampe DimmerSwitch 01 Day
+    lookups:
+    - type: labelRegex
+      labelRegex: Gaestezimmer Deckenlampe__DimmerSwitch__01__day__.*
+  - type: Scene
+    id: Gaestezimmer Deckenlampe DimmerSwitch 01 Night
+    lookups:
+    - type: labelRegex
+      labelRegex: Gaestezimmer Deckenlampe__DimmerSwitch__01__night__.*
+  - type: Scene
+    id: Gaestezimmer Nachttischlampen DimmerSwitch 01 Day
+    lookups:
+    - type: labelRegex
+      labelRegex: Gaestezimmer Nachttischlampen__DimmerSwitch__01__day__.*
+  - type: Scene
+    id: Gaestezimmer Nachttischlampen DimmerSwitch 01 Night
+    lookups:
+    - type: labelRegex
+      labelRegex: Gaestezimmer Nachttischlampen__DimmerSwitch__01__night__.*
   - type: Scene
     id: Treppe Dach DimmerSwitch 01 Day
     lookups:
@@ -536,6 +569,40 @@ smartHome:
           condition: night
       homeAssistantResources:
       - light_gaestezimmer
+  # Door switch of the guest room: the left rocker runs the ceiling light, the right rocker the two
+  # bedside lamps. Plain clock conditions like the Hue entry above - bedtime says nothing about
+  # when a guest retires.
+  - name: 1OG Gaestezimmer
+    type: AqaraLightSwitchH2_2Ch
+    devices:
+    - SW-1OG-Gaestezimmer
+    groups:
+    - position: '1'
+      profile: AqaraLightSwitchH2_2ChLeftLightDefault
+      triggers:
+      - trigger: AQARA_LIGHT_SWITCH_H2_2CH_LEFT_UP
+        sequences:
+        - homeAssistantResources:
+          - Gaestezimmer Deckenlampe DimmerSwitch 01 Day
+          condition: day_or_evening
+        - homeAssistantResources:
+          - Gaestezimmer Deckenlampe DimmerSwitch 01 Night
+          condition: night
+      homeAssistantResources:
+      - light_gaestezimmer_decke
+    - position: '1'
+      profile: AqaraLightSwitchH2_2ChRightLightDefault
+      triggers:
+      - trigger: AQARA_LIGHT_SWITCH_H2_2CH_RIGHT_UP
+        sequences:
+        - homeAssistantResources:
+          - Gaestezimmer Nachttischlampen DimmerSwitch 01 Day
+          condition: day_or_evening
+        - homeAssistantResources:
+          - Gaestezimmer Nachttischlampen DimmerSwitch 01 Night
+          condition: night
+      homeAssistantResources:
+      - light_gaestezimmer_nachttisch
   - name: Dach Switch 1
     type: AqaraLightSwitchH2_1Ch
     devices:
