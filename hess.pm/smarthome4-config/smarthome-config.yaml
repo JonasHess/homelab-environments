@@ -199,6 +199,12 @@ smartHome:
     - type: staticEntity
       entityRefs:
       - light.badezimmer_oben
+  - type: Light
+    id: light_badezimmer_spiegel
+    lookups:
+    - type: staticEntity
+      entityRefs:
+      - light.badezimmer_spiegel
   - type: Switch
     id: Switch Schlafzimmer Touchscreen
     lookups:
@@ -315,6 +321,26 @@ smartHome:
     lookups:
     - type: labelRegex
       labelRegex: Gaestezimmer Nachttischlampen__DimmerSwitch__01__night__.*
+  - type: Scene
+    id: Badezimmer Spiegel DimmerSwitch 01 Day
+    lookups:
+    - type: labelRegex
+      labelRegex: Badezimmer Spiegel__DimmerSwitch__01__day__.*
+  - type: Scene
+    id: Badezimmer Spiegel DimmerSwitch 01 Night
+    lookups:
+    - type: labelRegex
+      labelRegex: Badezimmer Spiegel__DimmerSwitch__01__night__.*
+  - type: Scene
+    id: Badezimmer Oben DimmerSwitch 01 Day
+    lookups:
+    - type: labelRegex
+      labelRegex: Badezimmer Oben__DimmerSwitch__01__day__.*
+  - type: Scene
+    id: Badezimmer Oben DimmerSwitch 01 Night
+    lookups:
+    - type: labelRegex
+      labelRegex: Badezimmer Oben__DimmerSwitch__01__night__.*
   - type: Scene
     id: Treppe Dach DimmerSwitch 01 Day
     lookups:
@@ -603,6 +629,58 @@ smartHome:
           condition: night
       homeAssistantResources:
       - light_gaestezimmer_nachttisch
+  # 1OG bathroom, switch inside the room: controls only the two mirror lights.
+  - name: 1OG Bad
+    type: AqaraLightSwitchH2_1Ch
+    devices:
+    - SW-1OG-BAD
+    groups:
+    - position: '1'
+      profile: AqaraLightSwitchH2_1ChLightDefault
+      triggers:
+      - trigger: AQARA_LIGHT_SWITCH_H2_1CH_SINGLE_UP
+        sequences:
+        - homeAssistantResources:
+          - Badezimmer Spiegel DimmerSwitch 01 Day
+          condition: morning_bright_or_day
+        - homeAssistantResources:
+          - Badezimmer Spiegel DimmerSwitch 01 Night
+          condition: morning_dim
+      homeAssistantResources:
+      - light_badezimmer_spiegel
+  # 1OG bathroom, switch at the hallway door: the left gang also controls the mirror lights (same
+  # scenes as the switch inside), the right gang the three ceiling lights.
+  - name: 1OG Badezimmer Flur
+    type: AqaraLightSwitchH2_2Ch
+    devices:
+    - SW-1OG-Badezimmer-Flur
+    groups:
+    - position: '1'
+      profile: AqaraLightSwitchH2_2ChLeftLightDefault
+      triggers:
+      - trigger: AQARA_LIGHT_SWITCH_H2_2CH_LEFT_UP
+        sequences:
+        - homeAssistantResources:
+          - Badezimmer Spiegel DimmerSwitch 01 Day
+          condition: morning_bright_or_day
+        - homeAssistantResources:
+          - Badezimmer Spiegel DimmerSwitch 01 Night
+          condition: morning_dim
+      homeAssistantResources:
+      - light_badezimmer_spiegel
+    - position: '1'
+      profile: AqaraLightSwitchH2_2ChRightLightDefault
+      triggers:
+      - trigger: AQARA_LIGHT_SWITCH_H2_2CH_RIGHT_UP
+        sequences:
+        - homeAssistantResources:
+          - Badezimmer Oben DimmerSwitch 01 Day
+          condition: morning_bright_or_day
+        - homeAssistantResources:
+          - Badezimmer Oben DimmerSwitch 01 Night
+          condition: morning_dim
+      homeAssistantResources:
+      - light_badezimmer_oben
   - name: Dach Switch 1
     type: AqaraLightSwitchH2_1Ch
     devices:
