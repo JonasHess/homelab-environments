@@ -822,6 +822,7 @@ smartHome:
       - light_gaestezimmer
       - light_schlafzimmer
       - light_badezimmer_oben
+      - light_badezimmer_spiegel
       - light_treppe_dach
       - light_garderobe_dach
       - light_badezimmer_dach
@@ -1173,17 +1174,17 @@ smartHome:
       homeAssistantResources:
       - light_badezimmer_dach
   - name: 1OG Flur + Treppe EG-1OG Motion
-    type: AqaraFP300
+    type: HueSML001
     devices:
-    - M01
-    - M05
+    - S20
+    - S21
     groups:
     - position: '1'
-      profile: AqaraFP300LightDefault
+      profile: HueSML001LightDefault
       profileOptions:
         offDelaySeconds: 0
       triggers:
-      - trigger: AQARA_FP300_PRESENCE_DETECTED
+      - trigger: HUE_SML001_OCCUPANCY_DETECTED
         sequences:
         - homeAssistantResources:
           - Treppe Oben DimmerSwitch 01 Day
@@ -1191,7 +1192,7 @@ smartHome:
         - homeAssistantResources:
           - Treppe Oben DimmerSwitch 01 Night
           condition: morning_dim
-      - trigger: AQARA_FP300_PRESENCE_DETECTED
+      - trigger: HUE_SML001_OCCUPANCY_DETECTED
         sequences:
         - homeAssistantResources:
           - 1OG-Flur DimmerSwitch 01 Day
@@ -1207,7 +1208,6 @@ smartHome:
   - name: Treppe 1OG-2OG Motion
     type: AqaraFP300
     devices:
-    - M02
     - M07
     groups:
     - position: '1'
@@ -1224,6 +1224,38 @@ smartHome:
           - Treppe Dach DimmerSwitch 01 Night
           condition: bedtime_dim
       - trigger: AQARA_FP300_PRESENCE_DETECTED
+        sequences:
+        - homeAssistantResources:
+          - Garderobe Dach DimmerSwitch 01 Day
+          condition: bedtime_bright_or_day
+        - homeAssistantResources:
+          - Garderobe Dach DimmerSwitch 01 Night
+          condition: bedtime_dim
+      homeAssistantResources:
+      - light_treppe_dach
+      - light_garderobe_dach
+      # TODO Ankleidezimmer: add its light resource here (and its scenes above) once the room has lights
+  # Hue twin of 'Treppe 1OG-2OG Motion': an entry holds one sensor type, so the Hue sensor has its own
+  # entry. Keep both entries identical apart from the device and the trigger names.
+  - name: Treppe 1OG-2OG Motion Hue
+    type: HueSML001
+    devices:
+    - S19
+    groups:
+    - position: '1'
+      profile: HueSML001LightDefault
+      profileOptions:
+        offDelaySeconds: 0
+      triggers:
+      - trigger: HUE_SML001_OCCUPANCY_DETECTED
+        sequences:
+        - homeAssistantResources:
+          - Treppe Dach DimmerSwitch 01 Day
+          condition: bedtime_bright_or_day
+        - homeAssistantResources:
+          - Treppe Dach DimmerSwitch 01 Night
+          condition: bedtime_dim
+      - trigger: HUE_SML001_OCCUPANCY_DETECTED
         sequences:
         - homeAssistantResources:
           - Garderobe Dach DimmerSwitch 01 Day
@@ -1291,6 +1323,8 @@ smartHome:
     type: HueSML001
     devices:
     - S23
+    - S22
+    - S25
     groups:
     - position: '1'
       profile: HueSML001LightDefault
@@ -1300,6 +1334,24 @@ smartHome:
       # Swap the sequence to Treppe Keller scene resources once they exist.
       triggers:
       - trigger: HUE_SML001_OCCUPANCY_DETECTED
+        sequences:
+        - homeAssistantResources:
+          - light_treppe_keller
+      homeAssistantResources:
+      - light_treppe_keller
+  # Aqara twin of 'Treppe Keller Motion': an entry holds one sensor type.
+  - name: Treppe Keller Motion Aqara
+    type: AqaraFP300
+    devices:
+    - M02
+    - M05
+    groups:
+    - position: '1'
+      profile: AqaraFP300LightDefault
+      profileOptions:
+        offDelaySeconds: 0
+      triggers:
+      - trigger: AQARA_FP300_PRESENCE_DETECTED
         sequences:
         - homeAssistantResources:
           - light_treppe_keller
@@ -1349,6 +1401,36 @@ smartHome:
           condition: bedtime_dim
       homeAssistantResources:
       - light_badezimmer_dach
+  # 1OG bathroom: presence lights the mirror and the ceiling lights, like the two switches there.
+  - name: 1OG Badezimmer Motion
+    type: AqaraFP300
+    devices:
+    - M01
+    groups:
+    - position: '1'
+      profile: AqaraFP300LightDefault
+      profileOptions:
+        offDelaySeconds: 300
+      triggers:
+      - trigger: AQARA_FP300_PRESENCE_DETECTED
+        sequences:
+        - homeAssistantResources:
+          - Badezimmer Spiegel DimmerSwitch 01 Day
+          condition: morning_bright_or_day
+        - homeAssistantResources:
+          - Badezimmer Spiegel DimmerSwitch 01 Night
+          condition: morning_dim
+      - trigger: AQARA_FP300_PRESENCE_DETECTED
+        sequences:
+        - homeAssistantResources:
+          - Badezimmer Oben DimmerSwitch 01 Day
+          condition: morning_bright_or_day
+        - homeAssistantResources:
+          - Badezimmer Oben DimmerSwitch 01 Night
+          condition: morning_dim
+      homeAssistantResources:
+      - light_badezimmer_spiegel
+      - light_badezimmer_oben
   - name: Esszimmer Motion
     type: AqaraFP300
     devices:
