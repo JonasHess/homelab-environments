@@ -1413,24 +1413,6 @@ smartHome:
           - light_treppe_keller
       homeAssistantResources:
       - light_treppe_keller
-  # Aqara twin of 'Treppe Keller Motion': an entry holds one sensor type.
-  - name: Treppe Keller Motion Aqara
-    type: AqaraFP300
-    devices:
-    - M02
-    - M05
-    groups:
-    - position: '1'
-      profile: AqaraFP300LightDefault
-      profileOptions:
-        offDelaySeconds: 300
-      triggers:
-      - trigger: AQARA_FP300_PRESENCE_DETECTED
-        sequences:
-        - homeAssistantResources:
-          - light_treppe_keller
-      homeAssistantResources:
-      - light_treppe_keller
   # Bedtime is armed here AND from the bedroom switches. Presence alone is not enough: a manual
   # lock on light_schlafzimmer suppresses presence events entirely for up to 4 h, so switching the
   # light on by hand at 21:30 would otherwise mean bedtime never arms at all.
