@@ -283,3 +283,151 @@
         target:
           entity_id: switch.sw_1og_badezimmer_flur_right
   mode: restart
+
+- id: '1793050000001'
+  alias: Keller Werkstatt light follows M02
+  description: >-
+    The workshop light has no smart bulb: it is powered through the left and the right relay of
+    SW-KELLER-WERKSTATT, wired as an OR. The right relay is the plain manual switch (the rocker cuts
+    the power itself). This automation drives the left relay from the presence sensor M02: on when
+    the room is occupied, off once it has been empty for the run-on time
+    (input_number.werkstatt_licht_nachlauf, 10 minutes if unset). While the light is paused by the
+    left rocker (input_boolean.werkstatt_licht_pausiert) presence does not switch it on.
+  triggers:
+  - trigger: state
+    entity_id: binary_sensor.m02_presence
+    to: 'on'
+    id: arrive
+  - trigger: state
+    entity_id: binary_sensor.m02_presence
+    to: 'off'
+    for:
+      minutes: "{{ states('input_number.werkstatt_licht_nachlauf') | int(10) }}"
+    id: empty
+  - trigger: homeassistant
+    event: start
+    id: startup
+  conditions: []
+  actions:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: arrive
+      - condition: state
+        entity_id: input_boolean.werkstatt_licht_pausiert
+        state: 'off'
+      sequence:
+      - action: switch.turn_on
+        target:
+          entity_id: switch.sw_keller_werkstatt_left
+    - conditions:
+      - condition: or
+        conditions:
+        - condition: trigger
+          id: empty
+        - condition: trigger
+          id: startup
+      - condition: not
+        conditions:
+        - condition: state
+          entity_id: binary_sensor.m02_presence
+          state: 'on'
+      sequence:
+      - action: switch.turn_off
+        target:
+          entity_id: switch.sw_keller_werkstatt_left
+      - action: input_boolean.turn_off
+        target:
+          entity_id: input_boolean.werkstatt_licht_pausiert
+  mode: restart
+
+- id: '1793050000002'
+  alias: Keller Werkstatt left rocker
+  description: >-
+    The left gang of SW-KELLER-WERKSTATT is decoupled, so its rocker only sends events. Top: light
+    on now and presence control active. Bottom: left relay off and presence paused until the room
+    has been empty once. Without this the right rocker could never switch off a light that the
+    presence automation holds on through the left relay.
+  triggers:
+  - trigger: mqtt
+    topic: zigbee2mqtt/SW-KELLER-WERKSTATT/action
+    payload: single_left
+    id: up
+  - trigger: mqtt
+    topic: zigbee2mqtt/SW-KELLER-WERKSTATT/action
+    payload: single_left_down
+    id: down
+  conditions: []
+  actions:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: up
+      sequence:
+      - action: input_boolean.turn_off
+        target:
+          entity_id: input_boolean.werkstatt_licht_pausiert
+      - action: switch.turn_on
+        target:
+          entity_id: switch.sw_keller_werkstatt_left
+    - conditions:
+      - condition: trigger
+        id: down
+      sequence:
+      - action: input_boolean.turn_on
+        target:
+          entity_id: input_boolean.werkstatt_licht_pausiert
+      - action: switch.turn_off
+        target:
+          entity_id: switch.sw_keller_werkstatt_left
+  mode: queued
+
+- id: '1793050000003'
+  alias: Keller Waschkueche light follows M05
+  description: >-
+    The laundry room light has no smart bulb: the relay of SW-KELLER-WASCHKUECHE cuts its power. The
+    switch stays in control_relay mode, so the rocker works by itself, and this automation also
+    drives the relay from the presence sensor M05: on when the room is occupied, off once it has
+    been empty for the run-on time (input_number.waschkueche_licht_nachlauf, 10 minutes if unset).
+    A manual Off while someone is in the room stays off until the next arrival.
+  triggers:
+  - trigger: state
+    entity_id: binary_sensor.m05_presence
+    to: 'on'
+    id: arrive
+  - trigger: state
+    entity_id: binary_sensor.m05_presence
+    to: 'off'
+    for:
+      minutes: "{{ states('input_number.waschkueche_licht_nachlauf') | int(10) }}"
+    id: empty
+  - trigger: homeassistant
+    event: start
+    id: startup
+  conditions: []
+  actions:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: arrive
+      sequence:
+      - action: switch.turn_on
+        target:
+          entity_id: switch.sw_keller_waschkueche_up
+    - conditions:
+      - condition: or
+        conditions:
+        - condition: trigger
+          id: empty
+        - condition: trigger
+          id: startup
+      - condition: not
+        conditions:
+        - condition: state
+          entity_id: binary_sensor.m05_presence
+          state: 'on'
+      sequence:
+      - action: switch.turn_off
+        target:
+          entity_id: switch.sw_keller_waschkueche_up
+  mode: restart

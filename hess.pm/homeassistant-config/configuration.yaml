@@ -94,6 +94,26 @@ input_number:
     step: 1
     unit_of_measurement: min
     mode: slider
+  # Run-on time of the cellar workshop and laundry lights after the room has been empty. Both omit
+  # initial: so a value set in the UI survives a restart; on a fresh install they start at their
+  # minimum and have to be set once. The automations fall back to 10 minutes while a slider has no
+  # usable value.
+  werkstatt_licht_nachlauf:
+    name: Werkstatt Licht Nachlauf
+    icon: mdi:timer-outline
+    min: 1
+    max: 60
+    step: 1
+    unit_of_measurement: min
+    mode: slider
+  waschkueche_licht_nachlauf:
+    name: Waschkueche Licht Nachlauf
+    icon: mdi:timer-outline
+    min: 1
+    max: 60
+    step: 1
+    unit_of_measurement: min
+    mode: slider
 
 input_boolean:
   # Master switch for the cat escape alarm, flipped from the dashboard and later from a Zigbee
@@ -107,6 +127,13 @@ input_boolean:
     name: Katzenalarm aktiv
     icon: mdi:cat
     initial: true
+
+  # Set by the left rocker of the workshop switch (Down): presence does not light the workshop until
+  # the room has been empty once. initial: false resets a pause on every restart.
+  werkstatt_licht_pausiert:
+    name: Werkstatt Licht pausiert
+    icon: mdi:lightbulb-off-outline
+    initial: false
 
 http:
   use_x_forwarded_for: true
