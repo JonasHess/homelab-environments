@@ -1191,6 +1191,56 @@ smartHome:
           condition: bedtime_dim
       homeAssistantResources:
       - light_buero_jonas
+  - name: Dach Schlafzimmer Wand
+    type: AqaraLightSwitchH2_1Ch
+    devices:
+    - SW-DACH-SZ-WAND
+    groups:
+    - position: '1'
+      profile: AqaraLightSwitchH2_1ChLightDefault
+      triggers:
+      - trigger: AQARA_LIGHT_SWITCH_H2_1CH_SINGLE_UP
+        sequences:
+        - homeAssistantResources:
+          - Schlafzimmer DimmerSwitch 01 Day
+          condition: bedtime_bright_or_day
+        - homeAssistantResources:
+          - Schlafzimmer DimmerSwitch 01 Night
+          condition: bedtime_dim
+      homeAssistantResources:
+      - light_schlafzimmer
+  # 2-gang switch: the left gang also controls the bedroom, the right gang the Dach lights.
+  - name: Dach Bad Oben
+    type: AqaraLightSwitchH2_2Ch
+    devices:
+    - SW-DACH-BAD-OBEN
+    groups:
+    - position: '1'
+      profile: AqaraLightSwitchH2_2ChLeftLightDefault
+      triggers:
+      - trigger: AQARA_LIGHT_SWITCH_H2_2CH_LEFT_UP
+        sequences:
+        - homeAssistantResources:
+          - Schlafzimmer DimmerSwitch 01 Day
+          condition: bedtime_bright_or_day
+        - homeAssistantResources:
+          - Schlafzimmer DimmerSwitch 01 Night
+          condition: bedtime_dim
+      homeAssistantResources:
+      - light_schlafzimmer
+    - position: '1'
+      profile: AqaraLightSwitchH2_2ChRightLightDefault
+      triggers:
+      - trigger: AQARA_LIGHT_SWITCH_H2_2CH_RIGHT_UP
+        sequences:
+        - homeAssistantResources:
+          - Dach DimmerSwitch 01 Day
+          condition: bedtime_bright_or_day
+        - homeAssistantResources:
+          - Dach DimmerSwitch 01 Night
+          condition: bedtime_dim
+      homeAssistantResources:
+      - light_dach
   - name: 1OG Flur + Treppe EG-1OG Motion
     type: HueSML001
     devices:
