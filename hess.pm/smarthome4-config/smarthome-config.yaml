@@ -1173,6 +1173,24 @@ smartHome:
           condition: bedtime_dim
       homeAssistantResources:
       - light_badezimmer_dach
+  - name: Dach Buero Jonas
+    type: AqaraLightSwitchH2_1Ch
+    devices:
+    - SW-DACH-BEURO-1
+    groups:
+    - position: '1'
+      profile: AqaraLightSwitchH2_1ChLightDefault
+      triggers:
+      - trigger: AQARA_LIGHT_SWITCH_H2_1CH_SINGLE_UP
+        sequences:
+        - homeAssistantResources:
+          - Buero Jonas DimmerSwitch 01 Day
+          condition: bedtime_bright_or_day
+        - homeAssistantResources:
+          - Buero Jonas DimmerSwitch 01 Night
+          condition: bedtime_dim
+      homeAssistantResources:
+      - light_buero_jonas
   - name: 1OG Flur + Treppe EG-1OG Motion
     type: HueSML001
     devices:
