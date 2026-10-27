@@ -1250,7 +1250,7 @@ smartHome:
     - position: '1'
       profile: HueSML001LightDefault
       profileOptions:
-        offDelaySeconds: 0
+        offDelaySeconds: 30
       triggers:
       - trigger: HUE_SML001_OCCUPANCY_DETECTED
         sequences:
@@ -1281,7 +1281,7 @@ smartHome:
     - position: '1'
       profile: AqaraFP300LightDefault
       profileOptions:
-        offDelaySeconds: 0
+        offDelaySeconds: 30
       triggers:
       - trigger: AQARA_FP300_PRESENCE_DETECTED
         sequences:
@@ -1313,7 +1313,7 @@ smartHome:
     - position: '1'
       profile: HueSML001LightDefault
       profileOptions:
-        offDelaySeconds: 0
+        offDelaySeconds: 30
       triggers:
       - trigger: HUE_SML001_OCCUPANCY_DETECTED
         sequences:
@@ -1397,7 +1397,7 @@ smartHome:
     - position: '1'
       profile: HueSML001LightDefault
       profileOptions:
-        offDelaySeconds: 0
+        offDelaySeconds: 30
       # Treppe Keller has no scenes yet: presence turns the light on at full brightness.
       # Swap the sequence to Treppe Keller scene resources once they exist.
       triggers:
@@ -1417,7 +1417,7 @@ smartHome:
     - position: '1'
       profile: AqaraFP300LightDefault
       profileOptions:
-        offDelaySeconds: 0
+        offDelaySeconds: 30
       triggers:
       - trigger: AQARA_FP300_PRESENCE_DETECTED
         sequences:
