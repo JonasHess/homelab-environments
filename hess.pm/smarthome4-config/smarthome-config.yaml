@@ -1493,6 +1493,50 @@ smartHome:
           condition: morning_dim
       homeAssistantResources:
       - light_terrasse
+  # Dark only: the Day and the Night condition both require NIGHT (sun down), so presence never
+  # lights the office by day. Together they cover the whole night, like the other bed-adjoining rooms.
+  - name: Buero Lena Motion
+    type: AqaraFP300
+    devices:
+    - M13
+    groups:
+    - position: '1'
+      profile: AqaraFP300LightDefault
+      profileOptions:
+        offDelaySeconds: 600
+      triggers:
+      - trigger: AQARA_FP300_PRESENCE_DETECTED
+        sequences:
+        - homeAssistantResources:
+          - Buero Lena DimmerSwitch 01 Day
+          condition: bedtime_bright
+        - homeAssistantResources:
+          - Buero Lena DimmerSwitch 01 Night
+          condition: bedtime_dim
+      homeAssistantResources:
+      - light_buero_lena
+  # Dark only, with the plain clock conditions of the guest room: evening and night both require
+  # NIGHT (sun down) and together cover the whole night.
+  - name: Gaestezimmer Motion
+    type: AqaraFP300
+    devices:
+    - M14
+    groups:
+    - position: '1'
+      profile: AqaraFP300LightDefault
+      profileOptions:
+        offDelaySeconds: 300
+      triggers:
+      - trigger: AQARA_FP300_PRESENCE_DETECTED
+        sequences:
+        - homeAssistantResources:
+          - Gaestezimmer DimmerSwitch 01 Day
+          condition: evening
+        - homeAssistantResources:
+          - Gaestezimmer DimmerSwitch 01 Night
+          condition: night
+      homeAssistantResources:
+      - light_gaestezimmer
   # Clears the night's state. Without it bedtime would still be set at the next nightfall and the
   # bedroom area would jump straight to its dim scenes in the early evening.
   - name: Sunrise Reset
