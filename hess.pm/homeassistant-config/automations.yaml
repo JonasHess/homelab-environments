@@ -431,3 +431,28 @@
         target:
           entity_id: switch.sw_keller_waschkueche_up
   mode: restart
+
+- id: '1793050000004'
+  alias: Keller stairs Off also turns off workshop and laundry
+  description: >-
+    SW-EG-KELLER-TREPPE-RUNTER (top of the cellar stairs, decoupled) turns off the cellar stairs light
+    through smarthome4. The workshop and the laundry room have no smart bulbs, only relays, which
+    smarthome4 cannot switch off, so this automation switches both relays of SW-KELLER-WERKSTATT and
+    the relay of SW-KELLER-WASCHKUECHE off as well. The workshop presence light is paused until the
+    room has been empty once, so it is not switched on again while someone is still inside.
+  triggers:
+  - trigger: mqtt
+    topic: zigbee2mqtt/SW-EG-KELLER-TREPPE-RUNTER/action
+    payload: single_down
+  conditions: []
+  actions:
+  - action: input_boolean.turn_on
+    target:
+      entity_id: input_boolean.werkstatt_licht_pausiert
+  - action: switch.turn_off
+    target:
+      entity_id:
+      - switch.sw_keller_werkstatt_left
+      - switch.sw_keller_werkstatt_right
+      - switch.sw_keller_waschkueche_up
+  mode: single
