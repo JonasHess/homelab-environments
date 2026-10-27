@@ -91,18 +91,24 @@ smartHome:
       - light.kueche
   - type: Light
     id: light_gaestezimmer
+    offLockSeconds: 43200      # single Off press locks the guest room against motion for 12 h
+    disableLockSeconds: 43200  # double Off press also locks for 12 h
     lookups:
     - type: staticEntity
       entityRefs:
       - light.gaestezimmer
   - type: Light
     id: light_gaestezimmer_decke
+    offLockSeconds: 43200      # single Off press locks the guest room against motion for 12 h
+    disableLockSeconds: 43200  # double Off press also locks for 12 h
     lookups:
     - type: staticEntity
       entityRefs:
       - light.gaestezimmer_decke
   - type: Light
     id: light_gaestezimmer_nachttisch
+    offLockSeconds: 43200      # single Off press locks the guest room against motion for 12 h
+    disableLockSeconds: 43200  # double Off press also locks for 12 h
     lookups:
     - type: staticEntity
       entityRefs:
@@ -1603,8 +1609,12 @@ smartHome:
         - homeAssistantResources:
           - Gaestezimmer DimmerSwitch 01 Night
           condition: night
+      # All three guest room resources, so a manual Off on the ceiling or the bedside lamps
+      # (the 2-gang switch) locks this sensor as well as one on the combined light.
       homeAssistantResources:
       - light_gaestezimmer
+      - light_gaestezimmer_decke
+      - light_gaestezimmer_nachttisch
   # Dark only, like the other Dach rooms: both conditions require NIGHT (sun down) and together
   # cover the whole night.
   - name: Buero Jonas Motion
