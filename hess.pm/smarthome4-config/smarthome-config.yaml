@@ -1352,7 +1352,7 @@ smartHome:
     - position: '1'
       profile: AqaraFP300LightDefault
       profileOptions:
-        offDelaySeconds: 180
+        offDelaySeconds: 600
       triggers:
       - trigger: AQARA_FP300_PRESENCE_DETECTED
         sequences:
