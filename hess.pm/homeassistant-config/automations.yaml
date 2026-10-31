@@ -565,7 +565,7 @@
       - action: input_boolean.turn_on
         target:
           entity_id: input_boolean.badezimmer_dach_radio_aktiv
-      - action: script.badezimmer_radio_abspielen
+      - action: script.dach_bathroom_radio_play
     - conditions:
       - condition: trigger
         id: stop
@@ -576,6 +576,6 @@
       - action: input_boolean.turn_off
         target:
           entity_id: input_boolean.badezimmer_dach_radio_aktiv
-      - action: script.badezimmer_musik_stoppen
+      - action: script.dach_bathroom_radio_stop
   mode: queued
   max: 5

@@ -90,19 +90,19 @@ views:
       features:
       - type: select-options
     - type: tile
-      entity: script.badezimmer_radio_abspielen
+      entity: script.dach_bathroom_radio_play
       name: Abspielen
       icon: mdi:play
       tap_action:
         action: perform-action
-        perform_action: script.badezimmer_radio_abspielen
+        perform_action: script.dach_bathroom_radio_play
     - type: tile
-      entity: script.badezimmer_musik_stoppen
+      entity: script.dach_bathroom_radio_stop
       name: Stoppen
       icon: mdi:stop
       tap_action:
         action: perform-action
-        perform_action: script.badezimmer_musik_stoppen
+        perform_action: script.dach_bathroom_radio_stop
 
   - type: grid
     title: SABnzbd

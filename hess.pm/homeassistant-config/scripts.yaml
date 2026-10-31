@@ -72,8 +72,8 @@ katzenalarm_benachrichtigung:
   mode: queued
   max: 5
 
-badezimmer_radio_abspielen:
-  alias: Badezimmer Radio abspielen
+dach_bathroom_radio_play:
+  alias: Dach bathroom radio play
   description: Plays the station selected in input_select.badezimmer_radio_sender on the bathroom
     Echo (Alexa Badezimmer) only. Falls back to HR3 while the selection has no usable value.
   icon: mdi:radio
@@ -90,17 +90,15 @@ badezimmer_radio_abspielen:
       so the radio plays exactly where the command was sent. The text must be in the Echo's
       language (German); Alexa picks the radio provider (usually TuneIn) for the station itself.
 
-badezimmer_musik_stoppen:
-  alias: Badezimmer Musik stoppen
+dach_bathroom_radio_stop:
+  alias: Dach bathroom radio stop
   description: Stops whatever plays on the bathroom Echo (Alexa Badezimmer); other Echos keep
     playing.
   icon: mdi:stop
   sequence:
-  - action: media_player.play_media
+  - action: media_player.media_stop
     target:
       entity_id: media_player.badezimmer
-    data:
-      media_content_type: custom
-      media_content_id: Stopp
-    note: Sent as a command to this one Echo, the same way the play script starts the radio, so it
-      does not depend on which state Home Assistant currently shows for the Echo.
+    note: media_stop sends Alexa's stop control addressed to this Echo's serial number. Do not send
+      "Stopp" as a custom voice command instead; Alexa treats a spoken stop that reaches an Echo
+      with nothing playing as "stop everything" and silences the other Echos too.
