@@ -94,6 +94,16 @@ input_number:
     step: 1
     unit_of_measurement: min
     mode: slider
+  # Longest the fan may run on humidity alone per shower. Without initial: like the sliders above;
+  # the automation falls back to 30 minutes while it has no usable value.
+  badezimmer_luefter_feuchte_max:
+    name: Badezimmer Lüfter Feuchte Maximum
+    icon: mdi:water-percent-alert
+    min: 5
+    max: 120
+    step: 5
+    unit_of_measurement: min
+    mode: slider
   # Run-on time of the cellar workshop and laundry lights after the room has been empty. Both omit
   # initial: so a value set in the UI survives a restart; on a fresh install they start at their
   # minimum and have to be set once. The automations fall back to 10 minutes while a slider has no
@@ -134,6 +144,54 @@ input_boolean:
     name: Werkstatt Licht pausiert
     icon: mdi:lightbulb-off-outline
     initial: false
+
+  # Set once the fan has run on humidity for the maximum time; humidity cannot start the fan again
+  # until it has fallen back near the baseline. No initial: so a block survives a restart, otherwise
+  # every restart during a humid spell would allow another full run.
+  badezimmer_luefter_feuchte_gesperrt:
+    name: Badezimmer Lüfter Feuchte gesperrt
+    icon: mdi:fan-off
+
+timer:
+  # Counts the humidity-only run time of the 1OG bathroom fan. restore: true keeps a running
+  # countdown across an HA restart.
+  badezimmer_luefter_feuchte_limit:
+    name: Badezimmer Lüfter Feuchte Limit
+    icon: mdi:timer-sand
+    restore: true
+
+sensor:
+  # Normal humidity of the 1OG bathroom: the median of the last 24 h. A shower lasts minutes and
+  # barely moves it, while a humid spell raises it, so the fan reacts to showers and not to weather.
+  - platform: statistics
+    name: Badezimmer Feuchte Basis
+    unique_id: badezimmer_feuchte_basis
+    entity_id: sensor.m01_humidity
+    state_characteristic: median
+    max_age:
+      hours: 24
+    sampling_size: 1000
+    precision: 1
+
+template:
+  - binary_sensor:
+      # On while the 1OG bathroom is clearly more humid than its baseline (a shower). Hysteresis:
+      # on at baseline + 12 points, off at baseline + 5, unchanged in between. Shower peaks seen so
+      # far were +15 to +29 points, normal noise about 3. Off when the reading is older than 3 h or
+      # missing, so a dead sensor can never keep the fan running.
+      # ASCII name so the entity id is binary_sensor.badezimmer_luefter_feuchte.
+      - name: Badezimmer Luefter Feuchte
+        unique_id: badezimmer_luefter_feuchte
+        icon: mdi:water-percent
+        state: >-
+          {% set s = states.sensor.m01_humidity %}
+          {% set h = states('sensor.m01_humidity') | float(none) %}
+          {% set b = states('sensor.badezimmer_feuchte_basis') | float(none) %}
+          {% set fresh = s is not none and h is not none and now() - s.last_reported < timedelta(hours=3) %}
+          {% if not fresh or b is none %}false
+          {% elif h >= b + 12 %}true
+          {% elif h <= b + 5 %}false
+          {% else %}{{ this.state == 'on' }}{% endif %}
 
 http:
   use_x_forwarded_for: true
