@@ -81,6 +81,30 @@ views:
       icon: mdi:speaker-multiple
 
   - type: grid
+    title: Badezimmer Radio
+    cards:
+    - type: tile
+      entity: input_select.badezimmer_radio_sender
+      name: Sender
+      icon: mdi:radio
+      features:
+      - type: select-options
+    - type: tile
+      entity: script.badezimmer_radio_abspielen
+      name: Abspielen
+      icon: mdi:play
+      tap_action:
+        action: perform-action
+        perform_action: script.badezimmer_radio_abspielen
+    - type: tile
+      entity: script.badezimmer_musik_stoppen
+      name: Stoppen
+      icon: mdi:stop
+      tap_action:
+        action: perform-action
+        perform_action: script.badezimmer_musik_stoppen
+
+  - type: grid
     title: SABnzbd
     cards:
     - type: sensor

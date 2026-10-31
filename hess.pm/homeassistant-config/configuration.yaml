@@ -152,6 +152,28 @@ input_boolean:
     name: Badezimmer Lüfter Feuchte gesperrt
     icon: mdi:fan-off
 
+  # On while the Dach bathroom radio was started by the automation, so only that music is stopped
+  # again: radio someone started by voice keeps playing when the door opens. No initial: so the
+  # flag survives a restart and a session that was running still ends with a stop.
+  badezimmer_dach_radio_aktiv:
+    name: Badezimmer Dach Radio aktiv
+    icon: mdi:radio
+
+input_select:
+  # Station the bathroom radio script plays. Each option is spoken to the Echo as "Spiele <option>",
+  # so it must be a name Alexa recognises in German. No initial: so the last selection survives a
+  # restart; on a fresh install the first option is selected.
+  badezimmer_radio_sender:
+    name: Badezimmer Radiosender
+    icon: mdi:radio
+    options:
+    - HR3
+    - HR1
+    - YOU FM
+    - Hit Radio FFH
+    - SWR3
+    - Deutschlandfunk
+
 timer:
   # Counts the humidity-only run time of the 1OG bathroom fan. restore: true keeps a running
   # countdown across an HA restart.

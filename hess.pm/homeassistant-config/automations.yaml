@@ -514,3 +514,68 @@
       - switch.sw_keller_werkstatt_right
       - switch.sw_keller_waschkueche_up
   mode: single
+
+- id: '1793100000001'
+  alias: Dach bathroom radio while the door is closed
+  description: >-
+    Plays the selected radio station (input_select.badezimmer_radio_sender) on the bathroom Echo
+    while someone is in the Dach bathroom with the door closed, and
+    stops it when the door opens or the room is empty. Door: contact sensor on the Dach bathroom
+    door (binary_sensor.badezimmer_dach_tuer_contact, on = open). Presence: M12. The radio starts
+    once per stay; input_boolean.badezimmer_dach_radio_aktiv marks music this automation started,
+    and only that music is stopped. While the door sensor does not exist yet, its state is not
+    'off', so the radio never starts.
+  triggers:
+  - trigger: state
+    entity_id: binary_sensor.badezimmer_dach_tuer_contact
+    to: 'off'
+    id: start
+  - trigger: state
+    entity_id: binary_sensor.m12_presence
+    to: 'on'
+    id: start
+  - trigger: state
+    entity_id: binary_sensor.badezimmer_dach_tuer_contact
+    to: 'on'
+    id: stop
+  # The grace time keeps a short presence dropout (someone standing very still) from stopping and
+  # restarting the radio.
+  - trigger: state
+    entity_id: binary_sensor.m12_presence
+    to: 'off'
+    for:
+      seconds: 30
+    id: stop
+  conditions: []
+  actions:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: start
+      - condition: state
+        entity_id: binary_sensor.badezimmer_dach_tuer_contact
+        state: 'off'
+      - condition: state
+        entity_id: binary_sensor.m12_presence
+        state: 'on'
+      - condition: state
+        entity_id: input_boolean.badezimmer_dach_radio_aktiv
+        state: 'off'
+      sequence:
+      - action: input_boolean.turn_on
+        target:
+          entity_id: input_boolean.badezimmer_dach_radio_aktiv
+      - action: script.badezimmer_radio_abspielen
+    - conditions:
+      - condition: trigger
+        id: stop
+      - condition: state
+        entity_id: input_boolean.badezimmer_dach_radio_aktiv
+        state: 'on'
+      sequence:
+      - action: input_boolean.turn_off
+        target:
+          entity_id: input_boolean.badezimmer_dach_radio_aktiv
+      - action: script.badezimmer_musik_stoppen
+  mode: queued
+  max: 5
