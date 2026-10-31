@@ -85,6 +85,7 @@ smartHome:
       - light.esszimmer
   - type: Light
     id: light_kueche
+    offLockSeconds: 30         # same as light_eingang_flur: one motion zone, and a longer lock here would block the hallway too
     lookups:
     - type: staticEntity
       entityRefs:
@@ -124,12 +125,14 @@ smartHome:
       - light.schlafzimmer
   - type: Light
     id: light_treppe_dach
+    offLockSeconds: 30         # pass-through room: a single Off press on the way out is a reflex, so motion works again after 30 s
     lookups:
     - type: staticEntity
       entityRefs:
       - light.treppe_dach
   - type: Light
     id: light_treppe_keller
+    offLockSeconds: 30         # pass-through room: a single Off press on the way out is a reflex, so motion works again after 30 s
     lookups:
     - type: staticEntity
       entityRefs:
@@ -142,6 +145,7 @@ smartHome:
       - light.terrasse
   - type: Light
     id: light_treppe_oben
+    offLockSeconds: 30         # pass-through room: a single Off press on the way out is a reflex, so motion works again after 30 s
     lookups:
     - type: staticEntity
       entityRefs:
@@ -172,6 +176,7 @@ smartHome:
       - light.dach
   - type: Light
     id: light_eingang_flur
+    offLockSeconds: 30         # pass-through room: a single Off press on the way out is a reflex, so motion works again after 30 s
     lookups:
     - type: staticEntity
       entityRefs:
@@ -179,6 +184,7 @@ smartHome:
       - light.eingang_flur_deckenlampe_wz
   - type: Light
     id: light_flur_oben
+    offLockSeconds: 30         # pass-through room: a single Off press on the way out is a reflex, so motion works again after 30 s
     lookups:
     - type: staticEntity
       entityRefs:
@@ -187,12 +193,14 @@ smartHome:
       - light.flur_oben_3
   - type: Light
     id: light_badezimmer_dach
+    offLockSeconds: 30         # pass-through room: a single Off press on the way out is a reflex, so motion works again after 30 s
     lookups:
     - type: staticEntity
       entityRefs:
       - light.badezimmer_dach
   - type: Light
     id: light_garderobe_dach
+    offLockSeconds: 30         # pass-through room: a single Off press on the way out is a reflex, so motion works again after 30 s
     lookups:
     - type: staticEntity
       entityRefs:
@@ -201,12 +209,14 @@ smartHome:
   # front-door master switch's whole-house off, which acts on Light resources.
   - type: Light
     id: light_badezimmer_oben
+    offLockSeconds: 30         # pass-through room: a single Off press on the way out is a reflex, so motion works again after 30 s
     lookups:
     - type: staticEntity
       entityRefs:
       - light.badezimmer_oben
   - type: Light
     id: light_badezimmer_spiegel
+    offLockSeconds: 30         # pass-through room: a single Off press on the way out is a reflex, so motion works again after 30 s
     lookups:
     - type: staticEntity
       entityRefs:
