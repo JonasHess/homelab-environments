@@ -607,6 +607,11 @@ apps:
       targetRevision: ~
       helm:
         values:
+          # Ping URL lives at /hess.pm/o11y/alertmanager/watchdog_heartbeat_url.
+          # This cluster has its own healthchecks.io check; it must not be shared with
+          # another cluster, or either one alone would keep the check green.
+          watchdogHeartbeat:
+            enabled: true
           generic:
             persistentVolume:
               prometheus: /mnt/tank1/unencrypted/apps/prometheus/data
