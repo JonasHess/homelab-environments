@@ -610,11 +610,10 @@ apps:
           generic:
             persistentVolume:
               prometheus: /mnt/tank1/unencrypted/apps/prometheus/data
+              alertmanager: /mnt/tank1/unencrypted/apps/prometheus/alertmanager/data
             persistentVolumeClaims:
               grafana:
                 hostPath: /mnt/tank1/unencrypted/apps/prometheus/grafana/data
-              alertmanager:
-                hostPath: /mnt/tank1/unencrypted/apps/prometheus/alertmanager/data
   sftpgo:
     enabled: true
     argocd:
