@@ -91,3 +91,49 @@ dach_bathroom_radio_stop:
     note: media_stop sends Alexa's stop control addressed to this Echo's serial number. Do not send
       "Stopp" as a custom voice command instead; Alexa treats a spoken stop that reaches an Echo
       with nothing playing as "stop everything" and silences the other Echos too.
+
+reminder_announcement:
+  alias: Reminder announcement
+  description: Speaks a household reminder on every Echo at the volume each one is set to.
+    Unlike the cat escape alarm it never raises the volume, because a reminder must not be
+    louder than the room was left.
+  fields:
+    message:
+      name: Message
+      description: Spoken text (German, the Echos' language)
+      required: true
+      selector:
+        text:
+  sequence:
+  - action: notify.alexa_media_ueberall
+    data:
+      message: '{{ message }}'
+      data:
+        type: announce
+    note: The group target speaks only via announce; plain TTS to it is silently dropped.
+  mode: queued
+  max: 10
+
+mark_trash_put_out:
+  alias: Mark trash put out
+  description: Records that the bins are outside, which silences tonight's remaining trash
+    reminders. Called by the dashboard button; a Zigbee button should call this too.
+  sequence:
+  - action: input_datetime.set_datetime
+    target:
+      entity_id: input_datetime.trash_put_out
+    data:
+      timestamp: '{{ now().timestamp() }}'
+  mode: single
+
+mark_cat_litter_changed:
+  alias: Mark cat litter changed
+  description: Records that the cat litter was changed, which silences the cat litter reminders
+    until next Monday. Called by the dashboard button; a Zigbee button should call this too.
+  sequence:
+  - action: input_datetime.set_datetime
+    target:
+      entity_id: input_datetime.cat_litter_changed
+    data:
+      timestamp: '{{ now().timestamp() }}'
+  mode: single

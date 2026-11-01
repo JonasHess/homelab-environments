@@ -579,3 +579,118 @@
       - action: script.dach_bathroom_radio_stop
   mode: queued
   max: 5
+
+- id: '1793200000001'
+  alias: Trash reminder
+  description: >-
+    The evening before a waste collection, announces on every Echo which bins go out, at 18:10,
+    19:10, 20:10 and 21:10, until someone marks the trash as put out (input_datetime.trash_put_out,
+    set by script.mark_trash_put_out). The dates come from calendar.waste_collection, which the
+    homeassistant-waste-sync CronJob fills from the provider every morning. The bin names are the
+    provider's own event titles, spoken unchanged, so a new waste type needs no change here.
+  triggers:
+  - trigger: time
+    at: '18:10:00'
+  - trigger: time
+    at: '19:10:00'
+  - trigger: time
+    at: '20:10:00'
+  - trigger: time
+    at: '21:10:00'
+  conditions:
+  - condition: template
+    value_template: "{{ (state_attr('input_datetime.trash_put_out', 'timestamp') or 0) < today_at().timestamp() }}"
+    note: Not yet marked as put out today. An unset helper has no timestamp and counts as not done.
+  actions:
+  - action: calendar.get_events
+    target:
+      entity_id: calendar.waste_collection
+    data:
+      start_date_time: '{{ (today_at() + timedelta(days=1)).isoformat() }}'
+      end_date_time: '{{ (today_at() + timedelta(days=2)).isoformat() }}'
+    response_variable: tomorrow
+  - variables:
+      bins: "{{ tomorrow['calendar.waste_collection'].events | map(attribute='summary') | unique | list }}"
+  - condition: template
+    value_template: '{{ bins | count > 0 }}'
+    note: No collection tomorrow, nothing to say.
+  - action: script.reminder_announcement
+    data:
+      message: >-
+        Morgen wird {{ bins[0] if bins | count == 1 else bins[:-1] | join(', ') ~ ' und ' ~ bins[-1] }}
+        abgeholt. Bitte heute Abend rausstellen.
+  mode: single
+
+- id: '1793200000002'
+  alias: Cat litter reminder
+  description: >-
+    Announces on every Echo that the cat litter is due, at 18:09, 19:09, 20:09 and 21:09, one
+    minute before the trash reminder so the two never talk over each other. Due from Monday until
+    someone marks it as changed (input_datetime.cat_litter_changed, set by
+    script.mark_cat_litter_changed): a missed Monday keeps reminding every evening until done, and
+    only a change since this week's Monday counts, so a change on Sunday does not skip Monday.
+  triggers:
+  - trigger: time
+    at: '18:09:00'
+  - trigger: time
+    at: '19:09:00'
+  - trigger: time
+    at: '20:09:00'
+  - trigger: time
+    at: '21:09:00'
+  conditions:
+  - condition: template
+    value_template: >-
+      {{ (state_attr('input_datetime.cat_litter_changed', 'timestamp') or 0)
+         < (today_at() - timedelta(days=now().weekday())).timestamp() }}
+    note: Not changed since Monday 00:00 of this week. An unset helper counts as not done.
+  actions:
+  - action: script.reminder_announcement
+    data:
+      message: Bitte die Katzenstreu wechseln.
+  mode: single
+
+- id: '1793200000003'
+  alias: Waste calendar health check
+  description: >-
+    Raises a persistent notification when the trash reminders would silently stop: the calendar
+    has been unavailable for a day, or it holds no collection in the next 14 days. Residual waste
+    alone is collected every 14 days, so an empty fortnight means the sync is broken (or the
+    provider has not published the next year yet), never that there is simply nothing to collect.
+    The CronJob's own failures are alerted by Prometheus (WasteSyncStale).
+  triggers:
+  - trigger: time
+    at: '09:00:00'
+  - trigger: state
+    entity_id: calendar.waste_collection
+    to: unavailable
+    for:
+      hours: 24
+  conditions: []
+  actions:
+  - action: calendar.get_events
+    target:
+      entity_id: calendar.waste_collection
+    data:
+      duration:
+        days: 14
+    response_variable: upcoming
+    continue_on_error: true
+    note: Fails while the calendar is unavailable; the check below then sees no events.
+  - if:
+    - condition: template
+      value_template: "{{ upcoming is not defined or (upcoming['calendar.waste_collection'].events | default([]) | count) == 0 }}"
+    then:
+    - action: persistent_notification.create
+      data:
+        notification_id: waste_calendar_health
+        title: Waste calendar has no upcoming collections
+        message: >-
+          calendar.waste_collection is {{ states('calendar.waste_collection') }} and lists no
+          collection in the next 14 days, so no trash reminder will be announced. Check the
+          homeassistant-waste-sync CronJob log in the argocd namespace.
+    else:
+    - action: persistent_notification.dismiss
+      data:
+        notification_id: waste_calendar_health
+  mode: single

@@ -183,3 +183,38 @@ views:
       entity: vacuum.2_stock
       name: 2. Stock
       icon: mdi:robot-vacuum
+
+  - type: grid
+    title: Chores
+    cards:
+    - type: markdown
+      content: >-
+        {% set s = state_attr('calendar.waste_collection', 'start_time') %}
+        {% if s %}**Next collection:** {{ state_attr('calendar.waste_collection', 'message') }},
+        {{ as_timestamp(s) | timestamp_custom('%a %d.%m.') }}{% else %}No upcoming collection known{% endif %}
+    - type: tile
+      entity: script.mark_trash_put_out
+      name: Trash is out
+      icon: mdi:trash-can
+      color: green
+      tap_action:
+        action: call-service
+        service: script.turn_on
+        target:
+          entity_id: script.mark_trash_put_out
+    - type: tile
+      entity: input_datetime.trash_put_out
+      name: Trash put out
+    - type: tile
+      entity: script.mark_cat_litter_changed
+      name: Cat litter changed
+      icon: mdi:cat
+      color: green
+      tap_action:
+        action: call-service
+        service: script.turn_on
+        target:
+          entity_id: script.mark_cat_litter_changed
+    - type: tile
+      entity: input_datetime.cat_litter_changed
+      name: Cat litter last changed

@@ -232,6 +232,10 @@ apps:
             targetRevision: "main"
             path: "hess.pm/homeassistant-config"
             configMapName: "homeassistant-app-config"
+          # Secrets: /hess.pm/homeassistant/waste-sync/{SOURCE_URL,CALDAV_PASSWORD} in Akeyless,
+          # plus a waste-sync entry in /hess.pm/radicale/HTPASSWD.
+          wasteSync:
+            enabled: true
           generic:
             deployment:
               pvcMounts:
@@ -975,6 +979,13 @@ apps:
                   user = jonas
                   collection = lena/shared-(contacts|calendar)
                   permissions = RrWw
+
+                  # Waste collection dates written by the homeassistant waste-sync job; read-only,
+                  # since the job deletes and re-adds events and would undo manual edits.
+                  [waste-collection-read]
+                  user = jonas|lena
+                  collection = waste-sync/waste-collection
+                  permissions = Rr
   prompt-util:
     enabled: true
     argocd:
