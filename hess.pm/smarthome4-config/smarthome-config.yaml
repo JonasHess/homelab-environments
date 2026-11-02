@@ -1224,6 +1224,29 @@ smartHome:
           condition: bedtime_dim
       homeAssistantResources:
       - light_badezimmer_dach
+  # Wireless H1 double rocker at the mirror: single press = on (repeat to cycle scenes), hold = off.
+  # Needs click_mode multi in Z2M (the only mode that reports hold). The right paddle is unused.
+  - name: Dach Bad Spiegel
+    type: AqaraWXKG15LM
+    devices:
+    - SW-DACH-BAD-Spiegel
+    groups:
+    - position: '1'
+      profile: AqaraWXKG15LMLeftLightDefault
+      profileOptions:
+        pressOnLockSeconds: 1800
+        pressOnAutoOff: true        # auto-off: lights go off 30 min after the press unless the bathroom still sees someone
+      triggers:
+      - trigger: AQARA_WXKG15LM_SINGLE_LEFT
+        sequences:
+        - homeAssistantResources:
+          - Badezimmer Dach DimmerSwitch 01 Day
+          condition: bedtime_bright_or_day
+        - homeAssistantResources:
+          - Badezimmer Dach DimmerSwitch 01 Night
+          condition: bedtime_dim
+      homeAssistantResources:
+      - light_badezimmer_dach
   - name: Dach Buero Jonas
     type: AqaraLightSwitchH2_1Ch
     devices:
