@@ -201,6 +201,16 @@ input_datetime:
     icon: mdi:meter-electric
     has_date: true
     has_time: true
+  sport_jonas:
+    name: Sport Jonas
+    icon: mdi:run
+    has_date: true
+    has_time: true
+  sport_lena:
+    name: Sport Lena
+    icon: mdi:run
+    has_date: true
+    has_time: true
 
 timer:
   # Counts the humidity-only run time of the 1OG bathroom fan. restore: true keeps a running

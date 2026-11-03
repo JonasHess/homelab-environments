@@ -91,3 +91,46 @@ views:
         service: script.turn_on
         target:
           entity_id: script.mark_meters_read
+
+  - type: grid
+    title: Sport
+    cards:
+    - type: markdown
+      content: >-
+        {% set t = state_attr('input_datetime.sport_jonas', 'timestamp') or 0 %}
+        {% set days = (now().date() - as_datetime(t).astimezone(now().tzinfo).date()).days %}
+        {% if days < 7 %}✅ **Jonas:** zuletzt am {{ t | timestamp_custom('%d.%m.') }}, wieder fällig in {{ 7 - days }} {{ 'Tag' if 7 - days == 1 else 'Tagen' }}
+        {% else %}⚠️ **Jonas:** Sport fällig, letztes Training vor {{ days }} Tagen
+        {% endif %}
+        <br>
+        {% set t = state_attr('input_datetime.sport_lena', 'timestamp') or 0 %}
+        {% set days = (now().date() - as_datetime(t).astimezone(now().tzinfo).date()).days %}
+        {% if days < 7 %}✅ **Lena:** zuletzt am {{ t | timestamp_custom('%d.%m.') }}, wieder fällig in {{ 7 - days }} {{ 'Tag' if 7 - days == 1 else 'Tagen' }}
+        {% else %}⚠️ **Lena:** Sport fällig, letztes Training vor {{ days }} Tagen
+        {% endif %}
+    - type: tile
+      entity: script.mark_sport_jonas
+      name: Jonas hat Sport gemacht
+      icon: mdi:run
+      color: green
+      hide_state: true
+      grid_options:
+        columns: full
+      tap_action:
+        action: call-service
+        service: script.turn_on
+        target:
+          entity_id: script.mark_sport_jonas
+    - type: tile
+      entity: script.mark_sport_lena
+      name: Lena hat Sport gemacht
+      icon: mdi:run
+      color: green
+      hide_state: true
+      grid_options:
+        columns: full
+      tap_action:
+        action: call-service
+        service: script.turn_on
+        target:
+          entity_id: script.mark_sport_lena

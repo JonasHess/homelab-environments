@@ -149,3 +149,27 @@ mark_meters_read:
     data:
       timestamp: '{{ now().timestamp() }}'
   mode: single
+
+mark_sport_jonas:
+  alias: Mark sport Jonas
+  description: Records that Jonas did sport, which silences Jonas's sport reminder for the next 7
+    days. Called by the dashboard button.
+  sequence:
+  - action: input_datetime.set_datetime
+    target:
+      entity_id: input_datetime.sport_jonas
+    data:
+      timestamp: '{{ now().timestamp() }}'
+  mode: single
+
+mark_sport_lena:
+  alias: Mark sport Lena
+  description: Records that Lena did sport, which silences Lena's sport reminder for the next 7
+    days. Called by the dashboard button.
+  sequence:
+  - action: input_datetime.set_datetime
+    target:
+      entity_id: input_datetime.sport_lena
+    data:
+      timestamp: '{{ now().timestamp() }}'
+  mode: single

@@ -724,3 +724,65 @@
     data:
       message: Bitte die Zählerstände ablesen.
   mode: single
+
+- id: '1793200000005'
+  alias: Sport reminder Jonas
+  description: >-
+    Announces on every Echo that Jonas is due for sport, at 18:07, 19:07, 20:07 and 21:07, staggered
+    against the other evening reminders so they never talk over each other. Due once 7 or more
+    calendar days have passed since Jonas's last workout (input_datetime.sport_jonas, set by
+    script.mark_sport_jonas), so the week rolls with the last workout instead of a fixed weekday,
+    and a missed day keeps reminding every evening until done.
+  triggers:
+  - trigger: time
+    at: '18:07:00'
+  - trigger: time
+    at: '19:07:00'
+  - trigger: time
+    at: '20:07:00'
+  - trigger: time
+    at: '21:07:00'
+  variables:
+    days: >-
+      {{ (now().date() - as_datetime(state_attr('input_datetime.sport_jonas', 'timestamp') or 0)
+          .astimezone(now().tzinfo).date()).days }}
+  conditions:
+  - condition: template
+    value_template: '{{ days >= 7 }}'
+    note: An unset helper is 1970, so it counts as due.
+  actions:
+  - action: script.reminder_announcement
+    data:
+      message: 'Jonas, Zeit für Sport: dein letztes Training ist {{ days }} Tage her.'
+  mode: single
+
+- id: '1793200000006'
+  alias: Sport reminder Lena
+  description: >-
+    Announces on every Echo that Lena is due for sport, at 18:06, 19:06, 20:06 and 21:06, staggered
+    against the other evening reminders so they never talk over each other. Due once 7 or more
+    calendar days have passed since Lena's last workout (input_datetime.sport_lena, set by
+    script.mark_sport_lena), so the week rolls with the last workout instead of a fixed weekday,
+    and a missed day keeps reminding every evening until done.
+  triggers:
+  - trigger: time
+    at: '18:06:00'
+  - trigger: time
+    at: '19:06:00'
+  - trigger: time
+    at: '20:06:00'
+  - trigger: time
+    at: '21:06:00'
+  variables:
+    days: >-
+      {{ (now().date() - as_datetime(state_attr('input_datetime.sport_lena', 'timestamp') or 0)
+          .astimezone(now().tzinfo).date()).days }}
+  conditions:
+  - condition: template
+    value_template: '{{ days >= 7 }}'
+    note: An unset helper is 1970, so it counts as due.
+  actions:
+  - action: script.reminder_announcement
+    data:
+      message: 'Lena, Zeit für Sport: dein letztes Training ist {{ days }} Tage her.'
+  mode: single
