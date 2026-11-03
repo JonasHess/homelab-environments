@@ -137,3 +137,15 @@ mark_cat_litter_changed:
     data:
       timestamp: '{{ now().timestamp() }}'
   mode: single
+
+mark_meters_read:
+  alias: Mark meters read
+  description: Records that the meter readings were taken, which silences the meter reading
+    reminders until the 1st of next month. Called by the dashboard button.
+  sequence:
+  - action: input_datetime.set_datetime
+    target:
+      entity_id: input_datetime.meters_read
+    data:
+      timestamp: '{{ now().timestamp() }}'
+  mode: single

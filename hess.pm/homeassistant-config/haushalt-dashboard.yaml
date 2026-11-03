@@ -67,3 +67,27 @@ views:
         service: script.turn_on
         target:
           entity_id: script.mark_cat_litter_changed
+
+  - type: grid
+    title: Zähler
+    cards:
+    - type: markdown
+      content: >-
+        {% set rd = state_attr('input_datetime.meters_read', 'timestamp') or 0 %}
+        {% set first = today_at().replace(day=1).timestamp() %}
+        {% if rd >= first %}✅ Diesen Monat abgelesen am {{ rd | timestamp_custom('%d.%m. um %H:%M') }}
+        {% else %}⚠️ Fällig: bitte die Zählerstände ablesen{% if rd > 0 %} (zuletzt am {{ rd | timestamp_custom('%d.%m.') }}){% endif %}
+        {% endif %}
+    - type: tile
+      entity: script.mark_meters_read
+      name: Zählerstände abgelesen
+      icon: mdi:meter-electric
+      color: green
+      hide_state: true
+      grid_options:
+        columns: full
+      tap_action:
+        action: call-service
+        service: script.turn_on
+        target:
+          entity_id: script.mark_meters_read

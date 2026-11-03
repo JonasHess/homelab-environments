@@ -694,3 +694,33 @@
       data:
         notification_id: waste_calendar_health
   mode: single
+
+- id: '1793200000004'
+  alias: Meter reading reminder
+  description: >-
+    Announces on every Echo that the meter readings are due, at 18:08, 19:08, 20:08 and 21:08, one
+    minute before the cat litter reminder so the reminders never talk over each other. Due from the
+    1st of each month until someone marks the readings as taken (input_datetime.meters_read, set by
+    script.mark_meters_read): a missed 1st keeps reminding every evening until done, and only a
+    reading since the 1st 00:00 of this month counts, so a reading on the 31st does not skip the
+    next month.
+  triggers:
+  - trigger: time
+    at: '18:08:00'
+  - trigger: time
+    at: '19:08:00'
+  - trigger: time
+    at: '20:08:00'
+  - trigger: time
+    at: '21:08:00'
+  conditions:
+  - condition: template
+    value_template: >-
+      {{ (state_attr('input_datetime.meters_read', 'timestamp') or 0)
+         < today_at().replace(day=1).timestamp() }}
+    note: Not read since the 1st 00:00 of this month. An unset helper counts as not done.
+  actions:
+  - action: script.reminder_announcement
+    data:
+      message: Bitte die Zählerstände ablesen.
+  mode: single
