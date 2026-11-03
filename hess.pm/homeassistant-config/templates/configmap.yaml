@@ -28,3 +28,5 @@ data:
 {{ .Files.Get "medien-dashboard.yaml" | indent 4 }}
   system-dashboard.yaml: |
 {{ .Files.Get "system-dashboard.yaml" | indent 4 }}
+  haushalt-dashboard.yaml: |
+{{ .Files.Get "haushalt-dashboard.yaml" | indent 4 }}

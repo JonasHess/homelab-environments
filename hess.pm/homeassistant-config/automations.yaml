@@ -617,7 +617,7 @@
   - action: script.reminder_announcement
     data:
       message: >-
-        Morgen wird {{ bins[0] if bins | count == 1 else bins[:-1] | join(', ') ~ ' und ' ~ bins[-1] }}
+        Morgen {{ 'wird ' ~ bins[0] if bins | count == 1 else 'werden ' ~ bins[:-1] | join(', ') ~ ' und ' ~ bins[-1] }}
         abgeholt. Bitte heute Abend rausstellen.
   mode: single
 

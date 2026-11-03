@@ -50,6 +50,12 @@ lovelace:
       title: System
       icon: mdi:cog
       show_in_sidebar: true
+    lovelace-haushalt:
+      mode: yaml
+      filename: haushalt-dashboard.yaml
+      title: Haushalt
+      icon: mdi:broom
+      show_in_sidebar: true
 
 automation: !include automations.yaml
 script: !include scripts.yaml

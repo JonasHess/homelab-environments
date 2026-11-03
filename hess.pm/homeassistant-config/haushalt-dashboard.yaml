@@ -1,0 +1,46 @@
+title: Haushalt
+views:
+- title: Haushalt
+  path: haushalt
+  icon: mdi:broom
+  type: sections
+  sections:
+
+  - type: grid
+    title: Müll
+    cards:
+    - type: markdown
+      content: >-
+        {% set s = state_attr('calendar.waste_collection', 'start_time') %}
+        {% if s %}**Nächste Abholung:** {{ state_attr('calendar.waste_collection', 'message') }},
+        {{ as_timestamp(s) | timestamp_custom('%d.%m.') }}{% else %}Keine Abholung bekannt{% endif %}
+    - type: tile
+      entity: script.mark_trash_put_out
+      name: Müll ist draußen
+      icon: mdi:trash-can
+      color: green
+      tap_action:
+        action: call-service
+        service: script.turn_on
+        target:
+          entity_id: script.mark_trash_put_out
+    - type: tile
+      entity: input_datetime.trash_put_out
+      name: Müll zuletzt rausgestellt
+
+  - type: grid
+    title: Katze
+    cards:
+    - type: tile
+      entity: script.mark_cat_litter_changed
+      name: Katzenstreu gewechselt
+      icon: mdi:cat
+      color: green
+      tap_action:
+        action: call-service
+        service: script.turn_on
+        target:
+          entity_id: script.mark_cat_litter_changed
+    - type: tile
+      entity: input_datetime.cat_litter_changed
+      name: Katzenstreu zuletzt gewechselt
