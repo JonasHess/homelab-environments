@@ -6,41 +6,64 @@ views:
   type: sections
   sections:
 
+  # Each chore: one status line in plain German, then one full-width button. The buttons hide
+  # their state, because a script's state is only "Off" and says nothing about the chore.
   - type: grid
     title: Müll
     cards:
     - type: markdown
       content: >-
+        {% set wd = ['Mo','Di','Mi','Do','Fr','Sa','So'] %}
         {% set s = state_attr('calendar.waste_collection', 'start_time') %}
-        {% if s %}**Nächste Abholung:** {{ state_attr('calendar.waste_collection', 'message') }},
-        {{ as_timestamp(s) | timestamp_custom('%d.%m.') }}{% else %}Keine Abholung bekannt{% endif %}
+        {% set out = state_attr('input_datetime.trash_put_out', 'timestamp') or 0 %}
+        {% if s %}
+        {% set d = as_datetime(s).date() %}
+        {% set days = (d - now().date()).days %}
+        **Nächste Abholung:** {{ state_attr('calendar.waste_collection', 'message') }},
+        {{ 'heute' if days == 0 else 'morgen' if days == 1 else 'in ' ~ days ~ ' Tagen' }}
+        ({{ wd[d.weekday()] }} {{ d.strftime('%d.%m.') }})
+        {% else %}
+        **Nächste Abholung:** keine bekannt
+        {% endif %}
+        <br>
+        {% if out >= today_at().timestamp() %}✅ Heute rausgestellt um {{ out | timestamp_custom('%H:%M') }}
+        {% elif s and days == 1 %}⚠️ Noch nicht rausgestellt: heute Abend rausstellen
+        {% elif out > 0 %}Zuletzt rausgestellt: {{ out | timestamp_custom('%d.%m. %H:%M') }}
+        {% endif %}
     - type: tile
       entity: script.mark_trash_put_out
       name: Müll ist draußen
       icon: mdi:trash-can
       color: green
+      hide_state: true
+      grid_options:
+        columns: full
       tap_action:
         action: call-service
         service: script.turn_on
         target:
           entity_id: script.mark_trash_put_out
-    - type: tile
-      entity: input_datetime.trash_put_out
-      name: Müll zuletzt rausgestellt
 
   - type: grid
     title: Katze
     cards:
+    - type: markdown
+      content: >-
+        {% set ch = state_attr('input_datetime.cat_litter_changed', 'timestamp') or 0 %}
+        {% set monday = (today_at() - timedelta(days=now().weekday())).timestamp() %}
+        {% if ch >= monday %}✅ Diese Woche gewechselt am {{ ch | timestamp_custom('%d.%m. um %H:%M') }}
+        {% else %}⚠️ Fällig: bitte die Katzenstreu wechseln{% if ch > 0 %} (zuletzt am {{ ch | timestamp_custom('%d.%m.') }}){% endif %}
+        {% endif %}
     - type: tile
       entity: script.mark_cat_litter_changed
       name: Katzenstreu gewechselt
       icon: mdi:cat
       color: green
+      hide_state: true
+      grid_options:
+        columns: full
       tap_action:
         action: call-service
         service: script.turn_on
         target:
           entity_id: script.mark_cat_litter_changed
-    - type: tile
-      entity: input_datetime.cat_litter_changed
-      name: Katzenstreu zuletzt gewechselt
