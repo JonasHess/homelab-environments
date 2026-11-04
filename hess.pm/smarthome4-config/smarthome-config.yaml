@@ -417,6 +417,37 @@ smartHome:
     lookups:
     - type: labelRegex
       labelRegex: Badezimmer Dach__DimmerSwitch__01__night__.*
+  # Reminder buttons: each script stamps its chore as done now (see the Haushalt dashboard in HA).
+  - type: Script
+    id: script_mark_trash_put_out
+    lookups:
+    - type: staticEntity
+      entityRefs:
+      - script.mark_trash_put_out
+  - type: Script
+    id: script_mark_cat_litter_changed
+    lookups:
+    - type: staticEntity
+      entityRefs:
+      - script.mark_cat_litter_changed
+  - type: Script
+    id: script_mark_meters_read
+    lookups:
+    - type: staticEntity
+      entityRefs:
+      - script.mark_meters_read
+  - type: Script
+    id: script_mark_sport_jonas
+    lookups:
+    - type: staticEntity
+      entityRefs:
+      - script.mark_sport_jonas
+  - type: Script
+    id: script_mark_sport_lena
+    lookups:
+    - type: staticEntity
+      entityRefs:
+      - script.mark_sport_lena
   sensors:
   # Touching either bedroom control after 21:00 arms bedtime. Presence alone is not enough:
   # AbstractPresenceSensorService only emits on a room TRANSITION, so someone already lying in
@@ -1247,6 +1278,68 @@ smartHome:
           condition: bedtime_dim
       homeAssistantResources:
       - light_badezimmer_dach
+  # Sonoff SNZB-01P reminder buttons: a single press marks the chore as done in Home Assistant.
+  # TriggersOnly sets no manual lock and keeps no scene cycle; double and long press are unused.
+  - name: Reminder Muell
+    type: SonoffSNZB01P
+    devices:
+    - SW-Reminder-Muell
+    groups:
+    - position: '1'
+      profile: TriggersOnly
+      triggers:
+      - trigger: SONOFF_SNZB_01P_SINGLE
+        sequences:
+        - homeAssistantResources:
+          - script_mark_trash_put_out
+  - name: Reminder Katzenstreu
+    type: SonoffSNZB01P
+    devices:
+    - SW-Reminder-Katzenstreu
+    groups:
+    - position: '1'
+      profile: TriggersOnly
+      triggers:
+      - trigger: SONOFF_SNZB_01P_SINGLE
+        sequences:
+        - homeAssistantResources:
+          - script_mark_cat_litter_changed
+  - name: Reminder Zaehlerstaende
+    type: SonoffSNZB01P
+    devices:
+    - SW-Reminder-Zaehler
+    groups:
+    - position: '1'
+      profile: TriggersOnly
+      triggers:
+      - trigger: SONOFF_SNZB_01P_SINGLE
+        sequences:
+        - homeAssistantResources:
+          - script_mark_meters_read
+  - name: Reminder Sport Jonas
+    type: SonoffSNZB01P
+    devices:
+    - SW-Reminder-Sport-Jonas
+    groups:
+    - position: '1'
+      profile: TriggersOnly
+      triggers:
+      - trigger: SONOFF_SNZB_01P_SINGLE
+        sequences:
+        - homeAssistantResources:
+          - script_mark_sport_jonas
+  - name: Reminder Sport Lena
+    type: SonoffSNZB01P
+    devices:
+    - SW-Reminder-Sport-Lena
+    groups:
+    - position: '1'
+      profile: TriggersOnly
+      triggers:
+      - trigger: SONOFF_SNZB_01P_SINGLE
+        sequences:
+        - homeAssistantResources:
+          - script_mark_sport_lena
   - name: Dach Buero Jonas
     type: AqaraLightSwitchH2_1Ch
     devices:
