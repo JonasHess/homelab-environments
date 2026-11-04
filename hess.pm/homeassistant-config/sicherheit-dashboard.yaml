@@ -94,6 +94,18 @@ views:
       grid_options:
         columns: 12
     - type: tile
+      entity: script.katzenalarm_pausieren
+      name: Katzenalarm 30 Min pausieren
+      icon: mdi:timer-pause-outline
+      hide_state: true
+      grid_options:
+        columns: 12
+      tap_action:
+        action: call-service
+        service: script.turn_on
+        target:
+          entity_id: script.katzenalarm_pausieren
+    - type: tile
       entity: automation.katzenalarm_wohnungstuer_2
       name: Automation
       icon: mdi:robot

@@ -117,59 +117,100 @@ reminder_announcement:
 mark_trash_put_out:
   alias: Mark trash put out
   description: Records that the bins are outside, which silences tonight's remaining trash
-    reminders. Called by the dashboard button; a Zigbee button should call this too.
+    reminders. Called by the dashboard button and the SW-Reminder-Trash-Out button.
   sequence:
   - action: input_datetime.set_datetime
     target:
       entity_id: input_datetime.trash_put_out
     data:
       timestamp: '{{ now().timestamp() }}'
+  - action: script.reminder_announcement
+    data:
+      message: Der Müll ist draußen.
+    note: Spoken confirmation, because the Zigbee button itself gives no feedback.
   mode: single
 
 mark_cat_litter_changed:
   alias: Mark cat litter changed
   description: Records that the cat litter was changed, which silences the cat litter reminders
-    until next Monday. Called by the dashboard button; a Zigbee button should call this too.
+    until next Monday. Called by the dashboard button and the SW-Reminder-Katzenstreu button.
   sequence:
   - action: input_datetime.set_datetime
     target:
       entity_id: input_datetime.cat_litter_changed
     data:
       timestamp: '{{ now().timestamp() }}'
+  - action: script.reminder_announcement
+    data:
+      message: Das Katzenstreu wurde gewechselt.
+    note: Spoken confirmation, because the Zigbee button itself gives no feedback.
   mode: single
 
 mark_meters_read:
   alias: Mark meters read
   description: Records that the meter readings were taken, which silences the meter reading
-    reminders until the 1st of next month. Called by the dashboard button.
+    reminders until the 1st of next month. Called by the dashboard button and the
+    SW-Reminder-Stromzaehler button.
   sequence:
   - action: input_datetime.set_datetime
     target:
       entity_id: input_datetime.meters_read
     data:
       timestamp: '{{ now().timestamp() }}'
+  - action: script.reminder_announcement
+    data:
+      message: Die Zählerstände wurden abgelesen.
+    note: Spoken confirmation, because the Zigbee button itself gives no feedback.
   mode: single
 
 mark_sport_jonas:
   alias: Mark sport Jonas
   description: Records that Jonas did sport, which silences Jonas's sport reminder for the next 7
-    days. Called by the dashboard button.
+    days. Called by the dashboard button and the SW-Reminder-Sport-Jonas button.
   sequence:
   - action: input_datetime.set_datetime
     target:
       entity_id: input_datetime.sport_jonas
     data:
       timestamp: '{{ now().timestamp() }}'
+  - action: script.reminder_announcement
+    data:
+      message: Jonas hat Sport gemacht.
+    note: Spoken confirmation, because the Zigbee button itself gives no feedback.
   mode: single
 
 mark_sport_lena:
   alias: Mark sport Lena
   description: Records that Lena did sport, which silences Lena's sport reminder for the next 7
-    days. Called by the dashboard button.
+    days. Called by the dashboard button and the SW-Reminder-Sport-Lena button.
   sequence:
   - action: input_datetime.set_datetime
     target:
       entity_id: input_datetime.sport_lena
     data:
       timestamp: '{{ now().timestamp() }}'
+  - action: script.reminder_announcement
+    data:
+      message: Lena hat Sport gemacht.
+    note: Spoken confirmation, because the Zigbee button itself gives no feedback.
   mode: single
+
+katzenalarm_pausieren:
+  alias: Katzenalarm pausieren
+  description: Switches the cat escape alarm off for 30 minutes, e.g. while a door stands open on
+    purpose, then switches it back on. Called by the dashboard button and the
+    SW-Reminder-Katzenalarm button. Silent by design.
+  icon: mdi:cat
+  sequence:
+  - action: input_boolean.turn_off
+    target:
+      entity_id: input_boolean.katzenalarm_aktiv
+  - delay: '00:30:00'
+  - action: input_boolean.turn_on
+    target:
+      entity_id: input_boolean.katzenalarm_aktiv
+    note: Switching on re-checks the doors at once (the alarm automation triggers on it), so a door
+      still open after the pause raises the alarm after the usual delay.
+  # restart: a second press starts the 30 minutes over. A Home Assistant restart ends the pause
+  # early, because input_boolean.katzenalarm_aktiv has initial: true.
+  mode: restart
