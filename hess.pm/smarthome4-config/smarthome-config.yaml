@@ -11,6 +11,10 @@ smartHome:
   - type: SpelExpression
     id: day
     expression: '#timeOfDay() == ''DAY'''
+  # Sun down (sun.sun below the horizon), at any hour.
+  - type: SpelExpression
+    id: sun_down
+    expression: '#timeOfDay() == ''NIGHT'''
   - type: SpelExpression
     id: evening
     expression: '#timeOfDay() == ''NIGHT'' && !#isTimeInRange(''22:30'', ''12:00'')'
@@ -1688,8 +1692,9 @@ smartHome:
           condition: morning_dim
       homeAssistantResources:
       - light_wohnzimmer
-  # Terrasse (outdoors, ground floor): the sensor only lights at night, so both scene conditions
-  # require NIGHT and together cover the whole night, like Esszimmer Motion.
+  # Terrasse (outdoors, ground floor): motion lights the Night scene whenever the sun is down and
+  # never by day. A motion sensor never advances the scene cycle, so it is always step 1
+  # (label Terrasse__DimmerSwitch__01__night__1).
   - name: Terrasse Motion
     type: HueSML004
     devices:
@@ -1703,11 +1708,8 @@ smartHome:
       - trigger: HUE_SML004_OCCUPANCY_DETECTED
         sequences:
         - homeAssistantResources:
-          - Terrasse DimmerSwitch 01 Day
-          condition: morning_bright
-        - homeAssistantResources:
           - Terrasse DimmerSwitch 01 Night
-          condition: morning_dim
+          condition: sun_down
       homeAssistantResources:
       - light_terrasse
   # Dark only: the Day and the Night condition both require NIGHT (sun down), so presence never
