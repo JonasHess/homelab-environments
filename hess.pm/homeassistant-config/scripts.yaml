@@ -240,3 +240,70 @@ computer_starten:
       broadcast 255.255.255.255 likely never reaches the LAN; if the computer does not wake, add
       broadcast_address set to the LAN's directed broadcast (e.g. x.x.x.255).
   mode: single
+
+nanokvm_einschalten:
+  alias: NanoKVM einschalten
+  description: Switches on the PC behind a NanoKVM by a short press of its power button, but only
+    while the power LED is off; a short press on a running PC would shut it down. Shared by the
+    per-PC scripts, which pass the device slug (its login is rest_command.nanokvm_<device>_login)
+    and the NanoKVM's address.
+  fields:
+    device:
+      name: Device
+      description: Slug of the NanoKVM, e.g. rtx5080_gaming_pc
+      required: true
+      selector:
+        text:
+    host:
+      name: Host
+      description: Address of the NanoKVM
+      required: true
+      selector:
+        text:
+  sequence:
+  - action: "rest_command.nanokvm_{{ device }}_login"
+    response_variable: login
+  - variables:
+      token: >-
+        {%- set c = login.content if login.content is mapping else (login.content | from_json(default={})) -%}
+        {{ c.data.token if c.code is defined and c.code == 0 and c.data is defined else '' }}
+  - if:
+    - condition: template
+      value_template: "{{ token == '' }}"
+    then:
+    - stop: NanoKVM login failed
+      error: true
+  - action: rest_command.nanokvm_gpio_status
+    data:
+      host: "{{ host }}"
+      token: "{{ token }}"
+    response_variable: status
+  - variables:
+      pwr: >-
+        {%- set c = status.content if status.content is mapping else (status.content | from_json(default={})) -%}
+        {{ c.data.pwr if c.data is defined else 'unknown' }}
+  - if:
+    - condition: template
+      value_template: "{{ pwr | string | lower != 'false' }}"
+    then:
+    - stop: PC is already on or its state is unknown, power button not pressed
+  - action: rest_command.nanokvm_gpio_press
+    data:
+      host: "{{ host }}"
+      token: "{{ token }}"
+      type: power
+      duration: 800
+    note: 800 ms is the short press the NanoKVM web app sends.
+  mode: single
+
+rtx5080_gaming_pc_starten:
+  alias: RTX5080 Gaming PC starten
+  description: Switches on the RTX5080 gaming PC through its NanoKVM. Does nothing while the PC is
+    already on. Called by a single press on the SW-EG-WZ-GamingPC button.
+  icon: mdi:desktop-tower-monitor
+  sequence:
+  - action: script.nanokvm_einschalten
+    data:
+      device: rtx5080_gaming_pc
+      host: 192.168.1.160
+  mode: single

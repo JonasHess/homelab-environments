@@ -65,6 +65,36 @@ alexa: !include alexa.yaml
 # Provides wake_on_lan.send_magic_packet (used by script.computer_starten).
 wake_on_lan:
 
+# NanoKVM (IP-KVM card inside a PC) API. The login is one command per device, because its body
+# comes from an environment variable (a Kubernetes Secret, see hess.pm/values.yaml) and !env_var
+# cannot be chosen by a template. The GPIO commands are shared and take host and token as data.
+# script.nanokvm_einschalten uses them; a new NanoKVM needs only its own login command.
+rest_command:
+  nanokvm_rtx5080_gaming_pc_login:
+    url: http://192.168.1.160/api/auth/login
+    method: POST
+    content_type: application/json
+    # The default "missing" makes the login fail cleanly instead of breaking the config while
+    # the variable is not set.
+    payload: !env_var NANOKVM_RTX5080_GAMING_PC_LOGIN_BODY missing
+    timeout: 10
+  # Returns pwr (power LED) and hdd (disk LED) as booleans.
+  nanokvm_gpio_status:
+    url: "http://{{ host }}/api/vm/gpio"
+    method: GET
+    headers:
+      Cookie: "nano-kvm-token={{ token }}"
+    timeout: 10
+  # Presses a front panel button: type power or reset, duration in milliseconds.
+  nanokvm_gpio_press:
+    url: "http://{{ host }}/api/vm/gpio"
+    method: POST
+    content_type: application/json
+    headers:
+      Cookie: "nano-kvm-token={{ token }}"
+    payload: '{"type": "{{ type }}", "duration": {{ duration }}}'
+    timeout: 10
+
 input_number:
   # Timings for the cat escape alarm. Both omit initial: so a value set in the UI survives a
   # restart; on a fresh install they start at their minimum and have to be set once.
