@@ -82,8 +82,9 @@ input_number:
     unit_of_measurement: s
     mode: slider
   # Timings for the 1OG bathroom fan. Both omit initial: so a value set in the UI survives a
-  # restart; on a fresh install they start at their minimum and have to be set once. The
-  # automation falls back to 3 and 10 minutes while a slider has no usable value.
+  # restart; on a fresh install they start at their minimum and have to be set once (intended:
+  # 8 and 10 minutes). The automation falls back to 8 and 10 minutes while a slider has no usable
+  # value.
   badezimmer_luefter_verzoegerung:
     name: Badezimmer Lüfter Verzögerung
     icon: mdi:fan-clock
@@ -100,8 +101,10 @@ input_number:
     step: 1
     unit_of_measurement: min
     mode: slider
-  # Longest the fan may run on humidity alone per shower. Without initial: like the sliders above;
-  # the automation falls back to 30 minutes while it has no usable value.
+  # Longest the fan may run on humidity alone per shower, counted from the end of the light run-on.
+  # Without initial: like the sliders above, so it starts at its minimum (5) on a fresh install and
+  # has to be set once (intended: 30); the automation falls back to 30 minutes only while it has no
+  # usable value.
   badezimmer_luefter_feuchte_max:
     name: Badezimmer Lüfter Feuchte Maximum
     icon: mdi:water-percent-alert
@@ -213,6 +216,12 @@ input_datetime:
     has_time: true
 
 timer:
+  # Run-on of the 1OG bathroom fan after both lights went off. A timer instead of a template "for"
+  # because restore: true carries a running run-on across an HA restart.
+  badezimmer_luefter_nachlauf:
+    name: Badezimmer Lüfter Nachlauf Timer
+    icon: mdi:timer-outline
+    restore: true
   # Counts the humidity-only run time of the 1OG bathroom fan. restore: true keeps a running
   # countdown across an HA restart.
   badezimmer_luefter_feuchte_limit:

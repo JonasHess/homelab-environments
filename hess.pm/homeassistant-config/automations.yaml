@@ -232,27 +232,39 @@
     rockers, so nothing else switches it. Two reasons run it, and it stops only when neither holds.
     Lights: the bathroom has no window, so a bathroom light (mirror or ceiling) being on counts as
     the room being in use. A short visit never starts the fan. Once a light has been on for the delay
-    in a row (input_number.badezimmer_luefter_verzoegerung, 3 minutes if unset) the fan starts, and
-    this reason holds until both lights have been off for the run-on time
-    (input_number.badezimmer_luefter_nachlauf, 10 minutes if unset).
+    in a row (input_number.badezimmer_luefter_verzoegerung, 8 minutes if unset) the fan starts, and
+    this reason holds while a light is on and for the run-on time after both are off
+    (timer.badezimmer_luefter_nachlauf, input_number.badezimmer_luefter_nachlauf, 10 minutes if unset).
     Humidity: binary_sensor.badezimmer_luefter_feuchte (a shower, measured against the 24 h
-    baseline) starts the fan and timer.badezimmer_luefter_feuchte_limit. Humidity alone may run the
-    fan for at most input_number.badezimmer_luefter_feuchte_max (30 minutes if unset); after that
+    baseline) starts the fan. Humidity alone may run it for at most
+    input_number.badezimmer_luefter_feuchte_max (30 minutes if unset), counted by
+    timer.badezimmer_luefter_feuchte_limit from the moment the lights stop holding the fan, so a
+    shower with the light on still gets the full time to dry the room afterwards. After that
     input_boolean.badezimmer_luefter_feuchte_gesperrt blocks humidity until the sensor is back near
-    the baseline, so a humid spell or a stuck sensor cannot run the fan for hours.
+    the baseline, so a humid spell or a stuck sensor cannot run the fan for hours. Both timers
+    restore across an HA restart.
   triggers:
   - trigger: template
     value_template: >-
       {{ is_state('light.badezimmer_spiegel', 'on') or is_state('light.badezimmer_oben', 'on') }}
     for:
-      minutes: "{{ states('input_number.badezimmer_luefter_verzoegerung') | int(3) }}"
+      minutes: "{{ states('input_number.badezimmer_luefter_verzoegerung') | int(8) }}"
     id: long_use
+  - trigger: state
+    entity_id:
+    - light.badezimmer_spiegel
+    - light.badezimmer_oben
+    to: 'on'
+    id: light_on
   - trigger: template
     value_template: >-
-      {{ not is_state('light.badezimmer_spiegel', 'on') and not is_state('light.badezimmer_oben', 'on') }}
-    for:
-      minutes: "{{ states('input_number.badezimmer_luefter_nachlauf') | int(10) }}"
-    id: free
+      {{ is_state('light.badezimmer_spiegel', 'off') and is_state('light.badezimmer_oben', 'off') }}
+    id: lights_off
+  - trigger: event
+    event_type: timer.finished
+    event_data:
+      entity_id: timer.badezimmer_luefter_nachlauf
+    id: run_on_over
   - trigger: state
     entity_id: binary_sensor.badezimmer_luefter_feuchte
     to: 'on'
@@ -271,6 +283,13 @@
     id: startup
   conditions: []
   actions:
+  - variables:
+      humid_allowed: >-
+        {{ is_state('binary_sensor.badezimmer_luefter_feuchte', 'on')
+           and is_state('input_boolean.badezimmer_luefter_feuchte_gesperrt', 'off') }}
+      lights_hold: >-
+        {{ is_state('light.badezimmer_spiegel', 'on') or is_state('light.badezimmer_oben', 'on')
+           or is_state('timer.badezimmer_luefter_nachlauf', 'active') }}
   - choose:
     - conditions:
       - condition: trigger
@@ -281,10 +300,29 @@
           entity_id: switch.sw_1og_badezimmer_flur_right
     - conditions:
       - condition: trigger
-        id: humid
-      - condition: state
-        entity_id: input_boolean.badezimmer_luefter_feuchte_gesperrt
-        state: 'off'
+        id: light_on
+      sequence:
+      - action: timer.cancel
+        target:
+          entity_id:
+          - timer.badezimmer_luefter_nachlauf
+          - timer.badezimmer_luefter_feuchte_limit
+        note: The lights hold the fan again, so neither the run-on nor the humidity budget runs.
+    - conditions:
+      - condition: trigger
+        id: lights_off
+      sequence:
+      - action: timer.start
+        target:
+          entity_id: timer.badezimmer_luefter_nachlauf
+        data:
+          duration:
+            minutes: "{{ states('input_number.badezimmer_luefter_nachlauf') | int(10) }}"
+    - conditions:
+      - condition: trigger
+        id: run_on_over
+      - condition: template
+        value_template: '{{ humid_allowed }}'
       sequence:
       - action: timer.start
         target:
@@ -295,6 +333,26 @@
       - action: switch.turn_on
         target:
           entity_id: switch.sw_1og_badezimmer_flur_right
+    - conditions:
+      - condition: trigger
+        id: humid
+      - condition: template
+        value_template: '{{ humid_allowed }}'
+      sequence:
+      - action: switch.turn_on
+        target:
+          entity_id: switch.sw_1og_badezimmer_flur_right
+      - if:
+        - condition: template
+          value_template: '{{ not lights_hold }}'
+        then:
+        - action: timer.start
+          target:
+            entity_id: timer.badezimmer_luefter_feuchte_limit
+          data:
+            duration:
+              minutes: "{{ states('input_number.badezimmer_luefter_feuchte_max') | int(30) }}"
+        note: While the lights hold the fan the budget waits; run_on_over starts it.
     - conditions:
       - condition: trigger
         id: dry
@@ -312,29 +370,26 @@
       - action: input_boolean.turn_on
         target:
           entity_id: input_boolean.badezimmer_luefter_feuchte_gesperrt
-  # Off only when neither reason holds. The lights hold while one is on, and also while the run-on
-  # time since the last light change has not passed yet - except at startup, where last_changed is
-  # the restart time and would keep a fan running that no later trigger switches off.
+  # Off only when neither reason holds: no light on, no run-on, no humidity budget running. A light
+  # still unknown or unavailable (right after a restart) blocks the off; once it reports off,
+  # lights_off starts the run-on and the fan stops after it.
   - if:
     - condition: trigger
       id:
-      - free
+      - run_on_over
       - dry
       - humid_limit
       - startup
-    - condition: not
-      conditions:
-      - condition: state
-        entity_id: timer.badezimmer_luefter_feuchte_limit
-        state: active
-    - condition: template
-      value_template: >-
-        {% set lights = expand('light.badezimmer_spiegel', 'light.badezimmer_oben') %}
-        {% set n = states('input_number.badezimmer_luefter_nachlauf') | int(10) %}
-        {% set any_on = lights | selectattr('state', 'eq', 'on') | list | count > 0 %}
-        {% set in_run_on = trigger.id in ['dry', 'humid_limit']
-             and (lights | map(attribute='last_changed') | max) > now() - timedelta(minutes=n) %}
-        {{ not any_on and not in_run_on }}
+    - condition: state
+      entity_id:
+      - light.badezimmer_spiegel
+      - light.badezimmer_oben
+      state: 'off'
+    - condition: state
+      entity_id:
+      - timer.badezimmer_luefter_nachlauf
+      - timer.badezimmer_luefter_feuchte_limit
+      state: idle
     then:
     - action: switch.turn_off
       target:
