@@ -458,6 +458,18 @@ smartHome:
     - type: staticEntity
       entityRefs:
       - script.katzenalarm_pausieren
+  - type: Script
+    id: script_schlafzimmer_touchscreen_umschalten
+    lookups:
+    - type: staticEntity
+      entityRefs:
+      - script.schlafzimmer_touchscreen_umschalten
+  - type: Script
+    id: script_computer_starten
+    lookups:
+    - type: staticEntity
+      entityRefs:
+      - script.computer_starten
   sensors:
   # Touching either bedroom control after 21:00 arms bedtime. Presence alone is not enough:
   # AbstractPresenceSensorService only emits on a room TRANSITION, so someone already lying in
@@ -1363,6 +1375,23 @@ smartHome:
         sequences:
         - homeAssistantResources:
           - script_katzenalarm_pausieren
+  # Bedroom button: single press toggles the touchscreen plug, long press wakes the computer.
+  - name: Dach Schlafzimmer Touchscreen
+    type: SonoffSNZB01P
+    devices:
+    - SW-DACH-SZ-Touchscreen
+    groups:
+    - position: '1'
+      profile: TriggersOnly
+      triggers:
+      - trigger: SONOFF_SNZB_01P_SINGLE
+        sequences:
+        - homeAssistantResources:
+          - script_schlafzimmer_touchscreen_umschalten
+      - trigger: SONOFF_SNZB_01P_LONG
+        sequences:
+        - homeAssistantResources:
+          - script_computer_starten
   - name: Dach Buero Jonas
     type: AqaraLightSwitchH2_1Ch
     devices:
