@@ -237,7 +237,17 @@ apps:
           wasteSync:
             enabled: true
           generic:
+            # Secrets Home Assistant reads as environment variables (!env_var in its YAML), one
+            # Secret with one key per value. Akeyless: /hess.pm/homeassistant/<area>/<device>/<KEY>.
+            # The pod does not start while a listed Akeyless entry is missing, so create the entry
+            # before adding its line here.
+            externalSecrets:
+              homeassistant-secrets:
+                # NanoKVM login JSON with the AES-encrypted password, as the NanoKVM web app sends it.
+                - NANOKVM_RTX5080_GAMING_PC_LOGIN_BODY: /homeassistant/nanokvm/rtx5080_gaming_pc/LOGIN_BODY
             deployment:
+              envFrom:
+                secretRef: homeassistant-secrets
               pvcMounts:
                 config:
                   hostPath: /mnt/tank1/unencrypted/apps/homeassistant/config
