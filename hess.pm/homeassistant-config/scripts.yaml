@@ -214,3 +214,29 @@ katzenalarm_pausieren:
   # restart: a second press starts the 30 minutes over. A Home Assistant restart ends the pause
   # early, because input_boolean.katzenalarm_aktiv has initial: true.
   mode: restart
+
+schlafzimmer_touchscreen_umschalten:
+  alias: Schlafzimmer Touchscreen umschalten
+  description: Toggles the power plug of the bedroom touchscreen. Called by a single press on the
+    SW-DACH-SZ-Touchscreen button.
+  icon: mdi:monitor
+  sequence:
+  - action: switch.toggle
+    target:
+      entity_id: switch.schlafzimmer_touchscreen
+  mode: single
+
+computer_starten:
+  alias: Computer starten
+  description: Wakes the computer with a Wake-on-LAN magic packet. Called by a long press on the
+    SW-DACH-SZ-Touchscreen button.
+  icon: mdi:desktop-tower
+  sequence:
+  - action: wake_on_lan.send_magic_packet
+    data:
+      mac: '00:00:5E:00:53:01'
+    note: Placeholder from the MAC range reserved for documentation, so it wakes nothing. Replace
+      it with the computer's MAC. Home Assistant runs in the pod network, where the default
+      broadcast 255.255.255.255 likely never reaches the LAN; if the computer does not wake, add
+      broadcast_address set to the LAN's directed broadcast (e.g. x.x.x.255).
+  mode: single

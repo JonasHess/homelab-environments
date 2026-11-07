@@ -62,6 +62,9 @@ script: !include scripts.yaml
 scene: !include scenes.yaml
 alexa: !include alexa.yaml
 
+# Provides wake_on_lan.send_magic_packet (used by script.computer_starten).
+wake_on_lan:
+
 input_number:
   # Timings for the cat escape alarm. Both omit initial: so a value set in the UI survives a
   # restart; on a fresh install they start at their minimum and have to be set once.
