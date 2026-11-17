@@ -702,7 +702,7 @@
   actions:
   - action: script.reminder_announcement
     data:
-      message: Bitte die Katzenstreu wechseln.
+      message: Bitte das Katzenstreu wechseln.
   mode: single
 
 - id: '1793200000003'

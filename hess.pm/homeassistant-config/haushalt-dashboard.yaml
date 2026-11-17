@@ -52,7 +52,7 @@ views:
         {% set ch = state_attr('input_datetime.cat_litter_changed', 'timestamp') or 0 %}
         {% set monday = (today_at() - timedelta(days=now().weekday())).timestamp() %}
         {% if ch >= monday %}✅ Diese Woche gewechselt am {{ ch | timestamp_custom('%d.%m. um %H:%M') }}
-        {% else %}⚠️ Fällig: bitte die Katzenstreu wechseln{% if ch > 0 %} (zuletzt am {{ ch | timestamp_custom('%d.%m.') }}){% endif %}
+        {% else %}⚠️ Fällig: bitte das Katzenstreu wechseln{% if ch > 0 %} (zuletzt am {{ ch | timestamp_custom('%d.%m.') }}){% endif %}
         {% endif %}
     - type: tile
       entity: script.mark_cat_litter_changed
