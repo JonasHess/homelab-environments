@@ -163,7 +163,22 @@ apps:
     argocd:
       targetRevision: ~
       helm:
-        values: {}
+        values:
+          generic:
+            # Retained messages (Zigbee2MQTT's Home Assistant discovery) must
+            # survive a broker restart, or the next HA restart loses every
+            # Zigbee entity.
+            persistentVolumeClaims:
+              data:
+                hostPath: /mnt/tank1/unencrypted/apps/mosquitto/data
+            configMaps:
+              mosquitto-config-cm:
+                mosquitto.conf: |-
+                  allow_anonymous true
+                  listener 1883
+                  password_file /mosquitto/config/auth.txt
+                  persistence true
+                  persistence_location /mosquitto/data/
   paperlessgpt:
     enabled: true
     argocd:
